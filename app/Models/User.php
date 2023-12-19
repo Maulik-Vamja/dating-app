@@ -21,8 +21,7 @@ class User extends Authenticatable
     }
 
     protected $fillable = [
-        "custom_id", "first_name", "last_name", "email", "password",
-        "country_code", "contact_number", "profile_photo", "referred_by", "is_active",
+        'custom_id', 'full_name', 'user_name', 'email', 'password', 'short_description', 'description', 'pronouns', 'gender', 'caters_to', 'body_type', 'height', 'ethnicity', 'cup_size', 'hair_colour', 'shoe_size', 'eye_colour', 'last_logged_in', 'profile_photo', 'thumbnail_image', 'membership', 'contact_disclaimer'
     ];
 
     protected $hidden = [
@@ -43,5 +42,10 @@ class User extends Authenticatable
         return trim(collect(explode(" ", config("utility.api.auth_token_name")))->map(function ($segment) {
             return ucfirst($segment);
         })->prepend("X")->join("-"));
+    }
+
+    public function availiability()
+    {
+        return $this->hasOne(UserAvailibility::class, "user_id", "id");
     }
 }

@@ -1,54 +1,1823 @@
-<!DOCTYPE html>
-<html lang="{{ str_replace('_', '-', app()->getLocale()) }}">
+<!doctype html>
+<html class="no-js" lang="en">
+
+
+<!-- Mirrored from demos.codexcoder.com/themeforest/html/ollya/index-2.html by HTTrack Website Copier/3.x [XR&CO'2014], Sat, 16 Dec 2023 08:36:56 GMT -->
 
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <meta charset="utf-8">
+    <title>Ollya</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
 
-    <title>{{ config('app.name') }}</title>
+    <!-- site favicon -->
+    <link rel="icon" type="image/png" href="{{asset('frontent/assets/images/favicon.png')}}">
+    <!-- Place favicon.ico in the root directory -->
 
-    <link rel="stylesheet" href="{{ asset('assets/frontend/css/welcome.css') }}">
+    <!-- All stylesheet and icons css  -->
+    <link rel="stylesheet" href="{{asset('frontend/assets/css/bootstrap.min.css')}}">
+    <link rel="stylesheet" href="{{asset('frontend/assets/css/animate.css')}}">
+    <link rel="stylesheet" href="{{asset('frontend/assets/css/all.min.css')}}">
+    <link rel="stylesheet" href="{{asset('frontend/assets/css/swiper.min.css')}}">
+    <link rel="stylesheet" href="{{asset('frontend/assets/css/lightcase.css')}}">
+    <link rel="stylesheet" href="{{asset('frontend/assets/css/style.css')}}">
+
 </head>
 
 <body>
-    <div class="theBall-outer">
-        <div class="theBall"></div>
+    <!-- preloader start here -->
+    <div class="preloader">
+        <div class="preloader-inner">
+            <div class="preloader-icon">
+                <span></span>
+                <span></span>
+            </div>
+        </div>
     </div>
-    <div id="page" class="site">
-        <canvas class="banner_canvas" id="canvas_banner"></canvas>
-    </div>
-    <svg viewBox="0 0 230 192" fill="none" xmlns="http://www.w3.org/2000/svg" class="svg top-title wow fadeInUp"
-        onmousemove="color_hover(event)">
-        <g clip-path="url(#clip0)" fill="#EF3B2D">
-            <path
-                d="M248.032 44.676h-16.466v100.23h47.394v-14.748h-30.928V44.676zM337.091 87.202c-2.101-3.341-5.083-5.965-8.949-7.875-3.865-1.909-7.756-2.864-11.669-2.864-5.062 0-9.69.931-13.89 2.792-4.201 1.861-7.804 4.417-10.811 7.661-3.007 3.246-5.347 6.993-7.016 11.239-1.672 4.249-2.506 8.713-2.506 13.389 0 4.774.834 9.26 2.506 13.459 1.669 4.202 4.009 7.925 7.016 11.169 3.007 3.246 6.609 5.799 10.811 7.66 4.199 1.861 8.828 2.792 13.89 2.792 3.913 0 7.804-.955 11.669-2.863 3.866-1.908 6.849-4.533 8.949-7.875v9.021h15.607V78.182h-15.607v9.02zm-1.431 32.503c-.955 2.578-2.291 4.821-4.009 6.73-1.719 1.91-3.795 3.437-6.229 4.582-2.435 1.146-5.133 1.718-8.091 1.718-2.96 0-5.633-.572-8.019-1.718-2.387-1.146-4.438-2.672-6.156-4.582-1.719-1.909-3.032-4.152-3.938-6.73-.909-2.577-1.36-5.298-1.36-8.161 0-2.864.451-5.585 1.36-8.162.905-2.577 2.219-4.819 3.938-6.729 1.718-1.908 3.77-3.437 6.156-4.582 2.386-1.146 5.059-1.718 8.019-1.718 2.958 0 5.656.572 8.091 1.718 2.434 1.146 4.51 2.674 6.229 4.582 1.718 1.91 3.054 4.152 4.009 6.729.953 2.577 1.432 5.298 1.432 8.162-.001 2.863-.479 5.584-1.432 8.161zM463.954 87.202c-2.101-3.341-5.083-5.965-8.949-7.875-3.865-1.909-7.756-2.864-11.669-2.864-5.062 0-9.69.931-13.89 2.792-4.201 1.861-7.804 4.417-10.811 7.661-3.007 3.246-5.347 6.993-7.016 11.239-1.672 4.249-2.506 8.713-2.506 13.389 0 4.774.834 9.26 2.506 13.459 1.669 4.202 4.009 7.925 7.016 11.169 3.007 3.246 6.609 5.799 10.811 7.66 4.199 1.861 8.828 2.792 13.89 2.792 3.913 0 7.804-.955 11.669-2.863 3.866-1.908 6.849-4.533 8.949-7.875v9.021h15.607V78.182h-15.607v9.02zm-1.432 32.503c-.955 2.578-2.291 4.821-4.009 6.73-1.719 1.91-3.795 3.437-6.229 4.582-2.435 1.146-5.133 1.718-8.091 1.718-2.96 0-5.633-.572-8.019-1.718-2.387-1.146-4.438-2.672-6.156-4.582-1.719-1.909-3.032-4.152-3.938-6.73-.909-2.577-1.36-5.298-1.36-8.161 0-2.864.451-5.585 1.36-8.162.905-2.577 2.219-4.819 3.938-6.729 1.718-1.908 3.77-3.437 6.156-4.582 2.386-1.146 5.059-1.718 8.019-1.718 2.958 0 5.656.572 8.091 1.718 2.434 1.146 4.51 2.674 6.229 4.582 1.718 1.91 3.054 4.152 4.009 6.729.953 2.577 1.432 5.298 1.432 8.162 0 2.863-.479 5.584-1.432 8.161zM650.772 44.676h-15.606v100.23h15.606V44.676zM365.013 144.906h15.607V93.538h26.776V78.182h-42.383v66.724zM542.133 78.182l-19.616 51.096-19.616-51.096h-15.808l25.617 66.724h19.614l25.617-66.724h-15.808zM591.98 76.466c-19.112 0-34.239 15.706-34.239 35.079 0 21.416 14.641 35.079 36.239 35.079 12.088 0 19.806-4.622 29.234-14.688l-10.544-8.158c-.006.008-7.958 10.449-19.832 10.449-13.802 0-19.612-11.127-19.612-16.884h51.777c2.72-22.043-11.772-40.877-33.023-40.877zm-18.713 29.28c.12-1.284 1.917-16.884 18.589-16.884 16.671 0 18.697 15.598 18.813 16.884h-37.402zM184.068 43.892c-.024-.088-.073-.165-.104-.25-.058-.157-.108-.316-.191-.46-.056-.097-.137-.176-.203-.265-.087-.117-.161-.242-.265-.345-.085-.086-.194-.148-.29-.223-.109-.085-.206-.182-.327-.252l-.002-.001-.002-.002-35.648-20.524a2.971 2.971 0 00-2.964 0l-35.647 20.522-.002.002-.002.001c-.121.07-.219.167-.327.252-.096.075-.205.138-.29.223-.103.103-.178.228-.265.345-.066.089-.147.169-.203.265-.083.144-.133.304-.191.46-.031.085-.08.162-.104.25-.067.249-.103.51-.103.776v38.979l-29.706 17.103V24.493a3 3 0 00-.103-.776c-.024-.088-.073-.165-.104-.25-.058-.157-.108-.316-.191-.46-.056-.097-.137-.176-.203-.265-.087-.117-.161-.242-.265-.345-.085-.086-.194-.148-.29-.223-.109-.085-.206-.182-.327-.252l-.002-.001-.002-.002L40.098 1.396a2.971 2.971 0 00-2.964 0L1.487 21.919l-.002.002-.002.001c-.121.07-.219.167-.327.252-.096.075-.205.138-.29.223-.103.103-.178.228-.265.345-.066.089-.147.169-.203.265-.083.144-.133.304-.191.46-.031.085-.08.162-.104.25-.067.249-.103.51-.103.776v122.09c0 1.063.568 2.044 1.489 2.575l71.293 41.045c.156.089.324.143.49.202.078.028.15.074.23.095a2.98 2.98 0 001.524 0c.069-.018.132-.059.2-.083.176-.061.354-.119.519-.214l71.293-41.045a2.971 2.971 0 001.489-2.575v-38.979l34.158-19.666a2.971 2.971 0 001.489-2.575V44.666a3.075 3.075 0 00-.106-.774zM74.255 143.167l-29.648-16.779 31.136-17.926.001-.001 34.164-19.669 29.674 17.084-21.772 12.428-43.555 24.863zm68.329-76.259v33.841l-12.475-7.182-17.231-9.92V49.806l12.475 7.182 17.231 9.92zm2.97-39.335l29.693 17.095-29.693 17.095-29.693-17.095 29.693-17.095zM54.06 114.089l-12.475 7.182V46.733l17.231-9.92 12.475-7.182v74.537l-17.231 9.921zM38.614 7.398l29.693 17.095-29.693 17.095L8.921 24.493 38.614 7.398zM5.938 29.632l12.475 7.182 17.231 9.92v79.676l.001.005-.001.006c0 .114.032.221.045.333.017.146.021.294.059.434l.002.007c.032.117.094.222.14.334.051.124.088.255.156.371a.036.036 0 00.004.009c.061.105.149.191.222.288.081.105.149.22.244.314l.008.01c.084.083.19.142.284.215.106.083.202.178.32.247l.013.005.011.008 34.139 19.321v34.175L5.939 144.867V29.632h-.001zm136.646 115.235l-65.352 37.625V148.31l48.399-27.628 16.953-9.677v33.862zm35.646-61.22l-29.706 17.102V66.908l17.231-9.92 12.475-7.182v33.841z" />
-        </g>
-    </svg>
-
-    <div class="container top-title wow fadeInUp" onmousemove="color_hover(event)">
-        <h3>{{ config('app.name') }}</h3>
-    </div>
+    <!-- preloader ending here -->
 
 
-    <div class="login-link-container">
-        <h3>Login to your account</h3>
-        <div class="links-container">
-            @if (Route::has('admin.login'))
-                <span class="login-link">
-                    <a href="{{ route('admin.login') }}">Admin Login</a>
-                </span>
-            @endif
-            @if (Route::has('login'))
-                <span class="login-link">
-                    <a href="{{ route('login') }}">Admin Login</a>
-                </span>
-            @endif
+    <!-- scrollToTop start here -->
+    <a href="#" class="scrollToTop"><i class="fa-solid fa-angle-up"></i></a>
+    <!-- scrollToTop ending here -->
+
+
+    <!-- ================> header section start here <================== -->
+    <header class="header" id="navbar">
+        <div class="header__top d-none d-lg-block">
+            <div class="container">
+                <div class="header__top--area">
+                    <div class="header__top--left">
+                        <ul>
+                            <li>
+                                <i class="fa-solid fa-phone"></i> <span>+800-123-4567 6587</span>
+                            </li>
+                            <li>
+                                <i class="fa-solid fa-location-dot"></i> Beverley, New York 224 USA
+                            </li>
+                        </ul>
+                    </div>
+                    <div class="header__top--right">
+                        <ul>
+                            <li><a href="#"><i class="fa-brands fa-facebook-f"></i> Facebook</a></li>
+                            <li><a href="#"><i class="fa-brands fa-instagram"></i> Instagram</a></li>
+                            <li><a href="#"><i class="fa-brands fa-youtube"></i> Youtube</a></li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="header__bottom">
+            <div class="container">
+                <nav class="navbar navbar-expand-lg">
+                    <a class="navbar-brand" href="index.html"><img
+                            src="{{asset('frontend/assets/images/logo/logo.png')}}" alt="logo"></a>
+                    <button class="navbar-toggler collapsed" type="button" data-bs-toggle="collapse"
+                        data-bs-target="#navbarNavAltMarkup" aria-controls="navbarNavAltMarkup" aria-expanded="false"
+                        aria-label="Toggle navigation">
+                        <span class="navbar-toggler--icon"></span>
+                    </button>
+                    <div class="collapse navbar-collapse justify-content-end" id="navbarNavAltMarkup">
+                        <div class="navbar-nav mainmenu">
+                            <ul>
+                                <li class="active">
+                                    <a href="#0">Home</a>
+                                    <ul>
+                                        <li><a href="index.html">Home Page One</a></li>
+                                        <li><a href="index-2.html" class="active">Home Page Two</a></li>
+                                        <li><a href="index-3.html">Home Page Three</a></li>
+                                    </ul>
+                                </li>
+                                <li>
+                                    <a href="#0">Pages</a>
+                                    <ul>
+                                        <li><a href="about.html">About Us</a></li>
+                                        <li><a href="membership.html">Membership</a></li>
+                                        <li><a href="comingsoon.html">comingsoon</a></li>
+                                        <li><a href="404.html">404</a></li>
+                                    </ul>
+                                </li>
+                                <li>
+                                    <a href="#0">Community</a>
+                                    <ul>
+                                        <li><a href="community.html">Community</a></li>
+                                        <li><a href="group.html">All Group</a></li>
+                                        <li><a href="members.html">All Members</a></li>
+                                        <li><a href="activity.html">Activity</a></li>
+
+                                    </ul>
+                                </li>
+                                <li>
+                                    <a href="#0">Shops</a>
+                                    <ul>
+                                        <li><a href="shop.html">Product</a></li>
+                                        <li><a href="shop-single.html">Product Details</a></li>
+                                        <li><a href="shop-cart.html">Product Cart</a></li>
+                                    </ul>
+                                </li>
+                                <li>
+                                    <a href="#0">Blogs</a>
+                                    <ul>
+                                        <li><a href="blog.html">Blog</a></li>
+                                        <li><a href="blog-2.html">Blog Style Two</a></li>
+                                        <li><a href="blog-single.html">Blog Details</a></li>
+                                    </ul>
+                                </li>
+                                <li><a href="contact.html">contact</a></li>
+                            </ul>
+                        </div>
+                        <div class="header__more">
+                            <button class="default-btn dropdown-toggle" type="button" id="moreoption"
+                                data-bs-toggle="dropdown" aria-expanded="false">My Account</button>
+                            <ul class="dropdown-menu" aria-labelledby="moreoption">
+                                <li><a class="dropdown-item" href="login.html">Log In</a></li>
+                                <li><a class="dropdown-item" href="register.html">Sign Up</a></li>
+                            </ul>
+                        </div>
+                    </div>
+                </nav>
+            </div>
+        </div>
+    </header>
+    <!-- ================> header section end here <================== -->
+
+
+    <!-- ================> Banner section start here <================== -->
+    <div class="banner banner--style2 padding-top bg_img" style="background-image: url(assets/images/banner/bg-2.jpg);">
+        <div class="container">
+            <div class="banner__wrapper">
+                <div class="row g-0 justify-content-center">
+                    <div class="col-lg-4 col-12">
+                        <div class="banner__content wow fadeInLeft" data-wow-duration="1.5s">
+                            <div class="banner__title">
+                                <h2>New Places, Unforgettable Dating.</h2>
+                                <p>Join our international family today! Please call us for more info.</p>
+                                <a href="membership.html" class="default-btn style-2"><span>Get A Membership</span></a>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-lg-8 col-12">
+                        <div class="banner__thumb wow fadeInUp" data-wow-duration="1.5s">
+                            <img src="{{asset('frontend/assets/images/banner/02.png')}}" alt="banner">
+                            <div class="banner__thumb--shape">
+                                <div class="shapeimg shapeimg__one">
+                                    <img src="{{asset('frontend/assets/images/banner/shape/home2/01.png')}}"
+                                        alt="dating thumb">
+                                </div>
+                                <div class="shapeimg shapeimg__two">
+                                    <img src="{{asset('frontend/assets/images/banner/shape/home2/02.png')}}"
+                                        alt="dating thumb">
+                                </div>
+                                <div class="shapeimg shapeimg__three">
+                                    <img src="{{asset('frontend/assets/images/banner/shape/home2/03.png')}}"
+                                        alt="dating thumb">
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- ================> Banner section end here <================== -->
+
+
+    <!-- ================> About section start here <================== -->
+    <div class="about about--style2 padding-top pt-xl-0">
+        <div class="container">
+            <div class="section__wrapper wow fadeInUp" data-wow-duration="1.5s">
+                <div class="row g-0 justify-content-center row-cols-lg-2 row-cols-1">
+                    <div class="col">
+                        <div class="about__left">
+                            <div class="about__top">
+                                <div class="about__content">
+                                    <h3>Welcome To Our Ollya</h3>
+                                    <p>You find us, finally, and you are already in love. More than 4.000.000 around the
+                                        world already shared the same experiences and uses our system. Joining us today
+                                        just got easier!</p>
+                                </div>
+                            </div>
+                            <div class="about__bottom">
+                                <div class="about__bottom--head">
+                                    <h5>Latest Registered Members</h5>
+                                    <div class="about__bottom--navi">
+                                        <div class="ragi-prev"><i class="fa-solid fa-chevron-left"></i></div>
+                                        <div class="ragi-next active"><i class="fa-solid fa-chevron-right"></i></div>
+                                    </div>
+                                </div>
+                                <div class="about__bottom--body">
+                                    <div class="ragi__slider overflow-hidden">
+                                        <div class="swiper-wrapper">
+                                            <div class="swiper-slide">
+                                                <div class="ragi__thumb">
+                                                    <a href="member-single.html"><img
+                                                            src="{{asset('frontend/assets/images/ragi/01.jpg')}}"
+                                                            alt="dating thumb"></a>
+                                                </div>
+                                            </div>
+                                            <div class="swiper-slide">
+                                                <div class="ragi__thumb">
+                                                    <a href="member-single.html"><img
+                                                            src="{{asset('frontend/assets/images/ragi/02.jpg')}}"
+                                                            alt="dating thumb"></a>
+                                                </div>
+                                            </div>
+                                            <div class="swiper-slide">
+                                                <div class="ragi__thumb">
+                                                    <a href="member-single.html"><img
+                                                            src="{{asset('frontend/assets/images/ragi/03.jpg')}}"
+                                                            alt="dating thumb"></a>
+                                                </div>
+                                            </div>
+                                            <div class="swiper-slide">
+                                                <div class="ragi__thumb">
+                                                    <a href="member-single.html"><img
+                                                            src="{{asset('frontend/assets/images/ragi/04.jpg')}}"
+                                                            alt="dating thumb"></a>
+                                                </div>
+                                            </div>
+                                            <div class="swiper-slide">
+                                                <div class="ragi__thumb">
+                                                    <a href="member-single.html"><img
+                                                            src="{{asset('frontend/assets/images/ragi/05.jpg')}}"
+                                                            alt="dating thumb"></a>
+                                                </div>
+                                            </div>
+                                            <div class="swiper-slide">
+                                                <div class="ragi__thumb">
+                                                    <a href="member-single.html"><img
+                                                            src="{{asset('frontend/assets/images/ragi/01.jpg')}}"
+                                                            alt="dating thumb"></a>
+                                                </div>
+                                            </div>
+                                            <div class="swiper-slide">
+                                                <div class="ragi__thumb">
+                                                    <a href="member-single.html"><img
+                                                            src="{{asset('frontend/assets/images/ragi/02.jpg')}}"
+                                                            alt="dating thumb"></a>
+                                                </div>
+                                            </div>
+                                            <div class="swiper-slide">
+                                                <div class="ragi__thumb">
+                                                    <a href="member-single.html"><img
+                                                            src="{{asset('frontend/assets/images/ragi/03.jpg')}}"
+                                                            alt="dating thumb"></a>
+                                                </div>
+                                            </div>
+                                            <div class="swiper-slide">
+                                                <div class="ragi__thumb">
+                                                    <a href="member-single.html"><img
+                                                            src="{{asset('frontend/assets/images/ragi/04.jpg')}}"
+                                                            alt="dating thumb"></a>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col">
+                        <div class="about__right">
+                            <div class="about__title">
+                                <h3>Find Your True Love</h3>
+                            </div>
+                            <form action="#">
+                                <div class="banner__list">
+                                    <div class="row">
+                                        <div class="col-6">
+                                            <label>I am a</label>
+                                            <div class="banner__inputlist">
+                                                <select>
+                                                    <option>Select Gender</option>
+                                                    <option value="male" selected>Male</option>
+                                                    <option value="female">Female</option>
+                                                    <option value="others">Others</option>
+                                                </select>
+                                            </div>
+                                        </div>
+                                        <div class="col-6">
+                                            <label>Looking for</label>
+                                            <div class="banner__inputlist">
+                                                <select>
+                                                    <option>Select Gender</option>
+                                                    <option value="male">Male</option>
+                                                    <option value="female" selected>Female</option>
+                                                    <option value="others">Others</option>
+                                                </select>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="banner__list">
+                                    <div class="row">
+                                        <div class="col-lg-6 col-12">
+                                            <label>Age</label>
+                                            <div class="row g-3">
+                                                <div class="col-6">
+                                                    <div class="banner__inputlist">
+                                                        <select>
+                                                            <option value="18" selected>18</option>
+                                                            <option value="19">19</option>
+                                                            <option value="20">20</option>
+                                                            <option value="21">21</option>
+                                                            <option value="22">22</option>
+                                                            <option value="23">23</option>
+                                                            <option value="24">24</option>
+                                                            <option value="25">25</option>
+                                                            <option value="26">26</option>
+                                                            <option value="27">27</option>
+                                                            <option value="28">28</option>
+                                                            <option value="29">29</option>
+                                                            <option value="30">30</option>
+                                                            <option value="31">31</option>
+                                                            <option value="32">32</option>
+                                                            <option value="33">33</option>
+                                                            <option value="34">34</option>
+                                                            <option value="35">35</option>
+                                                            <option value="36">36</option>
+                                                            <option value="37">37</option>
+                                                            <option value="38">38</option>
+                                                            <option value="39">39</option>
+                                                            <option value="40">40</option>
+                                                        </select>
+                                                    </div>
+                                                </div>
+                                                <div class="col-6">
+                                                    <div class="banner__inputlist">
+                                                        <select>
+                                                            <option value="18">18</option>
+                                                            <option value="19">19</option>
+                                                            <option value="20">20</option>
+                                                            <option value="21">21</option>
+                                                            <option value="22">22</option>
+                                                            <option value="23">23</option>
+                                                            <option value="24">24</option>
+                                                            <option value="25" selected>25</option>
+                                                            <option value="26">26</option>
+                                                            <option value="27">27</option>
+                                                            <option value="28">28</option>
+                                                            <option value="29">29</option>
+                                                            <option value="30">30</option>
+                                                            <option value="31">31</option>
+                                                            <option value="32">32</option>
+                                                            <option value="33">33</option>
+                                                            <option value="34">34</option>
+                                                            <option value="35">35</option>
+                                                            <option value="36">36</option>
+                                                            <option value="37">37</option>
+                                                            <option value="38">38</option>
+                                                            <option value="39">39</option>
+                                                            <option value="40">40</option>
+                                                        </select>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="col-lg-6 col-12">
+                                            <label>Country</label>
+                                            <div class="banner__inputlist">
+                                                <select id="country" name="country">
+                                                    <option value="Afganistan">Afghanistan</option>
+                                                    <option value="Albania">Albania</option>
+                                                    <option value="Algeria">Algeria</option>
+                                                    <option value="American Samoa">American Samoa</option>
+                                                    <option value="Andorra">Andorra</option>
+                                                    <option value="Angola">Angola</option>
+                                                    <option value="Anguilla">Anguilla</option>
+                                                    <option value="Antigua & Barbuda">Antigua & Barbuda</option>
+                                                    <option value="Argentina">Argentina</option>
+                                                    <option value="Armenia">Armenia</option>
+                                                    <option value="Aruba">Aruba</option>
+                                                    <option value="Australia">Australia</option>
+                                                    <option value="Austria">Austria</option>
+                                                    <option value="Azerbaijan">Azerbaijan</option>
+                                                    <option value="Bahamas">Bahamas</option>
+                                                    <option value="Bahrain">Bahrain</option>
+                                                    <option value="Bangladesh" selected>Bangladesh</option>
+                                                    <option value="Barbados">Barbados</option>
+                                                    <option value="Belarus">Belarus</option>
+                                                    <option value="Belgium">Belgium</option>
+                                                    <option value="Belize">Belize</option>
+                                                    <option value="Benin">Benin</option>
+                                                    <option value="Bermuda">Bermuda</option>
+                                                    <option value="Bhutan">Bhutan</option>
+                                                    <option value="Bolivia">Bolivia</option>
+                                                    <option value="Bonaire">Bonaire</option>
+                                                    <option value="Bosnia & Herzegovina">Bosnia & Herzegovina</option>
+                                                    <option value="Botswana">Botswana</option>
+                                                    <option value="Brazil">Brazil</option>
+                                                    <option value="British Indian Ocean Ter">British Indian Ocean Ter
+                                                    </option>
+                                                    <option value="Brunei">Brunei</option>
+                                                    <option value="Bulgaria">Bulgaria</option>
+                                                    <option value="Burkina Faso">Burkina Faso</option>
+                                                    <option value="Burundi">Burundi</option>
+                                                    <option value="Cambodia">Cambodia</option>
+                                                    <option value="Cameroon">Cameroon</option>
+                                                    <option value="Canada">Canada</option>
+                                                    <option value="Canary Islands">Canary Islands</option>
+                                                    <option value="Cape Verde">Cape Verde</option>
+                                                    <option value="Cayman Islands">Cayman Islands</option>
+                                                    <option value="Central African Republic">Central African Republic
+                                                    </option>
+                                                    <option value="Chad">Chad</option>
+                                                    <option value="Channel Islands">Channel Islands</option>
+                                                    <option value="Chile">Chile</option>
+                                                    <option value="China">China</option>
+                                                    <option value="Christmas Island">Christmas Island</option>
+                                                    <option value="Cocos Island">Cocos Island</option>
+                                                    <option value="Colombia">Colombia</option>
+                                                    <option value="Comoros">Comoros</option>
+                                                    <option value="Congo">Congo</option>
+                                                    <option value="Cook Islands">Cook Islands</option>
+                                                    <option value="Costa Rica">Costa Rica</option>
+                                                    <option value="Cote DIvoire">Cote DIvoire</option>
+                                                    <option value="Croatia">Croatia</option>
+                                                    <option value="Cuba">Cuba</option>
+                                                    <option value="Curaco">Curacao</option>
+                                                    <option value="Cyprus">Cyprus</option>
+                                                    <option value="Czech Republic">Czech Republic</option>
+                                                    <option value="Denmark">Denmark</option>
+                                                    <option value="Djibouti">Djibouti</option>
+                                                    <option value="Dominica">Dominica</option>
+                                                    <option value="Dominican Republic">Dominican Republic</option>
+                                                    <option value="East Timor">East Timor</option>
+                                                    <option value="Ecuador">Ecuador</option>
+                                                    <option value="Egypt">Egypt</option>
+                                                    <option value="El Salvador">El Salvador</option>
+                                                    <option value="Equatorial Guinea">Equatorial Guinea</option>
+                                                    <option value="Eritrea">Eritrea</option>
+                                                    <option value="Estonia">Estonia</option>
+                                                    <option value="Ethiopia">Ethiopia</option>
+                                                    <option value="Falkland Islands">Falkland Islands</option>
+                                                    <option value="Faroe Islands">Faroe Islands</option>
+                                                    <option value="Fiji">Fiji</option>
+                                                    <option value="Finland">Finland</option>
+                                                    <option value="France">France</option>
+                                                    <option value="French Guiana">French Guiana</option>
+                                                    <option value="French Polynesia">French Polynesia</option>
+                                                    <option value="French Southern Ter">French Southern Ter</option>
+                                                    <option value="Gabon">Gabon</option>
+                                                    <option value="Gambia">Gambia</option>
+                                                    <option value="Georgia">Georgia</option>
+                                                    <option value="Germany">Germany</option>
+                                                    <option value="Ghana">Ghana</option>
+                                                    <option value="Gibraltar">Gibraltar</option>
+                                                    <option value="Great Britain">Great Britain</option>
+                                                    <option value="Greece">Greece</option>
+                                                    <option value="Greenland">Greenland</option>
+                                                    <option value="Grenada">Grenada</option>
+                                                    <option value="Guadeloupe">Guadeloupe</option>
+                                                    <option value="Guam">Guam</option>
+                                                    <option value="Guatemala">Guatemala</option>
+                                                    <option value="Guinea">Guinea</option>
+                                                    <option value="Guyana">Guyana</option>
+                                                    <option value="Haiti">Haiti</option>
+                                                    <option value="Hawaii">Hawaii</option>
+                                                    <option value="Honduras">Honduras</option>
+                                                    <option value="Hong Kong">Hong Kong</option>
+                                                    <option value="Hungary">Hungary</option>
+                                                    <option value="Iceland">Iceland</option>
+                                                    <option value="Indonesia">Indonesia</option>
+                                                    <option value="India">India</option>
+                                                    <option value="Iran">Iran</option>
+                                                    <option value="Iraq">Iraq</option>
+                                                    <option value="Ireland">Ireland</option>
+                                                    <option value="Isle of Man">Isle of Man</option>
+                                                    <option value="Israel">Israel</option>
+                                                    <option value="Italy">Italy</option>
+                                                    <option value="Jamaica">Jamaica</option>
+                                                    <option value="Japan">Japan</option>
+                                                    <option value="Jordan">Jordan</option>
+                                                    <option value="Kazakhstan">Kazakhstan</option>
+                                                    <option value="Kenya">Kenya</option>
+                                                    <option value="Kiribati">Kiribati</option>
+                                                    <option value="Korea North">Korea North</option>
+                                                    <option value="Korea Sout">Korea South</option>
+                                                    <option value="Kuwait">Kuwait</option>
+                                                    <option value="Kyrgyzstan">Kyrgyzstan</option>
+                                                    <option value="Laos">Laos</option>
+                                                    <option value="Latvia">Latvia</option>
+                                                    <option value="Lebanon">Lebanon</option>
+                                                    <option value="Lesotho">Lesotho</option>
+                                                    <option value="Liberia">Liberia</option>
+                                                    <option value="Libya">Libya</option>
+                                                    <option value="Liechtenstein">Liechtenstein</option>
+                                                    <option value="Lithuania">Lithuania</option>
+                                                    <option value="Luxembourg">Luxembourg</option>
+                                                    <option value="Macau">Macau</option>
+                                                    <option value="Macedonia">Macedonia</option>
+                                                    <option value="Madagascar">Madagascar</option>
+                                                    <option value="Malaysia">Malaysia</option>
+                                                    <option value="Malawi">Malawi</option>
+                                                    <option value="Maldives">Maldives</option>
+                                                    <option value="Mali">Mali</option>
+                                                    <option value="Malta">Malta</option>
+                                                    <option value="Marshall Islands">Marshall Islands</option>
+                                                    <option value="Martinique">Martinique</option>
+                                                    <option value="Mauritania">Mauritania</option>
+                                                    <option value="Mauritius">Mauritius</option>
+                                                    <option value="Mayotte">Mayotte</option>
+                                                    <option value="Mexico">Mexico</option>
+                                                    <option value="Midway Islands">Midway Islands</option>
+                                                    <option value="Moldova">Moldova</option>
+                                                    <option value="Monaco">Monaco</option>
+                                                    <option value="Mongolia">Mongolia</option>
+                                                    <option value="Montserrat">Montserrat</option>
+                                                    <option value="Morocco">Morocco</option>
+                                                    <option value="Mozambique">Mozambique</option>
+                                                    <option value="Myanmar">Myanmar</option>
+                                                    <option value="Nambia">Nambia</option>
+                                                    <option value="Nauru">Nauru</option>
+                                                    <option value="Nepal">Nepal</option>
+                                                    <option value="Netherland Antilles">Netherland Antilles</option>
+                                                    <option value="Netherlands">Netherlands (Holland, Europe)</option>
+                                                    <option value="Nevis">Nevis</option>
+                                                    <option value="New Caledonia">New Caledonia</option>
+                                                    <option value="New Zealand">New Zealand</option>
+                                                    <option value="Nicaragua">Nicaragua</option>
+                                                    <option value="Niger">Niger</option>
+                                                    <option value="Nigeria">Nigeria</option>
+                                                    <option value="Niue">Niue</option>
+                                                    <option value="Norfolk Island">Norfolk Island</option>
+                                                    <option value="Norway">Norway</option>
+                                                    <option value="Oman">Oman</option>
+                                                    <option value="Pakistan">Pakistan</option>
+                                                    <option value="Palau Island">Palau Island</option>
+                                                    <option value="Palestine">Palestine</option>
+                                                    <option value="Panama">Panama</option>
+                                                    <option value="Papua New Guinea">Papua New Guinea</option>
+                                                    <option value="Paraguay">Paraguay</option>
+                                                    <option value="Peru">Peru</option>
+                                                    <option value="Phillipines">Philippines</option>
+                                                    <option value="Pitcairn Island">Pitcairn Island</option>
+                                                    <option value="Poland">Poland</option>
+                                                    <option value="Portugal">Portugal</option>
+                                                    <option value="Puerto Rico">Puerto Rico</option>
+                                                    <option value="Qatar">Qatar</option>
+                                                    <option value="Republic of Montenegro">Republic of Montenegro
+                                                    </option>
+                                                    <option value="Republic of Serbia">Republic of Serbia</option>
+                                                    <option value="Reunion">Reunion</option>
+                                                    <option value="Romania">Romania</option>
+                                                    <option value="Russia">Russia</option>
+                                                    <option value="Rwanda">Rwanda</option>
+                                                    <option value="St Barthelemy">St Barthelemy</option>
+                                                    <option value="St Eustatius">St Eustatius</option>
+                                                    <option value="St Helena">St Helena</option>
+                                                    <option value="St Kitts-Nevis">St Kitts-Nevis</option>
+                                                    <option value="St Lucia">St Lucia</option>
+                                                    <option value="St Maarten">St Maarten</option>
+                                                    <option value="St Pierre & Miquelon">St Pierre & Miquelon</option>
+                                                    <option value="St Vincent & Grenadines">St Vincent & Grenadines
+                                                    </option>
+                                                    <option value="Saipan">Saipan</option>
+                                                    <option value="Samoa">Samoa</option>
+                                                    <option value="Samoa American">Samoa American</option>
+                                                    <option value="San Marino">San Marino</option>
+                                                    <option value="Sao Tome & Principe">Sao Tome & Principe</option>
+                                                    <option value="Saudi Arabia">Saudi Arabia</option>
+                                                    <option value="Senegal">Senegal</option>
+                                                    <option value="Seychelles">Seychelles</option>
+                                                    <option value="Sierra Leone">Sierra Leone</option>
+                                                    <option value="Singapore">Singapore</option>
+                                                    <option value="Slovakia">Slovakia</option>
+                                                    <option value="Slovenia">Slovenia</option>
+                                                    <option value="Solomon Islands">Solomon Islands</option>
+                                                    <option value="Somalia">Somalia</option>
+                                                    <option value="South Africa">South Africa</option>
+                                                    <option value="Spain">Spain</option>
+                                                    <option value="Sri Lanka">Sri Lanka</option>
+                                                    <option value="Sudan">Sudan</option>
+                                                    <option value="Suriname">Suriname</option>
+                                                    <option value="Swaziland">Swaziland</option>
+                                                    <option value="Sweden">Sweden</option>
+                                                    <option value="Switzerland">Switzerland</option>
+                                                    <option value="Syria">Syria</option>
+                                                    <option value="Tahiti">Tahiti</option>
+                                                    <option value="Taiwan">Taiwan</option>
+                                                    <option value="Tajikistan">Tajikistan</option>
+                                                    <option value="Tanzania">Tanzania</option>
+                                                    <option value="Thailand">Thailand</option>
+                                                    <option value="Togo">Togo</option>
+                                                    <option value="Tokelau">Tokelau</option>
+                                                    <option value="Tonga">Tonga</option>
+                                                    <option value="Trinidad & Tobago">Trinidad & Tobago</option>
+                                                    <option value="Tunisia">Tunisia</option>
+                                                    <option value="Turkey">Turkey</option>
+                                                    <option value="Turkmenistan">Turkmenistan</option>
+                                                    <option value="Turks & Caicos Is">Turks & Caicos Is</option>
+                                                    <option value="Tuvalu">Tuvalu</option>
+                                                    <option value="Uganda">Uganda</option>
+                                                    <option value="United Kingdom">United Kingdom</option>
+                                                    <option value="Ukraine">Ukraine</option>
+                                                    <option value="United Arab Erimates">United Arab Emirates</option>
+                                                    <option value="United States of America">United States of America
+                                                    </option>
+                                                    <option value="Uraguay">Uruguay</option>
+                                                    <option value="Uzbekistan">Uzbekistan</option>
+                                                    <option value="Vanuatu">Vanuatu</option>
+                                                    <option value="Vatican City State">Vatican City State</option>
+                                                    <option value="Venezuela">Venezuela</option>
+                                                    <option value="Vietnam">Vietnam</option>
+                                                    <option value="Virgin Islands (Brit)">Virgin Islands (Brit)</option>
+                                                    <option value="Virgin Islands (USA)">Virgin Islands (USA)</option>
+                                                    <option value="Wake Island">Wake Island</option>
+                                                    <option value="Wallis & Futana Is">Wallis & Futana Is</option>
+                                                    <option value="Yemen">Yemen</option>
+                                                    <option value="Zaire">Zaire</option>
+                                                    <option value="Zambia">Zambia</option>
+                                                    <option value="Zimbabwe">Zimbabwe</option>
+                                                </select>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <button type="submit" class="default-btn reverse d-block"><span>Find Your
+                                        Partner</span></button>
+                            </form>
+                        </div>
+                    </div>
+                </div>
+            </div>
         </div>
     </div>
 
+    <div class="about padding-top padding-bottom">
+        <div class="container">
+            <div class="section__header style-2 text-center wow fadeInUp" data-wow-duration="1.5s">
+                <h2>It All Starts With A Date</h2>
+                <p>Learn from them and try to make it to this board. This will for sure boost you visibility and
+                    increase your chances to find you loved one.</p>
+            </div>
+            <div class="section__wrapper">
+                <div class="row g-4 justify-content-center row-cols-xl-4 row-cols-lg-3 row-cols-sm-2 row-cols-1">
+                    <div class="col wow fadeInUp" data-wow-duration="1.5s">
+                        <div class="about__item text-center">
+                            <div class="about__inner">
+                                <div class="about__thumb">
+                                    <img src="{{asset('frontend/assets/images/about/icon/01.png')}}" alt="dating thumb">
+                                </div>
+                                <div class="about__content">
+                                    <h3><span class="counter" data-to="990960" data-speed="1500"></span></h3>
+                                    <p>Members in Total</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col wow fadeInUp" data-wow-duration="1.6s">
+                        <div class="about__item text-center">
+                            <div class="about__inner">
+                                <div class="about__thumb">
+                                    <img src="{{asset('frontend/assets/images/about/icon/02.png')}}" alt="dating thumb">
+                                </div>
+                                <div class="about__content">
+                                    <h3><span class="counter" data-to="628590" data-speed="1500"></span></h3>
+                                    <p>Members Online</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col wow fadeInUp" data-wow-duration="1.7s">
+                        <div class="about__item text-center">
+                            <div class="about__inner">
+                                <div class="about__thumb">
+                                    <img src="{{asset('frontend/assets/images/about/icon/03.png')}}" alt="dating thumb">
+                                </div>
+                                <div class="about__content">
+                                    <h3><span class="counter" data-to="314587" data-speed="1500"></span></h3>
+                                    <p>Women Online</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col wow fadeInUp" data-wow-duration="1.8s">
+                        <div class="about__item text-center">
+                            <div class="about__inner">
+                                <div class="about__thumb">
+                                    <img src="{{asset('frontend/assets/images/about/icon/04.png')}}" alt="dating thumb">
+                                </div>
+                                <div class="about__content">
+                                    <h3><span class="counter" data-to="102369" data-speed="1500"></span></h3>
+                                    <p>Men Online</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- ================> About section end here <================== -->
 
-    <script src="{{ asset('assets/frontend/js/welcome.js') }}"></script>
+
+    <!-- ================> Story section start here <================== -->
+    <div class="story bg_img padding-top padding-bottom"
+        style="background-image: url({{asset('frontend/assets/images/bg-img/02.jpg')}});">
+        <div class="container">
+            <div class="section__header style-2 text-center wow fadeInUp" data-wow-duration="1.5s">
+                <h2>Ollya Stories From Our Lovers</h2>
+                <p>Listen and learn from our community members and find out tips and tricks to meet your love. Join us
+                    and be part of a bigger family.</p>
+            </div>
+            <div class="section__wrapper">
+                <div class="row g-4 justify-content-center row-cols-lg-3 row-cols-sm-2 row-cols-1">
+                    <div class="col wow fadeInUp" data-wow-duration="1.5s">
+                        <div class="story__item">
+                            <div class="story__inner">
+                                <div class="story__thumb">
+                                    <a href="blog-single.html"><img
+                                            src="{{asset('frontend/assets/images/story/01.jpg')}}"
+                                            alt="dating thumb"></a>
+                                    <span class="member__activity member__activity--ofline">Entertainment</span>
+                                </div>
+                                <div class="story__content">
+                                    <a href="blog-single.html">
+                                        <h4>Dream places and locations to visit in 2022</h4>
+                                    </a>
+                                    <div class="story__content--author">
+                                        <div class="story__content--thumb">
+                                            <img src="{{asset('frontend/assets/images/story/author/01.jpg')}}"
+                                                alt="dating thumb">
+                                        </div>
+                                        <div class="story__content--content">
+                                            <h6>Hester Reeves</h6>
+                                            <p>April 16, 2022</p>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col wow fadeInUp" data-wow-duration="1.6s">
+                        <div class="story__item">
+                            <div class="story__inner">
+                                <div class="story__thumb">
+                                    <a href="blog-single.html"><img
+                                            src="{{asset('frontend/assets/images/story/02.jpg')}}"
+                                            alt="dating thumb"></a>
+                                    <span class="member__activity member__activity--ofline">Love Stories</span>
+                                </div>
+                                <div class="story__content">
+                                    <a href="blog-single.html">
+                                        <h4>Make your dreams come true and monetise quickly</h4>
+                                    </a>
+                                    <div class="story__content--author">
+                                        <div class="story__content--thumb">
+                                            <img src="{{asset('frontend/assets/images/story/author/02.jpg')}}"
+                                                alt="dating thumb">
+                                        </div>
+                                        <div class="story__content--content">
+                                            <h6>Arika Q Smith</h6>
+                                            <p>March 14, 2022</p>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col wow fadeInUp" data-wow-duration="1.7s">
+                        <div class="story__item">
+                            <div class="story__inner">
+                                <div class="story__thumb">
+                                    <a href="blog-single.html"><img
+                                            src="{{asset('frontend/assets/images/story/03.jpg')}}"
+                                            alt="dating thumb"></a>
+                                    <span class="member__activity member__activity--ofline">Attraction</span>
+                                </div>
+                                <div class="story__content">
+                                    <a href="blog-single.html">
+                                        <h4>Love looks not with the eyes, but with the mind.</h4>
+                                    </a>
+                                    <div class="story__content--author">
+                                        <div class="story__content--thumb">
+                                            <img src="{{asset('frontend/assets/images/story/author/03.jpg')}}"
+                                                alt="dating thumb">
+                                        </div>
+                                        <div class="story__content--content">
+                                            <h6>William Show</h6>
+                                            <p>June 18, 2022</p>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- ================> Story section end here <================== -->
+
+
+    <!-- ================> Member section start here <================== -->
+    <div class="member member--style2 padding-top padding-bottom">
+        <div class="container">
+            <div class="section__header style-2 text-center wow fadeInUp" data-wow-duration="1.5s">
+                <h2>Most Popular Members</h2>
+                <p>Learn from them and try to make it to this board. This will for sure boost you visibility and
+                    increase your chances to find you loved one.</p>
+            </div>
+            <div class="section__wrapper wow fadeInUp" data-wow-duration="1.5s">
+                <ul class="nav nav-tabs member__tab" id="myTab" role="tablist">
+                    <li class="nav-item" role="presentation">
+                        <button class="nav-link active" id="newest-tab" data-bs-toggle="tab" data-bs-target="#newest"
+                            type="button" role="tab" aria-controls="newest" aria-selected="true">Newest Members</button>
+                    </li>
+                    <li class="nav-item" role="presentation">
+                        <button class="nav-link" id="activemember-tab" data-bs-toggle="tab"
+                            data-bs-target="#activemember" type="button" role="tab" aria-controls="activemember"
+                            aria-selected="false">Active Members</button>
+                    </li>
+                    <li class="nav-item" role="presentation">
+                        <button class="nav-link" id="popularmember-tab" data-bs-toggle="tab"
+                            data-bs-target="#popularmember" type="button" role="tab" aria-controls="popularmember"
+                            aria-selected="false">Popular Members</button>
+                    </li>
+                </ul>
+
+                <div class="tab-content mx-12-none" id="myTabContent">
+                    <div class="tab-pane fade show active" id="newest" role="tabpanel" aria-labelledby="newest-tab">
+                        <div class="row g-0 justify-content-center">
+                            <div class="member__item">
+                                <div class="member__inner">
+                                    <div class="member__thumb">
+                                        <img src="{{asset('frontend/assets/images/member/home2/01.jpg')}}"
+                                            alt="member-img">
+                                        <span class="member__activity"></span>
+                                    </div>
+                                    <div class="member__content">
+                                        <a href="member-single.html">
+                                            <h5>Smith Jhonson</h5>
+                                        </a>
+                                        <p>registered 4 months, 1 week ago</p>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="member__item">
+                                <div class="member__inner">
+                                    <div class="member__thumb">
+                                        <img src="{{asset('frontend/assets/images/member/home2/02.jpg')}}"
+                                            alt="member-img">
+                                        <span class="member__activity member__activity--ofline"></span>
+                                    </div>
+                                    <div class="member__content">
+                                        <a href="member-single.html">
+                                            <h5>Arika Q Smith</h5>
+                                        </a>
+                                        <p>registered 4 months, 1 week ago</p>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="member__item">
+                                <div class="member__inner">
+                                    <div class="member__thumb">
+                                        <img src="{{asset('frontend/assets/images/member/home2/03.jpg')}}"
+                                            alt="member-img">
+                                        <span class="member__activity"></span>
+                                    </div>
+                                    <div class="member__content">
+                                        <a href="member-single.html">
+                                            <h5>William R Show</h5>
+                                        </a>
+                                        <p>registered 4 months, 1 week ago</p>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="member__item">
+                                <div class="member__inner">
+                                    <div class="member__thumb">
+                                        <img src="{{asset('frontend/assets/images/member/home2/04.jpg')}}"
+                                            alt="member-img">
+                                        <span class="member__activity member__activity--ofline"></span>
+                                    </div>
+                                    <div class="member__content">
+                                        <a href="member-single.html">
+                                            <h5>Karolin Kuhn</h5>
+                                        </a>
+                                        <p>registered 4 months, 1 week ago</p>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="member__item">
+                                <div class="member__inner">
+                                    <div class="member__thumb">
+                                        <img src="{{asset('frontend/assets/images/member/home2/05.jpg')}}"
+                                            alt="member-img">
+                                        <span class="member__activity"></span>
+                                    </div>
+                                    <div class="member__content">
+                                        <a href="member-single.html">
+                                            <h5>Tobias Wagner</h5>
+                                        </a>
+                                        <p>registered 4 months, 1 week ago</p>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="member__item">
+                                <div class="member__inner">
+                                    <div class="member__thumb">
+                                        <img src="{{asset('frontend/assets/images/member/home2/06.jpg')}}"
+                                            alt="member-img">
+                                        <span class="member__activity"></span>
+                                    </div>
+                                    <div class="member__content">
+                                        <a href="member-single.html">
+                                            <h5>Amanda Rodrigues</h5>
+                                        </a>
+                                        <p>registered 4 months, 1 week ago</p>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="member__item">
+                                <div class="member__inner">
+                                    <div class="member__thumb">
+                                        <img src="{{asset('frontend/assets/images/member/home2/07.jpg')}}"
+                                            alt="member-img">
+                                        <span class="member__activity member__activity--ofline"></span>
+                                    </div>
+                                    <div class="member__content">
+                                        <a href="member-single.html">
+                                            <h5>Barros Pereira</h5>
+                                        </a>
+                                        <p>registered 4 months, 1 week ago</p>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="member__item">
+                                <div class="member__inner">
+                                    <div class="member__thumb">
+                                        <img src="{{asset('frontend/assets/images/member/home2/08.jpg')}}"
+                                            alt="member-img">
+                                        <span class="member__activity"></span>
+                                    </div>
+                                    <div class="member__content">
+                                        <a href="member-single.html">
+                                            <h5>Emily Fernandes</h5>
+                                        </a>
+                                        <p>registered 4 months, 1 week ago</p>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="member__item">
+                                <div class="member__inner">
+                                    <div class="member__thumb">
+                                        <img src="{{asset('frontend/assets/images/member/home2/09.jpg')}}"
+                                            alt="member-img">
+                                        <span class="member__activity member__activity--ofline"></span>
+                                    </div>
+                                    <div class="member__content">
+                                        <a href="member-single.html">
+                                            <h5>Alves Fernandes</h5>
+                                        </a>
+                                        <p>registered 4 months, 1 week ago</p>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="member__item">
+                                <div class="member__inner">
+                                    <div class="member__thumb">
+                                        <img src="{{asset('frontend/assets/images/member/home2/02.jpg')}}"
+                                            alt="member-img">
+                                        <span class="member__activity"></span>
+                                    </div>
+                                    <div class="member__content">
+                                        <a href="member-single.html">
+                                            <h5>Sousa Carvalho</h5>
+                                        </a>
+                                        <p>registered 4 months, 1 week ago</p>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="tab-pane fade" id="activemember" role="tabpanel" aria-labelledby="activemember-tab">
+                        <div class="row g-0 justify-content-center">
+                            <div class="member__item">
+                                <div class="member__inner">
+                                    <div class="member__thumb">
+                                        <img src="{{asset('frontend/assets/images/member/home2/01.jpg')}}"
+                                            alt="member-img">
+                                        <span class="member__activity"></span>
+                                    </div>
+                                    <div class="member__content">
+                                        <a href="member-single.html">
+                                            <h5>Smith Jhonson</h5>
+                                        </a>
+                                        <p>registered 4 months, 1 week ago</p>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="member__item">
+                                <div class="member__inner">
+                                    <div class="member__thumb">
+                                        <img src="{{asset('frontend/assets/images/member/home2/06.jpg')}}"
+                                            alt="member-img">
+                                        <span class="member__activity"></span>
+                                    </div>
+                                    <div class="member__content">
+                                        <a href="member-single.html">
+                                            <h5>Amanda Rodrigues</h5>
+                                        </a>
+                                        <p>registered 4 months, 1 week ago</p>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="member__item">
+                                <div class="member__inner">
+                                    <div class="member__thumb">
+                                        <img src="{{asset('frontend/assets/images/member/home2/07.jpg')}}"
+                                            alt="member-img">
+                                        <span class="member__activity member__activity--ofline"></span>
+                                    </div>
+                                    <div class="member__content">
+                                        <a href="member-single.html">
+                                            <h5>Barros Pereira</h5>
+                                        </a>
+                                        <p>registered 4 months, 1 week ago</p>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="member__item">
+                                <div class="member__inner">
+                                    <div class="member__thumb">
+                                        <img src="{{asset('frontend/assets/images/member/home2/08.jpg')}}"
+                                            alt="member-img">
+                                        <span class="member__activity"></span>
+                                    </div>
+                                    <div class="member__content">
+                                        <a href="member-single.html">
+                                            <h5>Emily Fernandes</h5>
+                                        </a>
+                                        <p>registered 4 months, 1 week ago</p>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="member__item">
+                                <div class="member__inner">
+                                    <div class="member__thumb">
+                                        <img src="{{asset('frontend/assets/images/member/home2/09.jpg')}}"
+                                            alt="member-img">
+                                        <span class="member__activity member__activity--ofline"></span>
+                                    </div>
+                                    <div class="member__content">
+                                        <a href="member-single.html">
+                                            <h5>Alves Fernandes</h5>
+                                        </a>
+                                        <p>registered 4 months, 1 week ago</p>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="member__item">
+                                <div class="member__inner">
+                                    <div class="member__thumb">
+                                        <img src="{{asset('frontend/assets/images/member/home2/02.jpg')}}"
+                                            alt="member-img">
+                                        <span class="member__activity member__activity--ofline"></span>
+                                    </div>
+                                    <div class="member__content">
+                                        <a href="member-single.html">
+                                            <h5>Arika Q Smith</h5>
+                                        </a>
+                                        <p>registered 4 months, 1 week ago</p>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="member__item">
+                                <div class="member__inner">
+                                    <div class="member__thumb">
+                                        <img src="{{asset('frontend/assets/images/member/home2/03.jpg')}}"
+                                            alt="member-img">
+                                        <span class="member__activity"></span>
+                                    </div>
+                                    <div class="member__content">
+                                        <a href="member-single.html">
+                                            <h5>William R Show</h5>
+                                        </a>
+                                        <p>registered 4 months, 1 week ago</p>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="member__item">
+                                <div class="member__inner">
+                                    <div class="member__thumb">
+                                        <img src="{{asset('frontend/assets/images/member/home2/04.jpg')}}"
+                                            alt="member-img">
+                                        <span class="member__activity member__activity--ofline"></span>
+                                    </div>
+                                    <div class="member__content">
+                                        <a href="member-single.html">
+                                            <h5>Karolin Kuhn</h5>
+                                        </a>
+                                        <p>registered 4 months, 1 week ago</p>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="member__item">
+                                <div class="member__inner">
+                                    <div class="member__thumb">
+                                        <img src="{{asset('frontend/assets/images/member/home2/05.jpg')}}"
+                                            alt="member-img">
+                                        <span class="member__activity"></span>
+                                    </div>
+                                    <div class="member__content">
+                                        <a href="member-single.html">
+                                            <h5>Tobias Wagner</h5>
+                                        </a>
+                                        <p>registered 4 months, 1 week ago</p>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="member__item">
+                                <div class="member__inner">
+                                    <div class="member__thumb">
+                                        <img src="{{asset('frontend/assets/images/member/home2/02.jpg')}}"
+                                            alt="member-img">
+                                        <span class="member__activity"></span>
+                                    </div>
+                                    <div class="member__content">
+                                        <a href="member-single.html">
+                                            <h5>Sousa Carvalho</h5>
+                                        </a>
+                                        <p>registered 4 months, 1 week ago</p>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="tab-pane fade" id="popularmember" role="tabpanel" aria-labelledby="popularmember-tab">
+                        <div class="row g-0 justify-content-center">
+                            <div class="member__item">
+                                <div class="member__inner">
+                                    <div class="member__thumb">
+                                        <img src="{{asset('frontend/assets/images/member/home2/04.jpg')}}"
+                                            alt="member-img">
+                                        <span class="member__activity member__activity--ofline"></span>
+                                    </div>
+                                    <div class="member__content">
+                                        <a href="member-single.html">
+                                            <h5>Karolin Kuhn</h5>
+                                        </a>
+                                        <p>registered 4 months, 1 week ago</p>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="member__item">
+                                <div class="member__inner">
+                                    <div class="member__thumb">
+                                        <img src="{{asset('frontend/assets/images/member/home2/05.jpg')}}"
+                                            alt="member-img">
+                                        <span class="member__activity"></span>
+                                    </div>
+                                    <div class="member__content">
+                                        <a href="member-single.html">
+                                            <h5>Tobias Wagner</h5>
+                                        </a>
+                                        <p>registered 4 months, 1 week ago</p>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="member__item">
+                                <div class="member__inner">
+                                    <div class="member__thumb">
+                                        <img src="{{asset('frontend/assets/images/member/home2/06.jpg')}}"
+                                            alt="member-img">
+                                        <span class="member__activity"></span>
+                                    </div>
+                                    <div class="member__content">
+                                        <a href="member-single.html">
+                                            <h5>Amanda Rodrigues</h5>
+                                        </a>
+                                        <p>registered 4 months, 1 week ago</p>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="member__item">
+                                <div class="member__inner">
+                                    <div class="member__thumb">
+                                        <img src="{{asset('frontend/assets/images/member/home2/07.jpg')}}"
+                                            alt="member-img">
+                                        <span class="member__activity member__activity--ofline"></span>
+                                    </div>
+                                    <div class="member__content">
+                                        <a href="member-single.html">
+                                            <h5>Barros Pereira</h5>
+                                        </a>
+                                        <p>registered 4 months, 1 week ago</p>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="member__item">
+                                <div class="member__inner">
+                                    <div class="member__thumb">
+                                        <img src="{{asset('frontend/assets/images/member/home2/08.jpg')}}"
+                                            alt="member-img">
+                                        <span class="member__activity"></span>
+                                    </div>
+                                    <div class="member__content">
+                                        <a href="member-single.html">
+                                            <h5>Emily Fernandes</h5>
+                                        </a>
+                                        <p>registered 4 months, 1 week ago</p>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="member__item">
+                                <div class="member__inner">
+                                    <div class="member__thumb">
+                                        <img src="{{asset('frontend/assets/images/member/home2/09.jpg')}}"
+                                            alt="member-img">
+                                        <span class="member__activity member__activity--ofline"></span>
+                                    </div>
+                                    <div class="member__content">
+                                        <a href="member-single.html">
+                                            <h5>Alves Fernandes</h5>
+                                        </a>
+                                        <p>registered 4 months, 1 week ago</p>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="member__item">
+                                <div class="member__inner">
+                                    <div class="member__thumb">
+                                        <img src="{{asset('frontend/assets/images/member/home2/01.jpg')}}"
+                                            alt="member-img">
+                                        <span class="member__activity"></span>
+                                    </div>
+                                    <div class="member__content">
+                                        <a href="member-single.html">
+                                            <h5>Smith Jhonson</h5>
+                                        </a>
+                                        <p>registered 4 months, 1 week ago</p>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="member__item">
+                                <div class="member__inner">
+                                    <div class="member__thumb">
+                                        <img src="{{asset('frontend/assets/images/member/home2/02.jpg')}}"
+                                            alt="member-img">
+                                        <span class="member__activity member__activity--ofline"></span>
+                                    </div>
+                                    <div class="member__content">
+                                        <a href="member-single.html">
+                                            <h5>Arika Q Smith</h5>
+                                        </a>
+                                        <p>registered 4 months, 1 week ago</p>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="member__item">
+                                <div class="member__inner">
+                                    <div class="member__thumb">
+                                        <img src="{{asset('frontend/assets/images/member/home2/03.jpg')}}"
+                                            alt="member-img">
+                                        <span class="member__activity"></span>
+                                    </div>
+                                    <div class="member__content">
+                                        <a href="member-single.html">
+                                            <h5>William R Show</h5>
+                                        </a>
+                                        <p>registered 4 months, 1 week ago</p>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="member__item">
+                                <div class="member__inner">
+                                    <div class="member__thumb">
+                                        <img src="{{asset('frontend/assets/images/member/home2/02.jpg')}}"
+                                            alt="member-img">
+                                        <span class="member__activity"></span>
+                                    </div>
+                                    <div class="member__content">
+                                        <a href="member-single.html">
+                                            <h5>Sousa Carvalho</h5>
+                                        </a>
+                                        <p>registered 4 months, 1 week ago</p>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="text-center mt-4">
+                    <a href="members.html" class="default-btn"><span>See More Popular</span></a>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- ================> Member section end here <================== -->
+
+
+    <!-- ================> About section start here <================== -->
+    <div class="about padding-top padding-bottom bg_img"
+        style="background-image: url({{asset('frontend/assets/images/bg-img/02.jpg')}});">
+        <div class="container">
+            <div class="section__header style-2 text-center wow fadeInUp" data-wow-duration="1.5s">
+                <h2>Why Choose Ollya</h2>
+                <p>Our dating platform is like a breath of fresh air. Clean and trendy design with ready to use features
+                    we are sure you will love.</p>
+            </div>
+            <div class="section__wrapper">
+                <div class="row g-4 justify-content-center row-cols-xl-4 row-cols-lg-3 row-cols-sm-2 row-cols-1">
+                    <div class="col wow fadeInUp" data-wow-duration="1.5s">
+                        <div class="about__item text-center">
+                            <div class="about__inner">
+                                <div class="about__thumb">
+                                    <img src="{{asset('frontend/assets/images/about/01.jpg')}}" alt="dating thumb">
+                                </div>
+                                <div class="about__content">
+                                    <h4>Simple To Use</h4>
+                                    <p>Simple steps to follow to have a matching connection.</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col wow fadeInUp" data-wow-duration="1.6s">
+                        <div class="about__item text-center">
+                            <div class="about__inner">
+                                <div class="about__thumb">
+                                    <img src="{{asset('frontend/assets/images/about/02.jpg')}}" alt="dating thumb">
+                                </div>
+                                <div class="about__content">
+                                    <h4>Smart Matching</h4>
+                                    <p>Create connections with users that are like you.</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col wow fadeInUp" data-wow-duration="1.7s">
+                        <div class="about__item text-center">
+                            <div class="about__inner">
+                                <div class="about__thumb">
+                                    <img src="{{asset('frontend/assets/images/about/03.jpg')}}" alt="dating thumb">
+                                </div>
+                                <div class="about__content">
+                                    <h4>Filter Very Fast</h4>
+                                    <p>Don’t waste your time! Find only what you are interested</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col wow fadeInUp" data-wow-duration="1.8s">
+                        <div class="about__item text-center">
+                            <div class="about__inner">
+                                <div class="about__thumb">
+                                    <img src="{{asset('frontend/assets/images/about/04.jpg')}}" alt="dating thumb">
+                                </div>
+                                <div class="about__content">
+                                    <h4>Cool Community</h4>
+                                    <p>BuddyPress network is full of cool members.</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- ================> About section end here <================== -->
+
+
+    <!-- Transportation Section Start Here -->
+    <section class="transportation padding-top padding-bottom">
+        <div class="container">
+            <div class="section__wrapper">
+                <div class="row">
+                    <div class="col-lg-4 col-12">
+                        <div class="left">
+                            <div class="section__header style-2 mb-lg-0 wow fadeInUp" data-wow-duration="1.5s">
+                                <h2>Meet Singles in Your Area</h2>
+                                <p>If you want to meet local singles for dating, companionship, friendship or even more,
+                                    you have come to the right place.</p>
+                                <ul>
+                                    <li>
+                                        <div class="thumb"> <img
+                                                src="{{asset('frontend/assets/images/transport/01.jpg')}}"
+                                                alt="lab-trensport"></div>
+                                        <div class="content"><a href="members.html">United kingdom</a></div>
+                                    </li>
+                                    <li>
+                                        <div class="thumb"> <img
+                                                src="{{asset('frontend/assets/images/transport/02.jpg')}}"
+                                                alt="lab-trensport"></div>
+                                        <div class="content"><a href="members.html">Germany</a></div>
+                                    </li>
+                                    <li>
+                                        <div class="thumb"> <img
+                                                src="{{asset('frontend/assets/images/transport/03.jpg')}}"
+                                                alt="lab-trensport"></div>
+                                        <div class="content"><a href="members.html">United states</a></div>
+                                    </li>
+                                    <li>
+                                        <div class="thumb"> <img
+                                                src="{{asset('frontend/assets/images/transport/04.jpg')}}"
+                                                alt="lab-trensport"></div>
+                                        <div class="content"><a href="members.html">Brazil</a></div>
+                                    </li>
+                                    <li>
+                                        <div class="thumb"> <img
+                                                src="{{asset('frontend/assets/images/transport/05.jpg')}}"
+                                                alt="lab-trensport"></div>
+                                        <div class="content"><a href="members.html">Falkland islands</a></div>
+                                    </li>
+                                    <li>
+                                        <div class="thumb"> <img
+                                                src="{{asset('frontend/assets/images/transport/06.jpg')}}"
+                                                alt="lab-trensport"></div>
+                                        <div class="content"><a href="members.html">Portugal</a></div>
+                                    </li>
+                                    <li>
+                                        <div class="thumb"> <img
+                                                src="{{asset('frontend/assets/images/transport/07.jpg')}}"
+                                                alt="lab-trensport"></div>
+                                        <div class="content"><a href="members.html">Australia</a></div>
+                                    </li>
+                                    <li>
+                                        <div class="thumb"> <img
+                                                src="{{asset('frontend/assets/images/transport/08.jpg')}}"
+                                                alt="lab-trensport"></div>
+                                        <div class="content"><a href="members.html">India</a></div>
+                                    </li>
+                                    <li>
+                                        <div class="thumb"> <img
+                                                src="{{asset('frontend/assets/images/transport/09.jpg')}}"
+                                                alt="lab-trensport"></div>
+                                        <div class="content"><a href="members.html">South Africa</a></div>
+                                    </li>
+                                    <li>
+                                        <div class="thumb"> <img
+                                                src="{{asset('frontend/assets/images/transport/10.jpg')}}"
+                                                alt="lab-trensport"></div>
+                                        <div class="content"><a href="members.html">Bangladesh</a></div>
+                                    </li>
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-lg-8 col-12">
+                        <div class="right wow fadeInUp" data-wow-duration="1.5s">
+                            <div class="lab-line">
+                                <span></span>
+                                <div class="lab-tooltip"><a href="members.html">United kingdom</a></div>
+                            </div>
+                            <div class="lab-line">
+                                <span></span>
+                                <div class="lab-tooltip"><a href="members.html">United states</a></div>
+                            </div>
+                            <div class="lab-line">
+                                <span></span>
+                                <div class="lab-tooltip"><a href="members.html">Falkland islands</a></div>
+                            </div>
+                            <div class="lab-line">
+                                <span></span>
+                                <div class="lab-tooltip"><a href="members.html">Australia</a></div>
+                            </div>
+                            <div class="lab-line">
+                                <span></span>
+                                <div class="lab-tooltip"><a href="members.html">South Africa</a></div>
+                            </div>
+                            <div class="lab-line">
+                                <span></span>
+                                <div class="lab-tooltip"><a href="members.html">Germany</a></div>
+                            </div>
+                            <div class="lab-line">
+                                <span></span>
+                                <div class="lab-tooltip"><a href="members.html">Brazil</a></div>
+                            </div>
+                            <div class="lab-line">
+                                <span></span>
+                                <div class="lab-tooltip"><a href="members.html">Portugal</a></div>
+                            </div>
+                            <div class="lab-line">
+                                <span></span>
+                                <div class="lab-tooltip"><a href="members.html">India</a></div>
+                            </div>
+                            <div class="lab-line">
+                                <span></span>
+                                <div class="lab-tooltip"><a href="members.html">Bangladesh</a></div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+    <!-- Transportation Section Ending Here -->
+
+
+    <!-- ================> Work section start here <================== -->
+    <div class="work work--style2 padding-top padding-bottom bg_img"
+        style="background-image: url({{asset('frontend/assets/images/bg-img/01.jpg')}});">
+        <div class="container">
+            <div class="section__wrapper">
+                <div class="row g-4 justify-content-center">
+                    <div class="col-xl-6 col-lg-8 col-12 wow fadeInLeft" data-wow-duration="1.5s">
+                        <div class="work__item">
+                            <div class="work__inner">
+                                <div class="work__thumb">
+                                    <img src="{{asset('frontend/assets/images/work/09.png')}}" alt="dating thumb">
+                                </div>
+                                <div class="work__content">
+                                    <h3>Trust And Safety</h3>
+                                    <p>Choose from one of our membership levels and unlock features you need. </p>
+                                    <a href="policy.html" class="default-btn"><span>See More Details</span></a>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-xl-6 col-lg-8 col-12 wow fadeInRight" data-wow-duration="1.5s">
+                        <div class="work__item">
+                            <div class="work__inner">
+                                <div class="work__thumb">
+                                    <img src="{{asset('frontend/assets/images/work/10.png')}}" alt="dating thumb">
+                                </div>
+                                <div class="work__content">
+                                    <h3>Simple Membership</h3>
+                                    <p>Choose from one of our membership levels and unlock features you need. </p>
+                                    <a href="membership.html" class="default-btn reverse"><span>Membership
+                                            Details</span></a>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- ================> Work section end here <================== -->
+
+
+    <!-- ================> App section start here <================== -->
+    <div class="app app--style2 padding-top padding-bottom">
+        <div class="container">
+            <div class="row g-4 justify-content-center">
+                <div class="col-xxl-6 col-12">
+                    <div class="app__item wow fadeInUp" data-wow-duration="1.5s">
+                        <div class="app__inner">
+                            <div class="app__content text-center">
+                                <h4>Download App Our Ollya</h4>
+                                <h2>Easy Connect To Everyone</h2>
+                                <p>You find us, finally and you are already in love. More than 5.000.000 around the
+                                    world already shared the same experience andng ares uses our system Joining us today
+                                    just got easier!</p>
+                                <ul class="justify-content-center">
+                                    <li><a href="#"><img src="assets/images/app/01.jpg" alt="dating thumb"></a></li>
+                                    <li><a href="#"><img src="assets/images/app/02.jpg" alt="dating thumb"></a></li>
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- ================> App section end here <================== -->
+
+
+    <!-- ================> Footer section start here <================== -->
+    <footer class="footer footer--style2">
+        <div class="footer__top bg_img"
+            style="background-image: url({{asset('frontend/assets/images/footer/bg.jpg')}})">
+            <div class="footer__newsletter wow fadeInUp" data-wow-duration="1.5s">
+                <div class="container">
+                    <div class="row g-4 justify-content-center">
+                        <div class="col-lg-6 col-12">
+                            <div class="footer__newsletter--area">
+                                <div class="footer__newsletter--title">
+                                    <h4>Newsletter Sign up</h4>
+                                </div>
+                                <div class="footer__newsletter--form">
+                                    <form action="#">
+                                        <input type="email" placeholder="Your email address">
+                                        <button type="submit" class="default-btn"><span>Subscribe</span></button>
+                                    </form>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-lg-6 col-12">
+                            <div class="footer__newsletter--area justify-content-xxl-end">
+                                <div class="footer__newsletter--title me-xl-4">
+                                    <h4>Join Community</h4>
+                                </div>
+                                <div class="footer__newsletter--social">
+                                    <ul>
+                                        <li><a href="#"><i class="fa-brands fa-twitter"></i></a></li>
+                                        <li><a href="#"><i class="fa-brands fa-twitch"></i></a></li>
+                                        <li><a href="#"><i class="fa-brands fa-instagram"></i></a></li>
+                                        <li><a href="#"><i class="fa-brands fa-dribbble"></i></a></li>
+                                        <li><a href="#"><i class="fa-brands fa-facebook-messenger"></i></a></li>
+                                    </ul>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="footer__toparea padding-top padding-bottom wow fadeInUp" data-wow-duration="1.5s">
+                <div class="container">
+                    <div class="row g-4">
+                        <div class="col-lg-3 col-sm-6 col-12">
+                            <div class="footer__item footer--about">
+                                <div class="footer__inner">
+                                    <div class="footer__content">
+                                        <div class="footer__content--title">
+                                            <h4>About Ollya</h4>
+                                        </div>
+                                        <div class="footer__content--desc">
+                                            <p>Ollya is a friendly dating theme based on HTML template for the community
+                                                functionality</p>
+                                        </div>
+                                        <div class="footer__content--info">
+                                            <p><b>Address :</b> Suite-13 Tropical Center New Elephant Road 1205</p>
+                                            <p><b>Contact :</b> +30 226 4881 514 www.yoursitename.com</p>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-lg-3 col-sm-6 col-12">
+                            <div class="footer__item footer--feature">
+                                <div class="footer__inner">
+                                    <div class="footer__content">
+                                        <div class="footer__content--title">
+                                            <h4>Featured Members</h4>
+                                        </div>
+                                        <div class="footer__content--desc">
+                                            <ul>
+                                                <li>
+                                                    <div class="thumb position-relative">
+                                                        <img src="{{asset('frontend/assets/images/footer/feature/01.jpg')}}"
+                                                            alt="member-img">
+                                                        <span class="feature__activity"></span>
+                                                    </div>
+                                                    <div class="content">
+                                                        <a href="member-single.html">
+                                                            <h6>Samantha Lee</h6>
+                                                        </a>
+                                                        <p>Active</p>
+                                                    </div>
+                                                </li>
+                                                <li>
+                                                    <div class="thumb position-relative">
+                                                        <img src="{{asset('frontend/assets/images/footer/feature/02.jpg')}}"
+                                                            alt="member-img">
+                                                        <span
+                                                            class="feature__activity feature__activity--ofline"></span>
+                                                    </div>
+                                                    <div class="content">
+                                                        <a href="member-single.html">
+                                                            <h6>Peter McMillan</h6>
+                                                        </a>
+                                                        <p>2 Hours Ago</p>
+                                                    </div>
+                                                </li>
+                                                <li>
+                                                    <div class="thumb position-relative">
+                                                        <img src="{{asset('frontend/assets/images/footer/feature/03.jpg')}}"
+                                                            alt="member-img">
+                                                        <span class="feature__activity"></span>
+                                                    </div>
+                                                    <div class="content">
+                                                        <a href="member-single.html">
+                                                            <h6>Tluagtea Tualzik</h6>
+                                                        </a>
+                                                        <p>Active</p>
+                                                    </div>
+                                                </li>
+                                            </ul>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-lg-3 col-sm-6 col-12">
+                            <div class="footer__item footer--support">
+                                <div class="footer__inner">
+                                    <div class="footer__content">
+                                        <div class="footer__content--title">
+                                            <h4>Contacts & Support</h4>
+                                        </div>
+                                        <div class="footer__content--desc">
+                                            <ul>
+                                                <li><a href="#"><i class="fa-solid fa-angle-right"></i> About Us</a>
+                                                </li>
+                                                <li><a href="#"><i class="fa-solid fa-angle-right"></i> Our Team</a>
+                                                </li>
+                                                <li><a href="#"><i class="fa-solid fa-angle-right"></i> Testimonials</a>
+                                                </li>
+                                                <li><a href="#"><i class="fa-solid fa-angle-right"></i> Get in Touch</a>
+                                                </li>
+                                                <li><a href="#"><i class="fa-solid fa-angle-right"></i> FAQ</a></li>
+                                            </ul>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-lg-3 col-sm-6 col-12">
+                            <div class="footer__item footer--activity">
+                                <div class="footer__inner">
+                                    <div class="footer__content">
+                                        <div class="footer__content--title">
+                                            <h4>Recent Activity</h4>
+                                        </div>
+                                        <div class="footer__content--desc">
+                                            <ul>
+                                                <li>
+                                                    <div class="thumb">
+                                                        <a href="group-single.html"><img
+                                                                src="{{asset('frontend/assets/images/footer/activity/01.jpg')}}"
+                                                                alt="dating thumb"></a>
+                                                    </div>
+                                                    <div class="content">
+                                                        <a href="group-single.html">
+                                                            <h6>Where to find a good...</h6>
+                                                        </a>
+                                                        <p>August 13, 2022</p>
+                                                    </div>
+                                                </li>
+                                                <li>
+                                                    <div class="thumb">
+                                                        <a href="group-single.html"><img
+                                                                src="{{asset('frontend/assets/images/footer/activity/02.jpg')}}"
+                                                                alt="dating thumb"></a>
+                                                    </div>
+                                                    <div class="content">
+                                                        <a href="group-single.html">
+                                                            <h6>Where to find a good...</h6>
+                                                        </a>
+                                                        <p>August 13, 2022</p>
+                                                    </div>
+                                                </li>
+                                                <li>
+                                                    <div class="thumb">
+                                                        <a href="group-single.html"><img
+                                                                src="{{asset('frontend/assets/images/footer/activity/03.jpg')}}"
+                                                                alt="dating thumb"></a>
+                                                    </div>
+                                                    <div class="content">
+                                                        <a href="group-single.html">
+                                                            <h6>Where to find a good...</h6>
+                                                        </a>
+                                                        <p>August 13, 2022</p>
+                                                    </div>
+                                                </li>
+                                            </ul>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="footer__bottom wow fadeInUp" data-wow-duration="1.5s">
+            <div class="container">
+                <div class="footer__content text-center">
+                    <p class="mb-0">All Rights Reserved &copy; <a href="index.html">Ollya</a> || Design By: CodexCoder
+                    </p>
+                </div>
+            </div>
+        </div>
+    </footer>
+    <!-- ================> Footer section end here <================== -->
+
+
+    <!-- All Needed JS -->
+    <script src="{{asset('frontend/assets/js/vendor/jquery-3.6.0.min.js')}}"></script>
+    <script src="{{asset('frontend/assets/js/vendor/modernizr-3.11.2.min.js')}}"></script>
+    <script src="{{asset('frontend/assets/js/isotope.pkgd.min.js')}}"></script>
+    <script src="{{asset('frontend/assets/js/swiper.min.js')}}"></script>
+    <!-- <script src="assets/js/all.min.js"></script> -->
+    <script src="{{asset('frontend/assets/js/wow.js')}}"></script>
+    <script src="{{asset('frontend/assets/js/counterup.js')}}"></script>
+    <script src="{{asset('frontend/assets/js/jquery.countdown.min.js')}}"></script>
+    <script src="{{asset('frontend/assets/js/lightcase.js')}}"></script>
+    <script src="{{asset('frontend/assets/js/waypoints.min.js')}}"></script>
+    <script src="{{asset('frontend/assets/js/vendor/bootstrap.bundle.min.js')}}"></script>
+    <script src="{{asset('frontend/assets/js/plugins.js')}}"></script>
+    <script src="{{asset('frontend/assets/js/main.js')}}"></script>
+
+
+    <!-- Google Analytics: change UA-XXXXX-Y to be your site's ID. -->
+    <script>
+        window.ga = function () {
+			ga.q.push(arguments)
+		};
+		ga.q = [];
+		ga.l = +new Date;
+		ga('create', 'UA-XXXXX-Y', 'auto');
+		ga('set', 'anonymizeIp', true);
+		ga('set', 'transport', 'beacon');
+		ga('send', 'pageview')
+    </script>
+    <script src="../../../../www.google-analytics.com/analytics.js" async></script>
 </body>
+
+<!-- Mirrored from demos.codexcoder.com/themeforest/html/ollya/index-2.html by HTTrack Website Copier/3.x [XR&CO'2014], Sat, 16 Dec 2023 08:37:08 GMT -->
 
 </html>

@@ -35,5 +35,13 @@ class DatabaseSeeder extends Seeder
             SettingsTableSeeder::class,
             CmsPagesTableSeeder::class,
         ]);
+
+        // Frontend Seeder
+        $this->call([
+            RateTypeTableSeeder::class,
+            PolicyTypeTableSeeder::class,
+            ContactMediaTableSeeder::class,
+            UserTableSeeder::class,
+        ]);
     }
 }

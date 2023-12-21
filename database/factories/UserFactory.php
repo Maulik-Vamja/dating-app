@@ -2,6 +2,7 @@
 
 namespace Database\Factories;
 
+use App\Enums\StatusEnums;
 use Illuminate\Database\Eloquent\Factories\Factory;
 use Illuminate\Support\Str;
 
@@ -16,11 +17,32 @@ class UserFactory extends Factory
     {
         return [
             'custom_id' => get_unique_string('users'),
-            'first_name' => $this->faker->name(),
-            'last_name' => $this->faker->name(),
+            'full_name' => $this->faker->name(),
+            'user_name' => get_unique_username($this->faker->userName()),
             'email' => $this->faker->unique()->safeEmail(),
-            'email_verified_at' => now(),
             'password' => '$2y$10$92IXUNpkjO0rOQ5byMi.Ye4oKoEa3Ro9llC/.og/at2.uheWG/igi', // password
+            'short_description' => $this->faker->text(20),
+            'description' => $this->faker->text(200),
+            'pronouns'  => $this->faker->randomElement(['She', 'Her', 'Hers']),
+            'gender'  => $this->faker->randomElement(['Male', 'Female', 'Non-binary']),
+            'age' => $this->faker->numberBetween(18, 60) . 's',
+            'caters_to' => implode(',', $this->faker->randomElements(['Men', 'Women', 'Non-binary', 'Couples'])),
+            'body_type' => implode(',', $this->faker->randomElements(['Slim', 'Curvy', 'Athletic', 'BBW', 'Muscular'])),
+            'height' => $this->faker->numberBetween(140, 190),
+            'ethnicity' => $this->faker->randomElement(['Asian', 'Black', 'Caucasian', 'Latin', 'Mixed']),
+            'availibility' => json_encode(['monday' => true, 'tuesday' => true, 'wednesday' => true, 'thursday' => true, 'friday' => true, 'saturday' => true, 'sunday' => true]),
+            'availibility_description' => $this->faker->text(100),
+            'cup_size' => $this->faker->randomElement(['AA', 'A', 'B', 'C', 'D', 'DD', 'DDD', 'F', 'G']),
+            'hair_colour' => $this->faker->randomElement(['Black', 'Blonde', 'Brunette', 'Red', 'Grey', 'White']),
+            'shoe_size' => $this->faker->numberBetween(3, 10),
+            'eye_colour' => $this->faker->randomElement(['Black', 'Blue', 'Brown', 'Green', 'Grey']),
+            'last_logged_in' => $this->faker->dateTimeBetween('-1 years', 'now'),
+            'profile_photo' => null,
+            'thumbnail_image' => $this->faker->imageUrl(267, 400, 'escorts'),
+            'membership' => null,
+            'contact_disclaimer' => $this->faker->text(100),
+            'is_active' => $this->faker->randomElement([StatusEnums::ACTIVE, StatusEnums::INACTIVE]),
+            'email_verified_at' => now(),
             'remember_token' => Str::random(10),
         ];
     }

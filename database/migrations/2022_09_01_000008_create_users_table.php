@@ -26,6 +26,7 @@ return new class extends Migration
             $table->text("description")->nullable();
             $table->string('pronouns')->nullable();
             $table->string('gender')->nullable();
+            $table->string('age')->nullable();
             $table->string('caters_to')->nullable();
             $table->string('body_type')->nullable();
             $table->integer('height')->nullable();
@@ -36,6 +37,8 @@ return new class extends Migration
             $table->string('eye_colour')->nullable();
             $table->datetime('last_logged_in')->nullable();
             $table->string('profile_photo')->nullable();
+            $table->json('availibility')->nullable();
+            $table->text('availibility_description')->nullable();
             $table->string('thumbnail_image')->nullable();
             $table->string('membership')->nullable();
             $table->string('contact_disclaimer')->nullable();

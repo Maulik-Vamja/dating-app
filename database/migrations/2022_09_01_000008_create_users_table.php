@@ -25,7 +25,7 @@ return new class extends Migration
             $table->text("short_description")->nullable();
             $table->text("description")->nullable();
             $table->string('pronouns')->nullable();
-            $table->string('gender')->nullable();
+            $table->enum('gender', ['male', 'female', 'non-binary'])->default('male')->nullable();
             $table->string('age')->nullable();
             $table->string('caters_to')->nullable();
             $table->string('body_type')->nullable();

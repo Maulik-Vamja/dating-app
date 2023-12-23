@@ -48,4 +48,29 @@ class User extends Authenticatable
     {
         return $this->hasOne(UserAvailibility::class, "user_id", "id");
     }
+
+    public function rates()
+    {
+        return $this->hasMany(UserRate::class, "user_id", "id");
+    }
+    public function policies()
+    {
+        return $this->hasMany(UserPolicy::class, "user_id", "id");
+    }
+    public function contacts()
+    {
+        return $this->hasMany(UserContactMedia::class, "user_id", "id")->where('is_active', 'y');
+    }
+    public function primary_address()
+    {
+        return $this->hasOne(UserAddress::class, "user_id", "id")->where('is_primary', 'y');
+    }
+    public function addresses()
+    {
+        return $this->hasMany(UserAddress::class, "user_id", "id")->where('is_active', 'y');
+    }
+    public function gallery_images()
+    {
+        return $this->hasMany(GalleryImages::class, "user_id", "id");
+    }
 }

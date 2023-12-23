@@ -1,80 +1,75 @@
-<!DOCTYPE html>
-<html lang="{{ str_replace('_', '-', app()->getLocale()) }}">
+<!doctype html>
+<html class="no-js" lang="en">
+
+
+<!-- Mirrored from demos.codexcoder.com/themeforest/html/ollya/index-2.html by HTTrack Website Copier/3.x [XR&CO'2014], Sat, 16 Dec 2023 08:36:56 GMT -->
+
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <meta charset="utf-8">
+    <title>Ollya</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
 
-    <!-- CSRF Token -->
-    <meta name="csrf-token" content="{{ csrf_token() }}">
-
-    <title>{{ config('app.name', 'Laravel') }}</title>
-
-    <!-- Fonts -->
-    <link rel="dns-prefetch" href="//fonts.gstatic.com" />
-    <link rel="stylesheet" type="text/css" href="//fonts.bunny.net/css?family=Nunito" />
-
-    <!-- Styles -->
-    <link rel="stylesheet" type="text/css" href="{{ asset('assets/frontend/css/app.css') }}" />
+    <!-- site favicon -->
+    <link rel="icon" type="image/png" href="{{asset('frontend/assets/images/favicon.png')}}">
+    <!-- Place favicon.ico in the root directory -->
+    @include('frontend.layouts.includes.css')
 </head>
+
 <body>
-    <div id="app">
-        <nav class="navbar navbar-expand-md navbar-light bg-white shadow-sm">
-            <div class="container">
-                <a class="navbar-brand" href="{{ url('/') }}">
-                    {{ config('app.name', 'Laravel') }}
-                </a>
-                <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="{{ __('Toggle navigation') }}">
-                    <span class="navbar-toggler-icon"></span>
-                </button>
-
-                <div class="collapse navbar-collapse" id="navbarSupportedContent">
-                    <!-- Left Side Of Navbar -->
-                    <ul class="navbar-nav me-auto"></ul>
-
-                    <!-- Right Side Of Navbar -->
-                    <ul class="navbar-nav ms-auto">
-                        <!-- Authentication Links -->
-                        @guest
-                            @if (Route::has('login'))
-                                <li class="nav-item">
-                                    <a class="nav-link" href="{{ route('login') }}">{{ __('Login') }}</a>
-                                </li>
-                            @endif
-
-                            @if (Route::has('register'))
-                                <li class="nav-item">
-                                    <a class="nav-link" href="{{ route('register') }}">{{ __('Register') }}</a>
-                                </li>
-                            @endif
-                        @else
-                            <li class="nav-item dropdown">
-                                <a id="navbarDropdown" class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false" v-pre>
-                                    {{ Auth::user()->first_name }} {{ Auth::user()->last_name }}
-                                </a>
-
-                                <div class="dropdown-menu dropdown-menu-end" aria-labelledby="navbarDropdown">
-                                    <a class="dropdown-item" href="{{ route('logout') }}" onclick="event.preventDefault(); document.getElementById('logout-form').submit();">
-                                        {{ __('Logout') }}
-                                    </a>
-
-                                    <form id="logout-form" action="{{ route('logout') }}" method="POST" class="d-none">
-                                        @csrf
-                                    </form>
-                                </div>
-                            </li>
-                        @endguest
-                    </ul>
-                </div>
+    <!-- preloader start here -->
+    <div class="preloader">
+        <div class="preloader-inner">
+            <div class="preloader-icon">
+                <span></span>
+                <span></span>
             </div>
-        </nav>
-
-        <main class="py-4">
-            @yield('content')
-        </main>
+        </div>
     </div>
+    <!-- preloader ending here -->
 
-    <!-- Scripts -->
-    <script src="{{ asset('assets/frontend/js/app.js') }}"></script>
+
+    <!-- scrollToTop start here -->
+    <a href="#" class="scrollToTop"><i class="fa-solid fa-angle-up"></i></a>
+    <!-- scrollToTop ending here -->
+
+
+    <!-- ================> header section start here <================== -->
+    @include('frontend.layouts.includes.header')
+    <!-- ================> header section end here <================== -->
+
+    @yield('content')
+
+
+
+    <!-- ================> Footer section start here <================== -->
+    @include('frontend.layouts.includes.footer')
+    <!-- ================> Footer section end here <================== -->
+
+    @include('frontend.layouts.includes.js')
 </body>
+
+<!-- Mirrored from demos.codexcoder.com/themeforest/html/ollya/index-2.html by HTTrack Website Copier/3.x [XR&CO'2014], Sat, 16 Dec 2023 08:37:08 GMT -->
+
 </html>
+<script>
+    $(document).ready(function(){
+        $('#country').on('change',function(){
+            var country_id = $(this).val();
+            $.ajax({
+                url:"{{route('get.states')}}?country_id="+country_id,
+                type:"GET",
+                dataType:"json",
+                success:function(data){
+                    $("#state").empty();
+                    $("#state").append(`<option value="">Select State</option>`)
+                    $.each(data,function(key,value){
+                        $("#state").append(`<option value="${value.id}">${value.name}</option>`);
+                    });
+                },
+                error:function(data){
+                    console.log(data);
+                }
+            });
+        });
+    });
+</script>

@@ -14,8 +14,8 @@ return new class extends Migration
         Schema::create('user_policies', function (Blueprint $table) {
             $table->id();
             $table->string('custom_id')->nullable();
-            $table->foreignId('user_id')->constrained('users')->cascadeOnUpdate()->cascadeOnDelete();
-            $table->foreignId('policy_type_id')->constrained('policy_types')->cascadeOnUpdate()->cascadeOnDelete();
+            $table->foreignId('user_id')->nullable()->constrained('users')->cascadeOnUpdate()->cascadeOnDelete();
+            $table->foreignId('policy_type_id')->nullable()->constrained('policy_types')->cascadeOnUpdate()->cascadeOnDelete();
             $table->text('description')->nullable();
             $table->timestamps();
         });

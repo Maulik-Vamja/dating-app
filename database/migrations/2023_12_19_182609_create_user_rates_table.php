@@ -14,11 +14,11 @@ return new class extends Migration
         Schema::create('user_rates', function (Blueprint $table) {
             $table->id();
             $table->string('custom_id')->nullable();
-            $table->foreignId('user_id')->constrained('users')->cascadeOnUpdate()->cascadeOnDelete();
-            $table->foreignId('rate_type_id')->constrained('rate_types')->cascadeOnUpdate()->cascadeOnDelete();
+            $table->foreignId('user_id')->nullable()->constrained('users')->cascadeOnUpdate()->cascadeOnDelete();
+            $table->foreignId('rate_type_id')->nullable()->constrained('rate_types')->cascadeOnUpdate()->cascadeOnDelete();
             $table->string('rate')->nullable();
             $table->string('duration')->nullable();
-            $table->foreignId('currency_id')->constrained('currencies')->cascadeOnUpdate()->cascadeOnDelete();
+            $table->foreignId('currency_id')->nullable()->constrained('currencies')->cascadeOnUpdate()->cascadeOnDelete();
             $table->text('description')->nullable();
             $table->enum('is_active', ['y', 'n'])->default('y')->nullable();
             $table->timestamps();

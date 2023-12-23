@@ -55,15 +55,15 @@ Route::controller(ResetPasswordController::class)->group(function () {
 });
 
 // Auth Protected Routes
-Route::middleware(['web', 'admin', 'auth:admin'])->group(function () {
-    Route::controller(ConfirmPasswordController::class)->group(function () {
-        Route::get('password/confirm', 'showConfirmForm')->name('password.confirm');
-        Route::post('password/confirm', 'confirm');
-    });
+// Route::middleware(['web', 'admin', 'auth:admin'])->group(function () {
+//     Route::controller(ConfirmPasswordController::class)->group(function () {
+//         Route::get('password/confirm', 'showConfirmForm')->name('password.confirm');
+//         Route::post('password/confirm', 'confirm');
+//     });
 
-    Route::controller(VerificationController::class)->group(function () {
-        Route::get('email/verify', 'show')->name('verification.notice');
-        Route::get('email/verify/{id}/{hash}', 'verify')->name('verification.verify');
-        Route::post('email/resend', 'resend')->name('verification.resend');
-    });
-});
+//     Route::controller(VerificationController::class)->group(function () {
+//         Route::get('email/verify', 'show')->name('verification.notice');
+//         Route::get('email/verify/{id}/{hash}', 'verify')->name('verification.verify');
+//         Route::post('email/resend', 'resend')->name('verification.resend');
+//     });
+// });

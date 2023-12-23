@@ -14,7 +14,7 @@ return new class extends Migration
         Schema::create('user_availibilities', function (Blueprint $table) {
             $table->id();
             $table->string('custom_id')->nullable();
-            $table->foreignId('user_id')->constrained('users')->cascadeOnUpdate()->cascadeOnDelete();
+            $table->foreignId('user_id')->nullable()->constrained('users')->cascadeOnUpdate()->cascadeOnDelete();
             $table->json('availibility')->nullable();
             $table->text('description')->nullable();
             $table->timestamps();

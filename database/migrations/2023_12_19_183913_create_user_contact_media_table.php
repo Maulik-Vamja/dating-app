@@ -14,8 +14,8 @@ return new class extends Migration
         Schema::create('user_contact_media', function (Blueprint $table) {
             $table->id();
             $table->string('custom_id')->nullable();
-            $table->foreignId('user_id')->constrained('users')->cascadeOnUpdate()->cascadeOnDelete();
-            $table->foreignId('contact_media_id')->constrained('contact_media')->cascadeOnUpdate()->cascadeOnDelete();
+            $table->foreignId('user_id')->nullable()->constrained('users')->cascadeOnUpdate()->cascadeOnDelete();
+            $table->foreignId('contact_media_id')->nullable()->constrained('contact_media')->cascadeOnUpdate()->cascadeOnDelete();
             $table->string('value')->nullable();
             $table->enum('is_active', ['y', 'n'])->default('y')->nullable();
             $table->timestamps();

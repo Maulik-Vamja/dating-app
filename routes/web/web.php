@@ -1,5 +1,8 @@
 <?php
 
+use App\Http\Controllers\EscortController;
+use App\Http\Controllers\SearchController;
+use App\Http\Controllers\UtilityController;
 use Illuminate\Support\Facades\{Route, Auth};
 
 /*
@@ -22,13 +25,19 @@ use Illuminate\Support\Facades\{Route, Auth};
  */
 
 // Guest Routes
-Route::view('/', 'welcome');
+Route::view('/', 'welcome')->name('welcome');
 // Update Auth routes as per your requirement
 Auth::routes([
-    'confirm' => true, 'verify' => true, 'register' => false, 'login' => false,
+    'confirm' => false, 'verify' => false, 'register' => true, 'login' => true,
 ]);
 
 // Auth Routes
 Route::middleware(['auth', 'verified'])->group(function () {
     Route::view('home', 'frontend.home');
+
+    Route::get('profile/{user:user_name}', [EscortController::class, 'getProfile'])->name('profile');
 });
+
+Route::get('/states', [UtilityController::class, 'getStatesFromCountry'])->name('get.states');
+Route::get('/escorts/{user:user_name}', [EscortController::class, 'getEscort'])->name('get.escort');
+Route::get('/search/escorts', SearchController::class)->name('get.escorts');

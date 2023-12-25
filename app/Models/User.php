@@ -44,7 +44,7 @@ class User extends Authenticatable
         })->prepend("X")->join("-"));
     }
 
-    public function availiability()
+    public function availability()
     {
         return $this->hasOne(UserAvailibility::class, "user_id", "id");
     }

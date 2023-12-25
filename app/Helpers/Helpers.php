@@ -157,3 +157,12 @@ if (!function_exists('get_unique_username')) {
         return str_slug(($no_of_users > 0) ? "{$username}{$no_of_users}" : $username);
     }
 }
+// old function using the db query //
+if (!function_exists('get_unique_slug')) {
+    function get_unique_slug($slug, string $table = 'blogs'): string
+    {
+        $data_found = \Illuminate\Support\Facades\DB::table($table)->where(['user_name' => $slug])->count();
+
+        return ($data_found > 0) ? "{$slug}{$data_found}" : $slug;
+    }
+}

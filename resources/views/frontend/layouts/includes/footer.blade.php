@@ -133,9 +133,11 @@
                                     </div>
                                     <div class="footer__content--desc">
                                         <ul>
-                                            <li><a href="#"><i class="fa-solid fa-angle-right"></i> About Us</a>
+                                            <li><a href="{{ route('about-us') }}"><i
+                                                        class="fa-solid fa-angle-right"></i> About Us</a>
                                             </li>
-                                            <li><a href="#"><i class="fa-solid fa-angle-right"></i> Contact Us</a>
+                                            <li><a href="{{ route('contact-us') }}"><i
+                                                        class="fa-solid fa-angle-right"></i> Contact Us</a>
                                             </li>
                                         </ul>
                                     </div>
@@ -152,45 +154,21 @@
                                     </div>
                                     <div class="footer__content--desc">
                                         <ul>
+                                            @foreach ($recent_blogs as $blog)
                                             <li>
                                                 <div class="thumb">
-                                                    <a href="group-single.html"><img
-                                                            src="{{asset('frontend/assets/images/footer/activity/01.jpg')}}"
-                                                            alt="dating thumb"></a>
+                                                    <a href="{{ route('blogs.show',$blog->slug) }}"><img
+                                                            src="{{asset($blog->image)}}" alt="dating thumb"></a>
                                                 </div>
                                                 <div class="content">
                                                     <a href="group-single.html">
-                                                        <h6>Where to find a good...</h6>
+                                                        <h6>{{ $blog->title }}</h6>
                                                     </a>
-                                                    <p>August 13, 2022</p>
+                                                    <p>{{ Carbon\Carbon::parse($blog->created_at)->format('F d,Y') }}
+                                                    </p>
                                                 </div>
                                             </li>
-                                            <li>
-                                                <div class="thumb">
-                                                    <a href="group-single.html"><img
-                                                            src="{{asset('frontend/assets/images/footer/activity/02.jpg')}}"
-                                                            alt="dating thumb"></a>
-                                                </div>
-                                                <div class="content">
-                                                    <a href="group-single.html">
-                                                        <h6>Where to find a good...</h6>
-                                                    </a>
-                                                    <p>August 13, 2022</p>
-                                                </div>
-                                            </li>
-                                            <li>
-                                                <div class="thumb">
-                                                    <a href="group-single.html"><img
-                                                            src="{{asset('frontend/assets/images/footer/activity/03.jpg')}}"
-                                                            alt="dating thumb"></a>
-                                                </div>
-                                                <div class="content">
-                                                    <a href="group-single.html">
-                                                        <h6>Where to find a good...</h6>
-                                                    </a>
-                                                    <p>August 13, 2022</p>
-                                                </div>
-                                            </li>
+                                            @endforeach
                                         </ul>
                                     </div>
                                 </div>

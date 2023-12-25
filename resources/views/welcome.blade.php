@@ -233,6 +233,87 @@
     </div>
 </div>
 
+<!-- ================> Member section start here <================== -->
+<div class="member member--style2 padding-top">
+    <div class="container">
+        <div class="section__header style-2 text-center wow fadeInUp" data-wow-duration="1.5s">
+            <h2>Most Popular Members</h2>
+            <p>Learn from them and try to make it to this board. This will for sure boost you visibility and increase
+                your chances to find you loved one.</p>
+        </div>
+        <div class="section__wrapper wow fadeInUp" data-wow-duration="1.5s">
+            <div class="tab-content mx-12-none">
+                <div class="row g-0 justify-content-center">
+                    @foreach ($escorts as $escort)
+                    <div class="member__item">
+                        <div class="member__inner">
+                            <div class="member__thumb">
+                                <a class="member-link-page" href="member-single.html">
+                                    <figure><img src="{{asset($escort->thumbnail_image)}}" alt="member-img">
+                                    </figure>
+                                </a>
+                            </div>
+                            <div class="member__content">
+                                <a class="member-link-page" href="member-single.html">
+                                    <h5>{{ $escort->full_name }}</h5>
+                                </a>
+                                <p class="short__desc mt-1">{{ $escort->short_description }}</p>
+                                <div class="city-availibity mt-2 d-flex justify-content-between">
+                                    <p><i class="fa-solid fa-house"></i>Sarasota, FL, US</p>
+                                    @php
+                                    $today = Carbon\Carbon::now()->format('l');
+                                    $availableOrNot =
+                                    $escort->availability()->where('availibility->'.$today,true)->first();
+
+                                    @endphp
+                                    <p class="d-flex align-items-center text-capitalize">
+                                        <span
+                                            class="{{ $availableOrNot ? '' : 'not-avail'}} availibity-members"></span>available
+                                    </p>
+                                </div>
+                                <div class="member-bio">
+                                    <p class="member__desc-txt">{!! $escort->description !!}</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    @endforeach
+                    {{-- <div class="member__item">
+                        <div class="member__inner">
+                            <div class="member__thumb">
+                                <a class="member-link-page" href="member-single.html">
+                                    <figure><img src="{{asset('frontend/assets/images/allmedia/06.jpg')}}"
+                                            alt="member-img"></figure>
+                                </a>
+                            </div>
+                            <div class="member__content">
+                                <a class="member-link-page" href="member-single.html">
+                                    <h5>Amanda Rodrigues</h5>
+                                </a>
+                                <p class="short__desc mt-1">Can you feel the Chemistry?</p>
+                                <div class="city-availibity mt-2 d-flex justify-content-between">
+                                    <p><i class="fa-solid fa-house"></i>Sarasota, FL, US</p>
+                                    <p class="d-flex align-items-center text-capitalize"><span
+                                            class="availibity-members"></span>available</p>
+                                </div>
+                                <div class="member-bio">
+                                    <p class="member__desc-txt">Lorem ipsum dolor sit amet, consectetur adipisicing
+                                        elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div> --}}
+                </div>
+            </div>
+            <div class="text-center mt-4">
+                <a href="members.html" class="default-btn"><span>See More Popular</span></a>
+            </div>
+        </div>
+    </div>
+</div>
+<!-- ================> Member section end here <================== -->
+
+
 <div class="about padding-top padding-bottom">
     <div class="container">
         <div class="section__header style-2 text-center wow fadeInUp" data-wow-duration="1.5s">
@@ -249,7 +330,8 @@
                                 <img src="{{asset('frontend/assets/images/about/icon/01.png')}}" alt="dating thumb">
                             </div>
                             <div class="about__content">
-                                <h3><span class="counter" data-to="990960" data-speed="1500"></span></h3>
+                                <h3><span class="counter" data-to="{{ $counts['total_escorts'] }}"
+                                        data-speed="1500"></span></h3>
                                 <p>Members in Total</p>
                             </div>
                         </div>
@@ -262,7 +344,8 @@
                                 <img src="{{asset('frontend/assets/images/about/icon/02.png')}}" alt="dating thumb">
                             </div>
                             <div class="about__content">
-                                <h3><span class="counter" data-to="628590" data-speed="1500"></span></h3>
+                                <h3><span class="counter" data-to="{{ $counts['total_online_escorts'] }}"
+                                        data-speed="1500"></span></h3>
                                 <p>Members Online</p>
                             </div>
                         </div>
@@ -275,7 +358,8 @@
                                 <img src="{{asset('frontend/assets/images/about/icon/03.png')}}" alt="dating thumb">
                             </div>
                             <div class="about__content">
-                                <h3><span class="counter" data-to="314587" data-speed="1500"></span></h3>
+                                <h3><span class="counter" data-to="{{ $counts['total_female_escorts'] }}"
+                                        data-speed="1500"></span></h3>
                                 <p>Women Online</p>
                             </div>
                         </div>
@@ -288,7 +372,8 @@
                                 <img src="{{asset('frontend/assets/images/about/icon/04.png')}}" alt="dating thumb">
                             </div>
                             <div class="about__content">
-                                <h3><span class="counter" data-to="102369" data-speed="1500"></span></h3>
+                                <h3><span class="counter" data-to="{{ $counts['total_male_escorts'] }}"
+                                        data-speed="1500"></span></h3>
                                 <p>Men Online</p>
                             </div>
                         </div>
@@ -299,6 +384,8 @@
     </div>
 </div>
 <!-- ================> About section end here <================== -->
+
+
 
 
 <!-- ================> Story section start here <================== -->
@@ -312,33 +399,36 @@
         </div>
         <div class="section__wrapper">
             <div class="row g-4 justify-content-center row-cols-lg-3 row-cols-sm-2 row-cols-1">
+                @foreach ($blogs as $blog)
                 <div class="col wow fadeInUp" data-wow-duration="1.5s">
                     <div class="story__item">
                         <div class="story__inner">
                             <div class="story__thumb">
-                                <a href="blog-single.html"><img src="{{asset('frontend/assets/images/story/01.jpg')}}"
+                                <a href="{{ route('blogs.show',$blog->slug) }}"><img src="{{$blog->image}}"
                                         alt="dating thumb"></a>
-                                <span class="member__activity member__activity--ofline">Entertainment</span>
+                                <span class="member__activity member__activity--ofline">{{
+                                    $blog->category->name }}</span>
                             </div>
                             <div class="story__content">
-                                <a href="blog-single.html">
-                                    <h4>Dream places and locations to visit in 2022</h4>
+                                <a href="{{ route('blogs.show',$blog->slug) }}">
+                                    <h4>{{ $blog->title }}</h4>
                                 </a>
                                 <div class="story__content--author">
                                     <div class="story__content--thumb">
-                                        <img src="{{asset('frontend/assets/images/story/author/01.jpg')}}"
+                                        <img height="50" width="50" src="{{ $blog->user->profile_photo }}"
                                             alt="dating thumb">
                                     </div>
                                     <div class="story__content--content">
-                                        <h6>Hester Reeves</h6>
-                                        <p>April 16, 2022</p>
+                                        <h6>{{ $blog->user->full_name }}</h6>
+                                        <p>{{ Carbon\Carbon::parse($blog->created_at)->format('M d,Y') }}</p>
                                     </div>
                                 </div>
                             </div>
                         </div>
                     </div>
                 </div>
-                <div class="col wow fadeInUp" data-wow-duration="1.6s">
+                @endforeach
+                {{-- <div class="col wow fadeInUp" data-wow-duration="1.6s">
                     <div class="story__item">
                         <div class="story__inner">
                             <div class="story__thumb">
@@ -389,482 +479,12 @@
                             </div>
                         </div>
                     </div>
-                </div>
+                </div> --}}
             </div>
         </div>
     </div>
 </div>
 <!-- ================> Story section end here <================== -->
-
-
-<!-- ================> Member section start here <================== -->
-<div class="member member--style2 padding-top padding-bottom">
-    <div class="container">
-        <div class="section__header style-2 text-center wow fadeInUp" data-wow-duration="1.5s">
-            <h2>Most Popular Members</h2>
-            <p>Learn from them and try to make it to this board. This will for sure boost you visibility and
-                increase your chances to find you loved one.</p>
-        </div>
-        <div class="section__wrapper wow fadeInUp" data-wow-duration="1.5s">
-            <ul class="nav nav-tabs member__tab" id="myTab" role="tablist">
-                <li class="nav-item" role="presentation">
-                    <button class="nav-link active" id="newest-tab" data-bs-toggle="tab" data-bs-target="#newest"
-                        type="button" role="tab" aria-controls="newest" aria-selected="true">Newest Members</button>
-                </li>
-                <li class="nav-item" role="presentation">
-                    <button class="nav-link" id="activemember-tab" data-bs-toggle="tab" data-bs-target="#activemember"
-                        type="button" role="tab" aria-controls="activemember" aria-selected="false">Active
-                        Members</button>
-                </li>
-                <li class="nav-item" role="presentation">
-                    <button class="nav-link" id="popularmember-tab" data-bs-toggle="tab" data-bs-target="#popularmember"
-                        type="button" role="tab" aria-controls="popularmember" aria-selected="false">Popular
-                        Members</button>
-                </li>
-            </ul>
-
-            <div class="tab-content mx-12-none" id="myTabContent">
-                <div class="tab-pane fade show active" id="newest" role="tabpanel" aria-labelledby="newest-tab">
-                    <div class="row g-0 justify-content-center">
-                        <div class="member__item">
-                            <div class="member__inner">
-                                <div class="member__thumb">
-                                    <img src="{{asset('frontend/assets/images/member/home2/01.jpg')}}" alt="member-img">
-                                    <span class="member__activity"></span>
-                                </div>
-                                <div class="member__content">
-                                    <a href="member-single.html">
-                                        <h5>Smith Jhonson</h5>
-                                    </a>
-                                    <p>registered 4 months, 1 week ago</p>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="member__item">
-                            <div class="member__inner">
-                                <div class="member__thumb">
-                                    <img src="{{asset('frontend/assets/images/member/home2/02.jpg')}}" alt="member-img">
-                                    <span class="member__activity member__activity--ofline"></span>
-                                </div>
-                                <div class="member__content">
-                                    <a href="member-single.html">
-                                        <h5>Arika Q Smith</h5>
-                                    </a>
-                                    <p>registered 4 months, 1 week ago</p>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="member__item">
-                            <div class="member__inner">
-                                <div class="member__thumb">
-                                    <img src="{{asset('frontend/assets/images/member/home2/03.jpg')}}" alt="member-img">
-                                    <span class="member__activity"></span>
-                                </div>
-                                <div class="member__content">
-                                    <a href="member-single.html">
-                                        <h5>William R Show</h5>
-                                    </a>
-                                    <p>registered 4 months, 1 week ago</p>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="member__item">
-                            <div class="member__inner">
-                                <div class="member__thumb">
-                                    <img src="{{asset('frontend/assets/images/member/home2/04.jpg')}}" alt="member-img">
-                                    <span class="member__activity member__activity--ofline"></span>
-                                </div>
-                                <div class="member__content">
-                                    <a href="member-single.html">
-                                        <h5>Karolin Kuhn</h5>
-                                    </a>
-                                    <p>registered 4 months, 1 week ago</p>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="member__item">
-                            <div class="member__inner">
-                                <div class="member__thumb">
-                                    <img src="{{asset('frontend/assets/images/member/home2/05.jpg')}}" alt="member-img">
-                                    <span class="member__activity"></span>
-                                </div>
-                                <div class="member__content">
-                                    <a href="member-single.html">
-                                        <h5>Tobias Wagner</h5>
-                                    </a>
-                                    <p>registered 4 months, 1 week ago</p>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="member__item">
-                            <div class="member__inner">
-                                <div class="member__thumb">
-                                    <img src="{{asset('frontend/assets/images/member/home2/06.jpg')}}" alt="member-img">
-                                    <span class="member__activity"></span>
-                                </div>
-                                <div class="member__content">
-                                    <a href="member-single.html">
-                                        <h5>Amanda Rodrigues</h5>
-                                    </a>
-                                    <p>registered 4 months, 1 week ago</p>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="member__item">
-                            <div class="member__inner">
-                                <div class="member__thumb">
-                                    <img src="{{asset('frontend/assets/images/member/home2/07.jpg')}}" alt="member-img">
-                                    <span class="member__activity member__activity--ofline"></span>
-                                </div>
-                                <div class="member__content">
-                                    <a href="member-single.html">
-                                        <h5>Barros Pereira</h5>
-                                    </a>
-                                    <p>registered 4 months, 1 week ago</p>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="member__item">
-                            <div class="member__inner">
-                                <div class="member__thumb">
-                                    <img src="{{asset('frontend/assets/images/member/home2/08.jpg')}}" alt="member-img">
-                                    <span class="member__activity"></span>
-                                </div>
-                                <div class="member__content">
-                                    <a href="member-single.html">
-                                        <h5>Emily Fernandes</h5>
-                                    </a>
-                                    <p>registered 4 months, 1 week ago</p>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="member__item">
-                            <div class="member__inner">
-                                <div class="member__thumb">
-                                    <img src="{{asset('frontend/assets/images/member/home2/09.jpg')}}" alt="member-img">
-                                    <span class="member__activity member__activity--ofline"></span>
-                                </div>
-                                <div class="member__content">
-                                    <a href="member-single.html">
-                                        <h5>Alves Fernandes</h5>
-                                    </a>
-                                    <p>registered 4 months, 1 week ago</p>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="member__item">
-                            <div class="member__inner">
-                                <div class="member__thumb">
-                                    <img src="{{asset('frontend/assets/images/member/home2/02.jpg')}}" alt="member-img">
-                                    <span class="member__activity"></span>
-                                </div>
-                                <div class="member__content">
-                                    <a href="member-single.html">
-                                        <h5>Sousa Carvalho</h5>
-                                    </a>
-                                    <p>registered 4 months, 1 week ago</p>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-                <div class="tab-pane fade" id="activemember" role="tabpanel" aria-labelledby="activemember-tab">
-                    <div class="row g-0 justify-content-center">
-                        <div class="member__item">
-                            <div class="member__inner">
-                                <div class="member__thumb">
-                                    <img src="{{asset('frontend/assets/images/member/home2/01.jpg')}}" alt="member-img">
-                                    <span class="member__activity"></span>
-                                </div>
-                                <div class="member__content">
-                                    <a href="member-single.html">
-                                        <h5>Smith Jhonson</h5>
-                                    </a>
-                                    <p>registered 4 months, 1 week ago</p>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="member__item">
-                            <div class="member__inner">
-                                <div class="member__thumb">
-                                    <img src="{{asset('frontend/assets/images/member/home2/06.jpg')}}" alt="member-img">
-                                    <span class="member__activity"></span>
-                                </div>
-                                <div class="member__content">
-                                    <a href="member-single.html">
-                                        <h5>Amanda Rodrigues</h5>
-                                    </a>
-                                    <p>registered 4 months, 1 week ago</p>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="member__item">
-                            <div class="member__inner">
-                                <div class="member__thumb">
-                                    <img src="{{asset('frontend/assets/images/member/home2/07.jpg')}}" alt="member-img">
-                                    <span class="member__activity member__activity--ofline"></span>
-                                </div>
-                                <div class="member__content">
-                                    <a href="member-single.html">
-                                        <h5>Barros Pereira</h5>
-                                    </a>
-                                    <p>registered 4 months, 1 week ago</p>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="member__item">
-                            <div class="member__inner">
-                                <div class="member__thumb">
-                                    <img src="{{asset('frontend/assets/images/member/home2/08.jpg')}}" alt="member-img">
-                                    <span class="member__activity"></span>
-                                </div>
-                                <div class="member__content">
-                                    <a href="member-single.html">
-                                        <h5>Emily Fernandes</h5>
-                                    </a>
-                                    <p>registered 4 months, 1 week ago</p>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="member__item">
-                            <div class="member__inner">
-                                <div class="member__thumb">
-                                    <img src="{{asset('frontend/assets/images/member/home2/09.jpg')}}" alt="member-img">
-                                    <span class="member__activity member__activity--ofline"></span>
-                                </div>
-                                <div class="member__content">
-                                    <a href="member-single.html">
-                                        <h5>Alves Fernandes</h5>
-                                    </a>
-                                    <p>registered 4 months, 1 week ago</p>
-                                </div>
-                            </div>
-                        </div>
-
-                        <div class="member__item">
-                            <div class="member__inner">
-                                <div class="member__thumb">
-                                    <img src="{{asset('frontend/assets/images/member/home2/02.jpg')}}" alt="member-img">
-                                    <span class="member__activity member__activity--ofline"></span>
-                                </div>
-                                <div class="member__content">
-                                    <a href="member-single.html">
-                                        <h5>Arika Q Smith</h5>
-                                    </a>
-                                    <p>registered 4 months, 1 week ago</p>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="member__item">
-                            <div class="member__inner">
-                                <div class="member__thumb">
-                                    <img src="{{asset('frontend/assets/images/member/home2/03.jpg')}}" alt="member-img">
-                                    <span class="member__activity"></span>
-                                </div>
-                                <div class="member__content">
-                                    <a href="member-single.html">
-                                        <h5>William R Show</h5>
-                                    </a>
-                                    <p>registered 4 months, 1 week ago</p>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="member__item">
-                            <div class="member__inner">
-                                <div class="member__thumb">
-                                    <img src="{{asset('frontend/assets/images/member/home2/04.jpg')}}" alt="member-img">
-                                    <span class="member__activity member__activity--ofline"></span>
-                                </div>
-                                <div class="member__content">
-                                    <a href="member-single.html">
-                                        <h5>Karolin Kuhn</h5>
-                                    </a>
-                                    <p>registered 4 months, 1 week ago</p>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="member__item">
-                            <div class="member__inner">
-                                <div class="member__thumb">
-                                    <img src="{{asset('frontend/assets/images/member/home2/05.jpg')}}" alt="member-img">
-                                    <span class="member__activity"></span>
-                                </div>
-                                <div class="member__content">
-                                    <a href="member-single.html">
-                                        <h5>Tobias Wagner</h5>
-                                    </a>
-                                    <p>registered 4 months, 1 week ago</p>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="member__item">
-                            <div class="member__inner">
-                                <div class="member__thumb">
-                                    <img src="{{asset('frontend/assets/images/member/home2/02.jpg')}}" alt="member-img">
-                                    <span class="member__activity"></span>
-                                </div>
-                                <div class="member__content">
-                                    <a href="member-single.html">
-                                        <h5>Sousa Carvalho</h5>
-                                    </a>
-                                    <p>registered 4 months, 1 week ago</p>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-                <div class="tab-pane fade" id="popularmember" role="tabpanel" aria-labelledby="popularmember-tab">
-                    <div class="row g-0 justify-content-center">
-                        <div class="member__item">
-                            <div class="member__inner">
-                                <div class="member__thumb">
-                                    <img src="{{asset('frontend/assets/images/member/home2/04.jpg')}}" alt="member-img">
-                                    <span class="member__activity member__activity--ofline"></span>
-                                </div>
-                                <div class="member__content">
-                                    <a href="member-single.html">
-                                        <h5>Karolin Kuhn</h5>
-                                    </a>
-                                    <p>registered 4 months, 1 week ago</p>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="member__item">
-                            <div class="member__inner">
-                                <div class="member__thumb">
-                                    <img src="{{asset('frontend/assets/images/member/home2/05.jpg')}}" alt="member-img">
-                                    <span class="member__activity"></span>
-                                </div>
-                                <div class="member__content">
-                                    <a href="member-single.html">
-                                        <h5>Tobias Wagner</h5>
-                                    </a>
-                                    <p>registered 4 months, 1 week ago</p>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="member__item">
-                            <div class="member__inner">
-                                <div class="member__thumb">
-                                    <img src="{{asset('frontend/assets/images/member/home2/06.jpg')}}" alt="member-img">
-                                    <span class="member__activity"></span>
-                                </div>
-                                <div class="member__content">
-                                    <a href="member-single.html">
-                                        <h5>Amanda Rodrigues</h5>
-                                    </a>
-                                    <p>registered 4 months, 1 week ago</p>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="member__item">
-                            <div class="member__inner">
-                                <div class="member__thumb">
-                                    <img src="{{asset('frontend/assets/images/member/home2/07.jpg')}}" alt="member-img">
-                                    <span class="member__activity member__activity--ofline"></span>
-                                </div>
-                                <div class="member__content">
-                                    <a href="member-single.html">
-                                        <h5>Barros Pereira</h5>
-                                    </a>
-                                    <p>registered 4 months, 1 week ago</p>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="member__item">
-                            <div class="member__inner">
-                                <div class="member__thumb">
-                                    <img src="{{asset('frontend/assets/images/member/home2/08.jpg')}}" alt="member-img">
-                                    <span class="member__activity"></span>
-                                </div>
-                                <div class="member__content">
-                                    <a href="member-single.html">
-                                        <h5>Emily Fernandes</h5>
-                                    </a>
-                                    <p>registered 4 months, 1 week ago</p>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="member__item">
-                            <div class="member__inner">
-                                <div class="member__thumb">
-                                    <img src="{{asset('frontend/assets/images/member/home2/09.jpg')}}" alt="member-img">
-                                    <span class="member__activity member__activity--ofline"></span>
-                                </div>
-                                <div class="member__content">
-                                    <a href="member-single.html">
-                                        <h5>Alves Fernandes</h5>
-                                    </a>
-                                    <p>registered 4 months, 1 week ago</p>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="member__item">
-                            <div class="member__inner">
-                                <div class="member__thumb">
-                                    <img src="{{asset('frontend/assets/images/member/home2/01.jpg')}}" alt="member-img">
-                                    <span class="member__activity"></span>
-                                </div>
-                                <div class="member__content">
-                                    <a href="member-single.html">
-                                        <h5>Smith Jhonson</h5>
-                                    </a>
-                                    <p>registered 4 months, 1 week ago</p>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="member__item">
-                            <div class="member__inner">
-                                <div class="member__thumb">
-                                    <img src="{{asset('frontend/assets/images/member/home2/02.jpg')}}" alt="member-img">
-                                    <span class="member__activity member__activity--ofline"></span>
-                                </div>
-                                <div class="member__content">
-                                    <a href="member-single.html">
-                                        <h5>Arika Q Smith</h5>
-                                    </a>
-                                    <p>registered 4 months, 1 week ago</p>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="member__item">
-                            <div class="member__inner">
-                                <div class="member__thumb">
-                                    <img src="{{asset('frontend/assets/images/member/home2/03.jpg')}}" alt="member-img">
-                                    <span class="member__activity"></span>
-                                </div>
-                                <div class="member__content">
-                                    <a href="member-single.html">
-                                        <h5>William R Show</h5>
-                                    </a>
-                                    <p>registered 4 months, 1 week ago</p>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="member__item">
-                            <div class="member__inner">
-                                <div class="member__thumb">
-                                    <img src="{{asset('frontend/assets/images/member/home2/02.jpg')}}" alt="member-img">
-                                    <span class="member__activity"></span>
-                                </div>
-                                <div class="member__content">
-                                    <a href="member-single.html">
-                                        <h5>Sousa Carvalho</h5>
-                                    </a>
-                                    <p>registered 4 months, 1 week ago</p>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-            <div class="text-center mt-4">
-                <a href="members.html" class="default-btn"><span>See More Popular</span></a>
-            </div>
-        </div>
-    </div>
-</div>
-<!-- ================> Member section end here <================== -->
 
 
 <!-- ================> About section start here <================== -->

@@ -42,6 +42,9 @@ class DatabaseSeeder extends Seeder
             PolicyTypeTableSeeder::class,
             ContactMediaTableSeeder::class,
             UserTableSeeder::class,
+            CategoryTableSeeder::class,
+            TagTableSeeder::class,
+            BlogTableSeeder::class,
         ]);
     }
 }

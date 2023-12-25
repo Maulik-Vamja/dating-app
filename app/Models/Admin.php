@@ -37,7 +37,7 @@ class Admin extends Authenticatable
 
     public function getAssetProfileAttribute()
     {
-        return !empty($this->profile) ? asset("storage/".$this->profile) : asset("assets/admin/images/default_profile.jpg");
+        return !empty($this->profile) ? asset("storage/" . $this->profile) : asset("assets/admin/images/default_profile.jpg");
     }
 
     public function quickLinks()
@@ -50,4 +50,8 @@ class Admin extends Authenticatable
         return "{$this->first_name} {$this->last_name}";
     }
 
+    public function blogs()
+    {
+        return $this->hasMany(Blog::class, "admin_id", "id");
+    }
 }

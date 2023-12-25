@@ -35,18 +35,17 @@
                 <div class="collapse navbar-collapse justify-content-end" id="navbarNavAltMarkup">
                     <div class="navbar-nav mainmenu">
                         <ul>
-                            <li class="active">
+                            <li class="{{ Route::is('welcome') ? 'active' : '' }}">
                                 <a href="{{ route('welcome') }}">Home</a>
                             </li>
-                            <li>
-                                <a href="#0">Contact Us</a>
+                            <li class="{{ Route::is('contact-us') ? 'active' : '' }}">
+                                <a href="{{ route('contact-us') }}">Contact Us</a>
                             </li>
-                            <li>
-                                <a href="#0">About Us</a>
-
+                            <li class="{{ Route::is('about-us') ? 'active' : '' }}">
+                                <a href="{{ route('about-us') }}">About Us</a>
                             </li>
-                            <li>
-                                <a href="#0">Blogs</a>
+                            <li class="{{ Route::is('blogs.*') ? 'active' : '' }}">
+                                <a href="{{ route('blogs.index') }}">Blogs</a>
                             </li>
                         </ul>
                     </div>

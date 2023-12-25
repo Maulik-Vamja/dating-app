@@ -1,6 +1,8 @@
 <?php
 
+use App\Http\Controllers\BlogsController;
 use App\Http\Controllers\EscortController;
+use App\Http\Controllers\PagesController;
 use App\Http\Controllers\SearchController;
 use App\Http\Controllers\UtilityController;
 use Illuminate\Support\Facades\{Route, Auth};
@@ -25,7 +27,7 @@ use Illuminate\Support\Facades\{Route, Auth};
  */
 
 // Guest Routes
-Route::view('/', 'welcome')->name('welcome');
+Route::get('/', [PagesController::class, 'home'])->name('welcome');
 // Update Auth routes as per your requirement
 Auth::routes([
     'confirm' => false, 'verify' => false, 'register' => true, 'login' => true,
@@ -41,3 +43,12 @@ Route::middleware(['auth', 'verified'])->group(function () {
 Route::get('/states', [UtilityController::class, 'getStatesFromCountry'])->name('get.states');
 Route::get('/escorts/{user:user_name}', [EscortController::class, 'getEscort'])->name('get.escort');
 Route::get('/search/escorts', SearchController::class)->name('get.escorts');
+Route::get('/contact-us', [PagesController::class, 'contactUs'])->name('contact-us');
+Route::get('/about-us', [PagesController::class, 'aboutUs'])->name('about-us');
+
+// Blogs  Routes
+Route::controller(BlogsController::class)->group(function () {
+    Route::get('/blogs', [BlogsController::class, 'index'])->name('blogs.index');
+    Route::get('/blogs/{blog:slug}', [BlogsController::class, 'show'])->name('blogs.show');
+    // Route::get('/blogs/asvc', [BlogsController::class, 'show'])->name('blogs.show');
+});

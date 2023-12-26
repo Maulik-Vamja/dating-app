@@ -153,70 +153,170 @@
                         <p>Let's create your profile! Just fill in the fields below, and we’ll get a new account. </p>
                     </div>
                     <div class="main-content">
-                        <form action="#">
+                        <form action="{{ route('register') }}" method="POST" id="registerFrm">
+                            @csrf
                             <h4 class="content-title">Acount Details</h4>
                             <div class="form-group">
-                                <label>Username*</label>
-                                <input type="text" class="my-form-control" placeholder="Enter Your Usewrname">
+                                <label>Username{!! $mend_sign !!}</label>
+                                <input type="text" class="my-form-control" placeholder="Enter Your Username"
+                                    name="user_name" id="user_name" value="{{ old('user_name') }}">
+                                @error('user_name')
+                                <span class="text-danger" role="alert">
+                                    <strong>{{ $message }}</strong></span>
+                                @enderror
                             </div>
                             <div class="form-group">
-                                <label>Email Address*</label>
-                                <input type="email" class="my-form-control" placeholder="Enter Your Email">
+                                <label>Email Address {!! $mend_sign !!}</label>
+                                <input type="email" class="my-form-control" placeholder="Enter Your Email" name="email"
+                                    id="email" value="{{ old('email') }}">
+                                @error('email')
+                                <span class="text-danger" role="alert">
+                                    <strong>{{ $message }}</strong></span>
+                                @enderror
                             </div>
                             <div class="form-group">
-                                <label>Password*</label>
-                                <input type="text" class="my-form-control" placeholder="Enter Your Password">
+                                <label>Password {!! $mend_sign !!}</label>
+                                <input type="password" class="my-form-control" placeholder="Enter Your Password"
+                                    name="password" id="password">
+                                @error('password')
+                                <span class="text-danger" role="alert">
+                                    <strong>{{ $message }}</strong></span>
+                                @enderror
                             </div>
                             <div class="form-group">
-                                <label>Confirm Password*</label>
-                                <input type="text" class="my-form-control" placeholder="Enter Your Password">
+                                <label>Confirm Password {!! $mend_sign !!}</label>
+                                <input type="password" class="my-form-control" placeholder="Enter Your Password"
+                                    name="password_confirmation" id="password_confirmation">
+                                @error('password_confirmation')
+                                <span class="text-danger" role="alert">
+                                    <strong>{{ $message }}</strong></span>
+                                @enderror
                             </div>
                             <h4 class="content-title mt-5">Profile Details</h4>
                             <div class="form-group">
-                                <label>Name*</label>
-                                <input type="text" class="my-form-control" placeholder="Enter Your Full Name">
+                                <label>Name {!! $mend_sign !!}</label>
+                                <input type="text" class="my-form-control" name="full_name" id="full_name"
+                                    placeholder="Enter Your Full Name" value="{{ old('full_name') }}">
+                                @error('full_name')
+                                <span class="text-danger" role="alert">
+                                    <strong>{{ $message }}</strong></span>
+                                @enderror
                             </div>
                             <div class="form-group">
-                                <label>Birthday*</label>
-                                <input type="date" class="my-form-control">
+                                <label>Short Description {!! $mend_sign !!}</label>
+                                <div class="">
+                                    <input type="text" class="my-form-control" name="short_description"
+                                        id="short_description" placeholder="Tell us about your self in short."
+                                        data-error-container="#short_description_error"
+                                        value="{{ old('short_description') }}">
+                                    <span class="text-muted fs-6">This Short description will be visible to the
+                                        Customers</span>
+                                </div>
+                                @error('short_descriptiion')
+                                <span class="text-danger" role="alert">
+                                    <strong>{{ $message }}</strong></span>
+                                @enderror
+                                <span id="short_description_error"></span>
                             </div>
                             <div class="form-group">
-                                <label>I am a*</label>
+                                <label>Gender{!! $mend_sign !!}</label>
                                 <div class="banner__inputlist">
                                     <div class="s-input me-3">
-                                        <input type="radio" name="gender1" id="males1"><label for="males1">Man</label>
+                                        <input type="radio" name="gender" id="gender_male" value="male" checked
+                                            data-error-container="#gender_error"><label for="gender_male">Man</label>
                                     </div>
                                     <div class="s-input">
-                                        <input type="radio" name="gender1" id="females1"><label
-                                            for="females1">Woman</label>
+                                        <input type="radio" name="gender" id="gender_female" value="female"
+                                            data-error-container="#gender_error"><label
+                                            for="gender_female">Woman</label>
+                                    </div>
+                                </div>
+                                @error('gender')
+                                <span class="text-danger" role="alert">
+                                    <strong>{{ $message }}</strong></span>
+                                @enderror
+                                <span id="gender_error"></span>
+                            </div>
+                            <div class="form-group">
+                                <label>Pronouns {!! $mend_sign !!}</label>
+                                <div>
+                                    <input type="text" class="my-form-control" name="pronouns" id="pronouns"
+                                        placeholder="Enter Your Pronoun" data-error-container="#pronouns_error">
+                                    <span class="text-muted fs-6">Pronuons will useful to users for how to address you
+                                        correctly</span>
+                                </div>
+                                @error('pronouns')
+                                <span class="text-danger" role="alert">
+                                    <strong>{{ $message }}</strong></span>
+                                @enderror
+                                <span id="pronouns_error"></span>
+                            </div>
+                            <div class="row">
+                                <div class="col-md-6">
+                                    <div class="form-group">
+                                        <label>Age {!! $mend_sign !!}</label>
+                                        <input type="text" name="user_age" id="user_age" class="my-form-control"
+                                            placeholder="Enter Your Age" value="{{ old(" user_age") }}">
+                                        @error("user_age")
+                                        <span class="text-danger" role="alert">
+                                            <strong>{{ $message }}</strong></span>
+                                        @enderror
+                                    </div>
+                                </div>
+                                <div class="col-md-6">
+                                    <div class="form-group">
+                                        <label>Body Type{!! $mend_sign !!}</label>
+                                        {{-- <div class="banner__inputlist">
+                                            <select name="body_type" id="body_type">
+                                                @foreach (config('utility.body_type') as $type)
+                                                <option value="{{$type}}" selected>{{ $type }}</option>
+                                                @endforeach
+                                            </select>
+                                        </div> --}}
+                                        <input type="text" class="my-form-control" name="body_type" id="body_type"
+                                            placeholder="Enter your Body Type" value="{{ old('body_type') }}">
+                                        @error('body_type')
+                                        <span class="text-danger" role="alert">
+                                            <strong>{{ $message }}</strong></span>
+                                        @enderror
                                     </div>
                                 </div>
                             </div>
-                            <div class="form-group">
-                                <label>Looking for a*</label>
-                                <div class="banner__inputlist">
-                                    <div class="s-input me-3">
-                                        <input type="radio" name="gender2" id="males"><label for="males">Man</label>
+                            <div class="row">
+                                <div class="col-md-6">
+                                    <div class="form-group">
+                                        <label>Height {!! $mend_sign !!}</label>
+                                        <input type="text" name="height" id="height" class="my-form-control"
+                                            placeholder="Enter Your Height in Inches" value="{{ old('height') }}">
+                                        @error('height')
+                                        <span class="text-danger" role="alert">
+                                            <strong>{{ $message }}</strong></span>
+                                        @enderror
                                     </div>
-                                    <div class="s-input">
-                                        <input type="radio" name="gender2" id="females"><label
-                                            for="females">Woman</label>
+                                </div>
+                                <div class="col-md-6">
+                                    <div class="form-group">
+                                        <label>Ethnicity{!! $mend_sign !!}</label>
+                                        {{-- <div class="banner__inputlist">
+                                            <select name="ethnicity" id="ethnicity">
+                                                @foreach (config('utility.ethinicity') as $type)
+                                                <option value="{{$type}}" selected>{{ $type }}</option>
+                                                @endforeach
+                                            </select>
+                                        </div>--}}
+                                        <input type="text" class="my-form-control" name="ethnicity" id="ethnicity"
+                                            placeholder="Enter your Ethnicity" value="{{ old('ethnicity') }}">
+                                        @error('ethinicity')
+                                        <span class="text-danger" role="alert">
+                                            <strong>{{ $message }}</strong></span>
+                                        @enderror
                                     </div>
                                 </div>
                             </div>
-                            <div class="form-group">
-                                <label>Marial status*</label>
-                                <div class="banner__inputlist">
-                                    <select>
-                                        <option value="Single" selected>Single</option>
-                                        <option value="Marid">Marid</option>
-                                    </select>
-                                </div>
-                            </div>
-                            <div class="form-group">
+                            {{-- <div class="form-group">
                                 <label>City*</label>
                                 <input type="text" class="my-form-control" placeholder="Enter Your City">
-                            </div>
+                            </div> --}}
                             <button class="default-btn reverse" data-toggle="modal"
                                 data-target="#email-confirm"><span>Create Your Profile</span></button>
                         </form>
@@ -227,3 +327,172 @@
     </div>
 </section>
 @endsection
+
+@push('frontend-extra-js')
+<script>
+    $(document).ready(function() {
+        $("#registerFrm").validate({
+            rules: {
+                user_name: {
+                    required: true,
+                    not_empty: true,
+                    minlength: 3,
+                    remote: {
+                        url: "{{ route('check.username') }}",
+                        type: "post",
+                        data: {
+                            _token: "{{ csrf_token() }}",
+                            username: function() {
+                                return $("#user_name").val();
+                            },
+                        }
+                    },
+                },
+                email: {
+                    required: true,
+                    maxlength: 80,
+                    email: true,
+                    valid_email: true,
+                    remote: {
+                        url: "{{ route('check.email') }}",
+                        type: "post",
+                        data: {
+                            _token: "{{ csrf_token() }}",
+                            type: "user",
+                        }
+                    },
+                },
+                password: {
+                    required: true,
+                    minlength: 8,
+                },
+                password_confirmation: {
+                    required: true,
+                    minlength: 8,
+                    equalTo: "#password",
+                },
+                full_name: {
+                    required: true,
+                    not_empty: true,
+                    minlength: 3,
+                },
+                short_description: {
+                    required: true,
+                    not_empty: true,
+                    minlength: 3,
+                },
+                pronouns:{
+                    required: true,
+                    not_empty: true,
+                    minlength: 3,
+                },
+                user_age: {
+                    required: true,
+                    not_empty: true,
+                    digits: true,
+                },
+                body_type: {
+                    required: true,
+                    not_empty: true,
+                    minlength: 3,
+                },
+                height:{
+                    required: true,
+                    not_empty: true,
+                    digits: true,
+                },
+                ethnicity:{
+                    required: true,
+                    not_empty: true,
+                    minlength: 3,
+                },
+            },
+            messages: {
+                user_name: {
+                    required: "@lang('validation.required', ['attribute' => 'User Name'])",
+                    not_empty: "@lang('validation.not_empty', ['attribute' => 'User Name'])",
+                    minlength: "@lang('validation.min.string', ['attribute' => 'User Name', 'min' => 3])",
+                    remote: "@lang('validation.unique', ['attribute' => 'User Name'])",
+                },
+                email: {
+                    required: "@lang('validation.required', ['attribute' => 'Email address'])",
+                    maxlength: "@lang('validation.max.string', ['attribute' => 'Email address', 'max' => 80])",
+                    email: "@lang('validation.email', ['attribute' => 'Email address'])",
+                    valid_email: "@lang('validation.email', ['attribute' => 'Email address'])",
+                    remote: "@lang('validation.unique', ['attribute' => 'Email address'])",
+                },
+                password:{
+                    required: "@lang('validation.required', ['attribute' => 'Password'])",
+                    minlength: "@lang('validation.min.string', ['attribute' => 'Password', 'min' => 8])",
+                },
+                password_confirmation: {
+                    required: "@lang('validation.required', ['attribute' => 'Confirm Password'])",
+                    minlength: "@lang('validation.min.string', ['attribute' => 'Confirm Password', 'min' => 8])",
+                    equalTo: "@lang('validation.same', ['attribute' => 'Confirm Password', 'other' => 'Password'])",
+                },
+                full_name: {
+                    required: "@lang('validation.required', ['attribute' => 'last name'])",
+                    not_empty: "@lang('validation.not_empty', ['attribute' => 'last name'])",
+                    minlength: "@lang('validation.min.string', ['attribute' => 'last name', 'min' => 3])",
+                },
+                short_description: {
+                    required: "@lang('validation.required', ['attribute' => 'Short Description'])",
+                    not_empty: "@lang('validation.not_empty', ['attribute' => 'Short Description'])",
+                    minlength: "@lang('validation.min.string', ['attribute' => 'Short Description', 'min' => 3])",
+                },
+                pronouns:{
+                    required: "@lang('validation.required', ['attribute' => 'Pronouns'])",
+                    not_empty: "@lang('validation.not_empty', ['attribute' => 'Pronouns'])",
+                    minlength: "@lang('validation.min.string', ['attribute' => 'Pronouns', 'min' => 3])",
+                },
+                user_age: {
+                    required: "@lang('validation.required', ['attribute' => 'Age'])",
+                    not_empty: "@lang('validation.not_empty', ['attribute' => 'Age'])",
+                    digits: "@lang('validation.numeric', ['attribute' => 'Age'])",
+                },
+                body_type: {
+                    required: "@lang('validation.required', ['attribute' => 'Body Type'])",
+                    not_empty: "@lang('validation.not_empty', ['attribute' => 'Body Type'])",
+                    minlength: "@lang('validation.min.string', ['attribute' => 'Body Type', 'min' => 3])",
+                },
+                height:{
+                    required: "@lang('validation.required', ['attribute' => 'Height'])",
+                    not_empty: "@lang('validation.not_empty', ['attribute' => 'Height'])",
+                },
+                ethnicity:{
+                    required: "@lang('validation.required', ['attribute' => 'Ethnicity'])",
+                    not_empty: "@lang('validation.not_empty', ['attribute' => 'Ethnicity'])",
+                    minlength: "@lang('validation.min.string', ['attribute' => 'Ethnicity', 'min' => 3])",
+                },
+            },
+            errorClass: 'invalid-feedback',
+            errorElement: 'span',
+            highlight: function(element) {
+                $(element).addClass('is-invalid');
+                $(element).siblings('label').addClass('text-danger'); // For Label
+            },
+            unhighlight: function(element) {
+                $(element).removeClass('is-invalid');
+                $(element).siblings('label').removeClass('text-danger'); // For Label
+            },
+            errorPlacement: function(error, element) {
+                if (element.attr("data-error-container")) {
+                    error.appendTo(element.attr("data-error-container"));
+                } else {
+                    error.insertAfter(element);
+                }
+            }
+        });
+        $('#registerFrm').submit(function() {
+            if ($(this).valid()) {
+                // addOverlay();
+                $("input[type=submit], input[type=button], button[type=submit]").prop("disabled",
+                    "disabled");
+                return true;
+            } else {
+                return false;
+            }
+        });
+    });
+</script>
+@endpush

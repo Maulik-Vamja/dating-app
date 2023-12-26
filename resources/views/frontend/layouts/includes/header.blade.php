@@ -41,6 +41,9 @@
                             <li class="{{ Route::is('contact-us') ? 'active' : '' }}">
                                 <a href="{{ route('contact-us') }}">Contact Us</a>
                             </li>
+                            <li class="">
+                                <a href="#">Services</a>
+                            </li>
                             <li class="{{ Route::is('about-us') ? 'active' : '' }}">
                                 <a href="{{ route('about-us') }}">About Us</a>
                             </li>
@@ -54,7 +57,18 @@
                             data-bs-toggle="dropdown" aria-expanded="false">My Account</button>
                         @auth
                         <ul class="dropdown-menu" aria-labelledby="moreoption">
-                            <li><a class="dropdown-item" href="login.html">Profile</a></li>
+                            <li><a class="dropdown-item"
+                                    href="{{ route('profile',auth()->user()->user_name) }}">Profile</a></li>
+                            <li>
+                                <a class="dropdown-item" href="{{ route('logout') }}" onclick="event.preventDefault();
+                                    document.getElementById('logout-form').submit();">Logout
+                                </a>
+
+                                <form id="logout-form" action="{{ route('logout') }}" method="POST"
+                                    style="display: none;">
+                                    @csrf
+                                </form>
+                            </li>
                         </ul>
                         @else
                         <ul class="dropdown-menu" aria-labelledby="moreoption">

@@ -13,13 +13,10 @@ class PagesController extends Controller
     {
         $recent_blogs = Blog::orderBy('created_at', 'DESC')->with(['tags', 'category', 'user'])->take(3)->get();
         $escorts = User::latest()->with(['availability', 'primary_address'])->limit(10)->get();
-
+        $today = strtolower(Carbon::now()->format('l'));
         $counts = [
             'total_escorts' => User::all()->count(),
-            'total_online_escorts' => User::whereHas('availability', function ($query) {
-                $today = Carbon::now()->format('l');
-                $query->where('availibility->' . $today, true);
-            })->count(),
+            'total_online_escorts' => User::where('availibility->' . $today, true)->count(),
             'total_female_escorts' => User::where('gender', 'female')->count(),
             'total_male_escorts' => User::where('gender', 'male')->count(),
         ];

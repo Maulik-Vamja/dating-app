@@ -144,4 +144,14 @@ class UtilityController extends Controller
         $states = \App\Models\State::where('country_id', $country_id)->get();
         return response()->json($states);
     }
+    public function checkUsername(Request $request)
+    {
+        $username = $request->username;
+        $user = User::where('user_name', $username)->count();
+        if ($user == 0) {
+            return "true";
+        } else {
+            return "false";
+        }
+    }
 }

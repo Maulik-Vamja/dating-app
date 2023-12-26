@@ -11,7 +11,13 @@
 <script src="{{asset('frontend/assets/js/waypoints.min.js')}}"></script>
 <script src="{{asset('frontend/assets/js/vendor/bootstrap.bundle.min.js')}}"></script>
 <script src="{{asset('frontend/assets/js/plugins.js')}}"></script>
+<script src="{{asset('frontend/assets/js/slick.js')}}"></script>
 <script src="{{asset('frontend/assets/js/main.js')}}"></script>
+<script src="{{ asset('assets/admin/plugins/jquery-validation/js/jquery.validate.min.js') }}" type="text/javascript">
+</script>
+<script src="{{ asset('assets/admin/plugins/jquery-validation/js/additional-methods.js') }}" type="text/javascript">
+</script>
+<script src="{{ asset('assets/admin/js/custom_validations.js') }}" type="text/javascript"></script>
 
 
 <!-- Google Analytics: change UA-XXXXX-Y to be your site's ID. -->
@@ -27,3 +33,5 @@
 		ga('send', 'pageview')
 </script>
 <script src="https://www.google-analytics.com/analytics.js" async></script> --}}
+
+@stack('frontend-extra-js')

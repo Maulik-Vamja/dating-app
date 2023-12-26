@@ -4,6 +4,7 @@ use App\Http\Controllers\BlogsController;
 use App\Http\Controllers\EscortController;
 use App\Http\Controllers\PagesController;
 use App\Http\Controllers\SearchController;
+use App\Http\Controllers\UserController;
 use App\Http\Controllers\UtilityController;
 use Illuminate\Support\Facades\{Route, Auth};
 
@@ -36,8 +37,7 @@ Auth::routes([
 // Auth Routes
 Route::middleware(['auth', 'verified'])->group(function () {
     Route::view('home', 'frontend.home');
-
-    Route::get('profile/{user:user_name}', [EscortController::class, 'getProfile'])->name('profile');
+    Route::get('profile/{user:user_name}', [UserController::class, 'getProfile'])->name('profile');
 });
 
 Route::get('/states', [UtilityController::class, 'getStatesFromCountry'])->name('get.states');
@@ -52,3 +52,7 @@ Route::controller(BlogsController::class)->group(function () {
     Route::get('/blogs/{blog:slug}', [BlogsController::class, 'show'])->name('blogs.show');
     // Route::get('/blogs/asvc', [BlogsController::class, 'show'])->name('blogs.show');
 });
+
+Route::post('/check/username', [UtilityController::class, 'checkUsername'])->name('check.username');
+Route::post('/check/email', [UtilityController::class, 'checkEmail'])->name('check.email');
+Route::post('/check/contact-no', [UtilityController::class, 'checkContact'])->name('check.contact-no');

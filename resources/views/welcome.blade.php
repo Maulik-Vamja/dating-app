@@ -248,13 +248,13 @@
                     <div class="member__item">
                         <div class="member__inner">
                             <div class="member__thumb">
-                                <a class="member-link-page" href="member-single.html">
+                                <a class="member-link-page" href="{{ route('get.escort',$escort->user_name) }}">
                                     <figure><img src="{{asset($escort->thumbnail_image)}}" alt="member-img">
                                     </figure>
                                 </a>
                             </div>
                             <div class="member__content">
-                                <a class="member-link-page" href="member-single.html">
+                                <a class="member-link-page" href="{{ route('get.escort',$escort->user_name) }}">
                                     <h5>{{ $escort->full_name }}</h5>
                                 </a>
                                 <p class="short__desc mt-1">{{ $escort->short_description }}</p>

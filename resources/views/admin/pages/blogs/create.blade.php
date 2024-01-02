@@ -17,7 +17,7 @@
         </div>
 
         <!--begin::Form-->
-        <form id="frmAddBlog" method="POST" action="{{ route('admin.escorts.store') }}" enctype="multipart/form-data">
+        <form id="frmAddBlog" method="POST" action="{{ route('admin.blogs.store') }}" enctype="multipart/form-data">
             @csrf
             <div class="card-body">
                 {{-- First Name --}}
@@ -57,7 +57,8 @@
                             <label class="btn btn-xs btn-icon btn-circle btn-white btn-hover-text-primary btn-shadow"
                                 data-action="change" data-toggle="tooltip" title="" data-original-title="Change avatar">
                                 <i class="fa fa-pen icon-sm text-muted"></i>
-                                <input type="file" name="profile_photo" accept=".png, .jpg, .jpeg" />
+                                <input type="file" name="featured_image" accept=".png, .jpg, .jpeg"
+                                    data-error-container="#featured_image_error_container" />
                             </label>
                             <span class="btn btn-xs btn-icon btn-circle btn-white btn-hover-text-primary btn-shadow"
                                 data-action="cancel" data-toggle="tooltip" title="Cancel avatar">
@@ -67,6 +68,8 @@
                         <span class="form-text text-muted">Allowed file types: png, jpg, jpeg.</span>
                     </div>
                 </div>
+                <span id="featured_image_error_container"></span>
+
                 {{-- Category --}}
                 <div class="form-group">
                     <div class="row">
@@ -74,12 +77,14 @@
                         <div class="col-lg-6">
                             <label for="category_id"> Category: {!! $mend_sign !!}</label>
                             <select name="category_id" id="category_id"
-                                class="form-control @error('category_id') is-invalid @enderror">
+                                class="form-control @error('category_id') is-invalid @enderror"
+                                data-error-container="#category_id_error_container">
                                 <option value="">Select Category</option>
                                 @foreach ($categories as $category)
                                 <option value="{{ $category->id }}">{{ $category->name }}</option>
                                 @endforeach
                             </select>
+                            <span id="category_id_error_container"></span>
                             @if ($errors->has('category_id'))
                             <span class="text-danger">
                                 <strong class="form-text">{{ $errors->first('category_id') }}</strong>
@@ -90,12 +95,13 @@
                         <div class="col-lg-6">
                             <label for="tags"> Tags: {!! $mend_sign !!}</label>
                             <select name="tags[]" id="tags" class="form-control @error('tags') is-invalid @enderror"
-                                multiple>
-                                <option value="">Select Category</option>
-                                @foreach ($categories as $category)
-                                <option value="{{ $category->id }}">{{ $category->name }}</option>
+                                multiple data-error-container="#tags_error_container">
+                                <option value="">Select Tag</option>
+                                @foreach ($tags as $tag)
+                                <option value="{{ $tag->id }}">{{ $tag->name }}</option>
                                 @endforeach
                             </select>
+                            <span id="tags_error_container"></span>
                             @if ($errors->has('tags'))
                             <span class="text-danger">
                                 <strong class="form-text">{{ $errors->first('tags') }}</strong>
@@ -129,6 +135,7 @@
 @endsection
 
 @push('extra-js')
+<script src="{{ asset('assets/js/pages/custom/profile/profile.js?v=7.0.5') }}"></script>
 <script>
     $(document).ready(function() {
         var summernoteElement = $('#description');
@@ -147,7 +154,8 @@
                 }
         });
         $('#category_id').select2({
-            placeholder: 'Select a Category'
+            placeholder: 'Select a Category',
+            tags: true
         });
         $('#tags').select2({
             placeholder: 'Select a Tags',
@@ -162,16 +170,14 @@
                 },
                 featured_image: {
                     required: true,
-                    not_empty: true,
-                    file: true,
-                    minlength: 3,
+                    accept: "image/*",
                 },
                 category_id: {
                     required: true,
                     not_empty: true,
                     minlength: 3,
                 },
-                tags: {
+                'tags[]': {
                     required: true,
                     not_empty: true,
                     minlength: 3,
@@ -185,13 +191,11 @@
                 },
                 featured_image: {
                     required: "@lang('validation.required', ['attribute' => 'Featured Image'])",
-                    not_empty: "@lang('validation.not_empty', ['attribute' => 'Featured Image'])",
-                    minlength: "@lang('validation.min.string', ['attribute' => 'Featured Image', 'min' => 3])",
                 },
                 category_id: {
                     required: "@lang('validation.required', ['attribute' => 'Category'])",
                 },
-                tags: {
+                'tags[]': {
                     required: "@lang('validation.required', ['attribute' => 'Tags'])",
                 },
             },

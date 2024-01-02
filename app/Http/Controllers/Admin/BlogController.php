@@ -2,11 +2,17 @@
 
 namespace App\Http\Controllers\Admin;
 
+use App\Enums\StatusEnums;
 use App\Http\Controllers\Controller;
 use App\Models\Blog;
 use App\Models\Category;
 use App\Models\Tag;
+use Exception;
+use Illuminate\Database\QueryException;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Facades\Log;
+use Illuminate\Support\Facades\Storage;
 
 class BlogController extends Controller
 {
@@ -74,12 +80,13 @@ class BlogController extends Controller
      */
     public function store(Request $request)
     {
+        dd($request->all());
         DB::beginTransaction();
         try {
             $request['custom_id'] = get_unique_string('blogs');
             $request['slug'] = get_unique_slug(str_slug($request->title));
             Blog::create($request->all());
-            
+
             flash('Blog Added Succesfully')->success();
             DB::commit();
         } catch (\Throwable $th) {
@@ -100,19 +107,18 @@ class BlogController extends Controller
     /**
      * Show the form for editing the specified resource.
      */
-    public function edit(string Blog $blog)
+    public function edit(Blog $blog)
     {
-        $blog->load(['category','tags']);
+        $blog->load(['category', 'tags']);
         $categories = Category::get(['name', 'id']);
         $tags = Tag::get(['name', 'id']);
-        return view('admin.pages.blogs.edit', ['categories' => $categories, 'tags' => $tags,'blog' => $blog])->with('custom_title', 'Blog');
-
+        return view('admin.pages.blogs.edit', ['categories' => $categories, 'tags' => $tags, 'blog' => $blog])->with('custom_title', 'Blog');
     }
 
     /**
      * Update the specified resource in storage.
      */
-    public function update(Request $request, string Blog $blog)
+    public function update(Request $request, Blog $blog)
     {
         try {
             DB::beginTransaction();
@@ -162,7 +168,7 @@ class BlogController extends Controller
     /**
      * Remove the specified resource from storage.
      */
-    public function destroy(string $id)
+    public function destroy(Request $request, string $id)
     {
         if (!empty($request->action) && $request->action == 'delete_all') {
             $content = ['status' => 204, 'message' => "something went wrong"];

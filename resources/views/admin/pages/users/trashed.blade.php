@@ -20,7 +20,8 @@
         </div>
         <div class="card-body">
             <!--begin: Datatable-->
-            <table class="table table-bordered table-hover table-checkable" id="users_table" style="margin-top: 13px !important">
+            <table class="table table-bordered table-hover table-checkable" id="users_table"
+                style="margin-top: 13px !important">
             </table>
             <!--end: Datatable-->
         </div>
@@ -39,7 +40,7 @@
             processing: true,
             serverSide: true,
             ajax: {
-                url: "{{ route('admin.users.trasheddata') }}",
+                url: "{{ route('admin.escorts.trasheddata') }}",
                 data: {
                     columnsDef: ['first_name', 'last_name', 'email', 'contact_number'],
                 },

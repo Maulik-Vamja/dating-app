@@ -1,4 +1,5 @@
 <footer class="footer footer--style2">
+
     <div class="footer__top bg_img" style="background-image: url({{asset('frontend/assets/images/footer/bg.jpg')}})">
         <div class="footer__newsletter wow fadeInUp" data-wow-duration="1.5s">
             <div class="container">

@@ -33,8 +33,8 @@ class SectionsTableSeeder extends Seeder
                 "updated_at"    =>  now()->addSeconds(1),
             ],
             [
-                "name"          =>  "Users",
-                "grouping_name" =>  "User Management",
+                "name"          =>  "Escorts",
+                "grouping_name" =>  "Escort Management",
                 "icon"          =>  "fas fa-users",
                 "image"         =>  NULL,
                 "icon_type"     =>  "icon", // icon or image
@@ -77,12 +77,23 @@ class SectionsTableSeeder extends Seeder
                 "updated_at"    =>  now()->addSeconds(5),
             ],
             [
+                "name"          =>  "Blog Management",
+                "grouping_name" =>  "Blog Management",
+                "icon"          =>  "fas fa-list",
+                "image"         =>  NULL,
+                "icon_type"     =>  "icon", // icon or image
+                "sequence"      =>  6,
+                "is_active"     =>  "y",
+                "created_at"    =>  now()->addSeconds(5),
+                "updated_at"    =>  now()->addSeconds(5),
+            ],
+            [
                 "name"          =>  "App Update Setting",
                 "grouping_name" =>  "App Update Setting",
                 "icon"          =>  "fas fa-cog",
                 "image"         =>  NULL,
                 "icon_type"     =>  "icon",
-                "sequence"      =>  6,
+                "sequence"      =>  7,
                 "is_active"     => "n",
                 "created_at"    => \Carbon\Carbon::now(),
                 "updated_at"    => \Carbon\Carbon::now(),

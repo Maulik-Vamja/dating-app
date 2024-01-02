@@ -52,10 +52,11 @@
                             </li>
                         </ul>
                     </div>
+
+                    @auth
                     <div class="header__more">
                         <button class="default-btn dropdown-toggle" type="button" id="moreoption"
-                            data-bs-toggle="dropdown" aria-expanded="false">My Account</button>
-                        @auth
+                            data-bs-toggle="dropdown" aria-expanded="false">{{ auth()->user()->full_name }}</button>
                         <ul class="dropdown-menu" aria-labelledby="moreoption">
                             <li><a class="dropdown-item"
                                     href="{{ route('profile',auth()->user()->user_name) }}">Profile</a></li>
@@ -70,13 +71,14 @@
                                 </form>
                             </li>
                         </ul>
-                        @else
-                        <ul class="dropdown-menu" aria-labelledby="moreoption">
-                            <li><a class="dropdown-item" href="{{ route('login') }}">Log In</a></li>
-                            <li><a class="dropdown-item" href="{{ route('register') }}">Sign Up</a></li>
-                        </ul>
-                        @endauth
                     </div>
+                    @else
+                    <div class="navbar-nav mainmenu">
+                        <ul class="">
+                            <li><a class="" href="{{ route('login') }}">Log In/Sign Up</a></li>
+                        </ul>
+                    </div>
+                    @endauth
                 </div>
             </nav>
         </div>

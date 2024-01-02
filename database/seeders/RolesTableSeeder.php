@@ -38,8 +38,8 @@ class RolesTableSeeder extends Seeder
             ],
             [
                 "section_id"            =>  2,
-                "title"                 =>  "Users",
-                "route"                 =>  "admin.users.index",
+                "title"                 =>  "Escorts Management",
+                "route"                 =>  "admin.escorts.index",
                 "params"                =>  NULL,
                 "icon"                  =>  "fas fa-users",
                 "image"                 =>  NULL,
@@ -93,7 +93,21 @@ class RolesTableSeeder extends Seeder
                 "updated_at"            =>  now()->addSeconds(5),
             ],
             [
-                "section_id"                => 6,
+                "section_id"            =>  6,
+                "title"                 =>  "Blog Management",
+                "route"                 =>  "admin.blogs.index",
+                "params"                =>  NULL,
+                "icon"                  =>  "fas fa-list",
+                "image"                 =>  NULL,
+                "icon_type"             =>  "icon", // icon or image
+                "sequence"              =>  1,
+                "is_active"             =>  1,
+                "allowed_permissions"   =>  "access,add,edit,delete,view",
+                "created_at"            =>  now()->addSeconds(5),
+                "updated_at"            =>  now()->addSeconds(5),
+            ],
+            [
+                "section_id"                => 7,
                 "title"                     => "App Update Setting",
                 "route"                     => "admin.update-settings.index",
                 "params"                    => NULL,

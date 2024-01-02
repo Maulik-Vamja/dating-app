@@ -30,9 +30,7 @@ class UserController extends Controller
 
             if ($search != '') {
                 $users->where(function ($query) use ($search) {
-                    $query->where('first_name', 'like', "%{$search}%")
-                        ->orWhere('last_name', 'like', "%{$search}%")
-                        ->orWhere('contact_number', 'like', "%{$search}%")
+                    $query->where('full_name', 'like', "%{$search}%")
                         ->orWhere('email', 'like', "%{$search}%");
                 });
             }
@@ -56,10 +54,9 @@ class UserController extends Controller
 
                 $records['data'][] = [
                     'id' => $user->id,
-                    'first_name' => $user->first_name,
-                    'last_name' => $user->last_name,
+                    'full_name' => $user->full_name,
                     'email' => '<a href="mailto:' . $user->email . '" >' . $user->email . '</a>',
-                    'contact_number' => $user->contact_number ? '<a href="tel:' . $user->contact_number . '" >' . $user->contact_number . '</a>' : 'N/A',
+                    'contact_no' => '',
                     'is_active' => view('admin.layouts.includes.switch', compact('params'))->render(),
                     'action' => view('admin.layouts.includes.actions')->with(['custom_title' => 'User', 'id' => $user->custom_id], $user)->render(),
                     'updated_at' => $user->updated_at,
@@ -68,7 +65,7 @@ class UserController extends Controller
             }
             return $records;
         }
-        return view('admin.pages.users.index')->with(['custom_title' => 'Users']);
+        return view('admin.pages.users.index')->with(['custom_title' => 'Escorts']);
     }
 
     /**
@@ -78,7 +75,7 @@ class UserController extends Controller
      */
     public function create()
     {
-        return view('admin.pages.users.create')->with(['custom_title' => 'User']);
+        return view('admin.pages.users.create')->with(['custom_title' => 'Escort']);
     }
 
     /**
@@ -101,7 +98,7 @@ class UserController extends Controller
             Log::channel("custom_log")->info($e->getMessage() . $e->getFile() . $e->getLine());
             flash('Unable to save avatar. Please try again later.')->error();
         }
-        return redirect(route('admin.users.index'));
+        return redirect(route('admin.escorts.index'));
     }
 
     /**
@@ -110,9 +107,9 @@ class UserController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function show(User $user)
+    public function show(User $escort)
     {
-        return view('admin.pages.users.show', compact('user'))->with(['custom_title' => 'User']);
+        return view('admin.pages.users.show', ['user' => $escort])->with(['custom_title' => 'Escort']);
     }
 
     /**
@@ -121,9 +118,9 @@ class UserController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function edit(User $user)
+    public function edit(User $escort)
     {
-        return view('admin.pages.users.edit', compact('user'))->with(['custom_title' => 'Users']);
+        return view('admin.pages.users.edit', ['user' => $escort])->with(['custom_title' => 'Escorts']);
     }
 
     /**
@@ -133,15 +130,15 @@ class UserController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(UserRequest $request, User $user)
+    public function update(UserRequest $request, User $escort)
     {
         try {
             DB::beginTransaction();
             if (!empty($request->action) && $request->action == 'change_status') {
                 $content = ['status' => 204, 'message' => "something went wrong"];
-                if ($user) {
-                    $user->is_active = ($request->value) ? StatusEnums::ACTIVE : StatusEnums::INACTIVE;
-                    if ($user->save()) {
+                if ($escort) {
+                    $escort->is_active = ($request->value) ? StatusEnums::ACTIVE : StatusEnums::INACTIVE;
+                    if ($escort->save()) {
                         DB::commit();
                         $content['status'] = 200;
                         $content['message'] = "Status updated successfully.";
@@ -149,26 +146,26 @@ class UserController extends Controller
                 }
                 return response()->json($content);
             } else {
-                $path = $user->profile_photo;
+                $path = $escort->profile_photo;
                 //request has remove_profie_photo then delete user image
                 if ($request->has('remove_profie_photo')) {
-                    if ($user->profile_photo) {
-                        Storage::delete($user->profile_photo);
+                    if ($escort->profile_photo) {
+                        Storage::delete($escort->profile_photo);
                     }
                     $path = null;
                 }
 
 
                 $path = imageUpload($request, "profile_photo", "users/profile_photo", $path);
-                $user->fill($request->all());
-                $user->profile_photo = $path;
-                if ($user->save()) {
+                $escort->fill($request->all());
+                $escort->profile_photo = $path;
+                if ($escort->save()) {
                     DB::commit();
-                    flash('User details updated successfully!')->success();
+                    flash('Escort details updated successfully!')->success();
                 } else {
                     flash('Unable to update user. Try again later')->error();
                 }
-                return redirect(route('admin.users.index'));
+                return redirect(route('admin.escorts.index'));
             }
         } catch (QueryException $e) {
             Log::channel("custom_log")->info($e->getMessage() . $e->getFile() . $e->getLine());
@@ -199,21 +196,21 @@ class UserController extends Controller
             }
             User::whereIn('custom_id', explode(',', $request->ids))->delete();
             $content['status'] = 200;
-            $content['message'] = "User deleted successfully.";
+            $content['message'] = "Escort deleted successfully.";
             $content['count'] = User::all()->count();
             return response()->json($content);
         } else {
-            $user = User::where('custom_id', $id)->firstOrFail();
-            if ($user->profile_photo) {
-                Storage::delete($user->profile_photo);
+            $escort = User::where('custom_id', $id)->firstOrFail();
+            if ($escort->profile_photo) {
+                Storage::delete($escort->profile_photo);
             }
-            $user->delete();
+            $escort->delete();
             if (request()->ajax()) {
-                $content = array('status' => 200, 'message' => "User deleted successfully.", 'count' => User::all()->count());
+                $content = array('status' => 200, 'message' => "Escort deleted successfully.", 'count' => User::all()->count());
                 return response()->json($content);
             } else {
-                flash('User deleted successfully.')->success();
-                return redirect()->route('admin.users.index');
+                flash('Escort deleted successfully.')->success();
+                return redirect()->route('admin.escorts.index');
             }
         }
     }

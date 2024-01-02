@@ -13,11 +13,12 @@ if (!function_exists("get_permissions")) {
         if ($user_type == "admin") {
             $permissions = [
                 1   =>  ["permissions" => "access"],                          // Dashboard
-                2   =>  ["permissions" => "access,add,edit,view,delete"],     // Users
+                2   =>  ["permissions" => "access,view,delete"],     // Users
                 3   =>  ["permissions" => "access,add,edit,delete"],          // Role Management
                 4   =>  ["permissions" => "access,edit"],                     // CMS Pages
                 5   =>  ["permissions" => "access"],                          // Site Configurations
-                6   =>  ["permissions" => "access,edit"],                     // App Update Setting
+                6   =>  ["permissions" => "access,add,edit,view,delete"],     // App Update Setting
+                7   =>  ["permissions" => "access,edit"],                     // App Update Setting
             ];
         }
 

@@ -46,11 +46,14 @@
                                     <strong>{{ $message }}</strong></span>
                                 @enderror
                             </div>
-                            <p class="f-pass">Forgot your password? <a href="#">recover password</a></p>
+                            {{-- <p class="f-pass">Forgot your password? <a href="#">recover password</a></p> --}}
                             <div class="text-center">
                                 <button type="submit" class="default-btn"><span>Sign IN</span></button>
                             </div>
-                            <div class="or">
+                            <p class="or-signup"> Don't have an account? <a href="{{ route('register') }}">Sign up
+                                    here</a>
+                            </p>
+                            {{-- <div class="or">
                                 <p>OR</p>
                             </div>
                             <div class="or-content">
@@ -58,10 +61,8 @@
                                 <a href="#" class="default-btn reverse"><img
                                         src="{{asset('frontend/assets/images/login/google.png')}}" alt="google">
                                     <span>Sign Up with Google</span></a>
-                                <p class="or-signup"> Don't have an account? <a href="{{ route('register') }}">Sign up
-                                        here</a>
-                                </p>
-                            </div>
+
+                            </div> --}}
                         </form>
                     </div>
                 </div>

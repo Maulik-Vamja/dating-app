@@ -6,6 +6,7 @@ use App\Http\Controllers\Admin\CityController;
 use App\Http\Controllers\admin\FaqsController;
 use App\Http\Controllers\Admin\AdminController;
 use App\Http\Controllers\Admin\AppUpdateSettingController;
+use App\Http\Controllers\Admin\BlogController;
 use App\Http\Controllers\Admin\ChartController;
 use App\Http\Controllers\Admin\ErrorController;
 use App\Http\Controllers\Admin\PagesController;
@@ -60,7 +61,7 @@ Route::group(['middleware' => ['check_permit', 'revalidate']], function () {
     });
 
     /* User */
-    Route::resource('users', UserController::class);
+    Route::resource('escorts', UserController::class);
 
     /* Role Management */
     Route::resource('roles', AdminController::class);
@@ -83,6 +84,9 @@ Route::group(['middleware' => ['check_permit', 'revalidate']], function () {
     /* FAQs Management */
     Route::get('faqs/listing', [FaqsController::class, 'listing'])->name('faqs.listing');
     Route::resource('faqs', FaqsController::class);
+
+    /* Blog Management */
+    Route::resource('blogs', BlogController::class);
 
     /* app update settings */
     Route::get('update-settings', [AppUpdateSettingController::class, 'index'])->name('update-settings.index');

@@ -1,109 +1,108 @@
 @extends('admin.layouts.app')
 
 @push('breadcrumb')
-    {!! Breadcrumbs::render('users_create') !!}
+{!! Breadcrumbs::render('users_create') !!}
 @endpush
 
 @section('content')
-    <div class="container">
-        <div class="card card-custom">
-            <div class="card-header">
-                <div class="card-title">
-                    <span class="card-icon">
-                        <i class="fas fa-user-plus text-primary"></i>
+<div class="container">
+    <div class="card card-custom">
+        <div class="card-header">
+            <div class="card-title">
+                <span class="card-icon">
+                    <i class="fas fa-user-plus text-primary"></i>
+                </span>
+                <h3 class="card-label text-uppercase">ADD {{ $custom_title }}</h3>
+            </div>
+        </div>
+
+        <!--begin::Form-->
+        <form id="frmAddUser" method="POST" action="{{ route('admin.escorts.store') }}" enctype="multipart/form-data">
+            @csrf
+            <div class="card-body">
+                {{-- First Name --}}
+                <div class="form-group">
+                    <label for="first_name"> First Name: {!! $mend_sign !!}</label>
+                    <input type="text" class="form-control @error('first_name') is-invalid @enderror" id="first_name"
+                        name="first_name" value="{{ old('first_name') }}" placeholder="Enter first name"
+                        autocomplete="first_name" spellcheck="false" autocapitalize="sentences" tabindex="0"
+                        autofocus />
+                    @if ($errors->has('first_name'))
+                    <span class="help-block">
+                        <strong class="form-text">{{ $errors->first('first_name') }}</strong>
                     </span>
-                    <h3 class="card-label text-uppercase">ADD {{ $custom_title }}</h3>
+                    @endif
+                </div>
+
+                {{-- Last Name --}}
+                <div class="form-group">
+                    <label for="last_name"> Last Name: {!! $mend_sign !!} </label>
+                    <input type="text" class="form-control @error('last_name') is-invalid @enderror" id="last_name"
+                        name="last_name" value="{{ old('last_name') }}" placeholder="Enter last name"
+                        autocomplete="last_name" spellcheck="false" autocapitalize="sentences" tabindex="0" autofocus />
+                    @if ($errors->has('last_name'))
+                    <span class="help-block">
+                        <strong class="form-text">{{ $errors->first('last_name') }}</strong>
+                    </span>
+                    @endif
+                </div>
+
+                {{-- Email --}}
+                <div class="form-group">
+                    <label for="email"> Email: {!! $mend_sign !!}</label>
+                    <input type="email" class="form-control @error('email') is-invalid @enderror" id="email"
+                        name="email" value="{{ old('email') }}" placeholder="Enter email" autocomplete="email"
+                        spellcheck="false" tabindex="0" />
+                    @if ($errors->has('email'))
+                    <span class="text-danger">
+                        <strong class="form-text">{{ $errors->first('email') }}</strong>
+                    </span>
+                    @endif
+                </div>
+
+                {{-- Contact Number --}}
+                <div class="form-group">
+                    <label for="contact_number">Contact Number: {!! $mend_sign !!}</label>
+                    <input type="text" class="form-control @error('contact_number') is-invalid @enderror"
+                        id="contact_number" name="contact_number" value="{{ old('contact_number') }}"
+                        placeholder="Enter contact number" autocomplete="contact_number" spellcheck="false"
+                        tabindex="0" />
+                    @if ($errors->has('contact_number'))
+                    <span class="text-danger">
+                        <strong class="form-text">{{ $errors->first('contact_number') }}</strong>
+                    </span>
+                    @endif
+                </div>
+
+                {{-- Profile Photo --}}
+                <div class="form-group">
+                    <label for="profile_photo">Profile Photo</label>
+                    <div class="custom-file">
+                        <input type="file" class="custom-file-input" id="profile_photo" name="profile_photo"
+                            tabindex="0" accept="image/png, image/jpeg, image/jpg" />
+                        <label class="custom-file-label @error('profile_photo') is-invalid @enderror"
+                            for="customFile">Choose file</label>
+                        @if ($errors->has('profile_photo'))
+                        <span class="text-danger">
+                            <strong class="form-text">{{ $errors->first('profile_photo') }}</strong>
+                        </span>
+                        @endif
+                    </div>
                 </div>
             </div>
-
-            <!--begin::Form-->
-            <form id="frmAddUser" method="POST" action="{{ route('admin.users.store') }}" enctype="multipart/form-data">
-                @csrf
-                <div class="card-body">
-                    {{-- First Name --}}
-                    <div class="form-group">
-                        <label for="first_name"> First Name: {!! $mend_sign !!}</label>
-                        <input type="text" class="form-control @error('first_name') is-invalid @enderror" id="first_name"
-                            name="first_name" value="{{ old('first_name') }}" placeholder="Enter first name"
-                            autocomplete="first_name" spellcheck="false" autocapitalize="sentences" tabindex="0"
-                            autofocus />
-                        @if ($errors->has('first_name'))
-                            <span class="help-block">
-                                <strong class="form-text">{{ $errors->first('first_name') }}</strong>
-                            </span>
-                        @endif
-                    </div>
-
-                    {{-- Last Name --}}
-                    <div class="form-group">
-                        <label for="last_name"> Last Name: {!! $mend_sign !!} </label>
-                        <input type="text" class="form-control @error('last_name') is-invalid @enderror" id="last_name"
-                            name="last_name" value="{{ old('last_name') }}" placeholder="Enter last name"
-                            autocomplete="last_name" spellcheck="false" autocapitalize="sentences" tabindex="0"
-                            autofocus />
-                        @if ($errors->has('last_name'))
-                            <span class="help-block">
-                                <strong class="form-text">{{ $errors->first('last_name') }}</strong>
-                            </span>
-                        @endif
-                    </div>
-
-                    {{-- Email --}}
-                    <div class="form-group">
-                        <label for="email"> Email: {!! $mend_sign !!}</label>
-                        <input type="email" class="form-control @error('email') is-invalid @enderror" id="email"
-                            name="email" value="{{ old('email') }}" placeholder="Enter email" autocomplete="email"
-                            spellcheck="false" tabindex="0" />
-                        @if ($errors->has('email'))
-                            <span class="text-danger">
-                                <strong class="form-text">{{ $errors->first('email') }}</strong>
-                            </span>
-                        @endif
-                    </div>
-
-                    {{-- Contact Number --}}
-                    <div class="form-group">
-                        <label for="contact_number">Contact Number: {!! $mend_sign !!}</label>
-                        <input type="text" class="form-control @error('contact_number') is-invalid @enderror"
-                            id="contact_number" name="contact_number" value="{{ old('contact_number') }}"
-                            placeholder="Enter contact number" autocomplete="contact_number" spellcheck="false"
-                            tabindex="0" />
-                        @if ($errors->has('contact_number'))
-                            <span class="text-danger">
-                                <strong class="form-text">{{ $errors->first('contact_number') }}</strong>
-                            </span>
-                        @endif
-                    </div>
-
-                    {{-- Profile Photo --}}
-                    <div class="form-group">
-                        <label for="profile_photo">Profile Photo</label>
-                        <div class="custom-file">
-                            <input type="file" class="custom-file-input" id="profile_photo" name="profile_photo"
-                                tabindex="0" accept="image/png, image/jpeg, image/jpg"/>
-                            <label class="custom-file-label @error('profile_photo') is-invalid @enderror"
-                                for="customFile">Choose file</label>
-                            @if ($errors->has('profile_photo'))
-                                <span class="text-danger">
-                                    <strong class="form-text">{{ $errors->first('profile_photo') }}</strong>
-                                </span>
-                            @endif
-                        </div>
-                    </div>
-                </div>
-                <div class="card-footer">
-                    <button type="submit" class="btn btn-primary mr-2 text-uppercase"> Add {{ $custom_title }}</button>
-                    <a href="{{ route('admin.users.index') }}" class="btn btn-secondary text-uppercase">Cancel</a>
-                </div>
-            </form>
-            <!--end::Form-->
-        </div>
+            <div class="card-footer">
+                <button type="submit" class="btn btn-primary mr-2 text-uppercase"> Add {{ $custom_title }}</button>
+                <a href="{{ route('admin.escorts.index') }}" class="btn btn-secondary text-uppercase">Cancel</a>
+            </div>
+        </form>
+        <!--end::Form-->
     </div>
+</div>
 @endsection
 
 @push('extra-js')
-    <script>
-        $(document).ready(function() {
+<script>
+    $(document).ready(function() {
             $("#frmAddUser").validate({
                 rules: {
                     first_name: {
@@ -208,5 +207,5 @@
                 }
             });
         });
-    </script>
+</script>
 @endpush

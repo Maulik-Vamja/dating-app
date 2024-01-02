@@ -126,6 +126,20 @@ Breadcrumbs::register('faqs_update', function ($breadcrumbs, $id) {
     $breadcrumbs->parent('faqs_list');
     $breadcrumbs->push(__('Edit Faqs'), route('admin.faqs.edit', $id));
 });
+// Blogs ---------------------------------------------------------------------------------------------------------------------------------------------------
+Breadcrumbs::register('blogs_list', function ($breadcrumbs) {
+    $breadcrumbs->parent('dashboard');
+    $breadcrumbs->push(__('Blogs'), route('admin.blogs.index'));
+});
+Breadcrumbs::register('blog_create', function ($breadcrumbs) {
+    $breadcrumbs->parent('blogs_list');
+    $breadcrumbs->push('Add New Blog', route('admin.blogs.create'));
+});
+Breadcrumbs::register('blog_update', function ($breadcrumbs, $id) {
+    $breadcrumbs->parent('blogs_list');
+    $breadcrumbs->push(__('Edit Blog'), route('admin.blogs.edit', $id));
+});
+
 //site configuartion
 Breadcrumbs::register('site_setting', function ($breadcrumbs) {
     $breadcrumbs->parent('dashboard');

@@ -1,7 +1,7 @@
 @extends('admin.layouts.app')
 
 @push('breadcrumb')
-{!! Breadcrumbs::render('users_create') !!}
+{!! Breadcrumbs::render('blog_create') !!}
 @endpush
 
 @section('content')
@@ -188,23 +188,11 @@
                     not_empty: "@lang('validation.not_empty', ['attribute' => 'Featured Image'])",
                     minlength: "@lang('validation.min.string', ['attribute' => 'Featured Image', 'min' => 3])",
                 },
-                email: {
-                    required: "@lang('validation.required', ['attribute' => 'email address'])",
-                    maxlength: "@lang('validation.max.string', ['attribute' => 'email address', 'max' => 80])",
-                    email: "@lang('validation.email', ['attribute' => 'email address'])",
-                    valid_email: "@lang('validation.email', ['attribute' => 'email address'])",
-                    remote: "@lang('validation.unique', ['attribute' => 'email address'])",
+                category_id: {
+                    required: "@lang('validation.required', ['attribute' => 'Category'])",
                 },
-                contact_number: {
-                    required: "@lang('validation.required', ['attribute' => 'contact number'])",
-                    not_empty: "@lang('validation.not_empty', ['attribute' => 'contact number'])",
-                    maxlength: "@lang('validation.max.string', ['attribute' => 'contact number', 'max' => 16])",
-                    minlength: "@lang('validation.min.string', ['attribute' => 'contact number', 'min' => 6])",
-                    pattern: "@lang('validation.numeric', ['attribute' => 'contact number'])",
-                    remote: "@lang('validation.unique', ['attribute' => 'contact number'])",
-                },
-                profile_photo: {
-                    extension: "@lang('validation.mimetypes', ['attribute' => 'profile photo', 'value' => 'jpg|png|jpeg'])",
+                tags: {
+                    required: "@lang('validation.required', ['attribute' => 'Tags'])",
                 },
             },
             errorClass: 'invalid-feedback',

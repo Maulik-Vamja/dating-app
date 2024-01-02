@@ -13,6 +13,11 @@ class Blog extends Model
         'custom_id', 'slug', 'title', 'description', 'image', 'admin_id', 'category_id',
     ];
 
+    public function getRouteKeyName()
+    {
+        return 'custom_id';
+    }
+
     public function user()
     {
         return $this->belongsTo(Admin::class, 'admin_id', 'id');

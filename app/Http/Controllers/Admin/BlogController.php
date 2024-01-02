@@ -74,7 +74,19 @@ class BlogController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        DB::beginTransaction();
+        try {
+            $request['custom_id'] = get_unique_string('blogs');
+            $request['slug'] = get_unique_slug(str_slug($request->title));
+            Blog::create($request->all());
+            
+            flash('Blog Added Succesfully')->success();
+            DB::commit();
+        } catch (\Throwable $th) {
+            flash('Something went wrong')->error();
+            DB::rollback();
+        }
+        return redirect()->route('admin.blogs.index');
     }
 
     /**

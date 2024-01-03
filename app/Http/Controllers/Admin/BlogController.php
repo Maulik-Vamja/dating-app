@@ -4,6 +4,7 @@ namespace App\Http\Controllers\Admin;
 
 use App\Enums\StatusEnums;
 use App\Http\Controllers\Controller;
+use App\Http\Requests\Admin\BlogRequest;
 use App\Models\Blog;
 use App\Models\Category;
 use App\Models\Tag;
@@ -78,18 +79,42 @@ class BlogController extends Controller
     /**
      * Store a newly created resource in storage.
      */
-    public function store(Request $request)
+    public function store(BlogRequest $request)
     {
-        dd($request->all());
         DB::beginTransaction();
         try {
             $request['custom_id'] = get_unique_string('blogs');
             $request['slug'] = get_unique_slug(str_slug($request->title));
-            Blog::create($request->all());
 
+            $category =  Category::firstOrCreate([
+                'id'    => $request->category_id,
+            ], [
+                'custom_id' => get_unique_string(),
+                'name'  => $request->category_id,
+                'slug'  => get_unique_slug(str_slug($request->category_id)),
+            ]);
+            $request['category_id'] = $category->id;
+
+            $request['featured_image'] = imageUpload($request, "image", "blogs/banner");
+
+            $blog = Blog::create($request->all());
+
+            if ($request->has('tags')) {
+                foreach ($request->tags as $tag) {
+                    $tag = Tag::firstOrCreate([
+                        'id'    => $tag,
+                    ], [
+                        'custom_id' => get_unique_string(),
+                        'name'  => $tag,
+                        'slug'  => get_unique_slug(str_slug($tag)),
+                    ]);
+                    $blog->tags()->attach($tag->id);
+                }
+            }
             flash('Blog Added Succesfully')->success();
             DB::commit();
         } catch (\Throwable $th) {
+            dd($th->getMessage(), 'error');
             flash('Something went wrong')->error();
             DB::rollback();
         }
@@ -142,8 +167,6 @@ class BlogController extends Controller
                     }
                     $path = null;
                 }
-
-
                 $path = imageUpload($request, "profile_photo", "users/profile_photo", $path);
                 $blog->fill($request->all());
                 $blog->image = $path;
@@ -199,49 +222,4 @@ class BlogController extends Controller
             }
         }
     }
-
-    // public function listing(Request $request)
-    // {
-    //     extract($this->DTFilters($request->all()));
-    //     $records = [];
-    //     $blogs = Blog::orderBy($sort_column, $sort_order);
-
-    //     if ($search != '') {
-    //         $blogs->where(function ($query) use ($search) {
-    //             $query->where('title', 'like', "%{$search}%")
-    //                 ->orWhere('description', 'like', "%{$search}%");
-    //         });
-    //     }
-
-    //     $count = $blogs->count();
-
-    //     $records['recordsTotal'] = $count;
-    //     $records['recordsFiltered'] = $count;
-    //     $records['data'] = [];
-
-    //     $blogs = $blogs->offset($offset)->limit($limit)->orderBy($sort_column, $sort_order);
-
-    //     $blogs = $blogs->latest()->get();
-    //     foreach ($blogs as $blog) {
-    //         $params = [
-    //             'checked' => ($blog->is_active ? 'checked' : ''),
-    //             'getaction' => $blog->is_active,
-    //             'class' => '',
-    //             'id' => $blog->custom_id,
-    //         ];
-
-    //         $records['data'][] = [
-    //             'id' => $blog->id,
-    //             'title' => $blog->title,
-    //             'description' => $blog->description,
-    //             'category_name' => $blog->category->name,
-    //             'active' => view('admin.layouts.includes.switch', compact('params'))->render(),
-    //             'action' => view('admin.layouts.includes.actions')->with(['custom_title' => 'Faqs', 'id' => $blog->custom_id], $blog)->render(),
-    //             'checkbox' => view('admin.layouts.includes.checkbox')->with('id', $blog->custom_id)->render(),
-    //             'updated_at' => $blog->updated_at,
-    //         ];
-    //     }
-    //     // dd($records);
-    //     return $records;
-    // }
 }

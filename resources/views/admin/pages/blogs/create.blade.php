@@ -57,8 +57,8 @@
                             <label class="btn btn-xs btn-icon btn-circle btn-white btn-hover-text-primary btn-shadow"
                                 data-action="change" data-toggle="tooltip" title="" data-original-title="Change avatar">
                                 <i class="fa fa-pen icon-sm text-muted"></i>
-                                <input type="file" name="featured_image" accept=".png, .jpg, .jpeg"
-                                    data-error-container="#featured_image_error_container" />
+                                <input type="file" name="image" accept=".png, .jpg, .jpeg"
+                                    data-error-container="#image_error_container" />
                             </label>
                             <span class="btn btn-xs btn-icon btn-circle btn-white btn-hover-text-primary btn-shadow"
                                 data-action="cancel" data-toggle="tooltip" title="Cancel avatar">
@@ -68,28 +68,32 @@
                         <span class="form-text text-muted">Allowed file types: png, jpg, jpeg.</span>
                     </div>
                 </div>
-                <span id="featured_image_error_container"></span>
-
+                <span id="image_error_container"></span>
+                @error('image')
+                <span class="help-block">
+                    <strong class="form-text">{{ $errors->first('title') }}</strong>
+                </span>
+                @enderror
                 {{-- Category --}}
                 <div class="form-group">
                     <div class="row">
                         {{-- Category --}}
                         <div class="col-lg-6">
-                            <label for="category_id"> Category: {!! $mend_sign !!}</label>
-                            <select name="category_id" id="category_id"
-                                class="form-control @error('category_id') is-invalid @enderror"
-                                data-error-container="#category_id_error_container">
+                            <label for="category"> Category: {!! $mend_sign !!}</label>
+                            <select name="category" id="category"
+                                class="form-control @error('category') is-invalid @enderror"
+                                data-error-container="#category_error_container">
                                 <option value="">Select Category</option>
                                 @foreach ($categories as $category)
                                 <option value="{{ $category->id }}">{{ $category->name }}</option>
                                 @endforeach
                             </select>
-                            <span id="category_id_error_container"></span>
-                            @if ($errors->has('category_id'))
-                            <span class="text-danger">
-                                <strong class="form-text">{{ $errors->first('category_id') }}</strong>
+                            <span id="category_error_container"></span>
+                            @error('category')
+                            <span class="help-block">
+                                <strong class="form-text">{{ $errors->first('title') }}</strong>
                             </span>
-                            @endif
+                            @enderror
                         </div>
                         {{-- Tags --}}
                         <div class="col-lg-6">
@@ -102,11 +106,11 @@
                                 @endforeach
                             </select>
                             <span id="tags_error_container"></span>
-                            @if ($errors->has('tags'))
-                            <span class="text-danger">
-                                <strong class="form-text">{{ $errors->first('tags') }}</strong>
+                            @error('tags')
+                            <span class="help-block">
+                                <strong class="form-text">{{ $errors->first('title') }}</strong>
                             </span>
-                            @endif
+                            @enderror
                         </div>
                     </div>
 
@@ -117,11 +121,11 @@
                     <textarea class="form-control @error('description') is-invalid @enderror" id="description"
                         name="description" placeholder="Enter description" autocomplete="description"
                         spellcheck="true">{{ old('description') }}</textarea>
-                    @if ($errors->has('description'))
-                    <span class="text-danger">
-                        <strong class="form-text">{{ $errors->first('description') }}</strong>
+                    @error('description')
+                    <span class="help-block">
+                        <strong class="form-text">{{ $errors->first('title') }}</strong>
                     </span>
-                    @endif
+                    @enderror
                 </div>
             </div>
             <div class="card-footer">
@@ -153,7 +157,7 @@
                     },
                 }
         });
-        $('#category_id').select2({
+        $('#category').select2({
             placeholder: 'Select a Category',
             tags: true
         });
@@ -168,11 +172,11 @@
                     not_empty: true,
                     minlength: 3,
                 },
-                featured_image: {
+                image: {
                     required: true,
                     accept: "image/*",
                 },
-                category_id: {
+                category: {
                     required: true,
                     not_empty: true,
                     minlength: 3,
@@ -189,10 +193,10 @@
                     not_empty: "@lang('validation.not_empty', ['attribute' => 'Title'])",
                     minlength: "@lang('validation.min.string', ['attribute' => 'Title', 'min' => 3])",
                 },
-                featured_image: {
+                image: {
                     required: "@lang('validation.required', ['attribute' => 'Featured Image'])",
                 },
-                category_id: {
+                category: {
                     required: "@lang('validation.required', ['attribute' => 'Category'])",
                 },
                 'tags[]': {

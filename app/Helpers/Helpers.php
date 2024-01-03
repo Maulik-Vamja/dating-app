@@ -17,8 +17,9 @@ if (!function_exists("get_permissions")) {
                 3   =>  ["permissions" => "access,add,edit,delete"],          // Role Management
                 4   =>  ["permissions" => "access,edit"],                     // CMS Pages
                 5   =>  ["permissions" => "access"],                          // Site Configurations
-                6   =>  ["permissions" => "access,add,edit,view,delete"],     // App Update Setting
+                6   =>  ["permissions" => "access,add,edit,delete"],     // App Update Setting
                 7   =>  ["permissions" => "access,edit"],                     // App Update Setting
+                8   =>  ["permissions" => "access"],                     // Meta tag Management
             ];
         }
 
@@ -162,7 +163,7 @@ if (!function_exists('get_unique_username')) {
 if (!function_exists('get_unique_slug')) {
     function get_unique_slug($slug, string $table = 'blogs'): string
     {
-        $data_found = \Illuminate\Support\Facades\DB::table($table)->where(['user_name' => $slug])->count();
+        $data_found = \Illuminate\Support\Facades\DB::table($table)->where(['slug' => $slug])->count();
 
         return ($data_found > 0) ? "{$slug}{$data_found}" : $slug;
     }

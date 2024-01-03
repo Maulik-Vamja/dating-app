@@ -15,6 +15,7 @@ use App\Http\Controllers\Admin\UserController;
 use App\Http\Controllers\Admin\CountryController;
 use App\Http\Controllers\Admin\CmsPagesController;
 use App\Http\Controllers\Admin\SummernoteController;
+use App\Http\Controllers\MetaTagController;
 
 /*
 |--------------------------------------------------------------------------
@@ -87,6 +88,10 @@ Route::group(['middleware' => ['check_permit', 'revalidate']], function () {
 
     /* Blog Management */
     Route::resource('blogs', BlogController::class);
+
+    // Meta Tag Management
+    Route::get('meta-tags', [MetaTagController::class, 'index'])->name('meta-tags.index');
+    Route::post('meta-tags/uodate', [MetaTagController::class, 'update'])->name('meta-tags.update');
 
     /* app update settings */
     Route::get('update-settings', [AppUpdateSettingController::class, 'index'])->name('update-settings.index');

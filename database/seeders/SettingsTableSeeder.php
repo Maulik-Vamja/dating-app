@@ -147,6 +147,20 @@ class SettingsTableSeeder extends Seeder
                 "created_at"    =>  now()->addSeconds(9),
                 "updated_at"    =>  now()->addSeconds(9),
             ],
+            [
+                "label"         =>  "Mata Tags",
+                "type"          =>  "textarea",
+                "constant"      =>  "meta_tags",
+                "options"       =>  NULL,
+                "class"         =>  NULL,
+                "icon"          =>  "",
+                "required"      =>  "y",
+                "value"         =>  "",
+                "hint"          =>  "Enter Meta Tags For SEO.",
+                "editable"      =>  "y",
+                "created_at"    =>  now()->addSeconds(9),
+                "updated_at"    =>  now()->addSeconds(9),
+            ],
         ];
 
         Setting::insert($settings);

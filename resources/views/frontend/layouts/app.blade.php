@@ -8,7 +8,7 @@
     <meta charset="utf-8">
     <title>Ollya</title>
     <meta name="viewport" content="width=device-width, initial-scale=1">
-
+    {!! $sitesetting['meta_tags'] !!}
     <!-- site favicon -->
     <link rel="icon" type="image/png" href="{{asset('frontend/assets/images/favicon.png')}}">
     <!-- Place favicon.ico in the root directory -->
@@ -39,10 +39,10 @@
 
     @yield('content')
 
-
-
     <!-- ================> Footer section start here <================== -->
+
     @include('frontend.layouts.includes.footer')
+
     <!-- ================> Footer section end here <================== -->
 
     @include('frontend.layouts.includes.js')

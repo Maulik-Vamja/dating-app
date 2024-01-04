@@ -1,16 +1,29 @@
 @extends('frontend.layouts.app')
 
-@section('content')
-<!-- ================> Page Header section start here <================== -->
-<div class="pageheader bg_img" style="background-image: url({{asset('frontend/assets/images/allmedia/01.jpg')}});">
-    <div class="container">
-        <div class="pageheader__content text-center">
-            <figure><img src="{{asset('frontend/assets/images/allmedia/01.jpg')}}" alt="member"></figure>
-        </div>
-    </div>
-</div>
-<!-- ================> Page Header section end here <================== -->
+@push('frontend-extra-css')
+<link href="https://cdn.jsdelivr.net/npm/summernote@0.8.18/dist/summernote.min.css" rel="stylesheet">
+<style>
+    /** add the dropzone beaty css */
+    .dropzone {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+        border: 2px dashed #0087F7;
+        border-radius: 5px;
+        background: white;
+        margin-top: 20px;
+        height: 85%;
+    }
 
+    .dz-button {
+        font-size: 20px !important;
+        /* Adjust the font size as needed */
+    }
+</style>
+@endpush
+
+@section('content')
 <!-- ================> Group section end here <================== -->
 
 <div class="group group--single pb-5">
@@ -22,7 +35,7 @@
                         <li class="nav-item" role="presentation">
                             <button class="nav-link active" id="gt1-tab" data-bs-toggle="tab" data-bs-target="#gt1"
                                 type="button" role="tab" aria-controls="gt1" aria-selected="true"><i
-                                    class="fa-solid fa-house"></i> Home</button>
+                                    class="fa-solid fa-user"></i> Basic</button>
                         </li>
                         <li class="nav-item" role="presentation">
                             <button class="nav-link" id="gt2-tab" data-bs-toggle="tab" data-bs-target="#gt2"
@@ -62,83 +75,90 @@
                     <div class="group__bottom--left">
                         <div class="tab-content" id="myTabContent">
                             <div class="tab-pane fade show active" id="gt1" role="tabpanel" aria-labelledby="gt1-tab">
-                                <div class="row">
-                                    <div class="col-md-12">
-                                        <div class="group__bottom--area group__bottom--memberactivity">
-                                            <div class="basic-info-profile d-flex justify-content-center">
-                                                <button class="ic-activiy"><i class="fa-solid fa-clock"></i> Last active
-                                                    today</button>
-                                                <button class="ic-location"><i class="fa-solid fa-house"></i> Miami, FL,
-                                                    US</button>
-                                                <button class="ic-gender"><i class="fa-solid fa-venus"></i>
-                                                    Woman</button>
+                                <div class="container">
+                                    <div class="card">
+                                        <div class="card-body">
+                                            {{-- Full Name --}}
+                                            <div class="col-md-6 mb-3">
+                                                <div class="form-group">
+                                                    <label for="full_name">Full Name:</label>
+                                                    <input type="text" class="form-control" id="full_name"
+                                                        name="full_name" placeholder="Enter Your Full Name"
+                                                        value="{{ $user->full_name }}">
+                                                </div>
                                             </div>
-                                        </div>
-                                        <div class="cmn-txt-area pt-4 pb-3">
-                                            <div class="title-main-txt text-center">
-                                                <h2 class="title-txt">Title</h2>
-                                                <h4 class="mt-2 text-capitalize">passport-ready listed redhead</h4>
-                                                <p>She</p>
+                                            {{-- Short Description --}}
+                                            <div class="col-md-6 mb-3">
+                                                <div class="form-group">
+                                                    <label for="full_name">Short Description:</label>
+                                                    <input type="text" class="form-control" id="full_name"
+                                                        name="full_name" placeholder="Enter Your Short Description"
+                                                        value="{{ $user->short_description }}">
+                                                </div>
                                             </div>
-                                            <div class="cmn-txt-block">
-                                                <p>Your bucket-list shouldn’t have to wait❤️</p>
-                                                <p>📹See me in motion on my website: ellesutton.com</p>
-                                                <p>Based in Seattle- touring DC in December and back to Seattle in Jan,
-                                                    or book a FMTY travel date(See https://www.ellesutton.com/fmty-101/
-                                                    for more info on FMTY)↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑</p>
-                                                <p>Your bucket list redhead here to be your adventure! Passport ready
-                                                    and available for travel dates anywhere and everywhere.</p>
-                                                <p>Bucket lists are fun, but there's an issue:</p>
-                                                <p>People focus on their once in a lifetime experiences, but I think its
-                                                    essential to pursue a life that makes you feel alive now:</p>
-                                                <ul>
-                                                    <li>Why wait to feel electrified til you're under the Northern
-                                                        Lights?</li>
-                                                    <li>Why wait to feel cherished till you've found your soulmate ?
-                                                    </li>
-                                                    <li>Why wait to feel fully alive till you've retired?</li>
-                                                </ul>
-                                                <p>Isn't it time you had an agenda of escapades that thrilled you, with
-                                                    people that make you feel energized: like a redhead with a
-                                                    personality as vibrant as her hair? Passport ready, I love to
-                                                    travel! We can take on the world, or start with your hometown.</p>
-                                                <p>After a tiring day of meetings on your business trip, I'll be waiting
-                                                    wearing just a smile. You and I could spend a Tuesday visiting an
-                                                    amusement park, laughing till our sides hurt. Other days, well take
-                                                    on food tours and secret speakeasies.</p>
-                                                <p>After a tiring day of meetings on your business trip, I'll be waiting
-                                                    wearing just a smile. You and I could spend a Tuesday visiting an
-                                                    amusement park, laughing till our sides hurt. Other days, well take
-                                                    on food tours and secret speakeasies.</p>
-                                                <p>No matter which adventure, our dates will be bucket list items you'll
-                                                    want to check off again and again.</p>
-                                                <p>A few of my favorite things:</p>
-                                                <span>--------------------------------</span>
-                                                <ul>
-                                                    <li>Pri-fixe menus</li>
-                                                    <li>Food tours (both abroad and locally!)</li>
-                                                    <li>Cuddles. (Especially wearing your tshirt)</li>
-                                                    <li>Board games</li>
-                                                    <li>A night at the theater </li>
-                                                    <li>Both tourist traps and under-the-radar-spots equally</li>
-                                                    <li>Joining you at conventions</li>
-                                                    <li>Traveling by train</li>
-                                                    <li>Spas</li>
-                                                    <li>Everything horror themed</li>
-                                                </ul>
-                                                <p>Newsletter to keep updated: <a
-                                                        href="https://tinyurl.com/ESloveletters"
-                                                        target="_blank">https://tinyurl.com/ESloveletters</a></p>
-                                                <p>Blog: Http://ellesutton.com/blog</p>
-                                                <p>Some extra descriptors: foodie (I especially love tasting menus and
-                                                    checking off The World’s Best list ), nerdy, hairy/all natural
-                                                    (nothing is shaved), tattooed, lover of duos/trios and more,
-                                                    ‘high-end’ and versatile (I do just as well at charity galas as I do
-                                                    at your favorite dive bar)</p>
+                                            {{-- Gender --}}
+                                            <div class="form-group">
+                                                <label>Gender</label>
+                                                <div class="banner__inputlist">
+                                                    <div class="s-input me-3">
+                                                        <input type="radio" name="gender" id="gender_male" value="male"
+                                                            checked data-error-container="#gender_error"><label
+                                                            for="gender_male">Man</label>
+                                                    </div>
+                                                    <div class="s-input me-3">
+                                                        <input type="radio" name="gender" id="gender_female"
+                                                            value="female" data-error-container="#gender_error"><label
+                                                            for="gender_female">Woman</label>
+                                                    </div>
+                                                    <div class="s-input">
+                                                        <input type="radio" name="gender" id="gender_non_binary"
+                                                            value="non_binary"
+                                                            data-error-container="#gender_error"><label
+                                                            for="gender_non_binary">Non Binary</label>
+                                                    </div>
+                                                </div>
+                                                @error('gender')
+                                                <span class="text-danger" role="alert">
+                                                    <strong>{{ $message }}</strong></span>
+                                                @enderror
+                                                <span id="gender_error"></span>
+                                            </div>
+                                            {{-- Pronouns --}}
+                                            <div class="col-md-6 mb-3">
+                                                <div class="form-group">
+                                                    <label for="full_name">Pronouns:</label>
+                                                    <input type="text" class="form-control" id="full_name"
+                                                        name="full_name" placeholder="Enter Your Pronouns">
+                                                </div>
+                                            </div>
+                                            {{-- Description --}}
+                                            <div class="form-group mb-3">
+                                                <label for="description">Description</label>
+                                                <textarea
+                                                    class="form-control @error('description') is-invalid @enderror"
+                                                    id="description" name="description" placeholder="Enter description"
+                                                    autocomplete="description"
+                                                    spellcheck="true">{{ old('description') != null ? old('description') : $user->description }}</textarea>
+                                                @if ($errors->has('description'))
+                                                <span class="text-danger">
+                                                    <strong class="form-text">{{ $errors->first('description')
+                                                        }}</strong>
+                                                </span>
+                                                @endif
+                                            </div>
+                                            {{-- Gallery Images --}}
+                                            <div class="form-group @error('upload_file') is-invalid @enderror">
+                                                <div
+                                                    class="form-group{{ $errors->has('dropzone') ? ' has-error' : '' }}">
+                                                    <label for="myDropzone">Upload Gallary File</label>
+                                                    <div id="myDropzone" class="dropzone"
+                                                        data-error-container="#mydropzone-error" name="upload_file">
+                                                    </div>
+                                                </div>
                                             </div>
                                         </div>
                                     </div>
-                                    <div class="col-md-12">
+                                    {{-- <div class="col-md-12">
                                         <div class="profile-gallery-block lazy slider">
                                             <div class="profile-slide">
                                                 <img src="assets/images/allmedia/01.jpg" alt="dating thumb">
@@ -177,7 +197,7 @@
                                                 <img src="assets/images/allmedia/12.jpg" alt="dating thumb">
                                             </div>
                                         </div>
-                                    </div>
+                                    </div> --}}
                                 </div>
                             </div>
                             <div class="tab-pane fade" id="gt2" role="tabpanel" aria-labelledby="gt2-tab">
@@ -605,42 +625,116 @@
 @endsection
 
 @push('frontend-extra-js')
-{{-- <script src="https://cdnjs.cloudflare.com/ajax/libs/slick-carousel/1.9.0/slick.min.js"
-    integrity="sha512-HGOnQO9+SP1V92SrtZfjqxxtLmVzqZpjFFekvzZVWoiASSQgSr4cw9Kqd2+l8Llp4Gm0G8GIFJ4ddwZilcdb8A=="
-    crossorigin="anonymous" referrerpolicy="no-referrer"></script> --}}
+<script src="https://unpkg.com/dropzone@5/dist/min/dropzone.min.js"></script>
+{{-- <script src="{{ asset('admin/plugins/summernote/summernotecustom.js') }}"></script> --}}
 <script type="text/javascript">
-    $(".lazy").slick({
-        dots: false,
-        lazyLoad: 'ondemand', // ondemand progressive anticipated
-        infinite: true,
-        slidesToShow: 4,
-        pauseOnHover: false,
-        autoplay: true,
-        speed: 1000,
-        slidesToScroll: 1,
-        responsive: [
-        {
-          breakpoint: 1024,
-          settings: {
-            slidesToShow: 3,
-            slidesToScroll: 1
-          }
-        },
-        {
-          breakpoint: 600,
-          settings: {
-            slidesToShow: 2,
-            slidesToScroll: 1
-          }
-        },
-        {
-          breakpoint: 480,
-          settings: {
-            slidesToShow: 1,
-            slidesToScroll: 1
-          }
+    var summernoteImageUpload = '{{ route('admin.summernote.imageUpload') }}';
+    var summernoteMediaDelete = '{{ route('admin.summernote.mediaDelete') }}';
+</script>
+<script>
+    $(document).ready(function () {
+
+        var DropZoneElement = new DropZone('#myDropzone',{
+            dictDefaultMessage: " {{ __('DRAG_AND_DROP_FILE') }} ",
+            maxFiles: 12,
+            maxFilesize: 2024, // max individual file size 1024 MB
+            chunking: false, // enable chunking
+            acceptedFiles: "image/*,video/*",
+            renameFile: function(file) {
+                var dt = new Date();
+                var time = dt.getTime();
+                var randomString = Math.floor(Math.random() * (90000 - 1000 + 1)) + 90000;
+                var originalName = file.name;
+                var extension = originalName.slice(((originalName.lastIndexOf(".") - 1) >>> 0) + 2);
+                return time + "_" + randomString + "." + extension;
+            },
+            headers: {
+                'X-CSRF-TOKEN': csrfToken
+            },
+            url: fileUploadUrl, // Rep
+            init: function() {
+                this.on("sending", function(file, xhr, formData) {
+                    formData.append("project_id", projectId);
+                });
+            },
+
+            addRemoveLinks: true,
+            timeout: 50000,
+        });
+
+        var summernoteElement = $('#description');
+        var imagePath = 'summernote/cms/image';
+        summernoteElement.summernote({
+            height: 300,
+        });
+        /*  $("#frmEditcms").validate({
+            rules: {
+                url: {
+                    required: true,
+                    not_empty: true,
+                    isurl:true,
+                },
+                image:{
+                    required:false,
+                    extension: "jpg|jpeg|png",
+                },
+            },
+            messages: {
+                title: {
+                    required: "@lang('validation.required',['attribute'=>'title'])",
+                    not_empty: "@lang('validation.not_empty',['attribute'=>'title'])",
+                    minlength:"@lang('validation.min.string',['attribute'=>'title','min'=>3])",
+                    remote:"@lang('validation.unique',['attribute'=>'title'])",
+                },
+                url: {
+                    required: "@lang('validation.required',['attribute'=>'url'])",
+                    not_empty: "@lang('validation.not_empty',['attribute'=>'url'])",
+                },
+                image: {
+                    required: "@lang('validation.required',['attribute'=>'image'])",
+                    extension:"@lang('validation.mimetypes',['attribute'=>'image','value'=>'jpg|png|jpeg'])",
+                },
+            },
+            errorClass: 'invalid-feedback',
+            errorElement: 'span',
+            highlight: function (element) {
+                $(element).addClass('is-invalid');
+                $(element).siblings('label').addClass('text-danger'); // For Label
+            },
+            unhighlight: function (element) {
+                $(element).removeClass('is-invalid');
+                $(element).siblings('label').removeClass('text-danger');
+            },
+            errorPlacement: function (error, element) {
+                if (element.attr("data-error-container")) {
+                    error.appendTo(element.attr("data-error-container"));
+                } else {
+                    error.insertAfter(element);
+                }
+            }
+        }); */
+        $('#frmEditcms').submit(function (e) {
+        if(summernoteElement.summernote('isEmpty')) {
+            $('#description-error').remove();
+            $('<span class="text-danger" id="description-error"><strong class="form-text">The description field is required.</strong></span>').insertAfter('.note-editor');
+            e.preventDefault();
+            return false;
+        }else {
+            if ($(this).valid()) {
+                addOverlay();
+                $("input[type=submit], input[type=button], button[type=submit]").prop("disabled", "disabled");
+                return true;
+            } else {
+                return false;
+            }
         }
-        ]
-      });
+        });
+
+        //tell the validator to ignore Summernote elements
+        $('form').each(function () {
+            if ($(this).data('validator'))
+                $(this).data('validator').settings.ignore = ".note-editor *";
+        });
+    });
 </script>
 @endpush

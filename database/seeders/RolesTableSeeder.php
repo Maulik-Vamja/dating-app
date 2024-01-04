@@ -120,20 +120,6 @@ class RolesTableSeeder extends Seeder
                 "created_at"                => \Carbon\Carbon::now(),
                 "updated_at"                => \Carbon\Carbon::now(),
             ],
-            [
-                "section_id"                => 8,
-                "title"                     => "Meta Tag Management",
-                "route"                     => "admin.meta-tags.index",
-                "params"                    => NULL,
-                "icon"                      => "fa fa-cog",
-                "image"                     => NULL,
-                "icon_type"                 => "icon",
-                "sequence"                  => 1,
-                "is_active"                 => 1,
-                "allowed_permissions"       => "access",
-                "created_at"                => \Carbon\Carbon::now(),
-                "updated_at"                => \Carbon\Carbon::now(),
-            ],
         ];
 
         Role::insert($roles);

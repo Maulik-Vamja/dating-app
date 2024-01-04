@@ -121,33 +121,37 @@
         </div>
         <div class="section__wrapper">
             <div class="row g-4 justify-content-center row-cols-lg-3 row-cols-sm-2 row-cols-1">
-                <div class="col">
+                @foreach ($blogs as $blog)
+                <div class="col wow fadeInUp" data-wow-duration="1.5s">
                     <div class="story__item">
                         <div class="story__inner">
                             <div class="story__thumb">
-                                <a href="blog-single.html"><img src="{{asset('frontend/assets/images/story/01.jpg')}}"
-                                        alt="dating thumb"></a>
-                                <span class="member__activity member__activity--ofline">Entertainment</span>
+                                <a href="{{ route('blogs.show',$blog->slug) }}"><img
+                                        src="{{\Storage::url($blog->image)}}" alt="dating thumb"
+                                        style="max-height:250px !important; height: 250px;"></a>
+                                <span class="member__activity member__activity--ofline">{{
+                                    $blog->category->name }}</span>
                             </div>
                             <div class="story__content">
-                                <a href="blog-single.html">
-                                    <h4>Dream places and locations to visit in 2022</h4>
+                                <a href="{{ route('blogs.show',$blog->slug) }}">
+                                    <h4>{{ $blog->title }}</h4>
                                 </a>
                                 <div class="story__content--author">
                                     <div class="story__content--thumb">
-                                        <img src="{{asset('frontend/assets/images/story/author/01.jpg')}}"
+                                        <img height="50" width="50" src="{{ $blog->user->profile_photo }}"
                                             alt="dating thumb">
                                     </div>
                                     <div class="story__content--content">
-                                        <h6>Hester Reeves</h6>
-                                        <p>April 16, 2022</p>
+                                        <h6>{{ $blog->user->full_name }}</h6>
+                                        <p>{{ Carbon\Carbon::parse($blog->created_at)->format('M d,Y') }}</p>
                                     </div>
                                 </div>
                             </div>
                         </div>
                     </div>
                 </div>
-                <div class="col">
+                @endforeach
+                {{-- <div class="col wow fadeInUp" data-wow-duration="1.6s">
                     <div class="story__item">
                         <div class="story__inner">
                             <div class="story__thumb">
@@ -173,7 +177,7 @@
                         </div>
                     </div>
                 </div>
-                <div class="col">
+                <div class="col wow fadeInUp" data-wow-duration="1.7s">
                     <div class="story__item">
                         <div class="story__inner">
                             <div class="story__thumb">
@@ -198,7 +202,7 @@
                             </div>
                         </div>
                     </div>
-                </div>
+                </div> --}}
             </div>
         </div>
     </div>

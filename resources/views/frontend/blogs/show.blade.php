@@ -27,7 +27,7 @@
                         <div class="blog__item">
                             <div class="blog__inner">
                                 <div class="blog__thumb">
-                                    <img src="{{ $blog->image }}" alt="blog">
+                                    <img src="{{\Storage::url($blog->image)}}" alt="blog">
                                 </div>
                                 <div class="blog__content">
                                     <h2>{{ $blog->title }}</h2>
@@ -241,8 +241,7 @@
                                 <li class="d-flex flex-wrap justify-content-between">
                                     <div class="post-thumb">
                                         <a href="{{ route('blogs.show',$recent_blog->slug) }}"><img
-                                                src="{{ asset($recent_blog->image)}}"
-                                                alt="product"></a>
+                                                src="{{ \Storage::url($recent_blog->image)}}" alt="product"></a>
                                     </div>
                                     <div class="post-content ps-4">
                                         <a href="{{ route('blogs.show',$recent_blog->slug) }}">

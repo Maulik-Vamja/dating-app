@@ -5,26 +5,23 @@
 @switch($setting->type)
     @case('textarea')
         <div class="form-group">
-            <label
-                for="{{ $setting->id }}"
-            >
+            <label for="{{ $setting->id }}">
                 {{ $setting->label }} <span class="text-danger">*</span>
             </label>
-            <div class="input-icon">
+            {{-- <div class="input-icon"> --}}
                 <textarea
                     type="text"
                     class="form-control"
                     placeholder="{{ $setting->hint }}"
                     name="{{ $setting->id }}"
                     id="{{ $setting->id }}"
+                    rows="5"
                     {{ $required }}
-                >
-                    {{ $setting->value }}
-                </textarea>
-                <span>
+                >{{ $setting->value }}</textarea>
+                {{-- <span>
                     <i class="{{ $setting->icon }}"></i>
-                </span>
-            </div>
+                </span> --}}
+            {{-- </div> --}}
         </div>
     @break
 

@@ -32,6 +32,9 @@ class PagesController extends Controller
 
     public function aboutUs()
     {
-        return view('frontend.about-us');
+        $blogs = Blog::orderBy('created_at', 'DESC')->with(['tags', 'category', 'user'])->take(3)->get();
+        return view('frontend.about-us', [
+            'blogs' => $blogs,
+        ]);
     }
 }

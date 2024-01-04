@@ -53,7 +53,7 @@ class BlogController extends Controller
                 $records['data'][] = [
                     'id' => $blog->id,
                     'title' => str_limit($blog->title, 40),
-                    'description' => str_limit($blog->description, 40),
+                    'description' => htmlspecialchars(str_limit($blog->description, 40)),
                     'category_name' => $blog->category->name,
                     'is_active' => view('admin.layouts.includes.switch', compact('params'))->render(),
                     'action' => view('admin.layouts.includes.actions')->with(['custom_title' => 'Blog', 'id' => $blog->custom_id], $blog)->render(),
@@ -81,22 +81,22 @@ class BlogController extends Controller
      */
     public function store(BlogRequest $request)
     {
+
         DB::beginTransaction();
         try {
             $request['custom_id'] = get_unique_string('blogs');
             $request['slug'] = get_unique_slug(str_slug($request->title));
 
             $category =  Category::firstOrCreate([
-                'id'    => $request->category_id,
+                'id'    => $request->category,
             ], [
                 'custom_id' => get_unique_string(),
-                'name'  => $request->category_id,
-                'slug'  => get_unique_slug(str_slug($request->category_id)),
+                'name'  => $request->category,
+                'slug'  => get_unique_slug(str_slug($request->category), 'categories'),
             ]);
             $request['category_id'] = $category->id;
-
-            $request['featured_image'] = imageUpload($request, "image", "blogs/banner");
-
+            $request['admin_id']    = auth()->id();
+            $request['image'] = imageUpload($request, "featured_image", "blogs/banner");
             $blog = Blog::create($request->all());
 
             if ($request->has('tags')) {
@@ -145,6 +145,7 @@ class BlogController extends Controller
      */
     public function update(Request $request, Blog $blog)
     {
+
         try {
             DB::beginTransaction();
             if (!empty($request->action) && $request->action == 'change_status') {
@@ -159,24 +160,46 @@ class BlogController extends Controller
                 }
                 return response()->json($content);
             } else {
+
                 $path = $blog->image;
                 //request has remove_profie_photo then delete user image
-                if ($request->has('remove_profie_photo')) {
-                    if ($blog->profile_photo) {
-                        Storage::delete($blog->profile_photo);
+                if ($request->has('featured_image')) {
+                    if ($blog->image && Storage::exists($blog->image)) {
+                        Storage::delete($blog->image);
                     }
                     $path = null;
+                    $path = imageUpload($request, "featured_image", "blogs/banner");
                 }
-                $path = imageUpload($request, "profile_photo", "users/profile_photo", $path);
+                $category =  Category::firstOrCreate([
+                    'id'    => $request->category,
+                ], [
+                    'custom_id' => get_unique_string(),
+                    'name'  => $request->category,
+                    'slug'  => get_unique_slug(str_slug($request->category), 'categories'),
+                ]);
+                $request['category_id'] = $category->id;
                 $blog->fill($request->all());
                 $blog->image = $path;
                 if ($blog->save()) {
+                    if ($request->has('tags')) {
+                        $blog->tags()->detach();
+                        foreach ($request->tags as $tag) {
+                            $tag = Tag::firstOrCreate([
+                                'id'    => $tag,
+                            ], [
+                                'custom_id' => get_unique_string(),
+                                'name'  => $tag,
+                                'slug'  => get_unique_slug(str_slug($tag)),
+                            ]);
+                            $blog->tags()->attach($tag->id);
+                        }
+                    }
                     DB::commit();
-                    flash('Escort details updated successfully!')->success();
+                    flash('Blog details updated successfully!')->success();
                 } else {
                     flash('Unable to update user. Try again later')->error();
                 }
-                return redirect(route('admin.escorts.index'));
+                return redirect(route('admin.blogs.index'));
             }
         } catch (QueryException $e) {
             Log::channel("custom_log")->info($e->getMessage() . $e->getFile() . $e->getLine());

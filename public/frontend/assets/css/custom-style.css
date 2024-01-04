@@ -23,6 +23,7 @@ p.main-short-info,.member__desc-txt { -webkit-line-clamp: 2; }
 .member--style2 .member__inner:hover .member__content { transform: translateY(0px); padding: 15px; }
 
 /*==============================================================*/
+.cmn-profile-txt-area { margin: 0 auto; background:#ffffff; padding: 0 15px; }
 .cmn-txt-area { max-width: 768px; margin: 0 auto; background:#ffffff; padding: 0 15px; }
 .title-main-txt h2.title-txt { position:relative; padding-bottom: 10px; display: inline-block; }
 .title-main-txt h2.title-txt::after { content: ''; display: block; bottom: 5px; height:3px; background: #f24570; position: absolute; width: 100%; left: 50%;

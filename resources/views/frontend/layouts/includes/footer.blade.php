@@ -159,7 +159,7 @@
                                             <li>
                                                 <div class="thumb">
                                                     <a href="{{ route('blogs.show',$blog->slug) }}"><img
-                                                            src="{{asset($blog->image)}}" alt="dating thumb"></a>
+                                                            src="{{\Storage::url($blog->image)}}" alt="dating thumb"></a>
                                                 </div>
                                                 <div class="content">
                                                     <a href="group-single.html">

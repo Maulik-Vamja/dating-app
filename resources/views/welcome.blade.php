@@ -312,8 +312,6 @@
     </div>
 </div>
 <!-- ================> Member section end here <================== -->
-
-
 <div class="about padding-top padding-bottom">
     <div class="container">
         <div class="section__header style-2 text-center wow fadeInUp" data-wow-duration="1.5s">
@@ -386,8 +384,6 @@
 <!-- ================> About section end here <================== -->
 
 
-
-
 <!-- ================> Story section start here <================== -->
 <div class="story bg_img padding-top padding-bottom"
     style="background-image: url({{asset('frontend/assets/images/bg-img/02.jpg')}});">
@@ -404,8 +400,10 @@
                     <div class="story__item">
                         <div class="story__inner">
                             <div class="story__thumb">
-                                <a href="{{ route('blogs.show',$blog->slug) }}"><img src="{{$blog->image}}"
-                                        alt="dating thumb"></a>
+                                <a href="{{ route('blogs.show',$blog->slug) }}"><img
+                                        src="{{\Storage::url($blog->image)}}" alt="dating thumb"
+                                        style="max-height:250px !important; height: 250px;">
+                                </a>
                                 <span class="member__activity member__activity--ofline">{{
                                     $blog->category->name }}</span>
                             </div>

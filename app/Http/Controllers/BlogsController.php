@@ -10,7 +10,8 @@ class BlogsController extends Controller
 {
     public function index()
     {
-        return view('frontend.blogs.index');
+        $blogs = Blog::orderBy('created_at', 'DESC')->with(['tags', 'category', 'user'])->paginate(9);
+        return view('frontend.blogs.index', ['blogs' => $blogs]);
     }
 
     public function show(Blog $blog)

@@ -13,3 +13,10 @@
         color: red;
     }
 </style>
+{{-- Summernote --}}
+<link href="https://cdn.jsdelivr.net/npm/summernote@0.8.18/dist/summernote-bs4.min.css" rel="stylesheet">
+
+{{-- Dropzone --}}
+<link rel="stylesheet" href="https://unpkg.com/dropzone@5/dist/min/dropzone.min.css" type="text/css" />
+{{-- --}}
+@stack('frontend-extra-css')

@@ -145,3 +145,9 @@ Breadcrumbs::register('site_setting', function ($breadcrumbs) {
     $breadcrumbs->parent('dashboard');
     $breadcrumbs->push(__('Site Configuration'), route('admin.settings.index'));
 });
+
+//Meta Tag Management
+Breadcrumbs::register('meta_tags', function ($breadcrumbs) {
+    $breadcrumbs->parent('dashboard');
+    $breadcrumbs->push(__('Meta Tags Management'), route('admin.meta-tags.index'));
+});

@@ -27,6 +27,6 @@ class ViewComposerServiceProvider extends ServiceProvider
     {
         view()->composer(['admin.auth.*'], 'App\Http\ViewComposers\LoginComposer');
         view()->composer(['admin.pages.*', 'admin.layouts.*'], 'App\Http\ViewComposers\AdminComposer');
-        view()->composer(['frontend.layouts.includes.*', 'frontend.auth.*'], 'App\Http\ViewComposers\FrontendComposer');
+        view()->composer(['frontend.layouts.includes.*', 'frontend.auth.*', 'frontend.layouts.app'], 'App\Http\ViewComposers\FrontendComposer');
     }
 }

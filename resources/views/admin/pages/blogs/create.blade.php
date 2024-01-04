@@ -57,7 +57,7 @@
                             <label class="btn btn-xs btn-icon btn-circle btn-white btn-hover-text-primary btn-shadow"
                                 data-action="change" data-toggle="tooltip" title="" data-original-title="Change avatar">
                                 <i class="fa fa-pen icon-sm text-muted"></i>
-                                <input type="file" name="image" accept=".png, .jpg, .jpeg"
+                                <input type="file" name="featured_image" id="featured_image" accept=".png, .jpg, .jpeg"
                                     data-error-container="#image_error_container" />
                             </label>
                             <span class="btn btn-xs btn-icon btn-circle btn-white btn-hover-text-primary btn-shadow"
@@ -69,7 +69,7 @@
                     </div>
                 </div>
                 <span id="image_error_container"></span>
-                @error('image')
+                @error('featured_image')
                 <span class="help-block">
                     <strong class="form-text">{{ $errors->first('title') }}</strong>
                 </span>
@@ -172,19 +172,16 @@
                     not_empty: true,
                     minlength: 3,
                 },
-                image: {
+                featured_image: {
                     required: true,
                     accept: "image/*",
                 },
                 category: {
                     required: true,
-                    not_empty: true,
-                    minlength: 3,
+
                 },
                 'tags[]': {
                     required: true,
-                    not_empty: true,
-                    minlength: 3,
                 },
             },
             messages: {
@@ -193,7 +190,7 @@
                     not_empty: "@lang('validation.not_empty', ['attribute' => 'Title'])",
                     minlength: "@lang('validation.min.string', ['attribute' => 'Title', 'min' => 3])",
                 },
-                image: {
+                featured_image: {
                     required: "@lang('validation.required', ['attribute' => 'Featured Image'])",
                 },
                 category: {

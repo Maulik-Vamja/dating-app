@@ -89,10 +89,6 @@ Route::group(['middleware' => ['check_permit', 'revalidate']], function () {
     /* Blog Management */
     Route::resource('blogs', BlogController::class);
 
-    // Meta Tag Management
-    Route::get('meta-tags', [MetaTagController::class, 'index'])->name('meta-tags.index');
-    Route::post('meta-tags/uodate', [MetaTagController::class, 'update'])->name('meta-tags.update');
-
     /* app update settings */
     Route::get('update-settings', [AppUpdateSettingController::class, 'index'])->name('update-settings.index');
     Route::post('app-change-setting', [AppUpdateSettingController::class, 'store'])->name('update-settings.change-setting');

@@ -1,6 +1,6 @@
 @extends('admin.layouts.app')
 @push('breadcrumb')
-    {!! Breadcrumbs::render('cms_update', $page->id) !!}
+{!! Breadcrumbs::render('cms_update', $page->id) !!}
 @endpush
 
 @section('content')
@@ -16,30 +16,35 @@
         </div>
 
         <!--begin::Form-->
-        <form id="frmEditcms" method="POST" action="{{ route('admin.pages.update', $page->id) }}" enctype="multipart/form-data">
+        <form id="frmEditcms" method="POST" action="{{ route('admin.pages.update', $page->id) }}"
+            enctype="multipart/form-data">
             @csrf
             @method('put')
             <div class="card-body">
 
-                {{--  Name --}}
+                {{-- Name --}}
                 <div class="form-group">
                     <label for="title">Title{!!$mend_sign!!}</label>
-                    <input type="text" class="form-control @error('title') is-invalid @enderror" id="title" name="title" value="{{ old('title') != null ? old('title') : $page->title }}" placeholder="Enter title" autocomplete="title" spellcheck="false" autocapitalize="sentences" tabindex="0" autofocus />
+                    <input type="text" class="form-control @error('title') is-invalid @enderror" id="title" name="title"
+                        value="{{ old('title') != null ? old('title') : $page->title }}" placeholder="Enter title"
+                        autocomplete="title" spellcheck="false" autocapitalize="sentences" tabindex="0" autofocus />
                     @if ($errors->has('title'))
-                        <span class="help-block">
-                            <strong class="form-text">{{ $errors->first('title') }}</strong>
-                        </span>
+                    <span class="help-block">
+                        <strong class="form-text">{{ $errors->first('title') }}</strong>
+                    </span>
                     @endif
                 </div>
 
                 {{-- Description --}}
                 <div class="form-group">
                     <label for="description">Description{!!$mend_sign!!}</label>
-                    <textarea class="form-control @error('description') is-invalid @enderror" id="description" name="description" placeholder="Enter description" autocomplete="description" spellcheck="true">{{ old('description') != null ? old('description') : $page->description }}</textarea>
+                    <textarea class="form-control @error('description') is-invalid @enderror" id="description"
+                        name="description" placeholder="Enter description" autocomplete="description"
+                        spellcheck="true">{{ old('description') != null ? old('description') : $page->description }}</textarea>
                     @if ($errors->has('description'))
-                        <span class="text-danger">
-                            <strong class="form-text">{{ $errors->first('description') }}</strong>
-                        </span>
+                    <span class="text-danger">
+                        <strong class="form-text">{{ $errors->first('description') }}</strong>
+                    </span>
                     @endif
                 </div>
 
@@ -48,11 +53,12 @@
                     <label for="image">Image</label>
                     <div class="custom-file">
                         <input type="file" class="custom-file-input" id="image" name="image" tabindex="0" />
-                        <label class="custom-file-label @error('image') is-invalid @enderror" for="customFile">Choose file</label>
+                        <label class="custom-file-label @error('image') is-invalid @enderror" for="customFile">Choose
+                            file</label>
                         @if ($errors->has('image'))
-                            <span class="text-danger">
-                                <strong class="form-text">{{ $errors->first('image') }}</strong>
-                            </span>
+                        <span class="text-danger">
+                            <strong class="form-text">{{ $errors->first('image') }}</strong>
+                        </span>
                         @endif
                     </div>
                 </div>
@@ -75,15 +81,15 @@
 </script>
 <script src="{{ asset('admin/plugins/summernote/summernotecustom.js') }}"></script>
 <script>
-$(document).ready(function () {
+    $(document).ready(function () {
     var summernoteElement = $('#description');
     var imagePath = 'summernote/cms/image';
     summernoteElement.summernote({
             height: 300,
             callbacks: {
                 onImageUpload : function(files, editor, welEditable) {
-                     for(var i = files.length - 1; i >= 0; i--) {
-                             sendFile(files[i], this,imagePath);
+                    for(var i = files.length - 1; i >= 0; i--) {
+                        sendFile(files[i], this,imagePath);
                     }
                 },
                 onMediaDelete : function(target) {

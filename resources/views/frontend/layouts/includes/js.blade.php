@@ -27,7 +27,7 @@
     integrity="sha384-wfSDF2E50Y2D1uUdj0O3uMBJnjuUD4Ih7YwaYd1iqfktj0Uod8GCExl3Og8ifwB6" crossorigin="anonymous">
 </script>
 <script src="https://cdn.jsdelivr.net/npm/summernote@0.8.18/dist/summernote-bs4.min.js"></script>
-
+<script src="https://unpkg.com/dropzone@5/dist/min/dropzone.min.js"></script>
 {{-- For Dropzone --}}
 
 <!-- Google Analytics: change UA-XXXXX-Y to be your site's ID. -->

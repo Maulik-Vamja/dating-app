@@ -2,7 +2,9 @@
 
 @push('frontend-extra-css')
 <link href="https://cdn.jsdelivr.net/npm/summernote@0.8.18/dist/summernote.min.css" rel="stylesheet">
-<style>
+<link href="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/css/select2.min.css" rel="stylesheet" />
+
+{{-- <style>
     /** add the dropzone beaty css */
     .dropzone {
         display: flex;
@@ -20,7 +22,7 @@
         font-size: 20px !important;
         /* Adjust the font size as needed */
     }
-</style>
+</style> --}}
 @endpush
 
 @section('content')
@@ -68,6 +70,11 @@
             </div>
         </div>
     </div>
+    @if (session('success'))
+    <div class="alert alert-success">
+        <strong>{{ session('success') }}</strong>
+    </div>
+    @endif
     <div class="group__bottom">
         <div class="container-fluid">
             <div class="row g-4">
@@ -76,133 +83,113 @@
                         <div class="tab-content" id="myTabContent">
                             <div class="tab-pane fade show active" id="gt1" role="tabpanel" aria-labelledby="gt1-tab">
                                 <div class="container">
-                                    <div class="card">
-                                        <div class="card-body">
-                                            {{-- Full Name --}}
-                                            <div class="col-md-6 mb-3">
-                                                <div class="form-group">
-                                                    <label for="full_name">Full Name:</label>
-                                                    <input type="text" class="form-control" id="full_name"
-                                                        name="full_name" placeholder="Enter Your Full Name"
-                                                        value="{{ $user->full_name }}">
+                                    <form action="{{ route('profile.update',$user->user_name) }}" method="POST"
+                                        enctype="multipart/form-data">
+                                        @csrf
+                                        <input type="hidden" name="action" value="update_basic">
+                                        <div class="card">
+                                            <div class="card-header">
+                                                <div class="d-flex justify-content-end">
+                                                    <button type="submit" class="btn btn-primary">Update Basic
+                                                        Details</button>
                                                 </div>
                                             </div>
-                                            {{-- Short Description --}}
-                                            <div class="col-md-6 mb-3">
-                                                <div class="form-group">
-                                                    <label for="full_name">Short Description:</label>
-                                                    <input type="text" class="form-control" id="full_name"
-                                                        name="full_name" placeholder="Enter Your Short Description"
-                                                        value="{{ $user->short_description }}">
+                                            <div class="card-body">
+                                                {{-- Full Name --}}
+                                                <div class="col-md-6 mb-3">
+                                                    <div class="form-group">
+                                                        <label for="full_name">Full Name:</label>
+                                                        <input type="text" class="form-control" id="full_name"
+                                                            name="full_name" placeholder="Enter Your Full Name"
+                                                            value="{{ $user->full_name }}" required>
+                                                    </div>
                                                 </div>
-                                            </div>
-                                            {{-- Gender --}}
-                                            <div class="form-group">
-                                                <label>Gender</label>
-                                                <div class="banner__inputlist">
-                                                    <div class="s-input me-3">
-                                                        <input type="radio" name="gender" id="gender_male" value="male"
-                                                            checked data-error-container="#gender_error"><label
-                                                            for="gender_male">Man</label>
+                                                {{-- Short Description --}}
+                                                <div class="col-md-6 mb-3">
+                                                    <div class="form-group">
+                                                        <label for="short_description">Short Description:</label>
+                                                        <input type="text" class="form-control" id="short_description"
+                                                            name="short_description"
+                                                            placeholder="Enter Your Short Description"
+                                                            value="{{ $user->short_description }}" required>
                                                     </div>
-                                                    <div class="s-input me-3">
-                                                        <input type="radio" name="gender" id="gender_female"
-                                                            value="female" data-error-container="#gender_error"><label
-                                                            for="gender_female">Woman</label>
-                                                    </div>
-                                                    <div class="s-input">
-                                                        <input type="radio" name="gender" id="gender_non_binary"
-                                                            value="non_binary"
+                                                </div>
+                                                {{-- Gender --}}
+                                                <div class="form-group">
+                                                    <label>Gender</label>
+                                                    <div class="banner__inputlist">
+                                                        <div class="s-input me-3">
+                                                            <input type="radio" name="gender" id="gender_male"
+                                                                value="male" {{ $user->gender == 'male' ? 'checked' : ''
+                                                            }}
                                                             data-error-container="#gender_error"><label
-                                                            for="gender_non_binary">Non Binary</label>
+                                                                for="gender_male">Man</label>
+                                                        </div>
+                                                        <div class="s-input me-3">
+                                                            <input type="radio" name="gender" id="gender_female"
+                                                                value="female" {{ $user->gender == 'female' ? 'checked'
+                                                            :'' }}
+                                                            data-error-container="#gender_error"><label
+                                                                for="gender_female">Woman</label>
+                                                        </div>
+                                                        <div class="s-input">
+                                                            <input type="radio" name="gender" id="gender_non_binary"
+                                                                value="non_binary" {{ $user->gender == 'non_binary' ?
+                                                            'checked' : ''
+                                                            }}
+                                                            data-error-container="#gender_error"><label
+                                                                for="gender_non_binary">Non Binary</label>
+                                                        </div>
+                                                    </div>
+                                                    @error('gender')
+                                                    <span class="text-danger" role="alert">
+                                                        <strong>{{ $message }}</strong></span>
+                                                    @enderror
+                                                    <span id="gender_error"></span>
+                                                </div>
+                                                {{-- Pronouns --}}
+                                                <div class="col-md-6 mb-3">
+                                                    <div class="form-group">
+                                                        <label for="pronouns">Pronouns:</label>
+                                                        <input type="text" class="form-control" id="pronouns"
+                                                            name="pronouns" placeholder="Enter Your Pronouns"
+                                                            value="{{ $user->pronouns }}" required>
                                                     </div>
                                                 </div>
-                                                @error('gender')
-                                                <span class="text-danger" role="alert">
-                                                    <strong>{{ $message }}</strong></span>
-                                                @enderror
-                                                <span id="gender_error"></span>
-                                            </div>
-                                            {{-- Pronouns --}}
-                                            <div class="col-md-6 mb-3">
-                                                <div class="form-group">
-                                                    <label for="full_name">Pronouns:</label>
-                                                    <input type="text" class="form-control" id="full_name"
-                                                        name="full_name" placeholder="Enter Your Pronouns">
+                                                {{-- Description --}}
+                                                <div class="form-group mb-3">
+                                                    <label for="description">Description</label>
+                                                    <textarea
+                                                        class="form-control @error('description') is-invalid @enderror"
+                                                        id="description" name="description"
+                                                        placeholder="Enter description" autocomplete="description"
+                                                        spellcheck="true"
+                                                        required>{{ old('description') != null ? old('description') : $user->description }}</textarea>
+                                                    @if ($errors->has('description'))
+                                                    <span class="text-danger">
+                                                        <strong class="form-text">{{ $errors->first('description')
+                                                            }}</strong>
+                                                    </span>
+                                                    @endif
                                                 </div>
-                                            </div>
-                                            {{-- Description --}}
-                                            <div class="form-group mb-3">
-                                                <label for="description">Description</label>
-                                                <textarea
-                                                    class="form-control @error('description') is-invalid @enderror"
-                                                    id="description" name="description" placeholder="Enter description"
-                                                    autocomplete="description"
-                                                    spellcheck="true">{{ old('description') != null ? old('description') : $user->description }}</textarea>
-                                                @if ($errors->has('description'))
-                                                <span class="text-danger">
-                                                    <strong class="form-text">{{ $errors->first('description')
-                                                        }}</strong>
-                                                </span>
-                                                @endif
-                                            </div>
-                                            {{-- Gallery Images --}}
-                                            <div class="form-group @error('upload_file') is-invalid @enderror">
-                                                <div
-                                                    class="form-group{{ $errors->has('dropzone') ? ' has-error' : '' }}">
-                                                    <label for="myDropzone">Upload Gallary File</label>
-                                                    <div id="myDropzone" class="dropzone"
-                                                        data-error-container="#mydropzone-error" name="upload_file">
+                                                {{-- Gallery Images --}}
+                                                {{-- <div class="form-group @error('upload_file') is-invalid @enderror">
+                                                    <div
+                                                        class="form-group{{ $errors->has('dropzone') ? ' has-error' : '' }}">
+                                                        <label for="myDropzone">Upload Gallary File</label>
+                                                        <div id="myDropzone" class="dropzone"
+                                                            data-error-container="#mydropzone-error" name="upload_file">
+                                                        </div>
                                                     </div>
-                                                </div>
+                                                </div> --}}
                                             </div>
                                         </div>
-                                    </div>
-                                    {{-- <div class="col-md-12">
-                                        <div class="profile-gallery-block lazy slider">
-                                            <div class="profile-slide">
-                                                <img src="assets/images/allmedia/01.jpg" alt="dating thumb">
-                                            </div>
-                                            <div class="profile-slide">
-                                                <img src="assets/images/allmedia/02.jpg" alt="dating thumb">
-                                            </div>
-                                            <div class="profile-slide">
-                                                <img src="assets/images/allmedia/03.jpg" alt="dating thumb">
-                                            </div>
-                                            <div class="profile-slide">
-                                                <img src="assets/images/allmedia/04.jpg" alt="dating thumb">
-                                            </div>
-                                            <div class="profile-slide">
-                                                <img src="assets/images/allmedia/05.jpg" alt="dating thumb">
-                                            </div>
-                                            <div class="profile-slide">
-                                                <img src="assets/images/allmedia/06.jpg" alt="dating thumb">
-                                            </div>
-                                            <div class="profile-slide">
-                                                <img src="assets/images/allmedia/07.jpg" alt="dating thumb">
-                                            </div>
-                                            <div class="profile-slide">
-                                                <img src="assets/images/allmedia/08.jpg" alt="dating thumb">
-                                            </div>
-                                            <div class="profile-slide">
-                                                <img src="assets/images/allmedia/09.jpg" alt="dating thumb">
-                                            </div>
-                                            <div class="profile-slide">
-                                                <img src="assets/images/allmedia/10.jpg" alt="dating thumb">
-                                            </div>
-                                            <div class="profile-slide">
-                                                <img src="assets/images/allmedia/11.jpg" alt="dating thumb">
-                                            </div>
-                                            <div class="profile-slide">
-                                                <img src="assets/images/allmedia/12.jpg" alt="dating thumb">
-                                            </div>
-                                        </div>
-                                    </div> --}}
+                                    </form>
                                 </div>
                             </div>
                             <div class="tab-pane fade" id="gt2" role="tabpanel" aria-labelledby="gt2-tab">
                                 <div class="container">
-                                    <div class="info">
+                                    {{-- <div class="info">
                                         <div class="info-card mb-4">
                                             <div class="info-card-title">
                                                 <h6>Base Info</h6>
@@ -288,153 +275,288 @@
                                                 </div>
                                             </div>
                                         </div>
-                                    </div>
+                                    </div> --}}
+                                    <form action="{{ route('profile.update',$user->user_name) }}" method="POST">
+                                        @csrf
+                                        <div class="card">
+                                            <div class="card-header">
+                                                <div class="d-flex justify-content-end">
+                                                    <button type="submit" class="btn btn-primary">Update Personal
+                                                        Details</button>
+                                                </div>
+                                            </div>
+                                            <div class="card-body">
+
+                                                <input type="hidden" name="action" value="update_personal_details">
+                                                <div class="row">
+                                                    <div class="col-md-6 mb-3">
+                                                        <div class="form-group d-flex flex-column">
+                                                            @php
+                                                            $user_cater_to = explode(',',$user->caters_to);
+                                                            @endphp
+                                                            <label for="category"> Caters To:</label>
+                                                            <select name="caters_to" id="caters_to"
+                                                                class="form-control @error('caters_to') is-invalid @enderror w-100"
+                                                                data-error-container="#caters_to_error_container"
+                                                                multiple>
+                                                                <option value="">Select Your Preference</option>
+                                                                @foreach (config('utility.caters_to') as $item)
+                                                                <option value="{{$item}}" {{
+                                                                    in_array($item,$user_cater_to) ? 'selected' : '' }}>
+                                                                    {{ $item }}
+                                                                </option>
+                                                                @endforeach
+                                                            </select>
+                                                        </div>
+                                                    </div>
+                                                    <div class="col-md-6">
+                                                        <div class="form-group">
+                                                            <label for="age">Age:</label>
+                                                            <input type="text" class="form-control" id="age" name="age"
+                                                                placeholder="Enter Your Age" value="{{ $user->age }}"
+                                                                required>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                                <div class="row">
+                                                    <div class="col-md-6 mb-3">
+                                                        <div class="form-group">
+                                                            <label for="height">Height(in Inch):</label>
+                                                            <input type="text" class="form-control" id="height"
+                                                                name="height" placeholder="Enter Your height"
+                                                                value="{{ $user->height }}" required>
+                                                        </div>
+                                                    </div>
+                                                    <div class="col-md-6 mb-3">
+                                                        <div class="form-group">
+                                                            <label for="body_type"> Body Type:</label>
+                                                            <select name="body_type" id="body_type"
+                                                                class="form-control">
+                                                                <option value="">Select Your Body Type</option>
+                                                                @foreach (config('utility.body_type') as $item)
+                                                                <option value="{{$item}}" {{ $item==$user->body_type ?
+                                                                    'selected' : '' }}>
+                                                                    {{ $item }}
+                                                                </option>
+                                                                @endforeach
+                                                            </select>
+                                                            {{-- <input type="text" class="form-control" id="body_type"
+                                                                name="body_type" placeholder="Enter Your Body Type"
+                                                                value="{{ $user->body_type }}" required> --}}
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                                <div class="row">
+                                                    <div class="col-md-6 mb-3">
+                                                        <div class="form-group">
+                                                            <label for="ethinicity">Ehinicity:</label>
+                                                            <select name="ethnicity" id="ethnicity"
+                                                                class="form-control">
+                                                                <option value="">Select Your Ethinicity</option>
+                                                                @foreach (config('utility.ethinicity') as $item)
+                                                                <option value="{{$item}}" {{ $item==$user->ethnicity ?
+                                                                    'selected' : '' }}>
+                                                                    {{ $item }}
+                                                                </option>
+                                                                @endforeach
+                                                            </select>
+                                                        </div>
+                                                    </div>
+                                                    <div class="col-md-6 mb-3">
+                                                        <div class="form-group">
+                                                            <label for="cup_size"> Cup Size:</label>
+                                                            <select name="cup_size" id="cup_size" class="form-control">
+                                                                <option value="">Select Your Cup Size</option>
+                                                                @foreach (config('utility.cup_size') as $item)
+                                                                <option value="{{$item}}" {{ $item==$user->cup_size ?
+                                                                    'selected' : '' }}>
+                                                                    {{ $item }}
+                                                                </option>
+                                                                @endforeach
+                                                            </select>
+                                                            {{-- <input type="text" class="form-control" id="cup_size"
+                                                                name="cup_size" placeholder="Enter Your Body Type"
+                                                                value="{{ $user->cup_size }}" required> --}}
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                                <div class="row">
+                                                    <div class="col-md-6 mb-3">
+                                                        <div class="form-group">
+                                                            <label for="hair_color">Hair Color:</label>
+                                                            <select name="hair_color" id="hair_color"
+                                                                class="form-control">
+                                                                <option value="">Select Your Hair Color</option>
+                                                                @foreach (config('utility.hair_color') as $item)
+                                                                <option value="{{$item}}" {{ $item==$user->hair_colour ?
+                                                                    'selected' : '' }}>
+                                                                    {{ $item }}
+                                                                </option>
+                                                                @endforeach
+                                                                {{-- <input type="text" class="form-control"
+                                                                    id="hair_color" name="hair_color"
+                                                                    placeholder="Enter Your hair_color"
+                                                                    value="{{ $user->hair_color }}" required> --}}
+                                                            </select>
+                                                        </div>
+                                                    </div>
+                                                    <div class="col-md-6 mb-3">
+                                                        <div class="form-group">
+                                                            <label for="eye_color"> Eye Color:</label>
+                                                            <select name="eye_color" id="eye_color"
+                                                                class="form-control">
+                                                                <option value="">Select Your Eye Color</option>
+                                                                @foreach (config('utility.eye_color') as $item)
+                                                                <option value="{{$item}}" {{ $item==$user->eye_colour ?
+                                                                    'selected' : '' }}>
+                                                                    {{ $item }}
+                                                                </option>
+                                                                @endforeach
+                                                            </select>
+                                                            {{-- <input type="text" class="form-control" id="eye_color"
+                                                                name="eye_color" placeholder="Enter Your Body Type"
+                                                                value="{{ $user->eye_color }}" required> --}}
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                                <hr>
+                                                <div class="h4">Availibility</div>
+                                                @php
+                                                $user_availibility =json_decode(json_decode($user->availibility),true);
+                                                // dd($user_availibility);
+                                                @endphp
+                                                <div class="form-group">
+                                                    <label for="availibility">Availibility:</label>
+                                                    <div class="d-flex align-items-center justify-content-center gap-2">
+                                                        @foreach (config('utility.availibility_days') as $item)
+                                                        <div class="form-check">
+                                                            <input class="form-check-input" type="checkbox" value="true"
+                                                                id="availibility[{{$item}}]"
+                                                                name="availibility[{{$item}}]"
+                                                                @checked(isset($user_availibility[$item]))>
+                                                            <label class="form-check-label"
+                                                                for="availibility[{{$item}}]">
+                                                                {{$item}}
+                                                            </label>
+                                                        </div>
+                                                        @endforeach
+                                                    </div>
+                                                </div>
+                                                <div class="form-group">
+                                                    <label for="availibility_description">Description</label>
+                                                    <textarea name="availibility_description" class="form-control"
+                                                        id="availibility_description"
+                                                        rows="5">{{ $user->availibility_description }}</textarea>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </form>
                                 </div>
                             </div>
                             <div class="tab-pane fade" id="gt3" role="tabpanel" aria-labelledby="gt3-tab">
                                 <div class="container">
                                     <div class="site">
                                         <div class="col-12">
-                                            <div class="row">
-                                                <div class="col-md-6">
-                                                    <div class="info-card mb-4">
-                                                        <div class="info-card-title">
-                                                            <h6>Online</h6>
+                                            <form action="{{ route('profile.update',$user->user_name) }}" method="POST">
+                                                @csrf
+                                                <input type="hidden" name="action" value="update_rates">
+                                                <div class="card">
+                                                    <div class="card-header">
+                                                        <div class="d-flex justify-content-end">
+                                                            <button type="submit" class="btn btn-primary">Update
+                                                                Rates</button>
                                                         </div>
-                                                        <div class="info-card-content">
-                                                            <ul class="info-list rate-listing">
-                                                                <li>
-                                                                    <div
-                                                                        class="rate-txt d-flex justify-content-between">
-                                                                        <p class="strong-txt">Video Session (30 minutes)
-                                                                        </p>
-                                                                        <p><span>$</span> 120</p>
+                                                    </div>
+                                                    <div class="card-body">
+                                                        <div class="row">
+                                                            @foreach (\App\Models\RateType::all() as $rate_type)
+                                                            <div class="col-md-12">
+                                                                <div class="card mb-4">
+                                                                    <div class="card-header">
+                                                                        <div
+                                                                            class="d-flex justify-content-between align-items-center">
+                                                                            <h6>{{ $rate_type->type }}</h6>
+                                                                            <button class="btn btn-primary"
+                                                                                type="button"
+                                                                                data-rate-type="{{ $rate_type->type }}"
+                                                                                data-rate-type-id="{{ $rate_type->id }}"
+                                                                                id="addMoreRate">
+                                                                                Add
+                                                                                +
+                                                                            </button>
+                                                                        </div>
                                                                     </div>
-                                                                </li>
-                                                                <li>
-                                                                    <div
-                                                                        class="rate-txt d-flex justify-content-between">
-                                                                        <p class="strong-txt">Sexting session (30
-                                                                            minutes)</p>
-                                                                        <p><span>$</span> 120</p>
+                                                                    @php
+                                                                    $user_rates =
+                                                                    $user->rates()->where('rate_type_id',$rate_type->id)->get();
+                                                                    $rate_type_id = $rate_type->id;
+                                                                    @endphp
+                                                                    <div class="card-body">
+                                                                        <div id="{{$rate_type->type}}Container">
+                                                                            @forelse ($user_rates as $key => $rate)
+
+                                                                            <div class="row align-items-center"
+                                                                                id="rateRow">
+                                                                                <input type="hidden"
+                                                                                    name="rates[{{$rate_type_id}}][{{$key}}][rate_type_id]"
+                                                                                    value="{{ $rate_type_id }}">
+                                                                                <div class="col-md-3">
+                                                                                    <div class="form-group">
+                                                                                        <label for="">Duration</label>
+                                                                                        <input
+                                                                                            type="rates[{{$rate_type_id}}][{{$key}}][duration]"
+                                                                                            class="form-control"
+                                                                                            value="{{ $rate->duration }}"
+                                                                                            name="rates[{{$rate_type_id}}][{{$key}}][duration]"
+                                                                                            id="rates[{{$rate_type_id}}][{{$key}}][duration]"
+                                                                                            placeholder="Enter Duration">
+                                                                                    </div>
+                                                                                </div>
+                                                                                <div class="col-md-3">
+                                                                                    <div class="form-group">
+                                                                                        <label
+                                                                                            for="rates[{{$rate_type_id}}][{{$key}}][description]">description</label>
+                                                                                        <input type="text"
+                                                                                            value="{{ $rate->description }}"
+                                                                                            name="rates[{{$rate_type_id}}][{{$key}}][description]"
+                                                                                            id="rates[{{$rate_type_id}}][{{$key}}][description]"
+                                                                                            placeholder="Enter Description"
+                                                                                            class="form-control">
+                                                                                    </div>
+                                                                                </div>
+                                                                                <div class="col-md-3">
+                                                                                    <div class="form-group">
+                                                                                        <label
+                                                                                            for="rates[{{$rate_type_id}}][{{$key}}][rate]">Rate</label>
+                                                                                        <input type="text"
+                                                                                            value="{{ $rate->rate }}"
+                                                                                            name="rates[{{$rate_type_id}}][{{$key}}][rate]"
+                                                                                            id="rates[{{$rate_type_id}}][{{$key}}][rate]"
+                                                                                            placeholder="Enter rate"
+                                                                                            class="form-control">
+                                                                                    </div>
+                                                                                </div>
+                                                                                <div
+                                                                                    class="col-md-3 d-flex justify-content-end">
+                                                                                    <button id="removeRate"
+                                                                                        type="button"
+                                                                                        class="btn btn-danger"
+                                                                                        data-rate-type="{{ $rate_type->type}}">Remove
+                                                                                        Rate</button>
+                                                                                </div>
+                                                                            </div>
+                                                                            @empty
+
+                                                                            @endforelse
+                                                                        </div>
                                                                     </div>
-                                                                </li>
-                                                                <li>
-                                                                    <div
-                                                                        class="rate-txt d-flex justify-content-between">
-                                                                        <p class="strong-txt">Video Session (1 hour)</p>
-                                                                        <p><span>$</span> 180</p>
-                                                                    </div>
-                                                                </li>
-                                                                <li>
-                                                                    <div
-                                                                        class="rate-txt d-flex justify-content-between">
-                                                                        <p class="strong-txt">Custom video requests</p>
-                                                                        <p><span>$</span> 200</p>
-                                                                    </div>
-                                                                    <p class="cmn-txt-rate">Donation ranges by length of
-                                                                        video, what the video contains, and how much
-                                                                        time I will have to put in to record and edit
-                                                                    </p>
-                                                                </li>
-                                                            </ul>
+                                                                </div>
+                                                            </div>
+                                                            @endforeach
                                                         </div>
                                                     </div>
                                                 </div>
-                                                <div class="col-md-6">
-                                                    <div class="info-card mb-4">
-                                                        <div class="info-card-title">
-                                                            <h6>Incall</h6>
-                                                        </div>
-                                                        <div class="info-card-content">
-                                                            <ul class="info-list rate-listing">
-                                                                <li>
-                                                                    <div
-                                                                        class="rate-txt d-flex justify-content-between">
-                                                                        <p class="strong-txt">Video Session (30 minutes)
-                                                                        </p>
-                                                                        <p><span>$</span> 120</p>
-                                                                    </div>
-                                                                </li>
-                                                                <li>
-                                                                    <div
-                                                                        class="rate-txt d-flex justify-content-between">
-                                                                        <p class="strong-txt">Sexting session (30
-                                                                            minutes)</p>
-                                                                        <p><span>$</span> 120</p>
-                                                                    </div>
-                                                                </li>
-                                                                <li>
-                                                                    <div
-                                                                        class="rate-txt d-flex justify-content-between">
-                                                                        <p class="strong-txt">Video Session (1 hour)</p>
-                                                                        <p><span>$</span> 180</p>
-                                                                    </div>
-                                                                </li>
-                                                                <li>
-                                                                    <div
-                                                                        class="rate-txt d-flex justify-content-between">
-                                                                        <p class="strong-txt">Custom video requests</p>
-                                                                        <p><span>$</span> 200</p>
-                                                                    </div>
-                                                                    <p class="cmn-txt-rate">Donation ranges by length of
-                                                                        video, what the video contains, and how much
-                                                                        time I will have to put in to record and edit
-                                                                    </p>
-                                                                </li>
-                                                            </ul>
-                                                        </div>
-                                                    </div>
-                                                </div>
-                                                <div class="col-md-6">
-                                                    <div class="info-card mb-4">
-                                                        <div class="info-card-title">
-                                                            <h6>Outcall</h6>
-                                                        </div>
-                                                        <div class="info-card-content">
-                                                            <ul class="info-list rate-listing">
-                                                                <li>
-                                                                    <div
-                                                                        class="rate-txt d-flex justify-content-between">
-                                                                        <p class="strong-txt">Video Session (30 minutes)
-                                                                        </p>
-                                                                        <p><span>$</span> 120</p>
-                                                                    </div>
-                                                                </li>
-                                                                <li>
-                                                                    <div
-                                                                        class="rate-txt d-flex justify-content-between">
-                                                                        <p class="strong-txt">Sexting session (30
-                                                                            minutes)</p>
-                                                                        <p><span>$</span> 120</p>
-                                                                    </div>
-                                                                </li>
-                                                                <li>
-                                                                    <div
-                                                                        class="rate-txt d-flex justify-content-between">
-                                                                        <p class="strong-txt">Video Session (1 hour)</p>
-                                                                        <p><span>$</span> 180</p>
-                                                                    </div>
-                                                                </li>
-                                                                <li>
-                                                                    <div
-                                                                        class="rate-txt d-flex justify-content-between">
-                                                                        <p class="strong-txt">Fly Me to You ✈️</p>
-                                                                        <p><span>$</span> 2900</p>
-                                                                    </div>
-                                                                    <p class="cmn-txt-rate">Fly Me to You bookings are
-                                                                        my absolute favorite! I thoroughly enjoy
-                                                                        traveling to different cities, and am always
-                                                                        passport ready. I ask that you secure our time
-                                                                        together at least 2 weeks in advance. Please
-                                                                        inquire about the donation, as there are
-                                                                        different factors involved 🤍</p>
-                                                                </li>
-                                                            </ul>
-                                                        </div>
-                                                    </div>
-                                                </div>
-                                            </div>
+                                            </form>
                                         </div>
                                     </div>
                                 </div>
@@ -530,7 +652,8 @@
                                                                     <div
                                                                         class="rate-txt d-flex justify-content-between">
                                                                         <p class="strong-txt"><i
-                                                                                class="fa-solid fa-link"></i> Website
+                                                                                class="fa-solid fa-link"></i>
+                                                                            Website
                                                                         </p>
                                                                         <p><a href="https://www.missgabriellawestwood.com/"
                                                                                 target="_blank"
@@ -553,7 +676,8 @@
                                                                     <div
                                                                         class="rate-txt d-flex justify-content-between">
                                                                         <p class="strong-txt"><i
-                                                                                class="fa-solid fa-mobile"></i> Mobile
+                                                                                class="fa-solid fa-mobile"></i>
+                                                                            Mobile
                                                                         </p>
                                                                         <p><a href="tel:" target="_blank"
                                                                                 class="link-data">+185●●●●●562</a></p>
@@ -587,7 +711,8 @@
                                                                     <div
                                                                         class="rate-txt d-flex justify-content-between">
                                                                         <p class="strong-txt"><i
-                                                                                class="fa-solid fa-lock"></i> Fansly</p>
+                                                                                class="fa-solid fa-lock"></i>
+                                                                            Fansly</p>
                                                                         <p><a href="https://fans.ly/https://fans.ly/gabriellawestwood4"
                                                                                 target="_blank"
                                                                                 class="link-data">@https://fans.ly/https://fans.ly/gabriellawestwood4</a>
@@ -598,7 +723,8 @@
                                                                     <div
                                                                         class="rate-txt d-flex justify-content-between">
                                                                         <p class="strong-txt"><i
-                                                                                class="fa-solid fa-lock"></i> Onlyfans
+                                                                                class="fa-solid fa-lock"></i>
+                                                                            Onlyfans
                                                                         </p>
                                                                         <p><a href="https://onlyfans.com/Gabinextdoor"
                                                                                 target="_blank"
@@ -621,11 +747,11 @@
         </div>
     </div>
 </div>
-
 @endsection
 
 @push('frontend-extra-js')
-<script src="https://unpkg.com/dropzone@5/dist/min/dropzone.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/js/select2.min.js"></script>
+
 {{-- <script src="{{ asset('admin/plugins/summernote/summernotecustom.js') }}"></script> --}}
 <script type="text/javascript">
     var summernoteImageUpload = '{{ route('admin.summernote.imageUpload') }}';
@@ -633,35 +759,9 @@
 </script>
 <script>
     $(document).ready(function () {
-
-        var DropZoneElement = new DropZone('#myDropzone',{
-            dictDefaultMessage: " {{ __('DRAG_AND_DROP_FILE') }} ",
-            maxFiles: 12,
-            maxFilesize: 2024, // max individual file size 1024 MB
-            chunking: false, // enable chunking
-            acceptedFiles: "image/*,video/*",
-            renameFile: function(file) {
-                var dt = new Date();
-                var time = dt.getTime();
-                var randomString = Math.floor(Math.random() * (90000 - 1000 + 1)) + 90000;
-                var originalName = file.name;
-                var extension = originalName.slice(((originalName.lastIndexOf(".") - 1) >>> 0) + 2);
-                return time + "_" + randomString + "." + extension;
-            },
-            headers: {
-                'X-CSRF-TOKEN': csrfToken
-            },
-            url: fileUploadUrl, // Rep
-            init: function() {
-                this.on("sending", function(file, xhr, formData) {
-                    formData.append("project_id", projectId);
-                });
-            },
-
-            addRemoveLinks: true,
-            timeout: 50000,
+        $('#caters_to').select2({
+            placeholder: "Please Select your Preference",
         });
-
         var summernoteElement = $('#description');
         var imagePath = 'summernote/cms/image';
         summernoteElement.summernote({
@@ -734,6 +834,68 @@
         $('form').each(function () {
             if ($(this).data('validator'))
                 $(this).data('validator').settings.ignore = ".note-editor *";
+        });
+
+        $(document).on('click','#addMoreRate',function(){
+            var rate_type = $(this).data('rate-type');
+            var rate_type_id = $(this).data('rate-type-id');
+            var rate_row_count = $(`#${rate_type}Container`).children('div#rateRow').length;
+
+            var newRow = `<div class="row align-items-center" id="rateRow">
+                    <input type="hidden"
+                        name="rates[${rate_type_id}][${rate_row_count}][rate_type_id]"
+                        value="${rate_type_id}">
+                    <div class="col-md-3">
+                        <div class="form-group">
+                            <label for="">Duration</label>
+                            <input
+                                type="rates[${rate_type_id}][${rate_row_count}][duration]"
+                                class="form-control"
+                                name="rates[${rate_type_id}][${rate_row_count}][duration]"
+                                id="rates[${rate_type_id}][${rate_row_count}][duration]"
+                                placeholder="Enter Duration"
+                                required>
+                        </div>
+                    </div>
+                    <div class="col-md-3">
+                        <div class="form-group">
+                            <label
+                                for="rates[${rate_type_id}][${rate_row_count}][description]">description</label>
+                            <input type="text"
+                                name="rates[${rate_type_id}][${rate_row_count}][description]"
+                                id="rates[${rate_type_id}][${rate_row_count}][description]"
+                                placeholder="Enter Description"
+                                class="form-control"
+                                required>
+                        </div>
+                    </div>
+                    <div class="col-md-3">
+                        <div class="form-group">
+                            <label
+                                for="rates[${rate_type_id}][${rate_row_count}][rate]">Rate</label>
+                            <input type="text"
+                                name="rates[${rate_type_id}][${rate_row_count}][rate]"
+                                id="rates[${rate_type_id}][${rate_row_count}][rate]"
+                                placeholder="Enter rate"
+                                class="form-control"
+                                required>
+                        </div>
+                    </div>
+                    <div
+                        class="col-md-3 d-flex justify-content-end">
+                        <button id="removeRate"
+                            type="button"
+                            class="btn btn-danger"
+                            data-rate-type="{{ $rate_type->type}}">Remove
+                            Rate</button>
+                    </div>
+                </div>`;
+
+            $(`#${rate_type}Container`).append(newRow);
+
+        });
+        $(document).on('click','#removeRate',function(){
+            $(this).parent().closest('div#rateRow').remove();
         });
     });
 </script>

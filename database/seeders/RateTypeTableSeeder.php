@@ -34,20 +34,6 @@ class RateTypeTableSeeder extends Seeder
                 'created_at'    => Carbon::now(),
                 'updated_at'    => Carbon::now(),
             ],
-            [
-                'custom_id'     => get_unique_string(),
-                'type'          => 'Touring',
-                'is_active'     => 'y',
-                'created_at'    => Carbon::now(),
-                'updated_at'    => Carbon::now(),
-            ],
-            [
-                'custom_id'     => get_unique_string(),
-                'type'          => 'Online',
-                'is_active'     => 'y',
-                'created_at'    => Carbon::now(),
-                'updated_at'    => Carbon::now(),
-            ],
         ];
 
         RateType::insert($rate_types);

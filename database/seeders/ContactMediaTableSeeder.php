@@ -23,7 +23,7 @@ class ContactMediaTableSeeder extends Seeder
             [
                 'custom_id' => get_unique_string(),
                 'name'  =>  'Website',
-                'icon'  =>  'fab fa-link',
+                'icon'  =>  'fas fa-link',
                 'is_active' =>  'y',
                 'created_at' => Carbon::now(),
                 'updated_at' => Carbon::now(),
@@ -31,7 +31,7 @@ class ContactMediaTableSeeder extends Seeder
             [
                 'custom_id' => get_unique_string(),
                 'name'  =>  'Email',
-                'icon'  =>  'fab fa-envelope',
+                'icon'  =>  'fas fa-envelope',
                 'is_active' =>  'y',
                 'created_at' => Carbon::now(),
                 'updated_at' => Carbon::now(),
@@ -47,7 +47,7 @@ class ContactMediaTableSeeder extends Seeder
             [
                 'custom_id' => get_unique_string(),
                 'name'  =>  'Twitter',
-                'icon'  =>  'fas fa-twitter',
+                'icon'  =>  'fab fa-twitter',
                 'is_active' =>  'y',
                 'created_at' => Carbon::now(),
                 'updated_at' => Carbon::now(),
@@ -55,7 +55,7 @@ class ContactMediaTableSeeder extends Seeder
             [
                 'custom_id' => get_unique_string(),
                 'name'  =>  'Instagram',
-                'icon'  =>  'fas fa-instagram',
+                'icon'  =>  'fab fa-instagram',
                 'is_active' =>  'y',
                 'created_at' => Carbon::now(),
                 'updated_at' => Carbon::now(),

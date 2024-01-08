@@ -62,9 +62,13 @@
                 success:function(data){
                     $("#state").empty();
                     $("#state").append(`<option value="">Select State</option>`)
-                    $.each(data,function(key,value){
-                        $("#state").append(`<option value="${value.id}">${value.name}</option>`);
-                    });
+                    if(data.length > 0){
+                        $.each(data,function(key,value){
+                            $("#state").append(`<option value="${value.id}">${value.name}</option>`);
+                        });
+                    }else{
+                        $("#state").append(`<option value="">No State Available</option>`)
+                    }
                 },
                 error:function(data){
                     console.log(data);

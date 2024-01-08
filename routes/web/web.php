@@ -40,6 +40,9 @@ Route::middleware(['auth', 'verified'])->group(function () {
     Route::get('profile/{user:user_name}', [UserController::class, 'getProfile'])->name('profile.get');
     Route::get('profile/{user:user_name}/update', [UserController::class, 'updateProfile'])->name('profile.edit');
     Route::post('profile/{user:user_name}/update', [UserController::class, 'update'])->name('profile.update');
+
+    Route::post('store-image', [UserController::class, 'storeImage'])->name('store.image');
+    Route::post('remove-image', [UserController::class, 'removeImage'])->name('remove.image');
 });
 
 Route::get('/states', [UtilityController::class, 'getStatesFromCountry'])->name('get.states');

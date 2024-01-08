@@ -143,9 +143,10 @@
                             <h3>Find Your True Love</h3>
                         </div>
                         <form action="{{ route('get.escorts') }}" method="GET">
+                            @csrf
                             <div class="banner__list">
                                 <div class="row">
-                                    <div class="col-6">
+                                    <div class="col-6 ">
                                         <label>I am a</label>
                                         <div class="banner__inputlist">
                                             <select>
@@ -173,27 +174,13 @@
                                 <div class="row">
                                     <div class="col-lg-6 col-12">
                                         <label>Age</label>
-                                        <div class="row g-3">
-                                            <div class="col-6">
-                                                <div class="banner__inputlist">
-                                                    <select name="min_age">
-                                                        @for ($i = 18; $i <= 40; $i++) <option value="{{$i}}" {{ $i==18
-                                                            ? 'selected' : '' }}>{{ $i }}
-                                                            </option>
-                                                            @endfor
-                                                    </select>
-                                                </div>
-                                            </div>
-                                            <div class="col-6">
-                                                <div class="banner__inputlist">
-                                                    <select name="max_age">
-                                                        @for ($i = 18; $i <= 40; $i++) <option value="{{$i}}" {{ $i==25
-                                                            ? 'selected' : '' }}>{{ $i }}
-                                                            </option>
-                                                            @endfor
-                                                    </select>
-                                                </div>
-                                            </div>
+                                        <div class="mt-2">
+                                            <input type="range" name="age_range" id="age_range" value="18,25" multiple
+                                                min="18" max="40">
+                                            <ul class="range-list">
+                                                <li>18</li>
+                                                <li>40</li>
+                                            </ul>
                                         </div>
                                     </div>
                                     @php
@@ -245,11 +232,16 @@
             <div class="tab-content mx-12-none">
                 <div class="row g-0 justify-content-center">
                     @foreach ($escorts as $escort)
+                    @php
+                    $random_image = $escort->gallery_images()->inRandomOrder()->first();
+                    @endphp
                     <div class="member__item">
                         <div class="member__inner">
                             <div class="member__thumb">
                                 <a class="member-link-page" href="{{ route('get.escort',$escort->user_name) }}">
-                                    <figure><img src="{{asset($escort->thumbnail_image)}}" alt="member-img">
+                                    <figure><img
+                                            src="{{$random_image ? Storage::url($random_image->image) : asset('frontend/assets/images/allmedia/01.jpg')}}"
+                                            alt="member-img">
                                     </figure>
                                 </a>
                             </div>
@@ -262,13 +254,14 @@
                                     <p><i class="fa-solid fa-house"></i>Sarasota, FL, US</p>
                                     @php
                                     $today = Carbon\Carbon::now()->format('l');
-                                    $availableOrNot =
-                                    $escort->availability()->where('availibility->'.$today,true)->first();
+                                    $availableOrNot = json_decode(json_decode($escort->availibility,true));
+                                    $a = array_filter($availableOrNot,function($day) use ($today){
+                                    return $day == $today;
+                                    },ARRAY_FILTER_USE_KEY);
 
                                     @endphp
                                     <p class="d-flex align-items-center text-capitalize">
-                                        <span
-                                            class="{{ $availableOrNot ? '' : 'not-avail'}} availibity-members"></span>available
+                                        <span class="{{ $a ? '' : 'not-avail' }} availibity-members"></span>available
                                     </p>
                                 </div>
                                 <div class="member-bio">
@@ -742,3 +735,22 @@
 </div>
 <!-- ================> App section end here <================== -->
 @endsection
+
+@push('frontend-extra-js')
+<script>
+    $(function() {
+        jcf.replaceAll();
+        var min_value = $('#age_range').prop('min');
+        var max_value = $('#age_range').prop('max');
+        $('#age_range').change(function(){
+            var values = $(this).val().split(',');
+            var min = values[0];
+            var max = values[1];
+            console.log(min, max);
+            $('.range-list li:first-child').text(min);
+            $('.range-list li:last-child').text(max);
+        });
+    });
+
+</script>
+@endpush

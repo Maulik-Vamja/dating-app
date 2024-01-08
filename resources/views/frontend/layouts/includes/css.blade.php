@@ -8,6 +8,7 @@
 <link rel="stylesheet" href="{{asset('frontend/assets/css/custom-style.css')}}">
 <link rel="stylesheet" href="{{asset('frontend/assets/css/slick.css')}}">
 <link rel="stylesheet" href="{{asset('frontend/assets/css/slick-theme.css')}}">
+<link rel="stylesheet" href="{{asset('frontend/assets/css/jcf.css')}}">
 <style>
     .mendatory {
         color: red;

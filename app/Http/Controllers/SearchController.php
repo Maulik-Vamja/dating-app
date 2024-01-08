@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Country;
 use App\Models\User;
 use Illuminate\Http\Request;
 
@@ -9,7 +10,8 @@ class SearchController extends Controller
 {
     public function __invoke(Request $request)
     {
-        $escorts = User::with('availiability', 'addresses', 'primary_address')
+        // dd($request->all());
+        $escorts = User::with('availability', 'addresses', 'primary_address', 'gallery_images')
             ->when($request->has('gender'), function ($query) use ($request) {
                 $query->where('gender', $request->gender);
             })
@@ -28,6 +30,10 @@ class SearchController extends Controller
             })
             ->orderBy('created_at', 'desc')
             ->paginate(12);
-        return view('frontend.escorts.escorts-list', compact('escorts'));
+        $countries = Country::all();
+        return view('frontend.escorts.escorts-list', [
+            'escorts' => $escorts,
+            'countries' => $countries,
+        ]);
     }
 }

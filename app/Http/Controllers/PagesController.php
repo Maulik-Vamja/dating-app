@@ -12,7 +12,7 @@ class PagesController extends Controller
     public function home()
     {
         $recent_blogs = Blog::orderBy('created_at', 'DESC')->with(['tags', 'category', 'user'])->take(3)->get();
-        $escorts = User::latest()->with(['availability', 'primary_address'])->limit(10)->get();
+        $escorts = User::with(['availability', 'primary_address'])->limit(10)->latest()->get();
         $today = strtolower(Carbon::now()->format('l'));
         $counts = [
             'total_escorts' => User::all()->count(),

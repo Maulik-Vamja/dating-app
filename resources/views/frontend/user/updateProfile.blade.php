@@ -3,6 +3,7 @@
 @push('frontend-extra-css')
 <link href="https://cdn.jsdelivr.net/npm/summernote@0.8.18/dist/summernote.min.css" rel="stylesheet">
 <link href="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/css/select2.min.css" rel="stylesheet" />
+<link href="https://cdnjs.cloudflare.com/ajax/libs/dropzone/4.0.1/dropzone.css" rel="stylesheet" />
 
 {{-- <style>
     /** add the dropzone beaty css */
@@ -40,6 +41,11 @@
                                     class="fa-solid fa-user"></i> Basic</button>
                         </li>
                         <li class="nav-item" role="presentation">
+                            <button class="nav-link" id="gt7-tab" data-bs-toggle="tab" data-bs-target="#gt7"
+                                type="button" role="tab" aria-controls="gt7" aria-selected="true"><i
+                                    class="fa-solid fa-image"></i> Gallery Images</button>
+                        </li>
+                        <li class="nav-item" role="presentation">
                             <button class="nav-link" id="gt2-tab" data-bs-toggle="tab" data-bs-target="#gt2"
                                 type="button" role="tab" aria-controls="gt2" aria-selected="false"><i
                                     class="fa-solid fa-users"></i> Personal details</button>
@@ -70,17 +76,20 @@
             </div>
         </div>
     </div>
-    @if (session('success'))
-    <div class="alert alert-success">
-        <strong>{{ session('success') }}</strong>
-    </div>
-    @endif
+
     <div class="group__bottom">
         <div class="container-fluid">
             <div class="row g-4">
                 <div class="col-lg-12">
                     <div class="group__bottom--left">
                         <div class="tab-content" id="myTabContent">
+                            @if (session('success'))
+                            <div class="container">
+                                <div class="alert alert-success" role="alert">
+                                    <strong>{{ session('success') }}</strong>
+                                </div>
+                            </div>
+                            @endif
                             <div class="tab-pane fade show active" id="gt1" role="tabpanel" aria-labelledby="gt1-tab">
                                 <div class="container">
                                     <form action="{{ route('profile.update',$user->user_name) }}" method="POST"
@@ -565,57 +574,51 @@
                                 <div class="container">
                                     <div class="site">
                                         <div class="col-12">
-                                            <div class="row">
-                                                <div class="col-md-6">
-                                                    <div class="info-card mb-4">
-                                                        <div class="info-card-title">
-                                                            <h6>Deposits</h6>
+                                            <form action="{{ route('profile.update',$user->user_name) }}" method="POST">
+                                                @csrf
+                                                <div class="card">
+                                                    <div class="card-header">
+                                                        <div class="d-flex justify-content-end">
+                                                            <button type="submit" class="btn btn-primary">Update
+                                                                Policies</button>
                                                         </div>
-                                                        <div class="info-card-content policies-content">
-                                                            <p>Deposits are required for any and all desired
-                                                                appointments.</p>
-                                                            <p>Fly me to you adventures will incur a 50% deposit and
-                                                                travel expenses are required.</p>
-                                                            <p>Deposits are final and are non-refundable except in the
-                                                                very rare case that I need to reschedule. If you are
-                                                                canceling, your deposit will be applied to a future date
-                                                                with me within 60 days of our initial date.</p>
-                                                            <p>**Please understand that I reserve the right to end our
-                                                                date if I get uncomfortable at any point.**</p>
+                                                    </div>
+                                                    <div class="card-body">
+                                                        @php
+                                                        $policy_types =
+                                                        \App\Models\PolicyType::where('is_active','y')->get();
+                                                        @endphp
+
+                                                        <input type="hidden" name="action" value="update_policies">
+                                                        <div class="row">
+                                                            @foreach ($policy_types as $policy_type)
+                                                            <input type="hidden"
+                                                                name="policies[{{ $policy_type->type }}][policy_type_id]"
+                                                                value="{{ $policy_type->id }}">
+                                                            @php
+                                                            $user_policy =
+                                                            $user->policies()->where('policy_type_id',
+                                                            $policy_type->id)->first();
+                                                            @endphp
+                                                            <div class="col-md-6 mb-3">
+                                                                <div class="card">
+                                                                    <div class="card-header">
+                                                                        <h4>{{ $policy_type->type }}</h4>
+                                                                    </div>
+                                                                    <div class="card-body">
+                                                                        <textarea
+                                                                            name="policies[{{ $policy_type->type }}][description]"
+                                                                            id="policies[{{ $policy_type->type }}][description]"
+                                                                            cols="30"
+                                                                            rows="10">{{ $user_policy->description ?? '' }}</textarea>
+                                                                    </div>
+                                                                </div>
+                                                            </div>
+                                                            @endforeach
                                                         </div>
                                                     </div>
                                                 </div>
-                                                <div class="col-md-6">
-                                                    <div class="info-card mb-4">
-                                                        <div class="info-card-title">
-                                                            <h6>Cancellations</h6>
-                                                        </div>
-                                                        <div class="info-card-content policies-content">
-                                                            <p>I ask that you politely ask that you schedule our date
-                                                                with a clear idea of your availability, as cancellations
-                                                                can cause unneeded stress for both parties.</p>
-                                                            <p>In the event that you no-show or cancel, please
-                                                                understand that your deposit will be forfeited and is
-                                                                non-refundable. It will, however, be applied to a future
-                                                                date with me within 60 days or our original date
-                                                                planned.</p>
-                                                            <p>In the event that you need to cancel 48 hours or less
-                                                                before our date, I will expect 50% of the donation. In
-                                                                the event that you need to cancel 24 hours or less
-                                                                before our date, I will expect my donation in full. In
-                                                                the event that you choose not to send the cancellation
-                                                                fees, you will have no chance at meeting me again.</p>
-                                                            <p>No-shows or cancellations within 36 hours of our
-                                                                scheduled date, will result in forfeiture of your
-                                                                deposit. I will wait 30 minutes at most for you to show
-                                                                up to our date. Cancellations outside of that time can
-                                                                be applied toward our future date.</p>
-                                                            <p>Please respect my time, and I will respect yours. Thank
-                                                                you! 💕</p>
-                                                        </div>
-                                                    </div>
-                                                </div>
-                                            </div>
+                                            </form>
                                         </div>
                                     </div>
                                 </div>
@@ -624,118 +627,134 @@
                                 <div class="container">
                                     <div class="site">
                                         <div class="col-12">
-                                            <div class="row">
-                                                <div class="col-md-6">
-                                                    <div class="info-card mb-4">
-                                                        <div class="info-card-title">
-                                                            <h6>Contact</h6>
+                                            <form action="{{ route('profile.update',$user->user_name) }}" method="POST">
+                                                @csrf
+                                                <input type="hidden" name="action" value="update_contacts">
+                                                <div class="card">
+                                                    <div class="card-header">
+                                                        <div class="d-flex justify-content-end">
+                                                            <button type="submit" class="btn btn-primary">Update
+                                                                Contacts</button>
                                                         </div>
-                                                        <div class="info-card-content policies-content">
-                                                            <p>Deposits are required for any and all desired
-                                                                appointments.</p>
-                                                            <p>Fly me to you adventures will incur a 50% deposit and
-                                                                travel expenses are required.</p>
-                                                            <p>Deposits are final and are non-refundable except in the
-                                                                very rare case that I need to reschedule. If you are
-                                                                canceling, your deposit will be applied to a future date
-                                                                with me within 60 days of our initial date.</p>
-                                                            <p>**Please understand that I reserve the right to end our
-                                                                date if I get uncomfortable at any point.**</p>
+                                                    </div>
+                                                    <div class="card-body">
+                                                        <div class="row">
+                                                            <div class="col-md-6">
+                                                                <div class="form-group">
+                                                                    <label for="" class="h4 text-strong">Contact</label>
+                                                                    <textarea name="contact_disclaimer"
+                                                                        class="form-control" id="" cols="30"
+                                                                        rows="10">{{ $user->contact_disclaimer }}</textarea>
+                                                                </div>
+                                                            </div>
+                                                            <div class="col-md-6">
+                                                                @php
+                                                                $medias =
+                                                                \App\Models\ContactMedia::where('is_active','y')->get();
+                                                                @endphp
+                                                                @foreach ($medias as $media)
+                                                                @php
+                                                                $contact =
+                                                                $user->contacts()->where('contact_media_id',$media->id)->first();
+                                                                $input_type = strtolower($media->name) == 'email' ?
+                                                                'email' : (strtolower($media->name) == 'mobile' ?
+                                                                'number' : 'url');
+                                                                $pattern = strtolower($media->name) == 'mobile' ?
+                                                                "pattern=''" :
+                                                                '';
+                                                                @endphp
+                                                                <div class="form-group mb-3">
+                                                                    <input type="hidden"
+                                                                        name="contacts[{{$media->name}}][contact_media_id]"
+                                                                        value="{{ $media->id }}">
+                                                                    <label for="contacts[{{$media->name}}][value]"><i
+                                                                            class="{{ $media->icon }}"
+                                                                            style="margin-right: 5px;"></i>{{
+                                                                        $media->name }}</label>
+                                                                    <input type="{{ $input_type }}"
+                                                                        name="contacts[{{$media->name}}][value]"
+                                                                        id="contacts[{{$media->name}}][value]"
+                                                                        class="form-control"
+                                                                        placeholder="Please Enter Your {{ $media->name }} {{ $input_type == 'email' ? '' : $input_type }}"
+                                                                        value="{{$contact->value ?? null}}">
+                                                                </div>
+                                                                @endforeach
+                                                            </div>
                                                         </div>
                                                     </div>
                                                 </div>
-                                                <div class="col-md-6">
-                                                    <div class="info-card mb-4">
-                                                        <div class="info-card-content">
-                                                            <ul class="info-list rate-listing">
-                                                                <li>
-                                                                    <div
-                                                                        class="rate-txt d-flex justify-content-between">
-                                                                        <p class="strong-txt"><i
-                                                                                class="fa-solid fa-link"></i>
-                                                                            Website
-                                                                        </p>
-                                                                        <p><a href="https://www.missgabriellawestwood.com/"
-                                                                                target="_blank"
-                                                                                class="link-data">https://www.missgabriellawestwood.com/</a>
-                                                                        </p>
+                                            </form>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="tab-pane fade" id="gt7" role="tabpanel" aria-labelledby="gt7-tab">
+                                <div class="container">
+                                    <div class="site">
+                                        <div class="col-12">
+                                            <form action="{{ route('profile.update',$user->user_name) }}" method="POST"
+                                                enctype="multipart/form-data">
+                                                @csrf
+                                                <input type="hidden" name="action" value="update_gallery_images">
+                                                <input type="hidden" name="images" id="images">
+                                                <input type="hidden" name="deleted_images" id="deleted_images">
+                                                <div class="card">
+                                                    <div class="card-header">
+                                                        <div class="d-flex justify-content-end">
+                                                            <button type="submit" class="btn btn-primary">Update
+                                                                Gallery Images</button>
+                                                        </div>
+                                                    </div>
+                                                    <div class="card-body">
+                                                        <div class="form-group row">
+                                                            <div class="col-lg-12 col-md-9 col-sm-12">
+                                                                <div class="dropzone dropzone-default dropzone-primary dz-clickable"
+                                                                    id="upload_file">
+                                                                    <div class="dropzone-msg dz-message needsclick">
+                                                                        <h3 class="dropzone-msg-title">Drop files here
+                                                                            or click
+                                                                            to upload.</h3>
+                                                                        <span class="dropzone-msg-desc">Upload up to 12
+                                                                            files</span>
                                                                     </div>
-                                                                </li>
-                                                                <li>
-                                                                    <div
-                                                                        class="rate-txt d-flex justify-content-between">
-                                                                        <p class="strong-txt"><i
-                                                                                class="fa-solid fa-envelope"></i> Email
-                                                                        </p>
-                                                                        <p><a href="mailto:" target="_blank"
-                                                                                class="link-data">in●●●●●@●●●●●.com</a>
-                                                                        </p>
-                                                                    </div>
-                                                                </li>
-                                                                <li>
-                                                                    <div
-                                                                        class="rate-txt d-flex justify-content-between">
-                                                                        <p class="strong-txt"><i
-                                                                                class="fa-solid fa-mobile"></i>
-                                                                            Mobile
-                                                                        </p>
-                                                                        <p><a href="tel:" target="_blank"
-                                                                                class="link-data">+185●●●●●562</a></p>
-                                                                    </div>
-                                                                </li>
-                                                                <li>
-                                                                    <div
-                                                                        class="rate-txt d-flex justify-content-between">
-                                                                        <p class="strong-txt"><i
-                                                                                class="fa-brands fa-twitter"></i>
-                                                                            Twitter</p>
-                                                                        <p><a href="https://twitter.com/DateGabriellaXo"
-                                                                                target="_blank"
-                                                                                class="link-data">@DateGabriellaXo</a>
-                                                                        </p>
-                                                                    </div>
-                                                                </li>
-                                                                <li>
-                                                                    <div
-                                                                        class="rate-txt d-flex justify-content-between">
-                                                                        <p class="strong-txt"><i
-                                                                                class="fa-brands fa-instagram"></i>
-                                                                            Instagram</p>
-                                                                        <p><a href="https://instagram.com/Gabriellawestwood4"
-                                                                                target="_blank"
-                                                                                class="link-data">@Gabriellawestwood4</a>
-                                                                        </p>
-                                                                    </div>
-                                                                </li>
-                                                                <li>
-                                                                    <div
-                                                                        class="rate-txt d-flex justify-content-between">
-                                                                        <p class="strong-txt"><i
-                                                                                class="fa-solid fa-lock"></i>
-                                                                            Fansly</p>
-                                                                        <p><a href="https://fans.ly/https://fans.ly/gabriellawestwood4"
-                                                                                target="_blank"
-                                                                                class="link-data">@https://fans.ly/https://fans.ly/gabriellawestwood4</a>
-                                                                        </p>
-                                                                    </div>
-                                                                </li>
-                                                                <li>
-                                                                    <div
-                                                                        class="rate-txt d-flex justify-content-between">
-                                                                        <p class="strong-txt"><i
-                                                                                class="fa-solid fa-lock"></i>
-                                                                            Onlyfans
-                                                                        </p>
-                                                                        <p><a href="https://onlyfans.com/Gabinextdoor"
-                                                                                target="_blank"
-                                                                                class="link-data">@Gabinextdoor</a></p>
-                                                                    </div>
-                                                                </li>
-                                                            </ul>
+                                                                </div>
+                                                                <span id="dropzone-error"></span>
+                                                            </div>
                                                         </div>
                                                     </div>
                                                 </div>
-                                            </div>
+                                                <div class="row mt-3">
+                                                    <div class="col-lg-12 col-md-9 col-sm-12">
+                                                        <div class="row">
+                                                            @foreach ($user->gallery_images as $image)
+                                                            <div class="col-lg-3 col-md-4 col-sm-6">
+                                                                <img src="{{ Storage::url($image->image) }}"
+                                                                    alt="{{ $image->image }}"
+                                                                    class="update_profile_image img-fluid">
+                                                                <div
+                                                                    class="d-flex justify-content-center align-items-center mt-3">
+                                                                    <button type="button" class="btn btn-danger btn-sm"
+                                                                        data-image-id="{{ $image->id }}"
+                                                                        id="deleteImage">Delete</button>
+                                                                </div>
+                                                                {{-- <div class="card">
+                                                                    <div class="card-body">
+                                                                        <img src="{{ Storage::url($image->image) }}"
+                                                                            alt="{{ $image->image }}" class="img-fluid">
+                                                                    </div>
+                                                                    <div class="card-footer">
+                                                                        <button type="button"
+                                                                            class="btn btn-danger btn-sm"
+                                                                            data-image-id="{{ $image->id }}"
+                                                                            id="deleteImage">Delete</button>
+                                                                    </div>
+                                                                </div>--}}
+                                                            </div>
+                                                            @endforeach
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </form>
                                         </div>
                                     </div>
                                 </div>
@@ -751,6 +770,8 @@
 
 @push('frontend-extra-js')
 <script src="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/js/select2.min.js"></script>
+{{-- <script src="{{ asset('assets/js/pages/crud/file-upload/dropzonejs.js') }}"></script> --}}
+<script src="https://cdnjs.cloudflare.com/ajax/libs/dropzone/4.0.1/dropzone.js"></script>
 
 {{-- <script src="{{ asset('admin/plugins/summernote/summernotecustom.js') }}"></script> --}}
 <script type="text/javascript">
@@ -758,9 +779,92 @@
     var summernoteMediaDelete = '{{ route('admin.summernote.mediaDelete') }}';
 </script>
 <script>
+    Dropzone.autoDiscover = false;
     $(document).ready(function () {
+        var images = [];
+        var deleted_images = [];
         $('#caters_to').select2({
             placeholder: "Please Select your Preference",
+        });
+        $('#upload_file').dropzone({
+            url: "{{ route('store.image') }}",
+            maxFiles: 12,
+            maxfilesexceeded: function(file) {
+                $(".dropzone").addClass("is-invalid");
+                $("#dropzone-error").text('You have exceeded the File Upload Limit, You can not add more then 12 Images.').css('color', 'red');
+                $("#dropzone-error").show();
+                // this.addFile(file);
+                this.removeFile(file);
+            },
+            maxFilesize: 1024, // MB
+            timeout: null,
+            addRemoveLinks: true,
+            acceptedFiles: ".jpeg,.jpg,.png,.gif",
+            dictMaxFilesExceeded: "You can not upload any more files.",
+            dictRemoveFile: "Remove file",
+            clickable: true,
+            headers: {
+                'X-CSRF-TOKEN': '{{ csrf_token() }}'
+            },
+            params: {
+                'type': "upload_file",
+            },
+            success: function(file, response) {
+                images.push(response.image);
+                var element = file.previewElement;
+                $(element).attr('data-image_url', response.image);
+                $('#images').val(images);
+            },
+            removedfile: function(file, element) {
+                log
+                var element =file.previewElement;
+                var image_url = $(element).data('image_url');
+                deleted_images.push(file.name);
+                $.ajax({
+                    url: "{{ route('remove.image') }}",
+                    type: 'POST',
+                    headers: {
+                        'X-CSRF-TOKEN': '{{ csrf_token() }}'
+                    },
+                    data: {
+                        path: image_url,
+                    },
+                    success: function(response) {
+                        $(element).remove();
+                        $('#deleted_images').val(deleted_images);
+                    },
+                });
+            },
+            error: function(file, response) {
+                // let errmsg = ''
+                // var status = file.xhr?.status;
+                // if(status == 413){
+                //     $(".dropzone").addClass("is-invalid");
+                //     $("#dropzone-error").text(`This file is to Large for upload,You can\'t upload more than ${max_upload_file_size} MB size of single file. Please try to upload the file with lower size.`);
+                //     $("#dropzone-error").show();
+                // }else{
+                //     if(response.errorType == 'instagram_image'){
+                //         // errmsg = response.message
+                //         $(file.previewElement).find('.dz-image').css({"border" : "2px solid #d90101"});
+                //         $(file.previewElement).addClass("dz-error").find('.dz-error-message').text(response.message_title);
+                //         errmsg = response.message;
+                //         // $(".dropzone").addClass('is-invalid');
+                //         // $("#dropzone-error").addClass('invalid-feedback').text(response.message);
+                //         // $("#dropzone-error").show();
+                //     }else{
+                //         if(response == 'error'){
+                //             errmsg = 'Something went wrong please upload another file.Allowed file types are image/*,.mp4,image/webp,.mov'
+                //         }else{
+                //             errmsg = response;
+                //         }
+                //         this.removeFile(file);
+                //         // file.previewElement.classList.add("dz-error");
+                //     }
+                //     $(".dropzone").addClass("is-invalid");
+                //     $("#dropzone-error").text(errmsg);
+                //     $("#dropzone-error").show();
+                // }
+            },
         });
         var summernoteElement = $('#description');
         var imagePath = 'summernote/cms/image';
@@ -814,20 +918,20 @@
             }
         }); */
         $('#frmEditcms').submit(function (e) {
-        if(summernoteElement.summernote('isEmpty')) {
-            $('#description-error').remove();
-            $('<span class="text-danger" id="description-error"><strong class="form-text">The description field is required.</strong></span>').insertAfter('.note-editor');
-            e.preventDefault();
-            return false;
-        }else {
-            if ($(this).valid()) {
-                addOverlay();
-                $("input[type=submit], input[type=button], button[type=submit]").prop("disabled", "disabled");
-                return true;
-            } else {
+            if(summernoteElement.summernote('isEmpty')) {
+                $('#description-error').remove();
+                $('<span class="text-danger" id="description-error"><strong class="form-text">The description field is required.</strong></span>').insertAfter('.note-editor');
+                e.preventDefault();
                 return false;
+            }else {
+                if ($(this).valid()) {
+                    addOverlay();
+                    $("input[type=submit], input[type=button], button[type=submit]").prop("disabled", "disabled");
+                    return true;
+                } else {
+                    return false;
+                }
             }
-        }
         });
 
         //tell the validator to ignore Summernote elements

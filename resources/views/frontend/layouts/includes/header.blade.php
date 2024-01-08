@@ -59,7 +59,11 @@
                             data-bs-toggle="dropdown" aria-expanded="false">{{ auth()->user()->full_name }}</button>
                         <ul class="dropdown-menu" aria-labelledby="moreoption">
                             <li><a class="dropdown-item"
-                                    href="{{ route('profile.get',auth()->user()->user_name) }}">Profile</a></li>
+                                    href="{{ route('profile.get',auth()->user()->user_name) }}">View Profile</a></li>
+                            <li>
+                            <li><a class="dropdown-item"
+                                    href="{{ route('profile.edit',auth()->user()->user_name) }}">Update Profile</a>
+                            </li>
                             <li>
                                 <a class="dropdown-item" href="{{ route('logout') }}" onclick="event.preventDefault();
                                     document.getElementById('logout-form').submit();">Logout

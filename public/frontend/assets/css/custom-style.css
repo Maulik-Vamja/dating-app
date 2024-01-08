@@ -23,7 +23,6 @@ p.main-short-info,.member__desc-txt { -webkit-line-clamp: 2; }
 .member--style2 .member__inner:hover .member__content { transform: translateY(0px); padding: 15px; }
 
 /*==============================================================*/
-.cmn-profile-txt-area { margin: 0 auto; background:#ffffff; padding: 0 15px; }
 .cmn-txt-area { max-width: 768px; margin: 0 auto; background:#ffffff; padding: 0 15px; }
 .title-main-txt h2.title-txt { position:relative; padding-bottom: 10px; display: inline-block; }
 .title-main-txt h2.title-txt::after { content: ''; display: block; bottom: 5px; height:3px; background: #f24570; position: absolute; width: 100%; left: 50%;
@@ -36,6 +35,7 @@ p.main-short-info,.member__desc-txt { -webkit-line-clamp: 2; }
 .cmn-txt-block a:hover,.cmn-txt-block a:focus { text-decoration: none;}
 .group__bottom--allmedia .cmn-txt-block ul li { padding: 0px; }
 .profile-slide img 					{ width: calc(100% - 30px); height: 475px; object-fit: cover; margin: 0 15px; }
+.update_profile_image 					{ width: calc(100% - 30px); height: 475px; object-fit: cover; margin: 0 15px; }
 .basic-info-profile 				{ margin-bottom: 20px; }
 .basic-info-profile button 			{ margin: 0 15px; background: #505050; padding: 5px 10px; border-radius: 10px; color: #ffffff; }
 .slick-prev 						{ left: 10px; }

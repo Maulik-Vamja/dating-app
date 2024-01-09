@@ -30,7 +30,7 @@ class UserFactory extends Factory
             'body_type' => implode(',', $this->faker->randomElements(['Slim', 'Curvy', 'Athletic', 'BBW', 'Muscular'])),
             'height' => $this->faker->numberBetween(140, 190),
             'ethnicity' => $this->faker->randomElement(['Asian', 'Black', 'Caucasian', 'Latin', 'Mixed']),
-            'availibility' => json_encode(['monday' => true, 'tuesday' => true, 'wednesday' => true, 'thursday' => true, 'friday' => true, 'saturday' => true, 'sunday' => true]),
+            'availibility' => json_encode(['Monday' => true, 'Tuesday' => true, 'Wednesday' => true, 'Thursday' => true, 'Friday' => true, 'Saturday' => true, 'Sunday' => true]),
             'availibility_description' => $this->faker->text(100),
             'cup_size' => $this->faker->randomElement(['AA', 'A', 'B', 'C', 'D', 'DD', 'DDD', 'F', 'G']),
             'hair_colour' => $this->faker->randomElement(['Black', 'Blonde', 'Brunette', 'Red', 'Grey', 'White']),

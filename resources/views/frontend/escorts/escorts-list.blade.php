@@ -7,29 +7,34 @@
     <div class="container">
         <div class="group__bottom--area">
             <div class="group__bottom--head">
-                <form action="{{ route('get.escorts') }}" method="GET">
-                    @csrf
+                <form action="{{ route('get.escorts') }}" method="GET" class="w-100">
                     <div class="banner__list">
                         <div class="row">
                             <div class="col-md-3 col-12">
                                 <label>Looking for</label>
                                 <div class="banner__inputlist">
-                                    <select>
-                                        <option>Select Gender</option>
-                                        <option value="male">Male</option>
-                                        <option value="female" selected>Female</option>
-                                        <option value="others">Others</option>
+                                    <select name="gender" id="gender">
+                                        <option value="">Select Gender</option>
+                                        <option value="male" {{ request()->gender == 'male' ? 'selected' : '' }}>Male
+                                        </option>
+                                        <option value="female" {{ request()->gender == 'female' ? 'selected' : ''
+                                            }}>Female</option>
+                                        <option value="non-binary" {{ request()->gender == 'non-binary' ? 'selected' :
+                                            ''
+                                            }}>Non Binary</option>
                                     </select>
                                 </div>
                             </div>
+                            <input type="hidden" name="min_age" id="min_age" value="{{ request()->min_age ?? 18 }}">
+                            <input type="hidden" name="max_age" id="max_age" value="{{ request()->max_age ?? 40 }}">
                             <div class="col-md-3 col-12">
-                                <label>Age</label>
-                                <div class="mt-2 cmn-range">
-                                    <input type="range" value="18,25" multiple min="18" max="40" class="form-control">
-                                    <ul class="range-list">
-                                        <li>18</li>
-                                        <li>40</li>
-                                    </ul>
+                                <label class="m-0">Age</label>
+                                <div class="range-slider">
+                                    <span class="rangeValues"></span>
+                                    <input value="{{ request()->min_age ?? 18 }}" min="18" max="60" step="1"
+                                        type="range">
+                                    <input value="{{ request()->max_age ?? 18 }}" min="18" max="60" step="1"
+                                        type="range">
                                 </div>
                             </div>
                             <div class="col-md-3 col-12">
@@ -44,11 +49,17 @@
                                     </select>
                                 </div>
                             </div>
+                            @php
+                            $states = \App\Models\State::where('country_id',request()->country)->get();
+                            @endphp
                             <div class="col-md-3 col-12">
                                 <label>State</label>
                                 <div class="banner__inputlist">
                                     <select id="state" name="state">
-                                        <option value="select State"></option>
+                                        @foreach ($states as $state)
+                                        <option value="{{ $state->id }}" {{ request()->state == $state->id ?
+                                            'selected' : ''}}>{{$state->name }}</option>
+                                        @endforeach
                                     </select>
                                 </div>
                             </div>
@@ -75,7 +86,7 @@
                 @php
                 $random_image = $escort->gallery_images()->inRandomOrder()->first();
                 @endphp
-                <a href="{{ route('get.escort',$escort->user_name) }}">
+                <a href="{{ route('get.escort',$escort->user_name) }}" class="w-100">
                     <div class="model-intro">
                         <div class="model-img"><img
                                 src="{{ $random_image ? Storage::url($random_image->image) : asset('frontend/assets/images/allmedia/01.jpg')}}"
@@ -88,13 +99,13 @@
                             </div>
                             @php
                             $today = Carbon\Carbon::now()->format('l');
-                            $availableOrNot =
-                            $escort->availability()->where('availibility->'.$today,true)->first();
+
+                            $availableOrNot = json_decode($escort->availibility,true);
                             @endphp
                             <p class="d-flex align-items-center text-capitalize"><span
-                                    class="{{ $availableOrNot ? '' : 'not-avail'}} availibity-members"></span>available
+                                    class="{{ isset($availableOrNot[$today]) ? '' : 'not-avail'}} availibity-members"></span>available
                             </p>
-                            <p class="main-short-info">{!! str_limit($escort->description,200) !!}</p>
+                            <p class="main-short-info">{{ str_limit(strip_tags($escort->description),200) }}</p>
                         </div>
                     </div>
                 </a>
@@ -252,6 +263,30 @@
 <script>
     $(function() {
         jcf.replaceAll();
+    });
+    $(document).ready(function(){
+        $('#country').on('change',function(){
+            var country_id = $(this).val();
+            $.ajax({
+                url:"{{route('get.states')}}?country_id="+country_id,
+                type:"GET",
+                dataType:"json",
+                success:function(data){
+                    $("#state").empty();
+                    $("#state").append(`<option value="">Select State</option>`)
+                    if(data.length > 0){
+                        $.each(data,function(key,value){
+                            $("#state").append(`<option value="${value.id}">${value.name}</option>`);
+                        });
+                    }else{
+                        $("#state").append(`<option value="">No State Available</option>`)
+                    }
+                },
+                error:function(data){
+                    console.log(data);
+                }
+            });
+        });
     });
 </script>
 @endpush

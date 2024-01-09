@@ -2,6 +2,7 @@
 
 namespace App\Http\ViewComposers;
 
+use App\Enums\StatusEnums;
 use App\Models\Blog;
 use App\Models\Setting;
 use App\Models\User;
@@ -18,7 +19,7 @@ class FrontendComposer
 
     public function __construct()
     {
-        $this->recent_blogs = Blog::orderBy('created_at', 'DESC')->with(['tags', 'category', 'user'])->take(4)->get();
+        $this->recent_blogs = Blog::where('is_active', StatusEnums::ACTIVE->value)->orderBy('created_at', 'DESC')->with(['tags', 'category', 'user'])->take(4)->get();
         $this->latest_escorts = User::latest()->with(['availability', 'primary_address'])->limit(4)->get();
         $this->settings = Setting::pluck('value', 'constant');;
     }

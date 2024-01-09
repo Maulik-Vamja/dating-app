@@ -180,17 +180,70 @@
                                                             }}</strong>
                                                     </span>
                                                     @endif
-                                                </div>
-                                                {{-- Gallery Images --}}
-                                                {{-- <div class="form-group @error('upload_file') is-invalid @enderror">
-                                                    <div
-                                                        class="form-group{{ $errors->has('dropzone') ? ' has-error' : '' }}">
-                                                        <label for="myDropzone">Upload Gallary File</label>
-                                                        <div id="myDropzone" class="dropzone"
-                                                            data-error-container="#mydropzone-error" name="upload_file">
+                                                    {{-- Address --}}
+                                                    <div class="row mt-3">
+                                                        <label for="">
+                                                            <h4>Primary Address</h4>
+                                                        </label>
+                                                        @php
+                                                        $countries = \App\Models\Country::all();
+                                                        $user_address = $user->primary_address;
+                                                        @endphp
+                                                        <div class="col-md-4">
+                                                            <div class="form-group">
+                                                                <label for="country">Country</label>
+                                                                <select
+                                                                    class="form-control @error('country') is-invalid @enderror"
+                                                                    name="country" id="country" required>
+                                                                    <option value="">Select Country</option>
+                                                                    @foreach ($countries as $country)
+                                                                    <option value="{{ $country->id }}" {{
+                                                                        $user_address?->country_id == $country->id ?
+                                                                        'selected' : ''
+                                                                        }}>
+                                                                        {{ $country->name }}
+                                                                    </option>
+                                                                    @endforeach
+                                                                </select>
+                                                            </div>
+                                                        </div>
+                                                        @php
+                                                        $states =
+                                                        \App\Models\State::where('country_id',$user_address?->country_id)->get();
+                                                        @endphp
+                                                        <div class="col-md-4">
+                                                            <div class="form-group">
+                                                                <label for="state">State</label>
+                                                                <select class="form-control" name="state" id="state"
+                                                                    required>
+                                                                    <option value="">Select Country</option>
+                                                                    @foreach ($states as $state)
+                                                                    <option value="{{ $state->id }}" {{ $user_address?->
+                                                                        state_id == $state->id ? 'selected' : '' }}>
+                                                                        {{ $state->name }}
+                                                                    </option>
+                                                                    @endforeach
+                                                                </select>
+                                                            </div>
+                                                        </div>
+                                                        @php
+                                                        $cities =
+                                                        \App\Models\City::where('state_id',$user_address?->state_id)->get();
+                                                        @endphp
+                                                        <div class="col-md-4">
+                                                            <label for="city">City</label>
+                                                            <select class="form-control" name="city" id="city" required>
+                                                                <option value="">Select Country</option>
+                                                                @foreach ($cities as $city)
+                                                                <option value="{{ $city->id }}" {{ $user_address?->
+                                                                    city_id==$city->id ? 'selected' : '' }}>
+                                                                    {{ $city->name }}
+                                                                </option>
+                                                                @endforeach
+                                                            </select>
                                                         </div>
                                                     </div>
-                                                </div> --}}
+                                                </div>
                                             </div>
                                         </div>
                                     </form>
@@ -198,93 +251,6 @@
                             </div>
                             <div class="tab-pane fade" id="gt2" role="tabpanel" aria-labelledby="gt2-tab">
                                 <div class="container">
-                                    {{-- <div class="info">
-                                        <div class="info-card mb-4">
-                                            <div class="info-card-title">
-                                                <h6>Base Info</h6>
-                                            </div>
-                                            <div class="info-card-content">
-                                                <ul class="info-list">
-                                                    <li>
-                                                        <p class="info-name">Base in</p>
-                                                        <p class="info-details"><a
-                                                                href="/us/escorts/florida/miami">Miami, Florida, United
-                                                                States</a></p>
-                                                    </li>
-                                                    <li>
-                                                        <p class="info-name">Caters to</p>
-                                                        <p class="info-details">Men</p>
-                                                    </li>
-                                                    <li>
-                                                        <p class="info-name">Last active</p>
-                                                        <p class="info-details">Today</p>
-                                                    </li>
-                                                    <li>
-                                                        <p class="info-name">Gender</p>
-                                                        <p class="info-details"><i class="fa-solid fa-venus"></i> Woman
-                                                            (She)</p>
-                                                    </li>
-                                                    <li>
-                                                        <p class="info-name">Age</p>
-                                                        <p class="info-details">25</p>
-                                                    </li>
-                                                    <li>
-                                                        <p class="info-name">Address</p>
-                                                        <p class="info-details">Streop Rd, Peosur, Inphodux,
-                                                            USA.</p>
-                                                    </li>
-                                                </ul>
-
-                                            </div>
-                                        </div>
-
-                                        <div class="info-card">
-                                            <div class="info-card-title">
-                                                <h6>Availability</h6>
-                                            </div>
-                                            <div class="info-card-content">
-                                                <ul class="info-list">
-                                                    <li>
-                                                        <p class="info-name">MON</p>
-                                                        <p class="info-details"><i class="fa-solid fa-check"></i></p>
-                                                    </li>
-                                                    <li>
-                                                        <p class="info-name">TUE</p>
-                                                        <p class="info-details"><i class="fa-solid fa-check"></i></p>
-                                                    </li>
-                                                    <li>
-                                                        <p class="info-name">WED</p>
-                                                        <p class="info-details"><i class="fa-solid fa-check"></i></p>
-                                                    </li>
-                                                    <li>
-                                                        <p class="info-name">THU</p>
-                                                        <p class="info-details"><i class="fa-solid fa-check"></i></p>
-                                                    </li>
-                                                    <li>
-                                                        <p class="info-name">FRI</p>
-                                                        <p class="info-details"><i class="fa-solid fa-check"></i></p>
-                                                    </li>
-                                                    <li>
-                                                        <p class="info-name">SAT</p>
-                                                        <p class="info-details"><i class="fa-solid fa-check"></i></p>
-                                                    </li>
-                                                    <li>
-                                                        <p class="info-name">SUN</p>
-                                                        <p class="info-details"><i class="fa-solid fa-check"></i></p>
-                                                    </li>
-                                                </ul>
-                                                <div class="info-profile-content">
-                                                    <p>The sooner you send over your screening info and a deposit, the
-                                                        sooner I can be all yours! </p>
-                                                    <p>Same-day bookings (if I am able to accommodate) require a 90
-                                                        minute minimum. This is not a required minimum if I am touring
-                                                        your area, and have availability that day.</p>
-                                                    <p>I will only accept bookings from those willing to go through
-                                                        light screening for my safety.</p>
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </div> --}}
                                     <form action="{{ route('profile.update',$user->user_name) }}" method="POST">
                                         @csrf
                                         <div class="card">
@@ -431,7 +397,8 @@
                                                 <hr>
                                                 <div class="h4">Availibility</div>
                                                 @php
-                                                $user_availibility =json_decode(json_decode($user->availibility),true);
+
+                                                $user_availibility =json_decode($user->availibility,true);
                                                 // dd($user_availibility);
                                                 @endphp
                                                 <div class="form-group">
@@ -733,22 +700,11 @@
                                                                     class="update_profile_image img-fluid">
                                                                 <div
                                                                     class="d-flex justify-content-center align-items-center mt-3">
-                                                                    <button type="button" class="btn btn-danger btn-sm"
+                                                                    {{-- <button type="button"
+                                                                        class="btn btn-danger btn-sm"
                                                                         data-image-id="{{ $image->id }}"
-                                                                        id="deleteImage">Delete</button>
+                                                                        id="deleteImage">Delete</button> --}}
                                                                 </div>
-                                                                {{-- <div class="card">
-                                                                    <div class="card-body">
-                                                                        <img src="{{ Storage::url($image->image) }}"
-                                                                            alt="{{ $image->image }}" class="img-fluid">
-                                                                    </div>
-                                                                    <div class="card-footer">
-                                                                        <button type="button"
-                                                                            class="btn btn-danger btn-sm"
-                                                                            data-image-id="{{ $image->id }}"
-                                                                            id="deleteImage">Delete</button>
-                                                                    </div>
-                                                                </div>--}}
                                                             </div>
                                                             @endforeach
                                                         </div>
@@ -783,6 +739,15 @@
     $(document).ready(function () {
         var images = [];
         var deleted_images = [];
+        $('#country').select2({
+            placeholder: "Please Select your Country",
+        });
+        $('#state').select2({
+            placeholder: "Please Select your State",
+        });
+        $('#city').select2({
+            placeholder: "Please Select your City",
+        });
         $('#caters_to').select2({
             placeholder: "Please Select your Preference",
         });
@@ -816,24 +781,29 @@
                 $('#images').val(images);
             },
             removedfile: function(file, element) {
-                log
                 var element =file.previewElement;
-                var image_url = $(element).data('image_url');
-                deleted_images.push(file.name);
-                $.ajax({
-                    url: "{{ route('remove.image') }}",
-                    type: 'POST',
-                    headers: {
-                        'X-CSRF-TOKEN': '{{ csrf_token() }}'
-                    },
-                    data: {
-                        path: image_url,
-                    },
-                    success: function(response) {
-                        $(element).remove();
-                        $('#deleted_images').val(deleted_images);
-                    },
-                });
+
+                if(file.type == 'image/png' || file.type == 'image/jpeg' || file.type == 'image/jpg' || file.type == 'image/gif'){
+                    var image_url = $(element).data('image_url');
+                    deleted_images.push(file.name);
+                    $.ajax({
+                        url: "{{ route('remove.image') }}",
+                        type: 'POST',
+                        headers: {
+                            'X-CSRF-TOKEN': '{{ csrf_token() }}'
+                        },
+                        data: {
+                            path: image_url,
+                        },
+                        success: function(response) {
+                            $(element).remove();
+                            $('#deleted_images').val(deleted_images);
+                        },
+                    });
+                }else{
+                    $(element).remove();
+                }
+
             },
             error: function(file, response) {
                 // let errmsg = ''
@@ -1000,6 +970,50 @@
         });
         $(document).on('click','#removeRate',function(){
             $(this).parent().closest('div#rateRow').remove();
+        });
+        $('#country').change(function(){
+            var country_id = $(this).val();
+            $.ajax({
+                url:"{{route('get.states')}}?country_id="+country_id,
+                type:"GET",
+                dataType:"json",
+                success:function(data){
+                    $("#state").empty();
+                    $("#state").append(`<option value="">Select State</option>`)
+                    if(data.length > 0){
+                        $.each(data,function(key,value){
+                            $("#state").append(`<option value="${value.id}">${value.name}</option>`);
+                        });
+                    }else{
+                        $("#state").append(`<option value="">No State Available</option>`)
+                    }
+                },
+                error:function(data){
+                    console.log(data);
+                }
+            });
+        });
+        $('#state').change(function(){
+            var state_id = $(this).val();
+            $.ajax({
+                url:"{{route('get.cities')}}?state_id="+state_id,
+                type:"GET",
+                dataType:"json",
+                success:function(data){
+                    $("#city").empty();
+                    $("#city").append(`<option value="">Select City</option>`)
+                    if(data.length > 0){
+                        $.each(data,function(key,value){
+                            $("#city").append(`<option value="${value.id}">${value.name}</option>`);
+                        });
+                    }else{
+                        $("#city").append(`<option value="">No city Available</option>`)
+                    }
+                },
+                error:function(data){
+                    console.log(data);
+                }
+            });
         });
     });
 </script>

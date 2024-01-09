@@ -5,16 +5,17 @@
 @php
 $random_image = $escort->gallery_images()->inRandomOrder()->first();
 @endphp
-<div class="pageheader bg_img"
-    style="max-height:fit-content !important;background-image: url({{ $random_image ? Storage::url($random_image->image) : asset('frontend/assets/images/allmedia/01.jpg')}});">
-    <div class="container">
-        <div class="pageheader__content text-center">
-            <figure><img
-                    src="{{$random_image ? Storage::url($random_image->image) : asset('frontend/assets/images/allmedia/01.jpg')}}"
-                    alt="member"></figure>
-        </div>
+<div class="pageheader">
+    <div class="bg_img member-single-inner"
+        style="background-image: url({{ $random_image ? Storage::url($random_image->image) : asset('frontend/assets/images/allmedia/01.jpg')}});">
+    </div>
+    <div class="pageheader__content">
+        <figure><img
+                src="{{ $random_image ? Storage::url($random_image->image) : asset('frontend/assets/images/allmedia/01.jpg')}}"
+                alt="member"></figure>
     </div>
 </div>
+
 
 <!-- ================> Page Header section end here <================== -->
 
@@ -73,7 +74,8 @@ $random_image = $escort->gallery_images()->inRandomOrder()->first();
                                     <div class="col-md-12">
                                         <div class="group__bottom--area group__bottom--memberactivity">
                                             <div class="basic-info-profile d-flex justify-content-center">
-                                                {{-- <button class="ic-activiy"><i class="fa-solid fa-clock"></i> Last active
+                                                {{-- <button class="ic-activiy"><i class="fa-solid fa-clock"></i> Last
+                                                    active
                                                     today</button> --}}
                                                 <button class="ic-location"><i class="fa-solid fa-house"></i> Miami, FL,
                                                     US</button>

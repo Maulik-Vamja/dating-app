@@ -9,8 +9,8 @@
             <h2>Our Blog Posts</h2>
             <nav aria-label="breadcrumb">
                 <ol class="breadcrumb justify-content-center mb-0">
-                    <li class="breadcrumb-item"><a href="{{route('welcome')}}">Home</a></li>
-                    <li class="breadcrumb-item active" aria-current="page">Blogs</li>
+                    {{-- <li class="breadcrumb-item"><a href="{{route('welcome')}}">Home</a></li>
+                    <li class="breadcrumb-item active" aria-current="page">Blogs</li> --}}
                 </ol>
             </nav>
         </div>
@@ -39,7 +39,7 @@
                                     <a href="#">{{ $blog->user->full_name }}</a>
                                     <a href="#">{{ Carbon\Carbon::parse($blog->created_at)->format('M d,Y') }}</a>
                                 </div>
-                                <p>{!! str_limit($blog->description, 200) !!}</p>
+                                <p>{{ str_limit(strip_tags($blog->description), 100) }}</p>
                                 <a href="{{ route('blogs.show',$blog->slug) }}" class="default-btn"><span>read
                                         more</span></a>
                             </div>

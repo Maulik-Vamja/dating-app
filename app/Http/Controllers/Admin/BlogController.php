@@ -114,7 +114,7 @@ class BlogController extends Controller
             flash('Blog Added Succesfully')->success();
             DB::commit();
         } catch (\Throwable $th) {
-            dd($th->getMessage(), 'error');
+            // dd($th->getMessage(), 'error');
             flash('Something went wrong')->error();
             DB::rollback();
         }

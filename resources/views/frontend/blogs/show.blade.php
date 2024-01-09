@@ -79,9 +79,12 @@
 
                         <div class="article-pagination">
                             @php
-                            $prev_article = App\Models\Blog::where('id', '<', $blog->id)->orderBy('id',
+                            $prev_article = App\Models\Blog::where('is_active',
+                            App\Enums\StatusEnums::ACTIVE->value)->where('id',
+                            '<', $blog->id)->orderBy('id',
                                 'desc')->first();
-                                $next_article = App\Models\Blog::where('id', '>', $blog->id)->orderBy('id',
+                                $next_article = App\Models\Blog::where('is_active',
+                                App\Enums\StatusEnums::ACTIVE->value)->where('id', '>', $blog->id)->orderBy('id',
                                 'asc')->first();
                                 @endphp
                                 @if ($prev_article)

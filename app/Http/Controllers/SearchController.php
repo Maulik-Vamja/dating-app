@@ -19,12 +19,12 @@ class SearchController extends Controller
                 $query->whereBetween('age', [$request->min_age, $request->max_age]);
             })
             ->when($request->country !== null, function ($query) use ($request) {
-                $query->whereHas('addresses', function ($query) use ($request) {
+                $query->whereHas('primary_address', function ($query) use ($request) {
                     $query->where('country_id', $request->country);
                 });
             })
             ->when($request->state !== null, function ($query) use ($request) {
-                $query->whereHas('addresses', function ($query) use ($request) {
+                $query->whereHas('primary_address', function ($query) use ($request) {
                     $query->where('state_id', $request->state);
                 });
             })
@@ -34,6 +34,7 @@ class SearchController extends Controller
         return view('frontend.escorts.escorts-list', [
             'escorts' => $escorts,
             'countries' => $countries,
+
         ]);
     }
 }

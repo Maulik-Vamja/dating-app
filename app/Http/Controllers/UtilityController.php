@@ -145,6 +145,12 @@ class UtilityController extends Controller
         $states = \App\Models\State::where('country_id', $country_id)->get();
         return response()->json($states);
     }
+    public function getCitiesFromState()
+    {
+        $state_id = request()->state_id;
+        $states = \App\Models\City::where('state_id', $state_id)->get();
+        return response()->json($states);
+    }
     public function checkUsername(Request $request)
     {
         $username = $request->username;

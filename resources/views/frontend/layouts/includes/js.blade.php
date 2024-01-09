@@ -12,9 +12,10 @@
 <script src="{{asset('frontend/assets/js/vendor/bootstrap.bundle.min.js')}}"></script>
 <script src="{{asset('frontend/assets/js/plugins.js')}}"></script>
 <script src="{{asset('frontend/assets/js/slick.js')}}"></script>
-<script src="{{asset('frontend/assets/js/jcf.js')}}"></script>
-<script src="{{asset('frontend/assets/js/jcf.range.js')}}"></script>
+{{-- <script src="{{asset('frontend/assets/js/jcf.js')}}"></script>
+<script src="{{asset('frontend/assets/js/jcf.range.js')}}"></script> --}}
 <script src="{{asset('frontend/assets/js/main.js')}}"></script>
+<script src="{{asset('frontend/assets/js/range.js')}}"></script>
 
 <script src="{{ asset('assets/admin/plugins/jquery-validation/js/jquery.validate.min.js') }}" type="text/javascript">
 </script>

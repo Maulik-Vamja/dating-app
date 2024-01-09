@@ -143,7 +143,6 @@
                             <h3>Find Your True Love</h3>
                         </div>
                         <form action="{{ route('get.escorts') }}" method="GET">
-                            @csrf
                             <div class="banner__list">
                                 <div class="row">
                                     <div class="col-6 ">
@@ -170,17 +169,16 @@
                                     </div>
                                 </div>
                             </div>
+                            <input type="hidden" name="min_age" id="min_age" value="18">
+                            <input type="hidden" name="max_age" id="max_age" value="40">
                             <div class="banner__list">
                                 <div class="row">
                                     <div class="col-lg-6 col-12">
-                                        <label>Age</label>
-                                        <div class="mt-2">
-                                            <input type="range" name="age_range" id="age_range" value="18,25" multiple
-                                                min="18" max="40">
-                                            <ul class="range-list">
-                                                <li>18</li>
-                                                <li>40</li>
-                                            </ul>
+                                        <label class="m-0">Age</label>
+                                        <div class="range-slider">
+                                            <span class="rangeValues"></span>
+                                            <input value="18" min="18" max="60" step="1" type="range">
+                                            <input value="40" min="18" max="60" step="1" type="range">
                                         </div>
                                     </div>
                                     @php
@@ -249,19 +247,18 @@
                                 <a class="member-link-page" href="{{ route('get.escort',$escort->user_name) }}">
                                     <h5>{{ $escort->full_name }}</h5>
                                 </a>
+                                @php
+                                $today = Carbon\Carbon::now()->format('l');
+                                $availableOrNot = json_decode($escort->availibility,true);
+                                @endphp
                                 <p class="short__desc mt-1">{{ $escort->short_description }}</p>
                                 <div class="city-availibity mt-2 d-flex justify-content-between">
-                                    <p><i class="fa-solid fa-house"></i>Sarasota, FL, US</p>
-                                    @php
-                                    $today = Carbon\Carbon::now()->format('l');
-                                    $availableOrNot = json_decode(json_decode($escort->availibility,true));
-                                    $a = array_filter($availableOrNot,function($day) use ($today){
-                                    return $day == $today;
-                                    },ARRAY_FILTER_USE_KEY);
-
-                                    @endphp
+                                    <p><i class="fa-solid fa-house"></i>{{ $escort->primary_address?->city->name }}, {{
+                                        $escort->primary_address?->state->name }},
+                                        {{ $escort->primary_address?->country->iso2 }}</p>
                                     <p class="d-flex align-items-center text-capitalize">
-                                        <span class="{{ $a ? '' : 'not-avail' }} availibity-members"></span>available
+                                        <span
+                                            class="{{ isset($availableOrNot[$today])  ? '' : 'not-avail' }} availibity-members"></span>available
                                     </p>
                                 </div>
                                 <div class="member-bio">
@@ -271,35 +268,10 @@
                         </div>
                     </div>
                     @endforeach
-                    {{-- <div class="member__item">
-                        <div class="member__inner">
-                            <div class="member__thumb">
-                                <a class="member-link-page" href="member-single.html">
-                                    <figure><img src="{{asset('frontend/assets/images/allmedia/06.jpg')}}"
-                                            alt="member-img"></figure>
-                                </a>
-                            </div>
-                            <div class="member__content">
-                                <a class="member-link-page" href="member-single.html">
-                                    <h5>Amanda Rodrigues</h5>
-                                </a>
-                                <p class="short__desc mt-1">Can you feel the Chemistry?</p>
-                                <div class="city-availibity mt-2 d-flex justify-content-between">
-                                    <p><i class="fa-solid fa-house"></i>Sarasota, FL, US</p>
-                                    <p class="d-flex align-items-center text-capitalize"><span
-                                            class="availibity-members"></span>available</p>
-                                </div>
-                                <div class="member-bio">
-                                    <p class="member__desc-txt">Lorem ipsum dolor sit amet, consectetur adipisicing
-                                        elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.</p>
-                                </div>
-                            </div>
-                        </div>
-                    </div> --}}
                 </div>
             </div>
             <div class="text-center mt-4">
-                <a href="members.html" class="default-btn"><span>See More Popular</span></a>
+                <a href="{{ route('get.escorts') }}" class="default-btn"><span>See More Popular</span></a>
             </div>
         </div>
     </div>
@@ -337,7 +309,7 @@
                             <div class="about__content">
                                 <h3><span class="counter" data-to="{{ $counts['total_online_escorts'] }}"
                                         data-speed="1500"></span></h3>
-                                <p>Members Online</p>
+                                <p>Members Available</p>
                             </div>
                         </div>
                     </div>
@@ -419,58 +391,6 @@
                     </div>
                 </div>
                 @endforeach
-                {{-- <div class="col wow fadeInUp" data-wow-duration="1.6s">
-                    <div class="story__item">
-                        <div class="story__inner">
-                            <div class="story__thumb">
-                                <a href="blog-single.html"><img src="{{asset('frontend/assets/images/story/02.jpg')}}"
-                                        alt="dating thumb"></a>
-                                <span class="member__activity member__activity--ofline">Love Stories</span>
-                            </div>
-                            <div class="story__content">
-                                <a href="blog-single.html">
-                                    <h4>Make your dreams come true and monetise quickly</h4>
-                                </a>
-                                <div class="story__content--author">
-                                    <div class="story__content--thumb">
-                                        <img src="{{asset('frontend/assets/images/story/author/02.jpg')}}"
-                                            alt="dating thumb">
-                                    </div>
-                                    <div class="story__content--content">
-                                        <h6>Arika Q Smith</h6>
-                                        <p>March 14, 2022</p>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-                <div class="col wow fadeInUp" data-wow-duration="1.7s">
-                    <div class="story__item">
-                        <div class="story__inner">
-                            <div class="story__thumb">
-                                <a href="blog-single.html"><img src="{{asset('frontend/assets/images/story/03.jpg')}}"
-                                        alt="dating thumb"></a>
-                                <span class="member__activity member__activity--ofline">Attraction</span>
-                            </div>
-                            <div class="story__content">
-                                <a href="blog-single.html">
-                                    <h4>Love looks not with the eyes, but with the mind.</h4>
-                                </a>
-                                <div class="story__content--author">
-                                    <div class="story__content--thumb">
-                                        <img src="{{asset('frontend/assets/images/story/author/03.jpg')}}"
-                                            alt="dating thumb">
-                                    </div>
-                                    <div class="story__content--content">
-                                        <h6>William Show</h6>
-                                        <p>June 18, 2022</p>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div> --}}
             </div>
         </div>
     </div>
@@ -738,17 +658,61 @@
 
 @push('frontend-extra-js')
 <script>
-    $(function() {
-        jcf.replaceAll();
-        var min_value = $('#age_range').prop('min');
-        var max_value = $('#age_range').prop('max');
-        $('#age_range').change(function(){
-            var values = $(this).val().split(',');
-            var min = values[0];
-            var max = values[1];
-            console.log(min, max);
-            $('.range-list li:first-child').text(min);
-            $('.range-list li:last-child').text(max);
+    // function getVals() {
+    //     // Get slider values
+    //     let parent = this.parentNode;
+    //     let slides = parent.getElementsByTagName("input");
+    //     let slide1 = parseFloat(slides[0].value);
+    //     let slide2 = parseFloat(slides[1].value);
+    //     // Neither slider will clip the other, so make sure we determine which is larger
+    //     if (slide1 > slide2) {
+    //         let tmp = slide2;
+    //         slide2 = slide1;
+    //         slide1 = tmp;
+    //     }
+
+    //     let displayElement = parent.getElementsByClassName("rangeValues")[0];
+    //     displayElement.innerHTML = "" + slide1 + " - " + slide2;
+    //     // document.getElementById('min').value = slide1;
+    //     // document.getElementById('max').value = slide2;
+    // }
+
+    // window.onload = function () {
+    //     // Initialize Sliders
+    //     let sliderSections = document.getElementsByClassName("range-slider");
+    //     for (let x = 0; x < sliderSections.length; x++) {
+    //         let sliders = sliderSections[x].getElementsByTagName("input");
+    //         for (let y = 0; y < sliders.length; y++) {
+    //             if (sliders[y].type === "range") {
+    //                 sliders[y].oninput = getVals;
+    //                 // Manually trigger event first time to display values
+    //                 sliders[y].oninput();
+    //             }
+    //         }
+    //     }
+    // };
+    $(document).ready(function(){
+        $('#country').on('change',function(){
+            var country_id = $(this).val();
+            $.ajax({
+                url:"{{route('get.states')}}?country_id="+country_id,
+                type:"GET",
+                dataType:"json",
+                success:function(data){
+                    $("#state").empty();
+                    $("#state").append(`<option value="">Select State</option>`)
+                    if(data.length > 0){
+                        $.each(data,function(key,value){
+                            $("#state").append(`<option value="${value.id}">${value.name}</option>`);
+                        });
+                    }else{
+                        $("#state").append(`<option value="">No State Available</option>`)
+                    }
+                },
+                error:function(data){
+                    console.log(data);
+                }
+            });
         });
     });
 

@@ -36,9 +36,16 @@ class UserController extends Controller
             switch ($request->input('action')) {
                 case 'update_basic':
                     $user->fill($request->all());
+                    $user->primary_address()->delete();
+                    $user->primary_address()->create([
+                        'custom_id'   => get_unique_string(),
+                        'country_id' => $request->input('country'),
+                        'state_id' => $request->input('state'),
+                        'city_id' => $request->input('city'),
+                        'is_primary'    => 'y',
+                    ]);
                     break;
                 case 'update_personal_details':
-                    $request['availibility'] = json_encode($request->input('availibility'));
                     $user->fill([
                         'availibility'  =>  json_encode($request->input('availibility')),
                         'availibility_description'  =>  $request->input('availibility_description'),
@@ -86,12 +93,8 @@ class UserController extends Controller
                         ]);
                     }
                     break;
-                case 'update_addresses':
-                    return $this->updateAddresses($request);
-                    break;
                 case 'update_gallery_images':
                     if ($request->has('deleted_images') && $request->deleted_images != null) {
-                        dd('here 1');
                         $deleted_images = explode(',', $request->deleted_images);
                         foreach ($deleted_images as $image) {
                             $user->gallery_images()->where('image', $image)->delete();
@@ -117,7 +120,7 @@ class UserController extends Controller
             return redirect()->back()->with('success', 'Profile updated successfully');
         } catch (Exception $th) {
             DB::rollBack();
-            dd($th->getMessage());
+            // dd($th->getMessage());
             return redirect()->back()->with('errorMsg', 'Something went wrong');
         }
     }

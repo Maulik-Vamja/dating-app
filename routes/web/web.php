@@ -46,6 +46,8 @@ Route::middleware(['auth', 'verified'])->group(function () {
 });
 
 Route::get('/states', [UtilityController::class, 'getStatesFromCountry'])->name('get.states');
+Route::get('/cities', [UtilityController::class, 'getCitiesFromState'])->name('get.cities');
+
 Route::get('/escorts/{user:user_name}', [EscortController::class, 'getEscort'])->name('get.escort');
 Route::get('/search/escorts', SearchController::class)->name('get.escorts');
 Route::get('/contact-us', [PagesController::class, 'contactUs'])->name('contact-us');

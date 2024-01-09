@@ -51,29 +51,3 @@
 <!-- Mirrored from demos.codexcoder.com/themeforest/html/ollya/index-2.html by HTTrack Website Copier/3.x [XR&CO'2014], Sat, 16 Dec 2023 08:37:08 GMT -->
 
 </html>
-<script>
-    $(document).ready(function(){
-        $('#country').on('change',function(){
-            var country_id = $(this).val();
-            $.ajax({
-                url:"{{route('get.states')}}?country_id="+country_id,
-                type:"GET",
-                dataType:"json",
-                success:function(data){
-                    $("#state").empty();
-                    $("#state").append(`<option value="">Select State</option>`)
-                    if(data.length > 0){
-                        $.each(data,function(key,value){
-                            $("#state").append(`<option value="${value.id}">${value.name}</option>`);
-                        });
-                    }else{
-                        $("#state").append(`<option value="">No State Available</option>`)
-                    }
-                },
-                error:function(data){
-                    console.log(data);
-                }
-            });
-        });
-    });
-</script>

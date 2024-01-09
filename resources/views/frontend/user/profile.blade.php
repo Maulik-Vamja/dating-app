@@ -5,14 +5,14 @@
 @php
 $random_image = $user->gallery_images()->inRandomOrder()->first();
 @endphp
-<div class="pageheader bg_img"
-    style="max-height:fit-content !important;background-image: url({{ $random_image ? Storage::url($random_image->image) : asset('frontend/assets/images/allmedia/01.jpg')}});">
-    <div class="container">
-        <div class="pageheader__content text-center">
-            <figure><img
-                    src="{{$random_image ? Storage::url($random_image->image) : asset('frontend/assets/images/allmedia/01.jpg')}}"
-                    alt="member"></figure>
-        </div>
+<div class="pageheader">
+    <div class="bg_img member-single-inner"
+        style="background-image: url({{ $random_image ? Storage::url($random_image->image) : asset('frontend/assets/images/allmedia/01.jpg')}});">
+    </div>
+    <div class="pageheader__content">
+        <figure><img
+                src="{{ $random_image ? Storage::url($random_image->image) : asset('frontend/assets/images/allmedia/01.jpg')}}"
+                alt="member"></figure>
     </div>
 </div>
 
@@ -100,40 +100,6 @@ $random_image = $user->gallery_images()->inRandomOrder()->first();
                                                 <img src="{{ Storage::url($image->image) }}" alt="dating thumb">
                                             </div>
                                             @endforeach
-
-                                            {{-- <div class="profile-slide">
-                                                <img src="assets/images/allmedia/02.jpg" alt="dating thumb">
-                                            </div>
-                                            <div class="profile-slide">
-                                                <img src="assets/images/allmedia/03.jpg" alt="dating thumb">
-                                            </div>
-                                            <div class="profile-slide">
-                                                <img src="assets/images/allmedia/04.jpg" alt="dating thumb">
-                                            </div>
-                                            <div class="profile-slide">
-                                                <img src="assets/images/allmedia/05.jpg" alt="dating thumb">
-                                            </div>
-                                            <div class="profile-slide">
-                                                <img src="assets/images/allmedia/06.jpg" alt="dating thumb">
-                                            </div>
-                                            <div class="profile-slide">
-                                                <img src="assets/images/allmedia/07.jpg" alt="dating thumb">
-                                            </div>
-                                            <div class="profile-slide">
-                                                <img src="assets/images/allmedia/08.jpg" alt="dating thumb">
-                                            </div>
-                                            <div class="profile-slide">
-                                                <img src="assets/images/allmedia/09.jpg" alt="dating thumb">
-                                            </div>
-                                            <div class="profile-slide">
-                                                <img src="assets/images/allmedia/10.jpg" alt="dating thumb">
-                                            </div>
-                                            <div class="profile-slide">
-                                                <img src="assets/images/allmedia/11.jpg" alt="dating thumb">
-                                            </div>
-                                            <div class="profile-slide">
-                                                <img src="assets/images/allmedia/12.jpg" alt="dating thumb">
-                                            </div> --}}
                                         </div>
                                     </div>
                                 </div>
@@ -225,9 +191,7 @@ $random_image = $user->gallery_images()->inRandomOrder()->first();
                                                 <ul class="info-list">
                                                     @php
                                                     $days = config('utility.availibility_days');
-                                                    $user_availibility
-                                                    = json_decode(json_decode($user->availibility),true);
-
+                                                    $user_availibility = json_decode($user->availibility,true);
                                                     @endphp
                                                     @foreach ($days as $day)
                                                     <li>

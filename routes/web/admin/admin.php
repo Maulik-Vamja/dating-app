@@ -53,7 +53,7 @@ Route::group(['middleware' => ['check_permit', 'revalidate']], function () {
 
     Route::controller(PagesController::class)->group(function () {
         /* Dashboard */
-        Route::get('/', 'dashboard')->name('dashboard.index');
+        // Route::get('/', 'dashboard')->name('dashboard.index');
         Route::get('/dashboard', 'dashboard')->name('dashboard.index');
 
         /* Site Configuration */

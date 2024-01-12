@@ -5,13 +5,13 @@
 @php
 $random_image = $user->gallery_images()->inRandomOrder()->first();
 @endphp
-<div class="pageheader">
+<div class="pageheader" style="padding: 0;">
     <div class="bg_img member-single-inner"
-        style="background-image: url({{ $random_image ? Storage::url($random_image->image) : asset('frontend/assets/images/allmedia/01.jpg')}});">
+        style="background-image: url({{ $random_image ? (filter_var($random_image->image,FILTER_VALIDATE_URL) == false ? Storage::url($random_image->image) : $random_image->image) : asset('frontend/assets/images/allmedia/01.jpg')}});">
     </div>
     <div class="pageheader__content">
         <figure><img
-                src="{{ $random_image ? Storage::url($random_image->image) : asset('frontend/assets/images/allmedia/01.jpg')}}"
+                src="{{ $random_image ? (filter_var($random_image->image,FILTER_VALIDATE_URL) == false ? Storage::url($random_image->image) : $random_image->image) : asset('frontend/assets/images/allmedia/01.jpg')}}"
                 alt="member"></figure>
     </div>
 </div>
@@ -97,7 +97,8 @@ $random_image = $user->gallery_images()->inRandomOrder()->first();
                                         <div class="profile-gallery-block lazy slider">
                                             @foreach ($user->gallery_images as $image)
                                             <div class="profile-slide">
-                                                <img src="{{ Storage::url($image->image) }}" alt="dating thumb">
+                                                <img src="{{ filter_var($image->image,FILTER_VALIDATE_URL) == false ? Storage::url($image->image) : $image->image }}"
+                                                    alt="dating thumb">
                                             </div>
                                             @endforeach
                                         </div>

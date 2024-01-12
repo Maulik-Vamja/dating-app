@@ -238,7 +238,7 @@
                             <div class="member__thumb">
                                 <a class="member-link-page" href="{{ route('get.escort',$escort->user_name) }}">
                                     <figure><img
-                                            src="{{$random_image ? Storage::url($random_image->image) : asset('frontend/assets/images/allmedia/01.jpg')}}"
+                                            src="{{$random_image ? (filter_var($random_image->image,FILTER_VALIDATE_URL) == false ? Storage::url($random_image->image) : $random_image->image) : asset('frontend/assets/images/allmedia/01.jpg')}}"
                                             alt="member-img">
                                     </figure>
                                 </a>
@@ -365,9 +365,10 @@
                     <div class="story__item">
                         <div class="story__inner">
                             <div class="story__thumb">
+
                                 <a href="{{ route('blogs.show',$blog->slug) }}"><img
-                                        src="{{\Storage::url($blog->image)}}" alt="dating thumb"
-                                        style="max-height:250px !important; height: 250px;">
+                                        src="{{ filter_var($blog->image,FILTER_VALIDATE_URL) == false ? \Storage::url($blog->image) : $blog->image }}  "
+                                        alt="dating thumb" style="max-height:250px !important; height: 250px;">
                                 </a>
                                 <span class="member__activity member__activity--ofline">{{
                                     $blog->category->name }}</span>

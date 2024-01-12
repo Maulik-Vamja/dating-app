@@ -2396,6 +2396,8 @@ iframe {
   width: 60px;
 }
 .footer--feature .footer__content--desc ul li .thumb img {
+    width: 60px;
+    height: 60px;
   -webkit-border-radius: 100%;
   -moz-border-radius: 100%;
   -ms-border-radius: 100%;

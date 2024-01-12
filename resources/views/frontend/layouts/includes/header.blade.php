@@ -41,9 +41,6 @@
                             <li class="{{ Route::is('contact-us') ? 'active' : '' }}">
                                 <a href="{{ route('contact-us') }}">Contact Us</a>
                             </li>
-                            <li class="">
-                                <a href="#">Services</a>
-                            </li>
                             <li class="{{ Route::is('about-us') ? 'active' : '' }}">
                                 <a href="{{ route('about-us') }}">About Us</a>
                             </li>

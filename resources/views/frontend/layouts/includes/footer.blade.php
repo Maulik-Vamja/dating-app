@@ -67,20 +67,34 @@
                                     </div>
                                     <div class="footer__content--desc">
                                         <ul>
+                                            @foreach ($latest_escorts as $escort)
+                                            @php
+                                            $random_image = $escort->gallery_images()->inRandomOrder()->first();
+                                            @endphp
                                             <li>
                                                 <div class="thumb position-relative">
-                                                    <img src="{{asset('frontend/assets/images/footer/feature/01.jpg')}}"
+                                                    <img src="{{$random_image ? (filter_var($random_image->image,FILTER_VALIDATE_URL) == false ? Storage::url($random_image->image) : $random_image->image) : asset('frontend/assets/images/allmedia/01.jpg')}}"
                                                         alt="member-img">
+                                                    @php
+                                                    $today = \Carbon\Carbon::now()->format('l');
+                                                    $availableOrNot = json_decode($escort->availibility,true);
+                                                    @endphp
+                                                    @if (array_key_exists($today,$availableOrNot))
                                                     <span class="feature__activity"></span>
+                                                    @endif
                                                 </div>
                                                 <div class="content">
-                                                    <a href="member-single.html">
-                                                        <h6>Samantha Lee</h6>
+                                                    <a href="{{ route('get.escort',$escort->user_name) }}">
+                                                        <h6>{{ $escort->full_name }}</h6>
                                                     </a>
+                                                    @if (array_key_exists($today,$availableOrNot))
                                                     <p>Active</p>
+                                                    @endif
                                                 </div>
                                             </li>
-                                            <li>
+                                            @endforeach
+
+                                            {{-- <li>
                                                 <div class="thumb position-relative">
                                                     <img src="{{asset('frontend/assets/images/footer/feature/02.jpg')}}"
                                                         alt="member-img">
@@ -118,7 +132,7 @@
                                                     </a>
                                                     <p>Active</p>
                                                 </div>
-                                            </li>
+                                            </li> --}}
                                         </ul>
                                     </div>
                                 </div>
@@ -158,8 +172,9 @@
                                             @foreach ($recent_blogs as $blog)
                                             <li>
                                                 <div class="thumb">
-                                                    <a href="{{ route('blogs.show',$blog->slug) }}"><img
-                                                            src="{{\Storage::url($blog->image)}}" alt="dating thumb"></a>
+                                                    <a href="{{ route('blogs.show',$blog->slug) }}">
+                                                        <img src="{{ filter_var($blog->image,FILTER_VALIDATE_URL) == false ? \Storage::url($blog->image) : $blog->image }} "
+                                                            alt="dating thumb"></a>
                                                 </div>
                                                 <div class="content">
                                                     <a href="group-single.html">

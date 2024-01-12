@@ -695,7 +695,7 @@
                                                         <div class="row">
                                                             @foreach ($user->gallery_images as $image)
                                                             <div class="col-lg-3 col-md-4 col-sm-6">
-                                                                <img src="{{ Storage::url($image->image) }}"
+                                                                <img src="{{ filter_var($image->image, FILTER_VALIDATE_URL) == false ? Storage::url($image->image) : $image->image }}"
                                                                     alt="{{ $image->image }}"
                                                                     class="update_profile_image img-fluid">
                                                                 <div

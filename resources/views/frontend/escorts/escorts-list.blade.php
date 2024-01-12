@@ -56,6 +56,7 @@
                                 <label>State</label>
                                 <div class="banner__inputlist">
                                     <select id="state" name="state">
+                                        <option value="">Select State</option>
                                         @foreach ($states as $state)
                                         <option value="{{ $state->id }}" {{ request()->state == $state->id ?
                                             'selected' : ''}}>{{$state->name }}</option>
@@ -88,9 +89,10 @@
                 @endphp
                 <a href="{{ route('get.escort',$escort->user_name) }}" class="w-100">
                     <div class="model-intro">
-                        <div class="model-img"><img
-                                src="{{ $random_image ? Storage::url($random_image->image) : asset('frontend/assets/images/allmedia/01.jpg')}}"
-                                alt="img"></div>
+                        <div class="model-img">
+                            <img src="{{$random_image ? (filter_var($random_image->image,FILTER_VALIDATE_URL) == false ? Storage::url($random_image->image) : $random_image->image) : asset('frontend/assets/images/allmedia/01.jpg')}}"
+                                alt="img">
+                        </div>
                         <div class="model-info">
                             <h5>{{ $escort->full_name }}</h5>
                             <p class="short-desc">{{ $escort->short_description }}</p>

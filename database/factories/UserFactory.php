@@ -22,7 +22,7 @@ class UserFactory extends Factory
             'email' => $this->faker->unique()->safeEmail(),
             'password' => '$2y$10$92IXUNpkjO0rOQ5byMi.Ye4oKoEa3Ro9llC/.og/at2.uheWG/igi', // password
             'short_description' => $this->faker->text(20),
-            'description' => $this->faker->text(200),
+            'description' => $this->faker->text(4000),
             'pronouns'  => $this->faker->randomElement(['She', 'Her', 'Hers']),
             'gender'  => $this->faker->randomElement(['male', 'female', 'non-binary']),
             'age' => $this->faker->numberBetween(18, 60),

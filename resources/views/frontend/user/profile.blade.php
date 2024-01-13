@@ -404,7 +404,7 @@ $random_image = $user->gallery_images()->inRandomOrder()->first();
                                                         <div class="info-card-content">
                                                             @php
                                                             $contact_medias =
-                                                            \App\models\ContactMedia::where('is_active','y')->get();
+                                                            \App\Models\ContactMedia::where('is_active','y')->get();
                                                             @endphp
 
                                                             <ul class="info-list rate-listing">

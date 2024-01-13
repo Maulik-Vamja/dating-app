@@ -79,7 +79,7 @@
                                                     $today = \Carbon\Carbon::now()->format('l');
                                                     $availableOrNot = json_decode($escort->availibility,true);
                                                     @endphp
-                                                    @if (array_key_exists($today,$availableOrNot))
+                                                    @if ($availableOrNot && array_key_exists($today,$availableOrNot))
                                                     <span class="feature__activity"></span>
                                                     @endif
                                                 </div>
@@ -87,7 +87,7 @@
                                                     <a href="{{ route('get.escort',$escort->user_name) }}">
                                                         <h6>{{ $escort->full_name }}</h6>
                                                     </a>
-                                                    @if (array_key_exists($today,$availableOrNot))
+                                                    @if ( $availableOrNot && array_key_exists($today,$availableOrNot))
                                                     <p>Active</p>
                                                     @endif
                                                 </div>

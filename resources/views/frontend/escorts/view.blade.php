@@ -117,8 +117,7 @@ $random_image = $escort->gallery_images()->inRandomOrder()->first();
                                                 <ul class="info-list">
                                                     <li>
                                                         <p class="info-name">Base in</p>
-                                                        <p class="info-details"><a
-                                                                href="/us/escorts/florida/miami">Miami, Florida, United
+                                                        <p class="info-details"><a href="#">Miami, Florida, United
                                                                 States</a></p>
                                                     </li>
                                                     <li>

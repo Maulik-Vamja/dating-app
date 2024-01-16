@@ -25,7 +25,7 @@
     <div class="header__bottom">
         <div class="container">
             <nav class="navbar navbar-expand-lg">
-                <a class="navbar-brand" href="{{ route('welcome') }}"><img
+                <a class="navbar-brand" href="{{ route('welcome') }}"><img style="max-height: 40px;"
                         src="{{asset('frontend/assets/images/logo/logo.png')}}" alt="logo"></a>
                 <button class="navbar-toggler collapsed" type="button" data-bs-toggle="collapse"
                     data-bs-target="#navbarNavAltMarkup" aria-controls="navbarNavAltMarkup" aria-expanded="false"
@@ -38,15 +38,16 @@
                             <li class="{{ Route::is('welcome') ? 'active' : '' }}">
                                 <a href="{{ route('welcome') }}">Home</a>
                             </li>
-                            <li class="{{ Route::is('contact-us') ? 'active' : '' }}">
-                                <a href="{{ route('contact-us') }}">Contact Us</a>
-                            </li>
+
                             <li class="{{ Route::is('about-us') ? 'active' : '' }}">
                                 <a href="{{ route('about-us') }}">About Us</a>
                             </li>
+                            {{-- <li class="{{ Route::is('contact-us') ? 'active' : '' }}">
+                                <a href="{{ route('contact-us') }}">Contact Us</a>
+                            </li>
                             <li class="{{ Route::is('blogs.*') ? 'active' : '' }}">
                                 <a href="{{ route('blogs.index') }}">Blogs</a>
-                            </li>
+                            </li> --}}
                         </ul>
                     </div>
 
@@ -76,7 +77,8 @@
                     @else
                     <div class="navbar-nav mainmenu">
                         <ul class="">
-                            <li><a class="" href="{{ route('login') }}">Log In/Sign Up</a></li>
+                            <li><a style="color:white" class="default-btn style-2" href="{{ route('login') }}">Log
+                                    In/Sign Up</a></li>
                         </ul>
                     </div>
                     @endauth

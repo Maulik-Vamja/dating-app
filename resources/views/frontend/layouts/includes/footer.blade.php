@@ -154,6 +154,10 @@
                                             <li><a href="{{ route('contact-us') }}"><i
                                                         class="fa-solid fa-angle-right"></i> Contact Us</a>
                                             </li>
+                                            <li><a href="{{ route('blogs.index') }}"><i
+                                                        class="fa-solid fa-angle-right"></i> Blogs</a>
+                                            </li>
+
                                         </ul>
                                     </div>
                                 </div>

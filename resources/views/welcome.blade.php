@@ -12,7 +12,7 @@
                         <div class="banner__title">
                             <h2>New Places, Unforgettable Dating.</h2>
                             <p>Join our international family today! Please call us for more info.</p>
-                            <a href="membership.html" class="default-btn style-2"><span>Get A Membership</span></a>
+                            <a href="membership.html" class="default-btn style-2"><span>Create Free Profile</span></a>
                         </div>
                     </div>
                 </div>
@@ -51,7 +51,7 @@
                     <div class="about__left h-100">
                         <div class="about__top">
                             <div class="about__content">
-                                <h3>Welcome To Our Ollya</h3>
+                                <h3>Welcome To Our iFindYou.co</h3>
                                 <p>You find us, finally, and you are already in love. More than 4.000.000 around the
                                     world already shared the same experiences and uses our system. Joining us today
                                     just got easier!</p>
@@ -68,69 +68,22 @@
                             <div class="about__bottom--body">
                                 <div class="ragi__slider overflow-hidden">
                                     <div class="swiper-wrapper">
+                                        @foreach ($escorts as $key => $escort)
+                                        @php
+                                        $random_image = $escort->gallery_images()->inRandomOrder()->first();
+                                        @endphp
                                         <div class="swiper-slide">
                                             <div class="ragi__thumb">
                                                 <a href="member-single.html"><img
-                                                        src="{{asset('frontend/assets/images/ragi/01.jpg')}}"
+                                                        src="{{$random_image ? (filter_var($random_image->image,FILTER_VALIDATE_URL) == false ? Storage::url($random_image->image) : $random_image->image) : asset('frontend/assets/images/allmedia/01.jpg')}}"
                                                         alt="dating thumb"></a>
                                             </div>
                                         </div>
-                                        <div class="swiper-slide">
-                                            <div class="ragi__thumb">
-                                                <a href="member-single.html"><img
-                                                        src="{{asset('frontend/assets/images/ragi/02.jpg')}}"
-                                                        alt="dating thumb"></a>
-                                            </div>
-                                        </div>
-                                        <div class="swiper-slide">
-                                            <div class="ragi__thumb">
-                                                <a href="member-single.html"><img
-                                                        src="{{asset('frontend/assets/images/ragi/03.jpg')}}"
-                                                        alt="dating thumb"></a>
-                                            </div>
-                                        </div>
-                                        <div class="swiper-slide">
-                                            <div class="ragi__thumb">
-                                                <a href="member-single.html"><img
-                                                        src="{{asset('frontend/assets/images/ragi/04.jpg')}}"
-                                                        alt="dating thumb"></a>
-                                            </div>
-                                        </div>
-                                        <div class="swiper-slide">
-                                            <div class="ragi__thumb">
-                                                <a href="member-single.html"><img
-                                                        src="{{asset('frontend/assets/images/ragi/05.jpg')}}"
-                                                        alt="dating thumb"></a>
-                                            </div>
-                                        </div>
-                                        <div class="swiper-slide">
-                                            <div class="ragi__thumb">
-                                                <a href="member-single.html"><img
-                                                        src="{{asset('frontend/assets/images/ragi/01.jpg')}}"
-                                                        alt="dating thumb"></a>
-                                            </div>
-                                        </div>
-                                        <div class="swiper-slide">
-                                            <div class="ragi__thumb">
-                                                <a href="member-single.html"><img
-                                                        src="{{asset('frontend/assets/images/ragi/02.jpg')}}"
-                                                        alt="dating thumb"></a>
-                                            </div>
-                                        </div>
-                                        <div class="swiper-slide">
-                                            <div class="ragi__thumb">
-                                                <a href="member-single.html"><img
-                                                        src="{{asset('frontend/assets/images/ragi/03.jpg')}}"
-                                                        alt="dating thumb"></a>
-                                            </div>
-                                        </div>
-                                        <div class="swiper-slide">
-                                            <div class="ragi__thumb">
-                                                <a href="member-single.html"><img
-                                                        src="{{asset('frontend/assets/images/ragi/04.jpg')}}"
-                                                        alt="dating thumb"></a>
-                                            </div>
-                                        </div>
+                                        @if ($key == 10)
+                                        @break
+                                        @endif
+                                        @endforeach
+
                                     </div>
                                 </div>
                             </div>

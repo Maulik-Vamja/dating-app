@@ -6,11 +6,11 @@
 
 <head>
     <meta charset="utf-8">
-    <title>Ollya</title>
+    <title>iFindYou.com is Largest Escorts Direcotry </title>
     <meta name="viewport" content="width=device-width, initial-scale=1">
     {!! $sitesetting['meta_tags'] !!}
     <!-- site favicon -->
-    <link rel="icon" type="image/png" href="{{asset('frontend/assets/images/favicon.png')}}">
+    <link rel="icon" type="image/png" href="{{asset('frontend/assets/images/fav-icon.png')}}">
     <!-- Place favicon.ico in the root directory -->
     @include('frontend.layouts.includes.css')
 </head>

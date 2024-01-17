@@ -34,27 +34,27 @@ $random_image = $escort->gallery_images()->inRandomOrder()->first();
                         </li>
                         <li class="nav-item" role="presentation">
                             <button class="nav-link" id="gt2-tab" data-bs-toggle="tab" data-bs-target="#gt2"
-                                type="button" role="tab" aria-controls="gt2" aria-selected="false"><i
-                                    class="fa-solid fa-users"></i> Personal details</button>
+                                type="button" role="tab" aria-controls="gt2" aria-selected="false"><i class="fa fa-user"
+                                    aria-hidden="true"></i> Personal details</button>
                         </li>
                         <li class="nav-item" role="presentation">
                             <button class="nav-link" id="gt3-tab" data-bs-toggle="tab" data-bs-target="#gt3"
                                 type="button" role="tab" aria-controls="gt3" aria-selected="false"><i
-                                    class="fa-solid fa-video"></i> Rates
+                                    class="fa-solid fa-usd"></i> Rates
                                 <!-- <span>06</span> -->
                             </button>
                         </li>
                         <li class="nav-item" role="presentation">
                             <button class="nav-link" id="gt4-tab" data-bs-toggle="tab" data-bs-target="#gt4"
                                 type="button" role="tab" aria-controls="gt4" aria-selected="false"><i
-                                    class="fa-solid fa-users"></i> Policies
+                                    class="fa-solid fa-th-large"></i> Policies
                                 <!-- <span>16</span> -->
                             </button>
                         </li>
                         <li class="nav-item" role="presentation">
                             <button class="nav-link" id="gt6-tab" data-bs-toggle="tab" data-bs-target="#gt6"
                                 type="button" role="tab" aria-controls="gt6" aria-selected="false"><i
-                                    class="fa-solid fa-photo-film"></i> Contacts
+                                    class="fa-solid fa-phone-square"></i> Contacts
                                 <!-- <span>06</span> -->
                             </button>
                         </li>
@@ -94,7 +94,8 @@ $random_image = $escort->gallery_images()->inRandomOrder()->first();
                                             </div>
                                         </div>
                                     </div>
-                                    <div class="col-md-12">
+
+                                    <div class="col-md-12" style="margin-top: 50px">
                                         <div class="profile-gallery-block lazy slider">
                                             @foreach ($escort->gallery_images as $image)
                                             <div class="profile-slide">
@@ -116,10 +117,11 @@ $random_image = $escort->gallery_images()->inRandomOrder()->first();
                                             <div class="info-card-content">
                                                 <ul class="info-list">
                                                     <li>
-                                                        <p class="info-name">Base in</p>
-                                                        <p class="info-details"><a
-                                                                href="/us/escorts/florida/miami">Miami, Florida, United
-                                                                States</a></p>
+                                                        <p class="info-name">Address</p>
+                                                        <p class="info-details">{{
+                                                            $escort->primary_address?->city->name }}, {{
+                                                            $escort->primary_address?->state->name }},
+                                                            {{ $escort->primary_address?->country->iso2 }}</p>
                                                     </li>
                                                     <li>
                                                         <p class="info-name">Caters to</p>

@@ -41,7 +41,7 @@ return new class extends Migration
             $table->text('availibility_description')->nullable();
             $table->string('thumbnail_image')->nullable();
             $table->string('membership')->nullable();
-            $table->string('contact_disclaimer')->nullable();
+            $table->text('contact_disclaimer')->nullable();
             // $table->foreignId("country_code")->nullable()->constrained("countries")
             //     ->cascadeOnUpdate()->cascadeOnDelete();
             // $table->string("contact_number")->nullable();

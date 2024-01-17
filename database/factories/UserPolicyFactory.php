@@ -19,7 +19,7 @@ class UserPolicyFactory extends Factory
     {
         return [
             'custom_id' =>  get_unique_string(),
-            'policy_type_id'    => PolicyType::inRandomOrder()->first()->id,
+            'policy_type_id'    => 1,
             'description' => $this->faker->text(100),
         ];
     }

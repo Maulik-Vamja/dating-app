@@ -6,8 +6,8 @@
             <div class="row">
                 <div class="col-lg-8 col-7">
                     <div class="logo">
-                        <a href="index.html"><img src="{{asset('frontend/assets/images/logo/logo.png')}}"
-                                alt="logo"></a>
+                        <a href="/"><img style="max-height: 50px"
+                                src="{{asset('frontend/assets/images/logo/logo.png')}}" alt="logo"></a>
                     </div>
                 </div>
                 <div class="col-lg-4 col-5">
@@ -23,7 +23,7 @@
             <div class="col-lg-7">
                 <div class="log-reg-inner">
                     <div class="section-header inloginp">
-                        <h2 class="title">Welcome to Ollya</h2>
+                        <h3 class="title">Welcome to iFindYou</h3>
                     </div>
                     <div class="main-content inloginp">
                         <form action="{{route('login')}}" method="POST" id="">

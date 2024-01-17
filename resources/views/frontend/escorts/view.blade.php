@@ -77,8 +77,12 @@ $random_image = $escort->gallery_images()->inRandomOrder()->first();
                                                 {{-- <button class="ic-activiy"><i class="fa-solid fa-clock"></i> Last
                                                     active
                                                     today</button> --}}
-                                                <button class="ic-location"><i class="fa-solid fa-house"></i> Miami, FL,
-                                                    US</button>
+                                                @if ($escort->primary_address)
+                                                <button class="ic-location"><i class="fa-solid fa-house"></i> {{
+                                                    $escort->primary_address?->city->name
+                                                    }}, {{ $escort->primary_address?->state->name }},
+                                                    {{ $escort->primary_address?->country->iso2 }}</button>
+                                                @endif
                                                 <button class="ic-gender"><i class="fa-solid fa-venus"></i>
                                                     {{ ucfirst($escort->gender) }}</button>
                                             </div>

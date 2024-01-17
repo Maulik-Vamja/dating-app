@@ -14,12 +14,12 @@ class PagesController extends Controller
     {
         $recent_blogs = Blog::where('is_active', StatusEnums::ACTIVE->value)->orderBy('created_at', 'DESC')->with(['tags', 'category', 'user'])->take(3)->get();
         $escorts = User::with(['availability', 'primary_address'])->limit(10)->latest()->get();
-        $today = strtolower(Carbon::now()->format('l'));
+        $today = Carbon::now()->format('l');
         $counts = [
             'total_escorts' => User::all()->count(),
             'total_online_escorts' => User::where('availibility->' . $today, 'true')->count(),
-            'total_female_escorts' => User::where('gender', 'female')->count(),
-            'total_male_escorts' => User::where('gender', 'male')->count(),
+            'total_female_escorts' => User::where('gender', 'female')->where('availibility->' . $today, 'true')->count(),
+            'total_male_escorts' => User::where('gender', 'male')->where('availibility->' . $today, 'true')->count(),
         ];
         return view('welcome', [
             'blogs' => $recent_blogs, 'escorts' => $escorts, 'counts' => $counts

@@ -117,9 +117,11 @@ $random_image = $escort->gallery_images()->inRandomOrder()->first();
                                             <div class="info-card-content">
                                                 <ul class="info-list">
                                                     <li>
-                                                        <p class="info-name">Base in</p>
-                                                        <p class="info-details"><a href="#">Miami, Florida, United
-                                                                States</a></p>
+                                                        <p class="info-name">Address</p>
+                                                        <p class="info-details">{{
+                                                            $escort->primary_address?->city->name }}, {{
+                                                            $escort->primary_address?->state->name }},
+                                                            {{ $escort->primary_address?->country->iso2 }}</p>
                                                     </li>
                                                     <li>
                                                         <p class="info-name">Caters to</p>

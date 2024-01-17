@@ -12,6 +12,9 @@ use App\Models\PolicyType;
 use App\Models\ContactMedia;
 use App\Models\GalleryImages;
 use App\Models\Currency;
+use App\Models\Country;
+use App\Models\State;
+use App\Models\City;
 use App\Enums\StatusEnums;
 use Illuminate\Database\Eloquent\Factories\Factory ;
 use Illuminate\Support\Facades\Storage;
@@ -68,24 +71,24 @@ class TrystUserSeeder extends Seeder
         ]);
 
         /* Upload Images */
-//     foreach ($userJson['slideshow_images'] as $imageUrl) {
-//         $customId = get_unique_string();
-//         $storagePath = "escorts/gallery/{$user->id}/{$customId}.jpg";
-//         $imageContent = file_get_contents($imageUrl);
+    foreach ($userJson['slideshow_images'] as $imageUrl) {
+        $customId = get_unique_string();
+        $storagePath = "escorts/gallery/{$user->id}/{$customId}.jpg";
+        $imageContent = file_get_contents($imageUrl);
 
-//     if ($imageContent !== false) {
-//         Storage::put($storagePath, $imageContent);
-//         $user->gallery_images()->create([
-//             'custom_id' => $customId,
-//             'image' => $storagePath,
-//         ]);
-//     } else {
-//        $user->gallery_images()->create([
-//             'custom_id' => $customId,
-//             'image' => $imageUrl,
-//         ]);
-//     }
-//  }
+    if ($imageContent !== false) {
+        Storage::put($storagePath, $imageContent);
+        $user->gallery_images()->create([
+            'custom_id' => $customId,
+            'image' => $storagePath,
+        ]);
+    } else {
+       $user->gallery_images()->create([
+            'custom_id' => $customId,
+            'image' => $imageUrl,
+        ]);
+    }
+ }
  /* Upload Images end */
 
 
@@ -168,10 +171,49 @@ if (isset($userJson['contact'])) {
     }
 }
 
+
+
+/* Add address */
+/* Add address */
+/* Add address */
+if (isset($userJson['based_in'])) {
+    $basedIn = $userJson['based_in'];
+
+    // Assuming the format is "City, State, Country"
+    $addressParts = explode(', ', $basedIn);
+
+    $cityName = $addressParts[0] ?? null;
+    $stateName = $addressParts[1] ?? null;
+
+    // Use the predefined ID for the USA
+    $countryId = 236; // Replace with the actual ID you have for the USA
+
+    // Find or create the State within the USA
+    $state = State::firstOrCreate(['country_id' => $countryId, 'name' => $stateName]);
+
+    // Find or create the City within the given State and USA
+    $city = City::firstOrCreate(['country_id' => $countryId, 'state_id' => $state->id, 'name' => $cityName]);
+
+    // Now you can store the address information in your UserAddress model or use it as needed
+    // For example, assuming you have a UserAddress model
+    DB::table('user_addresses')->insert([
+        'custom_id' => get_unique_string(),
+        'user_id' => $user->id,
+        'city_id' => $city->id,
+        'state_id' => $state->id,
+        'country_id' => $countryId,
+        'country_id' => $countryId,
+        'is_primary' => 'y'
+    ]);
+}
+
+
+
+
 }
     }
 
- /* Start  policy */
+
 
 
 

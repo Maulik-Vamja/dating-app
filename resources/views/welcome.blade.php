@@ -68,20 +68,23 @@
                             <div class="about__bottom--body">
                                 <div class="ragi__slider overflow-hidden">
                                     <div class="swiper-wrapper">
-                                        @foreach ($escorts as $key => $escort)
+
+                                        @foreach ($escorts as $escort)
                                         @php
                                         $random_image = $escort->gallery_images()->inRandomOrder()->first();
                                         @endphp
                                         <div class="swiper-slide">
                                             <div class="ragi__thumb">
-                                                <a href="member-single.html"><img
+                                                <a href="{{ route('get.escort',$escort->user_name) }}">
+                                                    <img class="rounded-circle"
+                                                        style="width: 100px; height: 100px; object-fit: cover;"
                                                         src="{{$random_image ? (filter_var($random_image->image,FILTER_VALIDATE_URL) == false ? Storage::url($random_image->image) : $random_image->image) : asset('frontend/assets/images/allmedia/01.jpg')}}"
-                                                        alt="dating thumb"></a>
+                                                        alt="dating thumb">
+
+                                                </a>
                                             </div>
                                         </div>
-                                        @if ($key == 10)
-                                        @break
-                                        @endif
+
                                         @endforeach
 
                                     </div>

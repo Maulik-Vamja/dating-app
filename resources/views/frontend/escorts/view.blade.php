@@ -94,7 +94,8 @@ $random_image = $escort->gallery_images()->inRandomOrder()->first();
                                             </div>
                                         </div>
                                     </div>
-                                    <div class="col-md-12">
+
+                                    <div class="col-md-12" style="margin-top: 50px">
                                         <div class="profile-gallery-block lazy slider">
                                             @foreach ($escort->gallery_images as $image)
                                             <div class="profile-slide">

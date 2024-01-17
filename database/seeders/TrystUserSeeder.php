@@ -20,6 +20,10 @@ use Illuminate\Database\Eloquent\Factories\Factory ;
 use Illuminate\Support\Facades\Storage;
 use DB;
 use Carbon\Carbon;
+use Illuminate\Support\Facades\Log;
+
+use Intervention\Image\ImageManager;
+use Intervention\Image\Drivers\Gd\Driver;
 
 
 
@@ -42,7 +46,7 @@ class TrystUserSeeder extends Seeder
         $user = User::create([
             'custom_id' => get_unique_string('users'),
             'full_name' => $userJson['name'],
-            'user_name' => str_replace(' ', '', $userJson['name']),
+            'user_name' => str_replace(' ', '', $userJson['name']). get_unique_string('users'),
             'email' => str_replace(' ', '', $userJson['name']) . uniqid().'@gmail.com',
             'password' => Hash::make('password'),
             'short_description' => $userJson['tagline'],
@@ -71,24 +75,129 @@ class TrystUserSeeder extends Seeder
         ]);
 
         /* Upload Images */
-    foreach ($userJson['slideshow_images'] as $imageUrl) {
-        $customId = get_unique_string();
-        $storagePath = "escorts/gallery/{$user->id}/{$customId}.jpg";
+//     foreach ($userJson['slideshow_images'] as $imageUrl) {
+//         $customId = get_unique_string();
+//         $storagePath = "escorts/gallery/{$user->id}/{$customId}.jpg";
+//         $imageContent = file_get_contents($imageUrl);
+
+//     if ($imageContent !== false) {
+//         Storage::put($storagePath, $imageContent);
+//         $user->gallery_images()->create([
+//             'custom_id' => $customId,
+//             'image' => $storagePath,
+//         ]);
+//     } else {
+//        $user->gallery_images()->create([
+//             'custom_id' => $customId,
+//             'image' => $imageUrl,
+//         ]);
+//     }
+//  }
+
+ $manager = new ImageManager(new Driver());
+foreach ($userJson['slideshow_images'] as $imageUrl) {
+    $customId = get_unique_string();
+
+     $oldStoragePath = "escorts/gallery/{$user->id}/{$customId}.jpg";
+      //$filePath = storage_path("app/{$storagePath}");
+    $storagePath = storage_path("app/public/escorts/gallery/{$user->id}/{$customId}.jpg");
+    try {
+        // Fetch image content from the URL
         $imageContent = file_get_contents($imageUrl);
 
-    if ($imageContent !== false) {
-        Storage::put($storagePath, $imageContent);
-        $user->gallery_images()->create([
-            'custom_id' => $customId,
-            'image' => $storagePath,
-        ]);
-    } else {
-       $user->gallery_images()->create([
-            'custom_id' => $customId,
-            'image' => $imageUrl,
-        ]);
+        if ($imageContent !== false) {
+            Log::info("Image content fetched successfully from: $imageUrl");
+
+            // Save the original image
+            Storage::put($oldStoragePath, $imageContent);
+            Log::info("Original image saved successfully to: $storagePath");
+
+            // Open the original image with Intervention Image Manager
+            $img = $manager->read($storagePath);
+
+            // Check if the image can be decoded successfully
+            if ($img->exif() !== false) {
+                Log::info("Image decoded successfully: $storagePath");
+
+                // Get the original width and height of the image
+                $originalWidth = $img->width();
+                $originalHeight = $img->height();
+                Log::info("Original image dimensions: {$originalWidth}x{$originalHeight}");
+
+                // Calculate the new dimensions after cutting down 10% from each side
+                $leftPercentage = 0.1;
+                $rightPercentage = 0.1;
+                $bottomPercentage = 0.2;
+
+                $newWidth = $originalWidth * (1 - $leftPercentage - $rightPercentage);
+                $newHeight = $originalHeight * (1 - $bottomPercentage);
+
+                Log::info("New image dimensions: {$newWidth}x{$newHeight}");
+
+                // Calculate the cropping positions
+                $left = $originalWidth * $leftPercentage;
+                $top = 0;  // No top cropping
+                $right = $originalWidth - $originalWidth * $rightPercentage;
+                $bottom = $originalHeight * $bottomPercentage;
+
+                Log::info("Cropping positions: left={$left}, top={$top}, right={$right}, bottom={$bottom}");
+
+                // Crop the image
+                $img->crop($newWidth, $newHeight, $left, $top);
+                Log::info("Image cropped successfully");
+
+                // Save the cropped image
+                if ($img->save($storagePath)) {
+                    Log::info("Cropped image saved successfully to: $storagePath");
+
+                    $user->gallery_images()->create([
+                        'custom_id' => $customId,
+                        'image' => $oldStoragePath,
+                    ]);
+                    Log::info("Database entry created for the image");
+                } else {
+                    Log::error("Failed to save the cropped image: $storagePath");
+                }
+            } else {
+                Log::error("Unable to decode input: $storagePath");
+            }
+        } else {
+            Log::error("Unable to fetch image content from: $imageUrl");
+            continue;
+        }
+    } catch (\Exception $e) {
+        Log::error("Exception: {$e->getMessage()}");
+        continue;
     }
- }
+}
+
+/*  $storagePath = storage_path('app/test4.jpg');
+ $img = $manager->read($storagePath);
+            $originalWidth = $img->width();
+            $originalHeight = $img->height();
+
+            // Calculate the new dimensions after cutting down 10% from each side
+            $leftPercentage = 0.1;
+            $rightPercentage = 0.1;
+            $bottomPercentage = 0.2;
+
+            $newWidth = $originalWidth * (1 - $leftPercentage - $rightPercentage);
+            $newHeight = $originalHeight * (1 - $bottomPercentage);
+
+            // Calculate the cropping positions
+            $left = $originalWidth * $leftPercentage;
+            $top = 0;  // No top cropping
+            $right = $originalWidth - $originalWidth * $rightPercentage;
+            $bottom = $originalHeight * $bottomPercentage;
+
+            // Crop the image
+            $img->crop($newWidth, $newHeight, $left, $top);
+
+
+ $img->save($storagePath); */
+
+
+
  /* Upload Images end */
 
 

@@ -5,18 +5,15 @@
                 <div class="header__top--left">
                     <ul>
                         <li>
-                            <i class="fa-solid fa-phone"></i> <span>+800-123-4567 6587</span>
+                            <i class="fa-solid fa-envelope"></i> <span>contact@ifindyou.co</span>
                         </li>
-                        <li>
-                            <i class="fa-solid fa-location-dot"></i> Beverley, New York 224 USA
-                        </li>
+
                     </ul>
                 </div>
                 <div class="header__top--right">
                     <ul>
                         <li><a href="#"><i class="fa-brands fa-facebook-f"></i> Facebook</a></li>
                         <li><a href="#"><i class="fa-brands fa-instagram"></i> Instagram</a></li>
-                        <li><a href="#"><i class="fa-brands fa-youtube"></i> Youtube</a></li>
                     </ul>
                 </div>
             </div>

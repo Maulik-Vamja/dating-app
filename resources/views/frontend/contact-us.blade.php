@@ -21,7 +21,7 @@
 <!-- ================> Page Header section end here <================== -->
 
 <!-- ===========Info Section Ends Here========== -->
-<div class="info-section padding-top padding-bottom">
+{{-- <div class="info-section padding-top padding-bottom">
     <div class="container">
         <div class="section__header style-2 text-center">
             <h2>Contact Info</h2>
@@ -65,7 +65,7 @@
             </div>
         </div>
     </div>
-</div>
+</div> --}}
 <!-- ===========Info Section Ends Here========== -->
 
 

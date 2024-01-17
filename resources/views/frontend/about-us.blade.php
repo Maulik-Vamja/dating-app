@@ -127,8 +127,9 @@
                         <div class="story__inner">
                             <div class="story__thumb">
                                 <a href="{{ route('blogs.show',$blog->slug) }}"><img
-                                        src="{{\Storage::url($blog->image)}}" alt="dating thumb"
-                                        style="max-height:250px !important; height: 250px;"></a>
+                                        src="{{ filter_var($blog->image, FILTER_VALIDATE_URL) == false ? \Storage::url($blog->image) : $blog->image }}"
+                                        alt="dating thumb"
+                                        style="max-height: 250px !important; height: auto; object-fit: cover;"></a>
                                 <span class="member__activity member__activity--ofline">{{
                                     $blog->category->name }}</span>
                             </div>

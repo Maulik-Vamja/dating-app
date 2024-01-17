@@ -11,7 +11,8 @@
                     <div class="banner__content wow fadeInLeft" data-wow-duration="1.5s">
                         <div class="banner__title">
                             <h2>New Places, Unforgettable Dating.</h2>
-                            <p>Join our international family today! Please call us for more info.</p>
+                            <p>The 1st Platform in the world who list the adult entertainer accross the world with
+                                service like BDSM, kink, video, massage and much more.</p>
                             <a href="membership.html" class="default-btn style-2"><span>Create Free Profile</span></a>
                         </div>
                     </div>
@@ -52,9 +53,9 @@
                         <div class="about__top">
                             <div class="about__content">
                                 <h3>Welcome To Our iFindYou.co</h3>
-                                <p>You find us, finally, and you are already in love. More than 4.000.000 around the
-                                    world already shared the same experiences and uses our system. Joining us today
-                                    just got easier!</p>
+                                <p>You find us, finally, and you are already in love. More than 4.000.000 escorts around
+                                    the
+                                    world already joined in our platform ! Dont be late, Still its free to join.</p>
                             </div>
                         </div>
                         <div class="about__bottom">
@@ -178,7 +179,7 @@
 <div class="member member--style2 padding-top">
     <div class="container">
         <div class="section__header style-2 text-center wow fadeInUp" data-wow-duration="1.5s">
-            <h2>Most Popular Members</h2>
+            <h2>Recent Active Members</h2>
             <p>Learn from them and try to make it to this board. This will for sure boost you visibility and increase
                 your chances to find you loved one.</p>
         </div>
@@ -310,7 +311,7 @@
     style="background-image: url({{asset('frontend/assets/images/bg-img/02.jpg')}});">
     <div class="container">
         <div class="section__header style-2 text-center wow fadeInUp" data-wow-duration="1.5s">
-            <h2>Ollya Stories From Our Lovers</h2>
+            <h2>Read Most Sensual Article</h2>
             <p>Listen and learn from our community members and find out tips and tricks to meet your love. Join us
                 and be part of a bigger family.</p>
         </div>
@@ -322,9 +323,10 @@
                         <div class="story__inner">
                             <div class="story__thumb">
 
-                                <a href="{{ route('blogs.show',$blog->slug) }}"><img
-                                        src="{{ filter_var($blog->image,FILTER_VALIDATE_URL) == false ? \Storage::url($blog->image) : $blog->image }}  "
-                                        alt="dating thumb" style="max-height:250px !important; height: 250px;">
+                                <a href="{{ route('blogs.show',$blog->slug) }}">
+                                    <img src="{{ filter_var($blog->image, FILTER_VALIDATE_URL) == false ? \Storage::url($blog->image) : $blog->image }}"
+                                        alt="dating thumb"
+                                        style="max-height: 250px !important; height: auto; object-fit: cover;">
                                 </a>
                                 <span class="member__activity member__activity--ofline">{{
                                     $blog->category->name }}</span>
@@ -360,7 +362,7 @@
     style="background-image: url({{asset('frontend/assets/images/bg-img/02.jpg')}});">
     <div class="container">
         <div class="section__header style-2 text-center wow fadeInUp" data-wow-duration="1.5s">
-            <h2>Why Choose Ollya</h2>
+            <h2>Why Choose iFindYou</h2>
             <p>Our dating platform is like a breath of fresh air. Clean and trendy design with ready to use features
                 we are sure you will love.</p>
         </div>
@@ -592,7 +594,7 @@
                 <div class="app__item wow fadeInUp" data-wow-duration="1.5s">
                     <div class="app__inner">
                         <div class="app__content text-center">
-                            <h4>Download App Our Ollya</h4>
+                            <h4>Coming Soon</h4>
                             <h2>Easy Connect To Everyone</h2>
                             <p>You find us, finally and you are already in love. More than 5.000.000 around the
                                 world already shared the same experience andng ares uses our system Joining us today

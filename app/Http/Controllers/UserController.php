@@ -30,6 +30,7 @@ class UserController extends Controller
     }
     public function update(Request $request)
     {
+        // dd($request->all());
         DB::beginTransaction();
         try {
             $user = request()->user()->load('availability', 'rates', 'policies', 'contacts', 'addresses', 'primary_address', 'gallery_images');
@@ -57,6 +58,7 @@ class UserController extends Controller
                         'cup_size' => $request->input('cup_size'),
                         'hair_colour' => $request->input('hair_color'),
                         'eye_colour' => $request->input('eye_color'),
+                        'is_trans'  => $request->input('is_trans'),
                     ]);
                     // dd($user);
                     break;
@@ -140,8 +142,8 @@ class UserController extends Controller
     public function removeImage(Request $request)
     {
         try {
-            if (Storage::exists($request->image)) {
-                Storage::delete($request->image);
+            if (Storage::exists($request->path)) {
+                Storage::delete($request->path);
             } else {
                 throw new Exception('Image not found');
             }

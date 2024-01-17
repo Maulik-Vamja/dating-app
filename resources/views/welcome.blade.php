@@ -200,7 +200,7 @@
                                     </figure>
                                 </a>
                             </div>
-                            <div class="member__content">
+                            <div class="member__content w-100">
                                 <a class="member-link-page" href="{{ route('get.escort',$escort->user_name) }}">
                                     <h5>{{ $escort->full_name }}</h5>
                                 </a>

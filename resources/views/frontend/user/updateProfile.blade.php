@@ -394,6 +394,19 @@
                                                         </div>
                                                     </div>
                                                 </div>
+                                                <div class="row">
+                                                    <div class="col-md-6 mb-3">
+                                                        <div class="form-group">
+                                                            <label for="is_trans">Trans:</label>
+                                                            <select name="is_trans" id="is_trans" class="form-control">
+                                                                <option value="y" {{ $user->is_trans == 'y' ? 'selected'
+                                                                    : '' }}>Yes</option>
+                                                                <option value="n" {{ $user->is_trans == 'n' ? 'selected'
+                                                                    : '' }}>No</option>
+                                                            </select>
+                                                        </div>
+                                                    </div>
+                                                </div>
                                                 <hr>
                                                 <div class="h4">Availibility</div>
                                                 @php
@@ -681,7 +694,8 @@
                                                                         <h3 class="dropzone-msg-title">Drop files here
                                                                             or click
                                                                             to upload.</h3>
-                                                                        <span class="dropzone-msg-desc">Upload up to 12
+                                                                        <span class="dropzone-msg-desc">Upload up to {{
+                                                                            12 - $user->gallery_images->count() }}
                                                                             files</span>
                                                                     </div>
                                                                 </div>
@@ -694,16 +708,17 @@
                                                     <div class="col-lg-12 col-md-9 col-sm-12">
                                                         <div class="row">
                                                             @foreach ($user->gallery_images as $image)
-                                                            <div class="col-lg-3 col-md-4 col-sm-6">
+                                                            <div class="col-lg-3 col-md-4 col-sm-6"
+                                                                id="imagePreviewContainer">
                                                                 <img src="{{ filter_var($image->image, FILTER_VALIDATE_URL) == false ? Storage::url($image->image) : $image->image }}"
                                                                     alt="{{ $image->image }}"
                                                                     class="update_profile_image img-fluid">
                                                                 <div
                                                                     class="d-flex justify-content-center align-items-center mt-3">
-                                                                    {{-- <button type="button"
-                                                                        class="btn btn-danger btn-sm"
+                                                                    <button type="button" class="btn btn-danger btn-sm"
                                                                         data-image-id="{{ $image->id }}"
-                                                                        id="deleteImage">Delete</button> --}}
+                                                                        data-image_url="{{ $image->image }}"
+                                                                        id="deleteImage">Delete</button>
                                                                 </div>
                                                             </div>
                                                             @endforeach
@@ -738,6 +753,7 @@
     Dropzone.autoDiscover = false;
     $(document).ready(function () {
         var images = [];
+        var total_uploaded_image = "{{ $user->gallery_images->count() }}";
         var deleted_images = [];
         $('#country').select2({
             placeholder: "Please Select your Country",
@@ -753,7 +769,7 @@
         });
         $('#upload_file').dropzone({
             url: "{{ route('store.image') }}",
-            maxFiles: 12,
+            maxFiles: 12 - total_uploaded_image,
             maxfilesexceeded: function(file) {
                 $(".dropzone").addClass("is-invalid");
                 $("#dropzone-error").text('You have exceeded the File Upload Limit, You can not add more then 12 Images.').css('color', 'red');
@@ -782,10 +798,10 @@
             },
             removedfile: function(file, element) {
                 var element =file.previewElement;
-
+                console.log(element);
                 if(file.type == 'image/png' || file.type == 'image/jpeg' || file.type == 'image/jpg' || file.type == 'image/gif'){
                     var image_url = $(element).data('image_url');
-                    deleted_images.push(file.name);
+                    // deleted_images.push(file.name);
                     $.ajax({
                         url: "{{ route('remove.image') }}",
                         type: 'POST',
@@ -797,43 +813,17 @@
                         },
                         success: function(response) {
                             $(element).remove();
-                            $('#deleted_images').val(deleted_images);
+                            // $('#deleted_images').val(deleted_images);
                         },
                     });
+
                 }else{
+                    // console.log('herhe 2');
                     $(element).remove();
                 }
 
             },
             error: function(file, response) {
-                // let errmsg = ''
-                // var status = file.xhr?.status;
-                // if(status == 413){
-                //     $(".dropzone").addClass("is-invalid");
-                //     $("#dropzone-error").text(`This file is to Large for upload,You can\'t upload more than ${max_upload_file_size} MB size of single file. Please try to upload the file with lower size.`);
-                //     $("#dropzone-error").show();
-                // }else{
-                //     if(response.errorType == 'instagram_image'){
-                //         // errmsg = response.message
-                //         $(file.previewElement).find('.dz-image').css({"border" : "2px solid #d90101"});
-                //         $(file.previewElement).addClass("dz-error").find('.dz-error-message').text(response.message_title);
-                //         errmsg = response.message;
-                //         // $(".dropzone").addClass('is-invalid');
-                //         // $("#dropzone-error").addClass('invalid-feedback').text(response.message);
-                //         // $("#dropzone-error").show();
-                //     }else{
-                //         if(response == 'error'){
-                //             errmsg = 'Something went wrong please upload another file.Allowed file types are image/*,.mp4,image/webp,.mov'
-                //         }else{
-                //             errmsg = response;
-                //         }
-                //         this.removeFile(file);
-                //         // file.previewElement.classList.add("dz-error");
-                //     }
-                //     $(".dropzone").addClass("is-invalid");
-                //     $("#dropzone-error").text(errmsg);
-                //     $("#dropzone-error").show();
-                // }
             },
         });
         var summernoteElement = $('#description');
@@ -1014,6 +1004,15 @@
                     console.log(data);
                 }
             });
+        });
+
+        $(document).on('click','#deleteImage',function(){
+            var image_url = $(this).data('image_url');
+            if(confirm('Are you sure want to delete this Image...?') == true){
+                deleted_images.push(image_url);
+                $(this).parent().closest('#imagePreviewContainer').remove();
+                $('#deleted_images').val(deleted_images);
+            }
         });
     });
 </script>

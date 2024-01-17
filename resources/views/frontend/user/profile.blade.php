@@ -114,12 +114,15 @@ $random_image = $user->gallery_images()->inRandomOrder()->first();
                                             </div>
                                             <div class="info-card-content">
                                                 <ul class="info-list">
+                                                    @if ($user->primary_address)
+
                                                     <li>
                                                         <p class="info-name">Base in</p>
-                                                        <p class="info-details"><a
-                                                                href="/us/escorts/florida/miami">Miami, Florida, United
-                                                                States</a></p>
+                                                        <p class="info-details">{{ $user->primary_address?->city->name
+                                                            }}, {{ $user->primary_address?->state->name }},
+                                                            {{ $user->primary_address?->country->iso2 }}</p>
                                                     </li>
+                                                    @endif
                                                     <li>
                                                         <p class="info-name">Caters to</p>
                                                         <p class="info-details">{{ $user->caters_to }}</p>
@@ -177,6 +180,13 @@ $random_image = $user->gallery_images()->inRandomOrder()->first();
                                                     <li>
                                                         <p class="info-name">Eye Color</p>
                                                         <p class="info-details">{{ $user->eye_colour }}</p>
+                                                    </li>
+                                                    @endif
+                                                    @if ($user->is_trans)
+                                                    <li>
+                                                        <p class="info-name">Trans</p>
+                                                        <p class="info-details">{{ $user->is_trans == 'y' ? 'Yes' : 'No'
+                                                            }}</p>
                                                     </li>
                                                     @endif
                                                 </ul>

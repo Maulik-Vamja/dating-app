@@ -71,6 +71,13 @@
                                 <!-- <span>06</span> -->
                             </button>
                         </li>
+                        <li class="nav-item" role="presentation">
+                            <button class="nav-link" id="gt8-tab" data-bs-toggle="tab" data-bs-target="#gt8"
+                                type="button" role="tab" aria-controls="gt6" aria-selected="false"><i
+                                    class="fa-solid fa-map"></i> Addresses
+                                <!-- <span>06</span> -->
+                            </button>
+                        </li>
                     </ul>
                 </div>
             </div>
@@ -181,7 +188,7 @@
                                                     </span>
                                                     @endif
                                                     {{-- Address --}}
-                                                    <div class="row mt-3">
+                                                    {{-- <div class="row mt-3">
                                                         <label for="">
                                                             <h4>Primary Address</h4>
                                                         </label>
@@ -242,7 +249,7 @@
                                                                 @endforeach
                                                             </select>
                                                         </div>
-                                                    </div>
+                                                    </div> --}}
                                                 </div>
                                             </div>
                                         </div>
@@ -730,6 +737,129 @@
                                     </div>
                                 </div>
                             </div>
+                            <div class="tab-pane fade" id="gt8" role="tabpanel" aria-labelledby="gt8-tab">
+                                <div class="container">
+                                    <div class="site">
+                                        <div class="col-12">
+                                            <form action="{{ route('profile.update',$user->user_name) }}" method="POST"
+                                                enctype="multipart/form-data">
+                                                @csrf
+                                                <input type="hidden" name="action" value="update_addresses">
+                                                <div class="card">
+                                                    <div class="card-header">
+                                                        <div class="d-flex justify-content-end">
+                                                            <button type="submit" class="btn btn-primary">Update
+                                                                Addresses</button>
+                                                        </div>
+                                                    </div>
+                                                    @php
+                                                    $addressTypes =
+                                                    \App\Models\AddressType::where('is_active','y')->get();
+                                                    @endphp
+                                                    <div class="card-body">
+                                                        @foreach ($addressTypes as $key => $address_type)
+                                                        <div class="card mb-4">
+                                                            <div
+                                                                class="card-header d-flex justify-content-between align-items-center">
+                                                                <h6>{{ $address_type->address_type }}</h6>
+                                                                <button type="button" class="btn btn-primary"
+                                                                    id="AddMoreAddress"
+                                                                    data-address_type="{{ str_slug($address_type->address_type) }}"
+                                                                    data-address_type_id="{{ $address_type->id }}">Add
+                                                                    +</button>
+                                                            </div>
+                                                            @php
+                                                            $user_addresses =
+                                                            $user->addresses()->where('address_type_id',$address_type->id)->get();
+                                                            @endphp
+                                                            <div class="card-body">
+                                                                <div class=""
+                                                                    id="{{str_slug($address_type->address_type)}}Container">
+                                                                    @foreach ($user_addresses as $key => $address)
+                                                                    <div class="row" id="addressRow">
+                                                                        <div class="col-md-3">
+                                                                            <div class="form-group">
+                                                                                <label for="">Country</label>
+                                                                                <select
+                                                                                    name="addresses[{{ $address_type->id }}][{{$key}}][country]"
+                                                                                    class="form-control"
+                                                                                    id="addresses_country" required>
+                                                                                    <option value="">Select Country
+                                                                                    </option>
+                                                                                    @foreach ($countries as $country)
+                                                                                    <option value="{{ $country->id }}"
+                                                                                        @selected($address->country_id
+                                                                                        == $country->id)>
+                                                                                        {{$country->name }}</option>
+                                                                                    @endforeach
+                                                                                </select>
+                                                                            </div>
+                                                                        </div>
+                                                                        @php
+                                                                        $stored_states =
+                                                                        \App\Models\State::where('country_id',$address->country_id)->get();
+                                                                        @endphp
+                                                                        <div class="col-md-3">
+                                                                            <div class="form-group">
+                                                                                <label for="">State</label>
+                                                                                <select
+                                                                                    name="addresses[{{ $address_type->id }}][{{$key}}][state]"
+                                                                                    id="addresses_state"
+                                                                                    class="form-control" required>
+                                                                                    <option value="">Select State
+                                                                                    </option>
+                                                                                    @foreach ($stored_states as $state)
+                                                                                    <option value="{{ $state->id }}"
+                                                                                        @selected($address->state_id ==
+                                                                                        $state->id)>
+                                                                                        {{ $state->name }}</option>
+                                                                                    @endforeach
+                                                                                </select>
+                                                                            </div>
+                                                                        </div>
+                                                                        @php
+                                                                        $stored_cities =
+                                                                        \App\Models\City::where('state_id',$address->state_id)->get();
+                                                                        @endphp
+                                                                        <div class="col-md-3">
+                                                                            <div class="form-group">
+                                                                                <label for="">City</label>
+                                                                                <select
+                                                                                    name="addresses[{{ $address_type->id }}][{{$key}}][city]"
+                                                                                    id="addresses_city"
+                                                                                    class="form-control" required>
+                                                                                    <option value="">Select Country
+                                                                                    </option>
+                                                                                    @foreach ($stored_cities as $city)
+                                                                                    <option value="{{ $city->id }}"
+                                                                                        @selected($address->city_id ==
+                                                                                        $city->id)>
+                                                                                        {{ $city->name }}</option>
+                                                                                    @endforeach
+                                                                                </select>
+                                                                            </div>
+                                                                        </div>
+                                                                        <div
+                                                                            class="col-md-3 d-flex justify-content-end align-items-center">
+                                                                            <button class="btn btn-danger"
+                                                                                id="removeAddress"
+                                                                                type="button">Remove</button>
+                                                                        </div>
+                                                                    </div>
+                                                                    @endforeach
+
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                        @endforeach
+
+                                                    </div>
+                                                </div>
+                                            </form>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
                         </div>
                     </div>
                 </div>
@@ -1013,6 +1143,112 @@
                 $(this).parent().closest('#imagePreviewContainer').remove();
                 $('#deleted_images').val(deleted_images);
             }
+        });
+        $(document).on('click','#AddMoreAddress',function(event){
+            var address_type = $(this).data('address_type');
+            var address_type_id = $(this).data('address_type_id');
+            var address_row_count = $(`#${address_type}Container`).children('div#addressRow').length;
+            var countries = JSON.parse(`{!! $countries->toJson() !!}`);
+
+            // console.log(countries);
+            var newAddressRowHtml = `
+            <div class="row" id="addressRow">
+                <div class="col-md-3">
+                    <div class="form-group">
+                        <label for="">Country</label>
+                        <select
+                            name="addresses[${address_type_id}][${address_row_count}][country]"
+                            class="form-control" id="addresses_country" required>
+                            <option value="">Select Country
+                            </option>`;
+                            $.each(countries,function(key,value){ newAddressRowHtml += `<option value="${value.id}">${value.name}</option>`; });
+                    newAddressRowHtml += `</select>
+                    </div>
+                </div>
+                <div class="col-md-3">
+                    <div class="form-group">
+                        <label for="">State</label>
+                        <select
+                            name="addresses[${address_type_id}][${address_row_count}][state]"
+                            id="addresses_state" class="form-control" required>
+                            <option value="">Select State
+                            </option>
+                        </select>
+                    </div>
+                </div>
+                <div class="col-md-3">
+                    <div class="form-group">
+                        <label for="">City</label>
+                        <select
+                            name="addresses[${address_type_id}][${address_row_count}][city]"
+                            id="addresses_city" class="form-control" required>
+                            <option value="">Select Country
+                            </option>
+                            <option value="1">1
+                            </option>
+                        </select>
+                    </div>
+                </div>
+                <div
+                    class="col-md-3 d-flex justify-content-end align-items-center">
+                    <button class="btn btn-danger" id="removeAddress"
+                        type="button">Remove</button>
+                </div>
+            </div>
+            `;
+
+            $(`#${address_type}Container`).append(newAddressRowHtml);
+        });
+        $(document).on('click','#removeAddress',function(){
+            $(this).parent().closest('div#addressRow').remove();
+        });
+
+        $(document).on('change','#addresses_country',function(){
+            var country_id = $(this).val();
+            var nearest_state_element = $(this).parent().closest('div#addressRow').find('select#addresses_state');
+            console.log(nearest_state_element,'nearest_state_element');
+            $.ajax({
+                url:"{{route('get.states')}}?country_id="+country_id,
+                type:"GET",
+                dataType:"json",
+                success:function(data){
+                    $(nearest_state_element).empty();
+                    $(nearest_state_element).append(`<option value="">Select State</option>`)
+                    if(data.length > 0){
+                        $.each(data,function(key,value){
+                            $(nearest_state_element).append(`<option value="${value.id}">${value.name}</option>`);
+                        });
+                    }else{
+                        $(nearest_state_element).append(`<option value="">No State Available</option>`)
+                    }
+                },
+                error:function(data){
+                    console.log(data);
+                }
+            });
+        })
+        $(document).on('change','#addresses_state',function(){
+            var state_id = $(this).val();
+            var nearest_city_element = $(this).parent().closest('div#addressRow').find('select#addresses_city');
+            $.ajax({
+                url:"{{route('get.cities')}}?state_id="+state_id,
+                type:"GET",
+                dataType:"json",
+                success:function(data){
+                    $(nearest_city_element).empty();
+                    $(nearest_city_element).append(`<option value="">Select City</option>`)
+                    if(data.length > 0){
+                        $.each(data,function(key,value){
+                            $(nearest_city_element).append(`<option value="${value.id}">${value.name}</option>`);
+                        });
+                    }else{
+                        $(nearest_city_element).append(`<option value="">No City Available, Select another State</option>`)
+                    }
+                },
+                error:function(data){
+                    console.log(data);
+                }
+            });
         });
     });
 </script>

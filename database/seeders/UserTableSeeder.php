@@ -28,7 +28,7 @@ class UserTableSeeder extends Seeder
             $user->rates()->saveMany(UserRate::factory()->count(rand(1, 5))->make());
             $user->policies()->saveMany(UserPolicy::factory()->count(rand(1, 5))->make());
             $user->contacts()->saveMany(UserContactMedia::factory()->count(rand(1, 5))->make());
-            $user->primary_address()->save(UserAddress::factory()->make());
+            $user->addresses()->saveMany(UserAddress::factory()->count(rand(1, 5))->make());
             $user->gallery_images()->saveMany(GalleryImages::factory()->count(8)->make());
         });
     }

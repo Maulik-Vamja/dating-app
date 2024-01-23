@@ -15,7 +15,7 @@ class UserController extends Controller
     public function getProfile()
     {
         $user = auth()->user();
-        $user->load('availability', 'rates', 'policies', 'contacts', 'addresses', 'primary_address', 'gallery_images');
+        $user->load('availability', 'rates', 'policies', 'contacts', 'addresses', 'home_addresses', 'based_in_addresses', 'gallery_images');
         return view('frontend.user.profile', [
             'user' => $user,
         ]);
@@ -23,7 +23,7 @@ class UserController extends Controller
     public function updateProfile()
     {
         $user = auth()->user();
-        $user->load('availability', 'rates', 'policies', 'contacts', 'addresses', 'primary_address', 'gallery_images');
+        $user->load('availability', 'rates', 'policies', 'contacts', 'addresses', 'home_address', 'gallery_images');
         return view('frontend.user.updateProfile', [
             'user' => $user,
         ]);
@@ -33,18 +33,18 @@ class UserController extends Controller
         // dd($request->all());
         DB::beginTransaction();
         try {
-            $user = request()->user()->load('availability', 'rates', 'policies', 'contacts', 'addresses', 'primary_address', 'gallery_images');
+            $user = request()->user()->load('availability', 'rates', 'policies', 'contacts', 'addresses', 'home_address', 'gallery_images');
             switch ($request->input('action')) {
                 case 'update_basic':
                     $user->fill($request->all());
-                    $user->primary_address()->delete();
-                    $user->primary_address()->create([
-                        'custom_id'   => get_unique_string(),
-                        'country_id' => $request->input('country'),
-                        'state_id' => $request->input('state'),
-                        'city_id' => $request->input('city'),
-                        'is_primary'    => 'y',
-                    ]);
+                    // $user->primary_address()->delete();
+                    // $user->primary_address()->create([
+                    //     'custom_id'   => get_unique_string(),
+                    //     'country_id' => $request->input('country'),
+                    //     'state_id' => $request->input('state'),
+                    //     'city_id' => $request->input('city'),
+                    //     'is_primary'    => 'y',
+                    // ]);
                     break;
                 case 'update_personal_details':
                     $user->fill([
@@ -113,6 +113,20 @@ class UserController extends Controller
                         TempImage::where('user_id', $user->id)->delete();
                     }
                     break;
+                case 'update_addresses':
+                    $user->addresses()->delete();
+                    foreach ($request->input('addresses') as $address_type_id =>  $addresses_of_types) {
+                        foreach ($addresses_of_types as $address) {
+                            $user->addresses()->create([
+                                'custom_id' => get_unique_string(),
+                                'address_type_id' => $address_type_id,
+                                'country_id' => $address['country'],
+                                'state_id' => $address['state'],
+                                'city_id' => $address['city'],
+                            ]);
+                        }
+                    }
+                    break;
                 default:
                     return redirect()->back()->with('error', 'Invalid action');
                     break;
@@ -122,7 +136,7 @@ class UserController extends Controller
             return redirect()->back()->with('success', 'Profile updated successfully');
         } catch (Exception $th) {
             DB::rollBack();
-            // dd($th->getMessage());
+            dd($th->getMessage());
             return redirect()->back()->with('errorMsg', 'Something went wrong');
         }
     }

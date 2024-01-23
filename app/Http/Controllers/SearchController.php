@@ -11,7 +11,7 @@ class SearchController extends Controller
     public function __invoke(Request $request)
     {
         // dd($request->all());
-        $escorts = User::with('availability', 'addresses', 'primary_address', 'gallery_images')
+        $escorts = User::with('availability', 'addresses', 'based_in_addresses', 'gallery_images')
             ->when($request->has('gender'), function ($query) use ($request) {
                 $query->where('gender', $request->gender);
             })
@@ -19,12 +19,12 @@ class SearchController extends Controller
                 $query->whereBetween('age', [$request->min_age, $request->max_age]);
             })
             ->when($request->country !== null, function ($query) use ($request) {
-                $query->whereHas('primary_address', function ($query) use ($request) {
+                $query->whereHas('based_in_addresses', function ($query) use ($request) {
                     $query->where('country_id', $request->country);
                 });
             })
             ->when($request->state !== null, function ($query) use ($request) {
-                $query->whereHas('primary_address', function ($query) use ($request) {
+                $query->whereHas('based_in_addresses', function ($query) use ($request) {
                     $query->where('state_id', $request->state);
                 });
             })

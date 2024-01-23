@@ -210,9 +210,9 @@
                                 @endphp
                                 <p class="short__desc mt-1">{{ $escort->short_description }}</p>
                                 <div class="city-availibity mt-2 d-flex justify-content-between">
-                                    <p><i class="fa-solid fa-house"></i>{{ $escort->primary_address?->city->name }}, {{
-                                        $escort->primary_address?->state->name }},
-                                        {{ $escort->primary_address?->country->iso2 }}</p>
+                                    <p><i class="fa-solid fa-house"></i>{{ $escort->home_address?->city->name }}, {{
+                                        $escort->home_address?->state->name }},
+                                        {{ $escort->home_address?->country->iso2 }}</p>
                                     <p class="d-flex align-items-center text-capitalize">
                                         <span
                                             class="{{ isset($availableOrNot[$today])  ? '' : 'not-avail' }} availibity-members"></span>available

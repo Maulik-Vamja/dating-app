@@ -60,6 +60,7 @@ $random_image = $escort->gallery_images()->inRandomOrder()->first();
                         </li>
                     </ul>
                 </div>
+
             </div>
         </div>
     </div>
@@ -77,11 +78,13 @@ $random_image = $escort->gallery_images()->inRandomOrder()->first();
                                                 {{-- <button class="ic-activiy"><i class="fa-solid fa-clock"></i> Last
                                                     active
                                                     today</button> --}}
-                                                @if ($escort->primary_address)
+                                                @if ($escort->home_addresses)
+                                                @foreach ($escort->home_addresses as $address)
                                                 <button class="ic-location"><i class="fa-solid fa-house"></i> {{
-                                                    $escort->primary_address?->city->name
-                                                    }}, {{ $escort->primary_address?->state->name }},
-                                                    {{ $escort->primary_address?->country->iso2 }}</button>
+                                                    $address?->city->name
+                                                    }}, {{ $address?->state->name }},
+                                                    {{ $address?->country->iso2 }}</button>
+                                                @endforeach
                                                 @endif
                                                 <button class="ic-gender"><i class="fa-solid fa-venus"></i>
                                                     {{ ucfirst($escort->gender) }}</button>
@@ -121,11 +124,16 @@ $random_image = $escort->gallery_images()->inRandomOrder()->first();
                                             <div class="info-card-content">
                                                 <ul class="info-list">
                                                     <li>
-                                                        <p class="info-name">Address</p>
-                                                        <p class="info-details">{{
-                                                            $escort->primary_address?->city->name }}, {{
-                                                            $escort->primary_address?->state->name }},
-                                                            {{ $escort->primary_address?->country->iso2 }}</p>
+                                                        @if ($escort->based_in_addresses)
+                                                        <p class="info-name">Based In Address</p>
+                                                        <div class="info-details">
+                                                            @foreach ($escort->based_in_addresses as $address)
+                                                            <p>{{ $address?->city->name
+                                                                }}, {{ $address?->state->name }},
+                                                                {{ $address?->country->iso2 }}.</p>
+                                                            @endforeach
+                                                        </div>
+                                                        @endif
                                                     </li>
                                                     <li>
                                                         <p class="info-name">Caters to</p>
@@ -450,6 +458,59 @@ $random_image = $escort->gallery_images()->inRandomOrder()->first();
                                         </div>
                                     </div>
                                 </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="section__wrapper wow fadeInUp" data-wow-duration="1.5s">
+                    <div class="member member--style2 mt-5">
+                        <div class="container">
+                            <div class="row g-0 justify-content-center">
+                                <h3 class="mb-3">Similar Profiles</h3>
+                                @forelse ($similar_escorts as $escort)
+                                @php
+                                $random_image = $escort->gallery_images()->inRandomOrder()->first();
+                                @endphp
+                                <div class="member__item">
+                                    <div class="member__inner">
+                                        <div class="member__thumb">
+                                            <a class="member-link-page"
+                                                href="{{ route('get.escort',$escort->user_name) }}">
+                                                <figure><img
+                                                        src="{{ $random_image ? (filter_var($random_image->image,FILTER_VALIDATE_URL) == false ? Storage::url($random_image->image) : $random_image->image) : asset('frontend/assets/images/allmedia/01.jpg')}}"
+                                                        alt="member-img">
+                                                </figure>
+                                            </a>
+                                        </div>
+                                        <div class="member__content">
+                                            <a class="member-link-page"
+                                                href="{{ route('get.escort',$escort->user_name) }}">
+                                                <h5>{{ $escort->full_name }}</h5>
+                                            </a>
+                                            @php
+                                            $today = Carbon\Carbon::now()->format('l');
+                                            $availableOrNot = json_decode($escort->availibility,true);
+                                            @endphp
+                                            <p class="short__desc mt-1">{{ $escort->short_description }}</p>
+                                            <div class="city-availibity mt-2 d-flex justify-content-between">
+                                                <p><i class="fa-solid fa-house"></i>{{
+                                                    $escort->home_address?->city->name }}, {{
+                                                    $escort->home_address?->state->name }},
+                                                    {{ $escort->home_address?->country->iso2 }}</p>
+                                                <p class="d-flex align-items-center text-capitalize"><span
+                                                        class="{{ isset($availableOrNot[$today])  ? '' : 'not-avail' }} availibity-members"></span>available
+                                                </p>
+                                            </div>
+                                            <div class="member-bio">
+                                                <p class="member__desc-txt">{!! $escort->description !!}</p>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                @empty
+                                <h4>Oops...No Similar Profiles Found..!</h4>
+                                @endforelse
+
                             </div>
                         </div>
                     </div>

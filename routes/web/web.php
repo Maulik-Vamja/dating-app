@@ -31,7 +31,7 @@ use Illuminate\Support\Facades\{Route, Auth};
 Route::get('/', [PagesController::class, 'home'])->name('welcome');
 // Update Auth routes as per your requirement
 Auth::routes([
-    'confirm' => false, 'verify' => false, 'register' => true, 'login' => true,
+    'confirm' => false, 'verify' => true, 'register' => true, 'login' => true,
 ]);
 
 // Auth Routes

@@ -18,6 +18,7 @@ class UserAddressFactory extends Factory
     {
         return [
             'custom_id' =>  get_unique_string(),
+            'address_type_id'   =>  \App\Models\AddressType::inRandomOrder()->first()->id,
             'country_id'    =>  \App\Models\Country::inRandomOrder()->first()->id,
             'state_id'  =>  \App\Models\State::inRandomOrder()->first()->id,
             'city_id'   =>  \App\Models\City::inRandomOrder()->first()->id,

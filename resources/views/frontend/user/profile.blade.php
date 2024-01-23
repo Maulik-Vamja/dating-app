@@ -76,8 +76,15 @@ $random_image = $user->gallery_images()->inRandomOrder()->first();
                                                 {{-- <button class="ic-activiy"><i class="fa-solid fa-clock"></i> Last
                                                     active
                                                     today</button> --}}
-                                                <button class="ic-location"><i class="fa-solid fa-house"></i> Miami, FL,
-                                                    US</button>
+                                                @if ($user->home_addresses)
+                                                @foreach ($user->home_addresses as $address)
+                                                <button class="ic-location"><i class="fa-solid fa-house"></i>
+                                                    {{ $address?->city->name}},
+                                                    {{ $address?->state->name }},
+                                                    {{ $address?->country->iso2 }}</button>
+                                                @endforeach
+                                                @endif
+
                                                 <button class="ic-gender"><i class="fa-solid fa-venus"></i>
                                                     {{ ucfirst($user->gender) }}</button>
                                             </div>
@@ -114,13 +121,16 @@ $random_image = $user->gallery_images()->inRandomOrder()->first();
                                             </div>
                                             <div class="info-card-content">
                                                 <ul class="info-list">
-                                                    @if ($user->primary_address)
-
+                                                    @if ($user->based_in_addresses)
                                                     <li>
-                                                        <p class="info-name">Base in</p>
-                                                        <p class="info-details">{{ $user->primary_address?->city->name
-                                                            }}, {{ $user->primary_address?->state->name }},
-                                                            {{ $user->primary_address?->country->iso2 }}</p>
+                                                        <p class="info-name">Based in</p>
+                                                        <div class="info-details">
+                                                            @foreach ($user->based_in_addresses as $address)
+                                                            <p>{{ $address?->city->name
+                                                                }}, {{ $address?->state->name }},
+                                                                {{ $address?->country->iso2 }}.</p>
+                                                            @endforeach
+                                                        </div>
                                                     </li>
                                                     @endif
                                                     <li>

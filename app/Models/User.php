@@ -9,6 +9,7 @@ use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
 use Laravel\Sanctum\HasApiTokens;
 
+// class User extends Authenticatable implements MustVerifyEmail
 class User extends Authenticatable
 {
     use HasApiTokens, HasFactory, Notifiable, SoftDeletes;
@@ -61,9 +62,17 @@ class User extends Authenticatable
     {
         return $this->hasMany(UserContactMedia::class, "user_id", "id")->where('is_active', 'y');
     }
-    public function primary_address()
+    public function home_address()
     {
-        return $this->hasOne(UserAddress::class, "user_id", "id")->where('is_primary', 'y');
+        return $this->hasOne(UserAddress::class, "user_id", "id")->where('address_type_id', 1)->latest();
+    }
+    public function home_addresses()
+    {
+        return $this->hasMany(UserAddress::class, "user_id", "id")->where('address_type_id', 1);
+    }
+    public function based_in_addresses()
+    {
+        return $this->hasMany(UserAddress::class, "user_id", "id")->where('address_type_id', 2);
     }
     public function addresses()
     {

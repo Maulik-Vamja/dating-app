@@ -22,7 +22,7 @@ class FrontendComposer
     {
         $this->recent_blogs = Blog::where('is_active', StatusEnums::ACTIVE->value)->orderBy('created_at', 'DESC')->with(['tags', 'category', 'user'])->take(4)->get();
 
-        $this->latest_escorts = User::latest()->with(['availability', 'primary_address'])->limit(4)->get();
+        $this->latest_escorts = User::latest()->with(['availability', 'addresses'])->limit(4)->get();
         $this->settings = Setting::pluck('value', 'constant');;
     }
 

@@ -187,6 +187,9 @@
                                                             }}</strong>
                                                     </span>
                                                     @endif
+                                                    @php
+                                                    $countries = \App\Models\Country::all();
+                                                    @endphp
                                                     {{-- Address --}}
                                                     {{-- <div class="row mt-3">
                                                         <label for="">

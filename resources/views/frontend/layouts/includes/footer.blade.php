@@ -25,10 +25,11 @@
                             <div class="footer__newsletter--social">
                                 <ul>
                                     <li><a href="#"><i class="fa-brands fa-twitter"></i></a></li>
-                                    <li><a href="#"><i class="fa-brands fa-twitch"></i></a></li>
+                                    <li><a href="#"><i class="fa-brands fa-tumblr"></i></a></li>
+                                    <li><a href="#"><i class="fa-brands fa-reddit"></i></a></li>
                                     <li><a href="#"><i class="fa-brands fa-instagram"></i></a></li>
-                                    <li><a href="#"><i class="fa-brands fa-dribbble"></i></a></li>
-                                    <li><a href="#"><i class="fa-brands fa-facebook-messenger"></i></a></li>
+                                    <li><a href="#"><i class="fa-brands fa-facebook"></i></a></li>
+                                    <li><a href="#"><i class="fa-brands fa-telegram"></i></a></li>
                                 </ul>
                             </div>
                         </div>
@@ -47,12 +48,11 @@
                                         <h4>About Ollya</h4>
                                     </div>
                                     <div class="footer__content--desc">
-                                        <p>Ollya is a friendly dating theme based on HTML template for the community
-                                            functionality</p>
+                                        <p>The 1st Platform in the world which lists adult entertainers across the world with services like BDSM, kink, Anal, BBW,
+                                        FMTY, Sensual Massage and much more</p>
                                     </div>
                                     <div class="footer__content--info">
-                                        <p><b>Address :</b> Suite-13 Tropical Center New Elephant Road 1205</p>
-                                        <p><b>Contact :</b> +30 226 4881 514 www.yoursitename.com</p>
+                                        <p>Now we 4,000 memebers Family</p>
                                     </div>
                                 </div>
                             </div>
@@ -144,7 +144,7 @@
                             <div class="footer__inner">
                                 <div class="footer__content">
                                     <div class="footer__content--title">
-                                        <h4>Contacts & Support</h4>
+                                        <h4>Links</h4>
                                     </div>
                                     <div class="footer__content--desc">
                                         <ul>
@@ -169,7 +169,7 @@
                             <div class="footer__inner">
                                 <div class="footer__content">
                                     <div class="footer__content--title">
-                                        <h4>Recent Activity</h4>
+                                        <h4>Recent Article</h4>
                                     </div>
                                     <div class="footer__content--desc">
                                         <ul>
@@ -203,7 +203,7 @@
     <div class="footer__bottom wow fadeInUp" data-wow-duration="1.5s">
         <div class="container">
             <div class="footer__content text-center">
-                <p class="mb-0">All Rights Reserved &copy; <a href="index.html">Ollya</a> || Design By: CodexCoder
+                <p class="mb-0">All Rights Reserved &copy; <a href="/">iFindyou.co</a>
                 </p>
             </div>
         </div>

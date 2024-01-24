@@ -10,9 +10,9 @@
                 <div class="col-lg-4 col-12">
                     <div class="banner__content wow fadeInLeft" data-wow-duration="1.5s">
                         <div class="banner__title">
-                            <h2>New Places, Unforgettable Dating.</h2>
-                            <p>The 1st Platform in the world who list the adult entertainer accross the world with
-                                service like BDSM, kink, video, massage and much more.</p>
+                            <h2>Meet & Date, Pleasant.</h2>
+                            <p>The 1st Platform in the world which lists adult entertainers across the world with services like BDSM, kink, Anal, BBW,
+                            FMTY, Sensual Massage and much more.</p>
                             <a href="membership.html" class="default-btn style-2"><span>Create Free Profile</span></a>
                         </div>
                     </div>
@@ -52,10 +52,9 @@
                     <div class="about__left h-100">
                         <div class="about__top">
                             <div class="about__content">
-                                <h3>Welcome To Our iFindYou.co</h3>
-                                <p>You find us, finally, and you are already in love. More than 4.000.000 escorts around
-                                    the
-                                    world already joined in our platform ! Dont be late, Still its free to join.</p>
+                                <h3>Welcome To iFindYou</h3>
+                                <p>You find us, finally, and you are already in love. More than 4.000.000 female & Male Escorts around the world have already joined our
+                                platform ! Don't be late, Still it's free to join.</p>
                             </div>
                         </div>
                         <div class="about__bottom">
@@ -97,7 +96,7 @@
                 <div class="col">
                     <div class="about__right ">
                         <div class="about__title">
-                            <h3>Find Your True Love</h3>
+                            <h3>Find Your best Match</h3>
                         </div>
                         <form action="{{ route('get.escorts') }}" method="GET">
                             <div class="banner__list">
@@ -180,8 +179,7 @@
     <div class="container">
         <div class="section__header style-2 text-center wow fadeInUp" data-wow-duration="1.5s">
             <h2>Recent Active Members</h2>
-            <p>Learn from them and try to make it to this board. This will for sure boost you visibility and increase
-                your chances to find you loved one.</p>
+            <p>Find your match from recently active members. Who is still waiting for your knock.</p>
         </div>
         <div class="section__wrapper wow fadeInUp" data-wow-duration="1.5s">
             <div class="tab-content mx-12-none">
@@ -228,7 +226,7 @@
                 </div>
             </div>
             <div class="text-center mt-4">
-                <a href="{{ route('get.escorts') }}" class="default-btn"><span>See More Popular</span></a>
+                <a href="{{ route('get.escorts') }}" class="default-btn"><span>See More</span></a>
             </div>
         </div>
     </div>
@@ -237,9 +235,8 @@
 <div class="about padding-top padding-bottom">
     <div class="container">
         <div class="section__header style-2 text-center wow fadeInUp" data-wow-duration="1.5s">
-            <h2>It All Starts With A Date</h2>
-            <p>Learn from them and try to make it to this board. This will for sure boost you visibility and
-                increase your chances to find you loved one.</p>
+            <h2>It all begins with a Knock</h2>
+            <p>There are many members in different activities. You can browse the listing and checkout them Like Megapersonals & Eros</p>
         </div>
         <div class="section__wrapper">
             <div class="row g-4 justify-content-center row-cols-xl-4 row-cols-lg-3 row-cols-sm-2 row-cols-1">
@@ -362,9 +359,8 @@
     style="background-image: url({{asset('frontend/assets/images/bg-img/02.jpg')}});">
     <div class="container">
         <div class="section__header style-2 text-center wow fadeInUp" data-wow-duration="1.5s">
-            <h2>Why Choose iFindYou</h2>
-            <p>Our dating platform is like a breath of fresh air. Clean and trendy design with ready to use features
-                we are sure you will love.</p>
+            <h2>Why Choose iFindYou ?</h2>
+            <p>Free Register today and effortlessly update your profile, ensuring visibility to a broad audience within our platform.</p>
         </div>
         <div class="section__wrapper">
             <div class="row g-4 justify-content-center row-cols-xl-4 row-cols-lg-3 row-cols-sm-2 row-cols-1">
@@ -375,8 +371,8 @@
                                 <img src="{{asset('frontend/assets/images/about/01.jpg')}}" alt="dating thumb">
                             </div>
                             <div class="about__content">
-                                <h4>Simple To Use</h4>
-                                <p>Simple steps to follow to have a matching connection.</p>
+                                <h4>Free Adult Directory</h4>
+                                <p>Now its Offering Free SingUp! </p>
                             </div>
                         </div>
                     </div>
@@ -389,7 +385,7 @@
                             </div>
                             <div class="about__content">
                                 <h4>Smart Matching</h4>
-                                <p>Create connections with users that are like you.</p>
+                                <p>We didnt shared listed data to 3rd party.</p>
                             </div>
                         </div>
                     </div>
@@ -401,8 +397,8 @@
                                 <img src="{{asset('frontend/assets/images/about/03.jpg')}}" alt="dating thumb">
                             </div>
                             <div class="about__content">
-                                <h4>Filter Very Fast</h4>
-                                <p>Don’t waste your time! Find only what you are interested</p>
+                                <h4>Happy Community</h4>
+                                <p>It's open to individuals worldwide.</p>
                             </div>
                         </div>
                     </div>
@@ -414,8 +410,8 @@
                                 <img src="{{asset('frontend/assets/images/about/04.jpg')}}" alt="dating thumb">
                             </div>
                             <div class="about__content">
-                                <h4>Cool Community</h4>
-                                <p>BuddyPress network is full of cool members.</p>
+                                <h4>Smart Matching</h4>
+                                <p>Connecting you with users who share common interests.</p>
                             </div>
                         </div>
                     </div>
@@ -435,60 +431,60 @@
                 <div class="col-lg-4 col-12">
                     <div class="left">
                         <div class="section__header style-2 mb-lg-0 wow fadeInUp" data-wow-duration="1.5s">
-                            <h2>Meet Singles in Your Area</h2>
-                            <p>If you want to meet local singles for dating, companionship, friendship or even more,
+                            <h2>Lets create a vibrant adult community</h2>
+                            <p>If you want to meet local escorts for dating, Adult Job, Video Call ,Companionship, Friendship or even more,
                                 you have come to the right place.</p>
                             <ul>
                                 <li>
                                     <div class="thumb"> <img src="{{asset('frontend/assets/images/transport/01.jpg')}}"
                                             alt="lab-trensport"></div>
-                                    <div class="content"><a href="members.html">United kingdom</a></div>
+                                    <div class="content"><a href="#">United kingdom</a></div>
                                 </li>
                                 <li>
                                     <div class="thumb"> <img src="{{asset('frontend/assets/images/transport/02.jpg')}}"
                                             alt="lab-trensport"></div>
-                                    <div class="content"><a href="members.html">Germany</a></div>
+                                    <div class="content"><a href="#">Germany</a></div>
                                 </li>
                                 <li>
                                     <div class="thumb"> <img src="{{asset('frontend/assets/images/transport/03.jpg')}}"
                                             alt="lab-trensport"></div>
-                                    <div class="content"><a href="members.html">United states</a></div>
+                                    <div class="content"><a href="#">United states</a></div>
                                 </li>
                                 <li>
                                     <div class="thumb"> <img src="{{asset('frontend/assets/images/transport/04.jpg')}}"
                                             alt="lab-trensport"></div>
-                                    <div class="content"><a href="members.html">Brazil</a></div>
+                                    <div class="content"><a href="#">Brazil</a></div>
                                 </li>
                                 <li>
                                     <div class="thumb"> <img src="{{asset('frontend/assets/images/transport/05.jpg')}}"
                                             alt="lab-trensport"></div>
-                                    <div class="content"><a href="members.html">Falkland islands</a></div>
+                                    <div class="content"><a href="#">Falkland islands</a></div>
                                 </li>
                                 <li>
                                     <div class="thumb"> <img src="{{asset('frontend/assets/images/transport/06.jpg')}}"
                                             alt="lab-trensport"></div>
-                                    <div class="content"><a href="members.html">Portugal</a></div>
+                                    <div class="content"><a href="#">Portugal</a></div>
                                 </li>
                                 <li>
                                     <div class="thumb"> <img src="{{asset('frontend/assets/images/transport/07.jpg')}}"
                                             alt="lab-trensport"></div>
-                                    <div class="content"><a href="members.html">Australia</a></div>
+                                    <div class="content"><a href="#">Australia</a></div>
                                 </li>
                                 <li>
                                     <div class="thumb"> <img src="{{asset('frontend/assets/images/transport/08.jpg')}}"
                                             alt="lab-trensport"></div>
-                                    <div class="content"><a href="members.html">India</a></div>
+                                    <div class="content"><a href="#">India</a></div>
                                 </li>
                                 <li>
                                     <div class="thumb"> <img src="{{asset('frontend/assets/images/transport/09.jpg')}}"
                                             alt="lab-trensport"></div>
-                                    <div class="content"><a href="members.html">South Africa</a></div>
+                                    <div class="content"><a href="#">South Africa</a></div>
                                 </li>
-                                <li>
+                                {{-- <li>
                                     <div class="thumb"> <img src="{{asset('frontend/assets/images/transport/10.jpg')}}"
                                             alt="lab-trensport"></div>
-                                    <div class="content"><a href="members.html">Bangladesh</a></div>
-                                </li>
+                                    <div class="content"><a href="#">Thailand</a></div>
+                                </li> --}}
                             </ul>
                         </div>
                     </div>
@@ -497,44 +493,44 @@
                     <div class="right wow fadeInUp" data-wow-duration="1.5s">
                         <div class="lab-line">
                             <span></span>
-                            <div class="lab-tooltip"><a href="members.html">United kingdom</a></div>
+                            <div class="lab-tooltip"><a href="#">United kingdom</a></div>
                         </div>
                         <div class="lab-line">
                             <span></span>
-                            <div class="lab-tooltip"><a href="members.html">United states</a></div>
+                            <div class="lab-tooltip"><a href="#">United states</a></div>
                         </div>
                         <div class="lab-line">
                             <span></span>
-                            <div class="lab-tooltip"><a href="members.html">Falkland islands</a></div>
+                            <div class="lab-tooltip"><a href="#">Falkland islands</a></div>
                         </div>
                         <div class="lab-line">
                             <span></span>
-                            <div class="lab-tooltip"><a href="members.html">Australia</a></div>
+                            <div class="lab-tooltip"><a href="#">Australia</a></div>
                         </div>
                         <div class="lab-line">
                             <span></span>
-                            <div class="lab-tooltip"><a href="members.html">South Africa</a></div>
+                            <div class="lab-tooltip"><a href="#">South Africa</a></div>
                         </div>
                         <div class="lab-line">
                             <span></span>
-                            <div class="lab-tooltip"><a href="members.html">Germany</a></div>
+                            <div class="lab-tooltip"><a href="#">Germany</a></div>
                         </div>
                         <div class="lab-line">
                             <span></span>
-                            <div class="lab-tooltip"><a href="members.html">Brazil</a></div>
+                            <div class="lab-tooltip"><a href="#">Brazil</a></div>
                         </div>
                         <div class="lab-line">
                             <span></span>
-                            <div class="lab-tooltip"><a href="members.html">Portugal</a></div>
+                            <div class="lab-tooltip"><a href="#">Portugal</a></div>
                         </div>
                         <div class="lab-line">
                             <span></span>
-                            <div class="lab-tooltip"><a href="members.html">India</a></div>
+                            <div class="lab-tooltip"><a href="#">India</a></div>
                         </div>
-                        <div class="lab-line">
+                        {{-- <div class="lab-line">
                             <span></span>
-                            <div class="lab-tooltip"><a href="members.html">Bangladesh</a></div>
-                        </div>
+                            <div class="lab-tooltip"><a href="#">Thailand</a></div>
+                        </div> --}}
                     </div>
                 </div>
             </div>
@@ -559,7 +555,7 @@
                             <div class="work__content">
                                 <h3>Trust And Safety</h3>
                                 <p>Choose from one of our membership levels and unlock features you need. </p>
-                                <a href="policy.html" class="default-btn"><span>See More Details</span></a>
+                                <a href="/contact-us" class="default-btn"><span>Contact Us</span></a>
                             </div>
                         </div>
                     </div>
@@ -572,9 +568,9 @@
                             </div>
                             <div class="work__content">
                                 <h3>Simple Membership</h3>
-                                <p>Choose from one of our membership levels and unlock features you need. </p>
-                                <a href="membership.html" class="default-btn reverse"><span>Membership
-                                        Details</span></a>
+                                <p>Dont be late, Currently we are offering free Escorts Registration. </p>
+                                <a href="membership.html" class="default-btn reverse"><span>Create
+                                        Profile</span></a>
                             </div>
                         </div>
                     </div>
@@ -596,9 +592,8 @@
                         <div class="app__content text-center">
                             <h4>Coming Soon</h4>
                             <h2>Easy Connect To Everyone</h2>
-                            <p>You find us, finally and you are already in love. More than 5.000.000 around the
-                                world already shared the same experience andng ares uses our system Joining us today
-                                just got easier!</p>
+                            <p>You find us, finally and you are already in love. More than 4.000.000 around the
+                                world already shared the same experience with Joining us today!</p>
                             <ul class="justify-content-center">
                                 <li><a href="#"><img src="{{asset('frontend/assets/images/app/01.jpg')}}"
                                             alt="dating thumb"></a></li>

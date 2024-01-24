@@ -12,7 +12,7 @@
                 </div>
                 <div class="header__top--right">
                     <ul>
-                        <li><a href="#"><i class="fa-brands fa-facebook-f"></i> Facebook</a></li>
+                        <li><a href="#"><i class="fa-brands fa-facebook-f"></i>Facebook</a></li>
                         <li><a href="#"><i class="fa-brands fa-instagram"></i> Instagram</a></li>
                     </ul>
                 </div>

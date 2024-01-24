@@ -742,9 +742,7 @@
                                     <div class="site">
                                         <div class="col-12">
 
-                                            @php
-                                            $countries = \App\Models\Country::get();
-                                            @endphp
+
 
                                             <form action="{{ route('profile.update',$user->user_name) }}" method="POST"
                                                 enctype="multipart/form-data">

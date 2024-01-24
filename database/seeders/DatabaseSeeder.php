@@ -42,7 +42,7 @@ class DatabaseSeeder extends Seeder
             RateTypeTableSeeder::class,
             PolicyTypeTableSeeder::class,
             ContactMediaTableSeeder::class,
-            //UserTableSeeder::class,
+            UserTableSeeder::class,
             CategoryTableSeeder::class,
             TagTableSeeder::class,
             BlogTableSeeder::class,

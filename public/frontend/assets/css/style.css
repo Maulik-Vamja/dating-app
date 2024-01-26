@@ -2540,7 +2540,7 @@ iframe {
 }
 @media (min-width: 992px) {
   .about--style2 {
-    margin-top: -60px;
+    margin-top: -120px;
     position: relative;
     z-index: 999;
   }

@@ -47,12 +47,16 @@
                                 @enderror
                             </div>
                             {{-- <p class="f-pass">Forgot your password? <a href="#">recover password</a></p> --}}
-                            <div class="text-center">
+                            <div class="">
                                 <button type="submit" class="default-btn"><span>Sign IN</span></button>
-                            </div>
-                            <p class="or-signup"> Don't have an account? <a href="{{ route('register') }}">Sign up
-                                    here</a>
+                            </div><br><br>
+                            <p class="or-signup"> Don't have an account?
+
                             </p>
+
+                            <a class="btn btn-info" href="{{ route('register') }}">Sign up
+                                here</a>
+
                             {{-- <div class="or">
                                 <p>OR</p>
                             </div>

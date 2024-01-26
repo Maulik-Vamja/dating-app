@@ -131,7 +131,7 @@
             <div class="row">
                 <div class="col-lg-8 col-7">
                     <div class="logo">
-                        <a href="index.html"><img src="{{asset('frontend/assets/images/logo/logo.png')}}"
+                        <a href="/"><img style="height: 60px" src="{{asset('frontend/assets/images/logo/logo.png')}}"
                                 alt="logo"></a>
                     </div>
                 </div>
@@ -149,8 +149,7 @@
             <div class="col-lg-7">
                 <div class="log-reg-inner">
                     <div class="section-header">
-                        <h2 class="title">Welcome to Ollya </h2>
-                        <p>Let's create your profile! Just fill in the fields below, and we’ll get a new account. </p>
+                        <p>Let's create your profile! If you alrady have, <a style="color:red" href="/login">Please login</a></p>
                     </div>
                     <div class="main-content">
                         <form action="{{ route('register') }}" method="POST" id="registerFrm">

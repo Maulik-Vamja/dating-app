@@ -94,7 +94,7 @@
 
 <head>
     <meta charset="utf-8">
-    <title>Ollya</title>
+    <title>iFindYou.co Login</title>
     <meta name="viewport" content="width=device-width, initial-scale=1">
 
     <!-- site favicon -->

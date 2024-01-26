@@ -372,7 +372,7 @@
                             </div>
                             <div class="about__content">
                                 <h4>Free Adult Directory</h4>
-                                <p>Now its Offering Free SingUp! </p>
+                               <p>Now We are Offering Free SingUp ! </p>
                             </div>
                         </div>
                     </div>

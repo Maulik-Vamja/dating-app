@@ -46,9 +46,9 @@ class TrystUserSeeder extends Seeder
         $user = User::create([
             'custom_id' => get_unique_string('users'),
             'full_name' => $userJson['name'],
-            'user_name' => str_replace(' ', '', $userJson['name']). get_unique_string('users'),
+            'user_name' => str_replace(' ', '', $userJson['name']),
             'email' => str_replace(' ', '', $userJson['name']) . uniqid().'@gmail.com',
-            'password' => Hash::make('password'),
+            'password' => Hash::make('Password@#1'),
             'short_description' => $userJson['tagline'],
             'description' => $userJson['about'],
             'pronouns' => $userJson['pronouns'],

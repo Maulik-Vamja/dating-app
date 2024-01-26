@@ -21,7 +21,7 @@ class AddressTypesTableSeeder extends Seeder
         $types = [
             [
                 'custom_id' => get_unique_string(),
-                'address_type' => 'Home Address',
+                'address_type' => 'Locations',
                 'is_active' => 'y'
             ],
             [

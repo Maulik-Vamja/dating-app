@@ -744,6 +744,9 @@
                                 <div class="container">
                                     <div class="site">
                                         <div class="col-12">
+
+
+
                                             <form action="{{ route('profile.update',$user->user_name) }}" method="POST"
                                                 enctype="multipart/form-data">
                                                 @csrf
@@ -775,6 +778,8 @@
                                                             $user_addresses =
                                                             $user->addresses()->where('address_type_id',$address_type->id)->get();
                                                             @endphp
+
+
                                                             <div class="card-body">
                                                                 <div class=""
                                                                     id="{{str_slug($address_type->address_type)}}Container">
@@ -789,6 +794,7 @@
                                                                                     id="addresses_country" required>
                                                                                     <option value="">Select Country
                                                                                     </option>
+
                                                                                     @foreach ($countries as $country)
                                                                                     <option value="{{ $country->id }}"
                                                                                         @selected($address->country_id

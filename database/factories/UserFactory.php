@@ -5,6 +5,7 @@ namespace Database\Factories;
 use App\Enums\StatusEnums;
 use Illuminate\Database\Eloquent\Factories\Factory;
 use Illuminate\Support\Str;
+use Illuminate\Support\Facades\Hash;
 
 class UserFactory extends Factory
 {
@@ -20,7 +21,7 @@ class UserFactory extends Factory
             'full_name' => $this->faker->name(),
             'user_name' => get_unique_username($this->faker->userName()),
             'email' => $this->faker->unique()->safeEmail(),
-            'password' => '$2y$10$92IXUNpkjO0rOQ5byMi.Ye4oKoEa3Ro9llC/.og/at2.uheWG/igi', // password
+            'password' =>  Hash::make('password'), // password
             'short_description' => $this->faker->text(20),
             'description' => $this->faker->text(4000),
             'pronouns'  => $this->faker->randomElement(['She', 'Her', 'Hers']),

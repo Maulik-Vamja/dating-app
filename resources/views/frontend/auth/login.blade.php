@@ -6,7 +6,7 @@
             <div class="row">
                 <div class="col-lg-8 col-7">
                     <div class="logo">
-                        <a href="/"><img style="max-height: 50px"
+                        <a href="/"><img style="max-height: 40px"
                                 src="{{asset('frontend/assets/images/logo/logo.png')}}" alt="logo"></a>
                     </div>
                 </div>

@@ -36,45 +36,55 @@
                 <div class="col-xl-12">
                     <ul class="nav nav-tabs justify-content-center" id="myTab" role="tablist">
                         <li class="nav-item" role="presentation">
-                            <button class="nav-link active" id="gt1-tab" data-bs-toggle="tab" data-bs-target="#gt1"
-                                type="button" role="tab" aria-controls="gt1" aria-selected="true"><i
-                                    class="fa-solid fa-user"></i> Basic</button>
+                            <button
+                                class="nav-link {{ session()->has('form_action') ? (session()->get('form_action') == 'update_basic' ? 'active' : '' ) : 'active' }}"
+                                id="gt1-tab" data-bs-toggle="tab" data-bs-target="#gt1" type="button" role="tab"
+                                aria-controls="gt1" aria-selected="true"><i class="fa-solid fa-user"></i> Basic</button>
                         </li>
                         <li class="nav-item" role="presentation">
-                            <button class="nav-link" id="gt7-tab" data-bs-toggle="tab" data-bs-target="#gt7"
-                                type="button" role="tab" aria-controls="gt7" aria-selected="true"><i
-                                    class="fa-solid fa-image"></i> Gallery Images</button>
+                            <button
+                                class="nav-link {{ session()->has('form_action') ? (session()->get('form_action') == 'update_gallery_images' ? 'active' : '' ) : '' }}"
+                                id="gt7-tab" data-bs-toggle="tab" data-bs-target="#gt7" type="button" role="tab"
+                                aria-controls="gt7" aria-selected="true"><i class="fa-solid fa-image"></i> Gallery
+                                Images</button>
                         </li>
                         <li class="nav-item" role="presentation">
-                            <button class="nav-link" id="gt2-tab" data-bs-toggle="tab" data-bs-target="#gt2"
-                                type="button" role="tab" aria-controls="gt2" aria-selected="false"><i
-                                    class="fa-solid fa-users"></i> Personal details</button>
+                            <button
+                                class="nav-link {{ session()->has('form_action') ? (session()->get('form_action') == 'update_personal_details' ? 'active' : '' ) : '' }}"
+                                id="gt2-tab" data-bs-toggle="tab" data-bs-target="#gt2" type="button" role="tab"
+                                aria-controls="gt2" aria-selected="false"><i class="fa-solid fa-users"></i> Personal
+                                details</button>
                         </li>
                         <li class="nav-item" role="presentation">
-                            <button class="nav-link" id="gt3-tab" data-bs-toggle="tab" data-bs-target="#gt3"
-                                type="button" role="tab" aria-controls="gt3" aria-selected="false"><i
-                                    class="fa-solid fa-video"></i> Rates
+                            <button
+                                class="nav-link {{ session()->has('form_action') ? (session()->get('form_action') == 'update_rates' ? 'active' : '' ) : '' }}"
+                                id="gt3-tab" data-bs-toggle="tab" data-bs-target="#gt3" type="button" role="tab"
+                                aria-controls="gt3" aria-selected="false"><i class="fa-solid fa-video"></i> Rates
                                 <!-- <span>06</span> -->
                             </button>
                         </li>
                         <li class="nav-item" role="presentation">
-                            <button class="nav-link" id="gt4-tab" data-bs-toggle="tab" data-bs-target="#gt4"
-                                type="button" role="tab" aria-controls="gt4" aria-selected="false"><i
-                                    class="fa-solid fa-users"></i> Policies
+                            <button
+                                class="nav-link {{ session()->has('form_action') ? (session()->get('form_action') == 'update_policies' ? 'active' : '' ) : '' }}"
+                                id="gt4-tab" data-bs-toggle="tab" data-bs-target="#gt4" type="button" role="tab"
+                                aria-controls="gt4" aria-selected="false"><i class="fa-solid fa-users"></i> Policies
                                 <!-- <span>16</span> -->
                             </button>
                         </li>
                         <li class="nav-item" role="presentation">
-                            <button class="nav-link" id="gt6-tab" data-bs-toggle="tab" data-bs-target="#gt6"
-                                type="button" role="tab" aria-controls="gt6" aria-selected="false"><i
-                                    class="fa-solid fa-photo-film"></i> Contacts
+                            <button
+                                class="nav-link {{ session()->has('form_action') ? (session()->get('form_action') == 'update_contacts' ? 'active' : '' ) : '' }}"
+                                id="gt6-tab" data-bs-toggle="tab" data-bs-target="#gt6" type="button" role="tab"
+                                aria-controls="gt6" aria-selected="false"><i class="fa-solid fa-photo-film"></i>
+                                Contacts
                                 <!-- <span>06</span> -->
                             </button>
                         </li>
-                        <li class="nav-item" role="presentation">
-                            <button class="nav-link" id="gt8-tab" data-bs-toggle="tab" data-bs-target="#gt8"
-                                type="button" role="tab" aria-controls="gt6" aria-selected="false"><i
-                                    class="fa-solid fa-map"></i> Addresses
+                        <li class="nav-item " role="presentation">
+                            <button
+                                class="nav-link {{ session()->has('form_action') ? (session()->get('form_action') == 'update_addresses' ? 'active' : '' ) : '' }}"
+                                id="gt8-tab" data-bs-toggle="tab" data-bs-target="#gt8" type="button" role="tab"
+                                aria-controls="gt8" aria-selected="false"><i class="fa-solid fa-map"></i> Addresses
                                 <!-- <span>06</span> -->
                             </button>
                         </li>
@@ -97,7 +107,8 @@
                                 </div>
                             </div>
                             @endif
-                            <div class="tab-pane fade show active" id="gt1" role="tabpanel" aria-labelledby="gt1-tab">
+                            <div class="tab-pane fade {{ session()->has('form_action') ? (session()->get('form_action') == 'update_basic' ? 'show active' : '' ) : 'show active' }}"
+                                id="gt1" role="tabpanel" aria-labelledby="gt1-tab">
                                 <div class="container">
                                     <form action="{{ route('profile.update',$user->user_name) }}" method="POST"
                                         enctype="multipart/form-data">
@@ -259,7 +270,8 @@
                                     </form>
                                 </div>
                             </div>
-                            <div class="tab-pane fade" id="gt2" role="tabpanel" aria-labelledby="gt2-tab">
+                            <div class="tab-pane fade {{ session()->has('form_action') ? (session()->get('form_action') == 'update_personal_details' ? 'show active' : '' ) : '' }}"
+                                id="gt2" role="tabpanel" aria-labelledby="gt2-tab">
                                 <div class="container">
                                     <form action="{{ route('profile.update',$user->user_name) }}" method="POST">
                                         @csrf
@@ -280,7 +292,7 @@
                                                             $user_cater_to = explode(',',$user->caters_to);
                                                             @endphp
                                                             <label for="category"> Caters To:</label>
-                                                            <select name="caters_to" id="caters_to"
+                                                            <select name="caters_to[]" id="caters_to"
                                                                 class="form-control @error('caters_to') is-invalid @enderror w-100"
                                                                 data-error-container="#caters_to_error_container"
                                                                 multiple>
@@ -452,7 +464,8 @@
                                     </form>
                                 </div>
                             </div>
-                            <div class="tab-pane fade" id="gt3" role="tabpanel" aria-labelledby="gt3-tab">
+                            <div class="tab-pane fade {{ session()->has('form_action') ? (session()->get('form_action') == 'update_rates' ? 'show active' : '' ) : '' }}"
+                                id="gt3" role="tabpanel" aria-labelledby="gt3-tab">
                                 <div class="container">
                                     <div class="site">
                                         <div class="col-12">
@@ -560,7 +573,8 @@
                                     </div>
                                 </div>
                             </div>
-                            <div class="tab-pane fade" id="gt4" role="tabpanel" aria-labelledby="gt4-tab">
+                            <div class="tab-pane fade {{ session()->has('form_action') ? (session()->get('form_action') == 'update_policies' ? 'show active' : '' ) : '' }}"
+                                id="gt4" role="tabpanel" aria-labelledby="gt4-tab">
                                 <div class="container">
                                     <div class="site">
                                         <div class="col-12">
@@ -613,7 +627,8 @@
                                     </div>
                                 </div>
                             </div>
-                            <div class="tab-pane fade" id="gt6" role="tabpanel" aria-labelledby="gt6-tab">
+                            <div class="tab-pane fade {{ session()->has('form_action') ? (session()->get('form_action') == 'update_contacts' ? 'show active' : '' ) : '' }}"
+                                id="gt6" role="tabpanel" aria-labelledby="gt6-tab">
                                 <div class="container">
                                     <div class="site">
                                         <div class="col-12">
@@ -678,7 +693,8 @@
                                     </div>
                                 </div>
                             </div>
-                            <div class="tab-pane fade" id="gt7" role="tabpanel" aria-labelledby="gt7-tab">
+                            <div class="tab-pane fade {{ session()->has('form_action') ? (session()->get('form_action') == 'update_gallery_images' ? 'show active' : '' ) : '' }}"
+                                id="gt7" role="tabpanel" aria-labelledby="gt7-tab">
                                 <div class="container">
                                     <div class="site">
                                         <div class="col-12">
@@ -718,7 +734,7 @@
                                                     <div class="col-lg-12 col-md-9 col-sm-12">
                                                         <div class="row">
                                                             @foreach ($user->gallery_images as $image)
-                                                            <div class="col-lg-3 col-md-4 col-sm-6"
+                                                            <div class="col-lg-3 col-md-4 col-sm-6 mb-3"
                                                                 id="imagePreviewContainer">
                                                                 <img src="{{ filter_var($image->image, FILTER_VALIDATE_URL) == false ? Storage::url($image->image) : $image->image }}"
                                                                     alt="{{ $image->image }}"
@@ -740,7 +756,8 @@
                                     </div>
                                 </div>
                             </div>
-                            <div class="tab-pane fade" id="gt8" role="tabpanel" aria-labelledby="gt8-tab">
+                            <div class="tab-pane fade {{ session()->has('form_action') ? (session()->get('form_action') == 'update_addresses' ? 'show active' : '' ) : '' }}"
+                                id="gt8" role="tabpanel" aria-labelledby="gt8-tab">
                                 <div class="container">
                                     <div class="site">
                                         <div class="col-12">

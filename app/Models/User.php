@@ -9,8 +9,8 @@ use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
 use Laravel\Sanctum\HasApiTokens;
 
-// class User extends Authenticatable implements MustVerifyEmail
-class User extends Authenticatable
+class User extends Authenticatable implements MustVerifyEmail
+// class User extends Authenticatable
 {
     use HasApiTokens, HasFactory, Notifiable, SoftDeletes;
 
@@ -81,5 +81,12 @@ class User extends Authenticatable
     public function gallery_images()
     {
         return $this->hasMany(GalleryImages::class, "user_id", "id");
+    }
+
+    // Scopes
+
+    public function scopeVerified($query)
+    {
+        return $query->whereNotNull('email_verified_at');
     }
 }

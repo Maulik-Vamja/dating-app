@@ -30,7 +30,6 @@ class UserController extends Controller
     }
     public function update(Request $request)
     {
-        // dd($request->all());
         DB::beginTransaction();
         try {
             $user = request()->user()->load('availability', 'rates', 'policies', 'contacts', 'addresses', 'home_address', 'gallery_images');
@@ -50,7 +49,7 @@ class UserController extends Controller
                     $user->fill([
                         'availibility'  =>  json_encode($request->input('availibility')),
                         'availibility_description'  =>  $request->input('availibility_description'),
-                        'caters_to' => $request->input('caters_to'),
+                        'caters_to' => implode(',', $request->input('caters_to')),
                         'age'   => $request->input('age'),
                         'height'    => $request->input('height'),
                         'body_type' => $request->input('body_type'),
@@ -133,11 +132,11 @@ class UserController extends Controller
             }
             if (!$user->save()) throw new Exception();
             DB::commit();
-            return redirect()->back()->with('success', 'Profile updated successfully');
+            return redirect()->back()->with(['success' => 'Profile updated successfully', 'form_action' => $request->input('action')]);
         } catch (Exception $th) {
             DB::rollBack();
-            dd($th->getMessage());
-            return redirect()->back()->with('errorMsg', 'Something went wrong');
+            // dd($th->getMessage());
+            return redirect()->back()->with(['errorMsg' => 'Something went wrong', 'form_action' => $request->input('action')]);
         }
     }
 

@@ -58,7 +58,8 @@ class Handler extends ExceptionHandler
                 'ip_address' => $request->getClientIp(),
                 'guard' => $guard
             ])->increment('count');
-        } catch (\Exception $e) {}
+        } catch (\Exception $e) {
+        }
 
         return parent::render($request, $exception);
     }
@@ -85,14 +86,14 @@ class Handler extends ExceptionHandler
     protected function unauthenticated($request, AuthenticationException $exception)
     {
         $current_gaurd = array_get($exception->guards(), 0);
-        $route = route('admin.login');
+        $route = route('login');
 
         if ($current_gaurd == 'admin') {
             $route = route('admin.login');
         }
 
         return $request->expectsJson()
-        ? response()->json(['message' => $exception->getMessage()], 401)
-        : redirect()->guest($route);
+            ? response()->json(['message' => $exception->getMessage()], 401)
+            : redirect()->guest($route);
     }
 }

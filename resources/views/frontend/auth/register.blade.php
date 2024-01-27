@@ -131,7 +131,7 @@
             <div class="row">
                 <div class="col-lg-8 col-7">
                     <div class="logo">
-                        <a href="/"><img style="height: 60px" src="{{asset('frontend/assets/images/logo/logo.png')}}"
+                        <a href="{{ route('welcome') }}"><img style="max-height:40px;" src="{{asset('frontend/assets/images/logo/logo.png')}}"
                                 alt="logo"></a>
                     </div>
                 </div>
@@ -265,15 +265,18 @@
                                 <div class="col-md-6">
                                     <div class="form-group">
                                         <label>Body Type{!! $mend_sign !!}</label>
-                                        {{-- <div class="banner__inputlist">
-                                            <select name="body_type" id="body_type">
+                                        <div class="banner__inputlist mb-0">
+                                            <select name="body_type" id="body_type"
+                                                data-error-container="#body_type_error">
+                                                <option value="">Select Your Body Type</option>
                                                 @foreach (config('utility.body_type') as $type)
-                                                <option value="{{$type}}" selected>{{ $type }}</option>
+                                                <option value="{{$type}}">{{ $type }}</option>
                                                 @endforeach
                                             </select>
-                                        </div> --}}
-                                        <input type="text" class="my-form-control" name="body_type" id="body_type"
-                                            placeholder="Enter your Body Type" value="{{ old('body_type') }}">
+                                        </div>
+                                        <span id="body_type_error"></span>
+                                        {{-- <input type="text" class="my-form-control" name="body_type" id="body_type"
+                                            placeholder="Enter your Body Type" value="{{ old('body_type') }}"> --}}
                                         @error('body_type')
                                         <span class="text-danger" role="alert">
                                             <strong>{{ $message }}</strong></span>
@@ -296,15 +299,18 @@
                                 <div class="col-md-6">
                                     <div class="form-group">
                                         <label>Ethnicity{!! $mend_sign !!}</label>
-                                        {{-- <div class="banner__inputlist">
-                                            <select name="ethnicity" id="ethnicity">
+                                        <div class="banner__inputlist mb-0">
+                                            <select name="ethnicity" id="ethnicity"
+                                                data-error-container="#ethnicity_error">
+                                                <option value="">Select Your Ethnicity</option>
                                                 @foreach (config('utility.ethinicity') as $type)
-                                                <option value="{{$type}}" selected>{{ $type }}</option>
+                                                <option value="{{$type}}">{{ $type }}</option>
                                                 @endforeach
                                             </select>
-                                        </div>--}}
-                                        <input type="text" class="my-form-control" name="ethnicity" id="ethnicity"
-                                            placeholder="Enter your Ethnicity" value="{{ old('ethnicity') }}">
+                                        </div>
+                                        <span id="ethnicity_error"></span>
+                                        {{-- <input type="text" class="my-form-control" name="ethnicity" id="ethnicity"
+                                            placeholder="Enter your Ethnicity" value="{{ old('ethnicity') }}"> --}}
                                         @error('ethinicity')
                                         <span class="text-danger" role="alert">
                                             <strong>{{ $message }}</strong></span>
@@ -312,12 +318,10 @@
                                     </div>
                                 </div>
                             </div>
-                            {{-- <div class="form-group">
-                                <label>City*</label>
-                                <input type="text" class="my-form-control" placeholder="Enter Your City">
-                            </div> --}}
-                            <button class="default-btn reverse" data-toggle="modal"
-                                data-target="#email-confirm"><span>Create Your Profile</span></button>
+                            <button class="default-btn reverse"><span>Create Your Profile</span></button>
+                            <p class="or-signup mt-3"> Already have an account? <a href="{{ route('login') }}">Sign In
+                                    here</a>
+                            </p>
                         </form>
                     </div>
                 </div>
@@ -392,8 +396,6 @@
                 },
                 body_type: {
                     required: true,
-                    not_empty: true,
-                    minlength: 3,
                 },
                 height:{
                     required: true,
@@ -402,8 +404,6 @@
                 },
                 ethnicity:{
                     required: true,
-                    not_empty: true,
-                    minlength: 3,
                 },
             },
             messages: {
@@ -451,8 +451,6 @@
                 },
                 body_type: {
                     required: "@lang('validation.required', ['attribute' => 'Body Type'])",
-                    not_empty: "@lang('validation.not_empty', ['attribute' => 'Body Type'])",
-                    minlength: "@lang('validation.min.string', ['attribute' => 'Body Type', 'min' => 3])",
                 },
                 height:{
                     required: "@lang('validation.required', ['attribute' => 'Height'])",
@@ -460,8 +458,6 @@
                 },
                 ethnicity:{
                     required: "@lang('validation.required', ['attribute' => 'Ethnicity'])",
-                    not_empty: "@lang('validation.not_empty', ['attribute' => 'Ethnicity'])",
-                    minlength: "@lang('validation.min.string', ['attribute' => 'Ethnicity', 'min' => 3])",
                 },
             },
             errorClass: 'invalid-feedback',

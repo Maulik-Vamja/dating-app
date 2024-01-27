@@ -6,7 +6,7 @@
             <div class="row">
                 <div class="col-lg-8 col-7">
                     <div class="logo">
-                        <a href="/"><img style="max-height: 50px"
+                        <a href="/"><img style="max-height: 40px"
                                 src="{{asset('frontend/assets/images/logo/logo.png')}}" alt="logo"></a>
                     </div>
                 </div>
@@ -25,6 +25,12 @@
                     <div class="section-header inloginp">
                         <h3 class="title">Welcome to iFindYou</h3>
                     </div>
+                    @error('accountActivationError')
+                    <div class="alert alert-danger" role="alert">
+                        <strong>{{ $message }}</strong>
+                    </div>
+                    @enderror
+
                     <div class="main-content inloginp">
                         <form action="{{route('login')}}" method="POST" id="">
                             @csrf
@@ -41,7 +47,7 @@
                                 <label>Password</label>
                                 <input type="password" name="password" id="password" class="my-form-control"
                                     placeholder="Enter Your Password">
-                                @error('email')
+                                @error('password')
                                 <span class="text-danger" role="alert">
                                     <strong>{{ $message }}</strong></span>
                                 @enderror

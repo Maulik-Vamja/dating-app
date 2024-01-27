@@ -28,14 +28,14 @@ use Illuminate\Support\Facades\{Route, Auth};
  */
 
 // Guest Routes
-Route::get('/', [PagesController::class, 'home'])->name('welcome');
+Route::get('/', [PagesController::class, 'home'])->middleware('user_validate')->name('welcome');
 // Update Auth routes as per your requirement
 Auth::routes([
     'confirm' => false, 'verify' => true, 'register' => true, 'login' => true,
 ]);
 
 // Auth Routes
-Route::middleware(['auth', 'verified'])->group(function () {
+Route::middleware(['auth', 'verified', 'user_validate'])->group(function () {
     Route::view('home', 'frontend.home');
     Route::get('profile/{user:user_name}', [UserController::class, 'getProfile'])->name('profile.get');
     Route::get('profile/{user:user_name}/update', [UserController::class, 'updateProfile'])->name('profile.edit');

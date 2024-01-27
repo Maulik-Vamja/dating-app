@@ -62,6 +62,7 @@ Route::group(['middleware' => ['check_permit', 'revalidate']], function () {
     });
 
     /* User */
+    Route::post('change/password/{escort}', [UserController::class, 'changePassword'])->name('escorts.changePassword');
     Route::resource('escorts', UserController::class);
 
     /* Role Management */

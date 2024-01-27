@@ -67,9 +67,9 @@ class RegisterController extends Controller
             'short_description' => ['required', 'string', 'max:255'],
             'pronouns' => ['required', 'string', 'max:255'],
             'user_age'   => ['required', 'numeric', 'between:18,50'],
-            'body_type' => ['required', 'string', 'max:255'],
+            'body_type' => ['required'],
             'height' => ['required', 'numeric'],
-            'ethnicity' => ['required', 'string', 'max:255'],
+            'ethnicity' => ['required'],
             'gender'    => ['required', 'string', 'in:male,female'],
         ], [
             'user_age.required' =>  trans('validation.required', ['attribute' => 'age']),

@@ -13,7 +13,7 @@ class EscortController extends Controller
 
         $similar_escorts = User::verified()->active()->whereHas('based_in_addresses', function ($query) use ($user) {
             $query->where('country_id', $user->home_address->country_id ?? 1)->groupBy('country_id');
-        })->where('id', '!=', $user->id)->limit(10)->get();
+        })->where('id', '!=', $user->id)->inRandomOrder()->limit(15)->get();
         // dd($user->id, $user->home_address->country_id);
         return view('frontend.escorts.view', ['escort' => $user, 'similar_escorts' => $similar_escorts]);
     }

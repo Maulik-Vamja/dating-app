@@ -45,7 +45,7 @@
                             <div class="footer__inner">
                                 <div class="footer__content">
                                     <div class="footer__content--title">
-                                        <h4>About Ollya</h4>
+                                        <h4>About iFindYou.co</h4>
                                     </div>
                                     <div class="footer__content--desc">
                                         <p>The 1st Platform in the world which lists adult entertainers across the world with services like BDSM, kink, Anal, BBW,
@@ -73,8 +73,8 @@
                                             @endphp
                                             <li>
                                                 <div class="thumb position-relative">
-                                                    <img src="{{$random_image ? (filter_var($random_image->image,FILTER_VALIDATE_URL) == false ? Storage::url($random_image->image) : $random_image->image) : asset('frontend/assets/images/allmedia/01.jpg')}}"
-                                                        alt="member-img">
+                                                    <img src="{{ $random_image ? (filter_var($random_image->image, FILTER_VALIDATE_URL) == false ? Storage::url($random_image->image) : $random_image->image) : asset('frontend/assets/images/allmedia/01.jpg') }}" alt="member-img" style="object-fit: cover;">
+
                                                     @php
                                                     $today = \Carbon\Carbon::now()->format('l');
                                                     $availableOrNot = json_decode($escort->availibility,true);

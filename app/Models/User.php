@@ -2,6 +2,7 @@
 
 namespace App\Models;
 
+use App\Enums\StatusEnums;
 use Illuminate\Contracts\Auth\MustVerifyEmail;
 use Illuminate\Database\Eloquent\SoftDeletes;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
@@ -88,5 +89,9 @@ class User extends Authenticatable implements MustVerifyEmail
     public function scopeVerified($query)
     {
         return $query->whereNotNull('email_verified_at');
+    }
+    public function scopeActive($query)
+    {
+        return $query->where('is_active', StatusEnums::ACTIVE->value);
     }
 }

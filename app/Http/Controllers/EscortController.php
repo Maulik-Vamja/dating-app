@@ -11,7 +11,7 @@ class EscortController extends Controller
     {
         $user->load('availability', 'rates', 'policies', 'contacts', 'addresses', 'home_address', 'home_addresses', 'based_in_addresses', 'gallery_images');
 
-        $similar_escorts = User::verified()->whereHas('based_in_addresses', function ($query) use ($user) {
+        $similar_escorts = User::verified()->active()->whereHas('based_in_addresses', function ($query) use ($user) {
             $query->where('country_id', $user->home_address->country_id ?? 1)->groupBy('country_id');
         })->where('id', '!=', $user->id)->limit(10)->get();
         // dd($user->id, $user->home_address->country_id);

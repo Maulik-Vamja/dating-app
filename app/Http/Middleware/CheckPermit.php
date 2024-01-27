@@ -39,7 +39,7 @@ class CheckPermit
 
 
         // Permissions
-        $access = ['index', 'listing', 'showSetting', 'change-setting', 'trashed', 'trasheddata'];
+        $access = ['index', 'listing', 'showSetting', 'change-setting', 'trashed', 'trasheddata', 'changePassword'];
         $add = ['store', 'create'];
         $update = ['edit', 'update'];
         $view = ['show'];

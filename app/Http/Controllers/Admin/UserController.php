@@ -13,6 +13,8 @@ use Illuminate\Support\Facades\Hash;
 use Illuminate\Database\QueryException;
 use Illuminate\Support\Facades\Storage;
 use App\Http\Requests\Admin\UserRequest;
+use App\Models\TempImage;
+use App\Models\UserRate;
 
 class UserController extends Controller
 {
@@ -120,7 +122,7 @@ class UserController extends Controller
      */
     public function edit(User $escort)
     {
-        return view('admin.pages.users.edit', ['user' => $escort])->with(['custom_title' => 'Escorts']);
+        return view('admin.pages.users.edit', ['user' => $escort])->with(['custom_title' => 'Escort']);
     }
 
     /**
@@ -130,7 +132,8 @@ class UserController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(UserRequest $request, User $escort)
+    // public function update(UserRequest $request, User $escort)
+    public function update(Request $request, User $escort)
     {
         try {
             DB::beginTransaction();
@@ -146,32 +149,116 @@ class UserController extends Controller
                 }
                 return response()->json($content);
             } else {
-                $path = $escort->profile_photo;
-                //request has remove_profie_photo then delete user image
-                if ($request->has('remove_profie_photo')) {
-                    if ($escort->profile_photo) {
-                        Storage::delete($escort->profile_photo);
-                    }
-                    $path = null;
+                $escort->load('availability', 'rates', 'policies', 'contacts', 'addresses', 'home_address', 'gallery_images');
+                switch ($request->input('action')) {
+                    case 'update_basic':
+                        $escort->fill($request->all());
+                        // $escort->primary_address()->delete();
+                        // $escort->primary_address()->create([
+                        //     'custom_id'   => get_unique_string(),
+                        //     'country_id' => $request->input('country'),
+                        //     'state_id' => $request->input('state'),
+                        //     'city_id' => $request->input('city'),
+                        //     'is_primary'    => 'y',
+                        // ]);
+                        break;
+                    case 'update_personal_details':
+                        $escort->fill([
+                            'availibility'  =>  json_encode($request->input('availibility')),
+                            'availibility_description'  =>  $request->input('availibility_description'),
+                            'caters_to' => implode(',', $request->input('caters_to')),
+                            'age'   => $request->input('age'),
+                            'height'    => $request->input('height'),
+                            'body_type' => $request->input('body_type'),
+                            'ethnicity' => $request->input('ethnicity'),
+                            'cup_size' => $request->input('cup_size'),
+                            'hair_colour' => $request->input('hair_color'),
+                            'eye_colour' => $request->input('eye_color'),
+                            'is_trans'  => $request->input('is_trans'),
+                        ]);
+                        // dd($escort);
+                        break;
+                    case 'update_rates':
+                        UserRate::where('user_id', $escort->id)->delete();
+                        foreach (array_reduce($request->input('rates'), 'array_merge', array()) as $rate) {
+                            $escort->rates()->create([
+                                'custom_id' => get_unique_string(),
+                                'rate_type_id'  =>  $rate['rate_type_id'],
+                                'rate'  =>  $rate['rate'],
+                                'duration'  =>  $rate['duration'],
+                                'description'   =>  $rate['description'],
+                            ]);
+                        }
+                        break;
+                    case 'update_policies':
+                        $escort->policies()->delete();
+                        foreach ($request->input('policies') as $policy) {
+                            $escort->policies()->create([
+                                'custom_id' => get_unique_string(),
+                                'policy_type_id'  =>  $policy['policy_type_id'],
+                                'description'   =>  $policy['description'],
+                            ]);
+                        }
+                        break;
+                    case 'update_contacts':
+                        $escort->contacts()->delete();
+                        $escort->fill(['contact_disclaimer'    =>  $request->input('contact_disclaimer')]);
+                        foreach ($request->input('contacts') as $contact) {
+                            $escort->contacts()->create([
+                                'custom_id' => get_unique_string(),
+                                'contact_media_id'  =>  $contact['contact_media_id'],
+                                'value'   =>  $contact['value'],
+                            ]);
+                        }
+                        break;
+                    case 'update_gallery_images':
+                        if ($request->has('deleted_images') && $request->deleted_images != null) {
+                            $deleted_images = explode(',', $request->deleted_images);
+                            foreach ($deleted_images as $image) {
+                                $escort->gallery_images()->where('image', $image)->delete();
+                            }
+                        }
+                        if ($request->images) {
+                            $images = explode(',', $request->images);
+                            foreach ($images as $image) {
+                                $escort->gallery_images()->create([
+                                    'custom_id' => get_unique_string(),
+                                    'image' => $image,
+                                ]);
+                            }
+                            TempImage::where('user_id', $escort->id)->delete();
+                        }
+                        break;
+                    case 'update_addresses':
+                        $escort->addresses()->delete();
+                        foreach ($request->input('addresses') as $address_type_id =>  $addresses_of_types) {
+                            foreach ($addresses_of_types as $address) {
+                                $escort->addresses()->create([
+                                    'custom_id' => get_unique_string(),
+                                    'address_type_id' => $address_type_id,
+                                    'country_id' => $address['country'],
+                                    'state_id' => $address['state'],
+                                    'city_id' => $address['city'],
+                                ]);
+                            }
+                        }
+                        break;
+                    default:
+                        return redirect()->back()->with('error', 'Invalid action');
+                        break;
                 }
-
-
-                $path = imageUpload($request, "profile_photo", "users/profile_photo", $path);
-                $escort->fill($request->all());
-                $escort->profile_photo = $path;
-                if ($escort->save()) {
-                    DB::commit();
-                    flash('Escort details updated successfully!')->success();
-                } else {
-                    flash('Unable to update user. Try again later')->error();
-                }
-                return redirect(route('admin.escorts.index'));
+                if (!$escort->save()) throw new Exception();
+                flash('Escort details updated successfully!')->success();
+                DB::commit();
+                // return redirect(route('admin.escorts.index'));
+                return redirect()->back();
             }
         } catch (QueryException $e) {
             Log::channel("custom_log")->info($e->getMessage() . $e->getFile() . $e->getLine());
             DB::rollback();
             return redirect()->back()->flash('error', "Something went wrong");
         } catch (Exception $e) {
+            DB::rollback();
             Log::channel("custom_log")->info($e->getMessage() . $e->getFile() . $e->getLine());
             return redirect()->back()->with('error', "Something went wrong");
         }
@@ -269,5 +356,17 @@ class UserController extends Controller
         // dd($records);
 
         return $records;
+    }
+
+    public function changePassword(Request $request, User $escort)
+    {
+        $request->validate([
+            'password' => 'required|min:8|max:15',
+            'confirm_password' => 'required|min:8|max:15|same:password',
+        ]);
+        $escort->password = Hash::make($request->password);
+        $escort->save();
+        flash('Password changed successfully!')->success();
+        return redirect()->back();
     }
 }

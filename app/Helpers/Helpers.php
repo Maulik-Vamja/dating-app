@@ -13,7 +13,7 @@ if (!function_exists("get_permissions")) {
         if ($user_type == "admin") {
             $permissions = [
                 1   =>  ["permissions" => "access"],                          // Dashboard
-                2   =>  ["permissions" => "access,view,delete"],     // Users
+                2   =>  ["permissions" => "access,view,edit,delete"],     // Users
                 3   =>  ["permissions" => "access,add,edit,delete"],          // Role Management
                 4   =>  ["permissions" => "access,edit"],                     // CMS Pages
                 5   =>  ["permissions" => "access"],                          // Site Configurations

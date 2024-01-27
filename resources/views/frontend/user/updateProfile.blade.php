@@ -432,9 +432,7 @@
                                                 <hr>
                                                 <div class="h4">Availibility</div>
                                                 @php
-
                                                 $user_availibility =json_decode($user->availibility,true);
-                                                // dd($user_availibility);
                                                 @endphp
                                                 <div class="form-group">
                                                     <label for="availibility">Availibility:</label>
@@ -761,9 +759,6 @@
                                 <div class="container">
                                     <div class="site">
                                         <div class="col-12">
-
-
-
                                             <form action="{{ route('profile.update',$user->user_name) }}" method="POST"
                                                 enctype="multipart/form-data">
                                                 @csrf
@@ -878,7 +873,6 @@
                                                             </div>
                                                         </div>
                                                         @endforeach
-
                                                     </div>
                                                 </div>
                                             </form>
@@ -987,52 +981,6 @@
         summernoteElement.summernote({
             height: 300,
         });
-        /*  $("#frmEditcms").validate({
-            rules: {
-                url: {
-                    required: true,
-                    not_empty: true,
-                    isurl:true,
-                },
-                image:{
-                    required:false,
-                    extension: "jpg|jpeg|png",
-                },
-            },
-            messages: {
-                title: {
-                    required: "@lang('validation.required',['attribute'=>'title'])",
-                    not_empty: "@lang('validation.not_empty',['attribute'=>'title'])",
-                    minlength:"@lang('validation.min.string',['attribute'=>'title','min'=>3])",
-                    remote:"@lang('validation.unique',['attribute'=>'title'])",
-                },
-                url: {
-                    required: "@lang('validation.required',['attribute'=>'url'])",
-                    not_empty: "@lang('validation.not_empty',['attribute'=>'url'])",
-                },
-                image: {
-                    required: "@lang('validation.required',['attribute'=>'image'])",
-                    extension:"@lang('validation.mimetypes',['attribute'=>'image','value'=>'jpg|png|jpeg'])",
-                },
-            },
-            errorClass: 'invalid-feedback',
-            errorElement: 'span',
-            highlight: function (element) {
-                $(element).addClass('is-invalid');
-                $(element).siblings('label').addClass('text-danger'); // For Label
-            },
-            unhighlight: function (element) {
-                $(element).removeClass('is-invalid');
-                $(element).siblings('label').removeClass('text-danger');
-            },
-            errorPlacement: function (error, element) {
-                if (element.attr("data-error-container")) {
-                    error.appendTo(element.attr("data-error-container"));
-                } else {
-                    error.insertAfter(element);
-                }
-            }
-        }); */
         $('#frmEditcms').submit(function (e) {
             if(summernoteElement.summernote('isEmpty')) {
                 $('#description-error').remove();
@@ -1208,9 +1156,7 @@
                         <select
                             name="addresses[${address_type_id}][${address_row_count}][city]"
                             id="addresses_city" class="form-control" required>
-                            <option value="">Select Country
-                            </option>
-                            <option value="1">1
+                            <option value="">Select City
                             </option>
                         </select>
                     </div>

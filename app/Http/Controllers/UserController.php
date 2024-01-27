@@ -135,7 +135,6 @@ class UserController extends Controller
             return redirect()->back()->with(['success' => 'Profile updated successfully', 'form_action' => $request->input('action')]);
         } catch (Exception $th) {
             DB::rollBack();
-            // dd($th->getMessage());
             return redirect()->back()->with(['errorMsg' => 'Something went wrong', 'form_action' => $request->input('action')]);
         }
     }

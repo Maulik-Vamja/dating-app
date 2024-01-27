@@ -13,13 +13,13 @@ class PagesController extends Controller
     public function home()
     {
         $recent_blogs = Blog::where('is_active', StatusEnums::ACTIVE->value)->orderBy('created_at', 'DESC')->with(['tags', 'category', 'user'])->take(3)->get();
-        $escorts = User::verified()->with(['availability', 'home_address'])->limit(10)->latest()->get();
+        $escorts = User::verified()->active()->with(['availability', 'home_address'])->limit(10)->latest()->get();
         $today = Carbon::now()->format('l');
         $counts = [
-            'total_escorts' => User::verified()->get()->count(),
-            'total_online_escorts' => User::verified()->where('availibility->' . $today, 'true')->count(),
-            'total_female_escorts' => User::verified()->where('gender', 'female')->where('availibility->' . $today, 'true')->count(),
-            'total_male_escorts' => User::verified()->where('gender', 'male')->where('availibility->' . $today, 'true')->count(),
+            'total_escorts' => User::verified()->active()->get()->count(),
+            'total_online_escorts' => User::verified()->active()->where('availibility->' . $today, 'true')->count(),
+            'total_female_escorts' => User::verified()->active()->where('gender', 'female')->where('availibility->' . $today, 'true')->count(),
+            'total_male_escorts' => User::verified()->active()->where('gender', 'male')->where('availibility->' . $today, 'true')->count(),
         ];
         return view('welcome', [
             'blogs' => $recent_blogs, 'escorts' => $escorts, 'counts' => $counts

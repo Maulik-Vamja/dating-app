@@ -1,5 +1,5 @@
-<html class="no-js" lang="en">
-
+<!DOCTYPE html>
+<html lang="en">
 <head>
     <meta charset="utf-8">
     <title>Not Found ! iFindYou</title>

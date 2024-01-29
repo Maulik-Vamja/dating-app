@@ -13,7 +13,7 @@ class PagesController extends Controller
     public function home()
     {
         $recent_blogs = Blog::where('is_active', StatusEnums::ACTIVE->value)->orderBy('created_at', 'DESC')->with(['tags', 'category', 'user'])->take(3)->get();
-        $escorts = User::verified()->active()->with(['availability', 'home_address'])->inRandomOrder()->limit(40)->get();
+        $escorts = User::verified()->active()->with(['availability', 'home_address'])->inRandomOrder()->limit(20)->get();
         $today = Carbon::now()->format('l');
         $counts = [
             'total_escorts' => User::verified()->active()->get()->count(),

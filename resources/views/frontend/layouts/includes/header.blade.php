@@ -12,8 +12,8 @@
                 </div>
                 <div class="header__top--right">
                     <ul>
-                        <li><a href="#"><i class="fa-brands fa-facebook-f"></i>Facebook</a></li>
-                        <li><a href="#"><i class="fa-brands fa-instagram"></i> Instagram</a></li>
+                        <li><a rel="nofollow" href="https://www.facebook.com/ifindyou.global"><i class="fa-brands fa-facebook-f"></i>Facebook</a></li>
+                        <li><a  rel="nofollow" href="https://www.facebook.com/ifindyou.global"><i class="fa-brands fa-instagram"></i> Instagram</a></li>
                     </ul>
                 </div>
             </div>

@@ -6,7 +6,7 @@
 
 <head>
     <meta charset="utf-8">
-    <title>iFindYou is Largest Adult Friend Finder Platorm </title>
+    <title>iFindYou | The Largest Adult Friend Finder Platorm </title>
     <meta name="viewport" content="width=device-width, initial-scale=1">
     {!! $sitesetting['meta_tags'] !!}
     <!-- site favicon -->

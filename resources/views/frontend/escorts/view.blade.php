@@ -4,6 +4,7 @@ $random_image = $escort->gallery_images()->inRandomOrder()->first();
 @endphp
 
 @section('og-meta')
+    <meta property="og:type" content="website">
     <!-- Dynamic OG meta tags -->
     <meta property="og:title" content="{{ $escort->full_name ? $escort->full_name . ' | ' : '' }}{{ $escort->home_addresses->isNotEmpty() ? $escort->home_addresses->first()->city->name . ', ' . $escort->home_addresses->first()->state->name . ', ' . $escort->home_addresses->first()->country->iso2 : 'iFindYou' }} / &#x2713;">
     <meta property="og:description" content=" {{$escort->short_description ?? 'The Largest Adult Friend Finder Platform'}} | {{ str_limit($escort->description ?? 'The Largest Adult Friend Finder Platform', 50) }}">

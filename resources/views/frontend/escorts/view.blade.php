@@ -5,8 +5,8 @@ $random_image = $escort->gallery_images()->inRandomOrder()->first();
 
 @section('og-meta')
     <!-- Dynamic OG meta tags -->
-    <meta property="og:title" content="{{ $escort->full_name ? $escort->full_name . ' | ' : '' }}{{ $escort->home_addresses->isNotEmpty() ? $escort->home_addresses->first()->city->name . ', ' . $escort->home_addresses->first()->state->name . ', ' . $escort->home_addresses->first()->country->iso2 : 'iFindYou' }} | {{$escort->short_description?? 'The Largest Adult Friend Finder Platform' }}">
-    <meta property="og:description" content="">
+    <meta property="og:title" content="{{ $escort->full_name ? $escort->full_name . ' | ' : '' }}{{ $escort->home_addresses->isNotEmpty() ? $escort->home_addresses->first()->city->name . ', ' . $escort->home_addresses->first()->state->name . ', ' . $escort->home_addresses->first()->country->iso2 : 'iFindYou' }}  | {{$escort->short_description?? 'The Largest Adult Friend Finder Platform' }}✔">
+    <meta property="og:description" content="{{ str_limit($escort->description ?? 'The Largest Adult Friend Finder Platform', 200) }}">
     <meta property="og:image" content="{{ $random_image ? (filter_var($random_image->image,FILTER_VALIDATE_URL) == false ? Storage::url($random_image->image) : $random_image->image) : asset('frontend/assets/images/allmedia/01.jpg')}}">
     <meta property="og:url" content="{{ url()->current() }}">
 @endsection

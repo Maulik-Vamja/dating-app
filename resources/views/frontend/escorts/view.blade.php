@@ -5,7 +5,7 @@
 @php
 $random_image = $escort->gallery_images()->inRandomOrder()->first();
 @endphp
-<div class="pageheader" style="padding: 0;">
+{{-- <div class="pageheader" style="padding: 0;">
     <div class="bg_img member-single-inner"
         style="background-image: url({{ $random_image ? (filter_var($random_image->image,FILTER_VALIDATE_URL) == false ? Storage::url($random_image->image) : $random_image->image) : asset('frontend/assets/images/allmedia/01.jpg')}});">
     </div>
@@ -13,6 +13,18 @@ $random_image = $escort->gallery_images()->inRandomOrder()->first();
         <figure><img
                 src="{{ $random_image ? (filter_var($random_image->image,FILTER_VALIDATE_URL) == false ? Storage::url($random_image->image) : $random_image->image) : asset('frontend/assets/images/allmedia/01.jpg')}}"
                 alt="member"></figure>
+    </div>
+</div> --}}
+
+
+<div class="col-md-12" style="">
+    <div class="profile-gallery-block lazy slider">
+        @foreach ($escort->gallery_images as $image)
+        <div class="profile-slide">
+            <img src="{{ filter_var($image->image,FILTER_VALIDATE_URL) == false ? Storage::url($image->image) : $image->image }}"
+                alt="dating thumb">
+        </div>
+        @endforeach
     </div>
 </div>
 
@@ -102,7 +114,7 @@ $random_image = $escort->gallery_images()->inRandomOrder()->first();
                                         </div>
                                     </div>
 
-                                    <div class="col-md-12" style="margin-top: 50px">
+                                    {{-- <div class="col-md-12" style="margin-top: 50px">
                                         <div class="profile-gallery-block lazy slider">
                                             @foreach ($escort->gallery_images as $image)
                                             <div class="profile-slide">
@@ -111,7 +123,7 @@ $random_image = $escort->gallery_images()->inRandomOrder()->first();
                                             </div>
                                             @endforeach
                                         </div>
-                                    </div>
+                                    </div> --}}
                                 </div>
                             </div>
                             <div class="tab-pane fade" id="gt2" role="tabpanel" aria-labelledby="gt2-tab">

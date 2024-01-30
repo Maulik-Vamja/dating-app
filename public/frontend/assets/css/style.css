@@ -2544,6 +2544,7 @@ iframe {
     position: relative;
     z-index: 999;
   }
+
 }
 .about--style2 .about__title h3 {
   font-size: calc(1.35rem + 1.2vw);

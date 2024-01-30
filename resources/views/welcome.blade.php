@@ -13,11 +13,17 @@
                             <h2>Meet & Date, Pleasant.</h2>
                             <p>The 1st Platform in the world which lists adult entertainers across the world with services like BDSM, kink, Anal, BBW,
                             FMTY, Sensual Massage and much more.</p>
-                            <a href="membership.html" class="default-btn style-2"><span>Create Free Profile</span></a>
+
+                           @guest
+                           <a href="{{ route('register') }}" class="default-btn style-2">
+                            <span>Create Free Profile</span>
+                        </a>
+                           @endguest
+
                         </div>
                     </div>
                 </div>
-                <div class="col-lg-8 col-12">
+                <div class="col-lg-8 col-12" >
                     <div class="banner__thumb wow fadeInUp" data-wow-duration="1.5s">
                         <img src="{{asset('frontend/assets/images/banner/02.png')}}" alt="banner">
                         <div class="banner__thumb--shape">
@@ -40,11 +46,12 @@
         </div>
     </div>
 </div>
+
 <!-- ================> Banner section end here <================== -->
 
 
 <!-- ================> About section start here <================== -->
-<div class="about about--style2 padding-top pt-xl-0">
+<div class="about about--style2 padding-top pt-xl-0" >
     <div class="container">
         <div class="section__wrapper wow fadeInUp" data-wow-duration="1.5s">
             <div class="row g-0 justify-content-center row-cols-lg-2 row-cols-1">
@@ -55,6 +62,11 @@
                                 <h3>Welcome To iFindYou</h3>
                                 <p>You find us, finally, and you are already in love. More than 4.000.000 female & Male Escorts around the world have already joined our
                                 platform ! Don't be late, Still it's free to join.</p>
+                                @auth
+                            <a href="{{ route('profile.edit',auth()->user()->user_name) }}" class="default-btn style-2">
+                                <span>Update Profile</span>
+                            </a>
+                           @endauth
                             </div>
                         </div>
                         <div class="about__bottom">

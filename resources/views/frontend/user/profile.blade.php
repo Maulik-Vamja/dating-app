@@ -5,14 +5,14 @@
 @php
 $random_image = $user->gallery_images()->inRandomOrder()->first();
 @endphp
-<div class="pageheader" style="padding: 0;">
-    <div class="bg_img member-single-inner"
-        style="background-image: url({{ $random_image ? (filter_var($random_image->image,FILTER_VALIDATE_URL) == false ? Storage::url($random_image->image) : $random_image->image) : asset('frontend/assets/images/allmedia/01.jpg')}});">
-    </div>
-    <div class="pageheader__content">
-        <figure><img
-                src="{{ $random_image ? (filter_var($random_image->image,FILTER_VALIDATE_URL) == false ? Storage::url($random_image->image) : $random_image->image) : asset('frontend/assets/images/allmedia/01.jpg')}}"
-                alt="member"></figure>
+<div class="col-md-12">
+    <div class="profile-gallery-block lazy slider">
+        @foreach ($user->gallery_images as $image)
+        <div class="profile-slide">
+            <img src="{{ filter_var($image->image,FILTER_VALIDATE_URL) == false ? Storage::url($image->image) : $image->image }}"
+                alt="dating thumb">
+        </div>
+        @endforeach
     </div>
 </div>
 
@@ -24,8 +24,8 @@ $random_image = $user->gallery_images()->inRandomOrder()->first();
     <div class="group__top">
         <div class="container">
             <div class="row">
-                <div class="col-xl-12">
-                    <ul class="nav nav-tabs justify-content-center" id="myTab" role="tablist">
+                <div class="col-xl-8">
+                    <ul class="nav nav-tabs justify-content-end" id="myTab" role="tablist">
                         <li class="nav-item" role="presentation">
                             <button class="nav-link active" id="gt1-tab" data-bs-toggle="tab" data-bs-target="#gt1"
                                 type="button" role="tab" aria-controls="gt1" aria-selected="true"><i
@@ -57,6 +57,21 @@ $random_image = $user->gallery_images()->inRandomOrder()->first();
                                 <!-- <span>06</span> -->
                             </button>
                         </li>
+                    </ul>
+                </div>
+
+                <div class="col-xl-4">
+                    <ul class="nav nav-tabs justify-content-end" id="myTab" role="tablist">
+                        <li><a class="nav-link" rel="nofollow"  href="https://www.facebook.com/sharer/sharer.php?u={{ route('get.escort',$user->user_name)  }}" target="_blank" rel="noopener noreferrer"><i class="fa-brands fa-facebook"></i></a></li>
+                        <li><a class="nav-link" rel="nofollow" href="https://twitter.com/intent/tweet?url={{ route('get.escort',$user->user_name) }}" target="_blank" rel="noopener noreferrer"><i class="fa-brands fa-twitter"></i></a></li>
+                        <li>   <a class="nav-link" rel="nofollow" href="whatsapp://send?text=Check%20out%20my%20profile%20on%20ifindyou:%20{{ route('get.escort',$user->user_name) }}" target="_blank" rel="noopener noreferrer">
+                            <i class="fa-brands fa-whatsapp"></i>
+                        </a> </li>
+
+                        <li>    <a class="nav-link" rel="nofollow" href="https://www.reddit.com/submit?url={{ route('get.escort',$user->user_name)  }}" target="_blank" rel="noopener noreferrer">
+                            <i class="fa-brands fa-reddit"></i>
+                        </a> </li>
+
                     </ul>
                 </div>
             </div>
@@ -100,7 +115,7 @@ $random_image = $user->gallery_images()->inRandomOrder()->first();
                                             </div>
                                         </div>
                                     </div>
-                                    <div class="col-md-12">
+                                    {{-- <div class="col-md-12">
                                         <div class="profile-gallery-block lazy slider">
                                             @foreach ($user->gallery_images as $image)
                                             <div class="profile-slide">
@@ -109,7 +124,7 @@ $random_image = $user->gallery_images()->inRandomOrder()->first();
                                             </div>
                                             @endforeach
                                         </div>
-                                    </div>
+                                    </div> --}}
                                 </div>
                             </div>
                             <div class="tab-pane fade" id="gt2" role="tabpanel" aria-labelledby="gt2-tab">

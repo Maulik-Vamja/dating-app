@@ -28,6 +28,11 @@ class SearchController extends Controller
                     $query->where('state_id', $request->state);
                 });
             })
+            ->when($request->city !== null, function ($query) use ($request) {
+                $query->whereHas('based_in_addresses', function ($query) use ($request) {
+                    $query->where('city_id', $request->city);
+                });
+            })
             ->orderBy('created_at', 'desc')
             ->paginate(12);
         $countries = Country::all();

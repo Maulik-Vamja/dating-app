@@ -161,7 +161,7 @@
                                                         </div>
                                                         <div class="s-input">
                                                             <input type="radio" name="gender" id="gender_non_binary"
-                                                                value="non_binary" {{ $user->gender == 'non_binary' ?
+                                                                value="non_binary" {{ $user->gender == 'non-binary' ?
                                                             'checked' : ''
                                                             }}
                                                             data-error-container="#gender_error"><label

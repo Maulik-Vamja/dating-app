@@ -131,8 +131,8 @@
             <div class="row">
                 <div class="col-lg-8 col-7">
                     <div class="logo">
-                        <a href="{{ route('welcome') }}"><img style="max-height:40px;" src="{{asset('frontend/assets/images/logo/logo.png')}}"
-                                alt="logo"></a>
+                        <a href="{{ route('welcome') }}"><img style="max-height:40px;"
+                                src="{{asset('frontend/assets/images/logo/logo.png')}}" alt="logo"></a>
                     </div>
                 </div>
                 <div class="col-lg-4 col-5">
@@ -149,143 +149,105 @@
             <div class="col-lg-7">
                 <div class="log-reg-inner">
                     <div class="section-header">
-                        <p>Let's create your profile! If you alrady have, <a style="color:red" href="/login">Please login</a></p>
+                        <p>Let's create your profile! If you alrady have, <a style="color:red" href="/login">Please
+                                login</a></p>
                     </div>
                     <div class="main-content">
                         <form action="{{ route('register') }}" method="POST" id="registerFrm">
                             @csrf
                             <h4 class="content-title">Acount Details</h4>
-                            <div class="form-group">
-                                <label>Username{!! $mend_sign !!}</label>
-                                <input type="text" class="my-form-control" placeholder="Enter Your Username"
-                                    name="user_name" id="user_name" value="{{ old('user_name') }}">
-                                @error('user_name')
-                                <span class="text-danger" role="alert">
-                                    <strong>{{ $message }}</strong></span>
-                                @enderror
-                            </div>
-                            <div class="form-group">
-                                <label>Email Address {!! $mend_sign !!}</label>
-                                <input type="email" class="my-form-control" placeholder="Enter Your Email" name="email"
-                                    id="email" value="{{ old('email') }}">
-                                @error('email')
-                                <span class="text-danger" role="alert">
-                                    <strong>{{ $message }}</strong></span>
-                                @enderror
-                            </div>
-                            <div class="form-group">
-                                <label>Password {!! $mend_sign !!}</label>
-                                <input type="password" class="my-form-control" placeholder="Enter Your Password"
-                                    name="password" id="password">
-                                @error('password')
-                                <span class="text-danger" role="alert">
-                                    <strong>{{ $message }}</strong></span>
-                                @enderror
-                            </div>
-                            <div class="form-group">
-                                <label>Confirm Password {!! $mend_sign !!}</label>
-                                <input type="password" class="my-form-control" placeholder="Enter Your Password"
-                                    name="password_confirmation" id="password_confirmation">
-                                @error('password_confirmation')
-                                <span class="text-danger" role="alert">
-                                    <strong>{{ $message }}</strong></span>
-                                @enderror
-                            </div>
-                            <h4 class="content-title mt-5">Profile Details</h4>
-                            <div class="form-group">
-                                <label>Name {!! $mend_sign !!}</label>
-                                <input type="text" class="my-form-control" name="full_name" id="full_name"
-                                    placeholder="Enter Your Full Name" value="{{ old('full_name') }}">
-                                @error('full_name')
-                                <span class="text-danger" role="alert">
-                                    <strong>{{ $message }}</strong></span>
-                                @enderror
-                            </div>
-                            <div class="form-group">
-                                <label>Short Description {!! $mend_sign !!}</label>
-                                <div class="">
-                                    <input type="text" class="my-form-control" name="short_description"
-                                        id="short_description" placeholder="Tell us about your self in short."
-                                        data-error-container="#short_description_error"
-                                        value="{{ old('short_description') }}">
-                                    <span class="text-muted fs-6">This Short description will be visible to the
-                                        Customers</span>
-                                </div>
-                                @error('short_descriptiion')
-                                <span class="text-danger" role="alert">
-                                    <strong>{{ $message }}</strong></span>
-                                @enderror
-                                <span id="short_description_error"></span>
-                            </div>
-                            <div class="form-group">
-                                <label>Gender{!! $mend_sign !!}</label>
-                                <div class="banner__inputlist">
-                                    <div class="s-input me-3">
-                                        <input type="radio" name="gender" id="gender_male" value="male" checked
-                                            data-error-container="#gender_error"><label for="gender_male">Man</label>
-                                    </div>
-                                    <div class="s-input">
-                                        <input type="radio" name="gender" id="gender_female" value="female"
-                                            data-error-container="#gender_error"><label
-                                            for="gender_female">Woman</label>
-                                    </div>
-                                </div>
-                                @error('gender')
-                                <span class="text-danger" role="alert">
-                                    <strong>{{ $message }}</strong></span>
-                                @enderror
-                                <span id="gender_error"></span>
-                            </div>
-                            <div class="form-group">
-                                <label>Pronouns {!! $mend_sign !!}</label>
-                                <div>
-                                    <input type="text" class="my-form-control" name="pronouns" id="pronouns"
-                                        placeholder="Enter Your Pronoun" data-error-container="#pronouns_error">
-                                    <span class="text-muted fs-6">Pronuons will useful to users for how to address you
-                                        correctly</span>
-                                </div>
-                                @error('pronouns')
-                                <span class="text-danger" role="alert">
-                                    <strong>{{ $message }}</strong></span>
-                                @enderror
-                                <span id="pronouns_error"></span>
-                            </div>
                             <div class="row">
                                 <div class="col-md-6">
+                                    {{-- Name --}}
+                                    <div class="form-group">
+                                        <label>Name {!! $mend_sign !!}</label>
+                                        <input type="text" class="my-form-control" name="full_name" id="full_name"
+                                            placeholder="Enter Your Full Name" value="{{ old('full_name') }}">
+                                        @error('full_name')
+                                        <span class="text-danger" role="alert">
+                                            <strong>{{ $message }}</strong></span>
+                                        @enderror
+                                    </div>
+                                </div>
+                                <div class="col-md-6">
+                                    {{-- Username --}}
+                                    <div class="form-group">
+                                        <label>Username{!! $mend_sign !!}</label>
+                                        <input type="text" class="my-form-control" placeholder="Enter Your Username"
+                                            name="user_name" id="user_name" value="{{ old('user_name') }}">
+                                        @error('user_name')
+                                        <span class="text-danger" role="alert">
+                                            <strong>{{ $message }}</strong></span>
+                                        @enderror
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="col-md-12">
+                                    {{-- Email --}}
+                                    <div class="form-group">
+                                        <label>Email Address {!! $mend_sign !!}</label>
+                                        <input type="email" class="my-form-control" placeholder="Enter Your Email"
+                                            name="email" id="email" value="{{ old('email') }}">
+                                        @error('email')
+                                        <span class="text-danger" role="alert">
+                                            <strong>{{ $message }}</strong></span>
+                                        @enderror
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="col-md-4">
+                                    {{-- Gender --}}
+                                    <div class="form-group">
+                                        <label>Gender{!! $mend_sign !!}</label>
+                                        <div class="banner__inputlist">
+                                            <select name="gender" id="gender" class=""
+                                                data-error-container="#gender_error">
+                                                <option value="male">Male</option>
+                                                <option value="female">Female</option>
+                                                <option value="non-binary">Non Binary</option>
+                                            </select>
+
+                                            {{-- <div class="s-input me-3">
+                                                <input type="radio" name="gender" id="gender_male" value="male" checked
+                                                    data-error-container="#gender_error"><label
+                                                    for="gender_male">Man</label>
+                                            </div>
+                                            <div class="s-input">
+                                                <input type="radio" name="gender" id="gender_female" value="female"
+                                                    data-error-container="#gender_error"><label
+                                                    for="gender_female">Woman</label>
+                                            </div>--}}
+                                        </div>
+                                        @error('gender')
+                                        <span class="text-danger" role="alert">
+                                            <strong>{{ $message }}</strong></span>
+                                        @enderror
+                                        <span id="gender_error"></span>
+                                    </div>
+                                </div>
+                                <div class="col-md-4">
+                                    {{-- Age --}}
                                     <div class="form-group">
                                         <label>Age {!! $mend_sign !!}</label>
-                                        <input type="text" name="user_age" id="user_age" class="my-form-control"
-                                            placeholder="Enter Your Age" value="{{ old(" user_age") }}">
+                                        <div class="banner__inputlist mb-0">
+                                            <select name="user_age" id="user_age" class=""
+                                                data-error-container="#user_age_error">
+                                                <option value="">Select Your Age</option>
+                                                @for ($i = 18; $i <= 60; $i++) <option value="{{$i}}">{{$i}}</option>
+                                                    @endfor
+                                            </select>
+                                        </div>
                                         @error("user_age")
                                         <span class="text-danger" role="alert">
                                             <strong>{{ $message }}</strong></span>
                                         @enderror
+                                        <span id="user_age_error"></span>
                                     </div>
                                 </div>
-                                <div class="col-md-6">
-                                    <div class="form-group">
-                                        <label>Body Type{!! $mend_sign !!}</label>
-                                        <div class="banner__inputlist mb-0">
-                                            <select name="body_type" id="body_type"
-                                                data-error-container="#body_type_error">
-                                                <option value="">Select Your Body Type</option>
-                                                @foreach (config('utility.body_type') as $type)
-                                                <option value="{{$type}}">{{ $type }}</option>
-                                                @endforeach
-                                            </select>
-                                        </div>
-                                        <span id="body_type_error"></span>
-                                        {{-- <input type="text" class="my-form-control" name="body_type" id="body_type"
-                                            placeholder="Enter your Body Type" value="{{ old('body_type') }}"> --}}
-                                        @error('body_type')
-                                        <span class="text-danger" role="alert">
-                                            <strong>{{ $message }}</strong></span>
-                                        @enderror
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="row">
-                                <div class="col-md-6">
+                                <div class="col-md-4">
+                                    {{-- Height --}}
                                     <div class="form-group">
                                         <label>Height {!! $mend_sign !!}</label>
                                         <input type="text" name="height" id="height" class="my-form-control"
@@ -296,22 +258,27 @@
                                         @enderror
                                     </div>
                                 </div>
+                            </div>
+                            <div class="row">
                                 <div class="col-md-6">
+                                    {{-- Password --}}
                                     <div class="form-group">
-                                        <label>Ethnicity{!! $mend_sign !!}</label>
-                                        <div class="banner__inputlist mb-0">
-                                            <select name="ethnicity" id="ethnicity"
-                                                data-error-container="#ethnicity_error">
-                                                <option value="">Select Your Ethnicity</option>
-                                                @foreach (config('utility.ethinicity') as $type)
-                                                <option value="{{$type}}">{{ $type }}</option>
-                                                @endforeach
-                                            </select>
-                                        </div>
-                                        <span id="ethnicity_error"></span>
-                                        {{-- <input type="text" class="my-form-control" name="ethnicity" id="ethnicity"
-                                            placeholder="Enter your Ethnicity" value="{{ old('ethnicity') }}"> --}}
-                                        @error('ethinicity')
+                                        <label>Password {!! $mend_sign !!}</label>
+                                        <input type="password" class="my-form-control" placeholder="Enter Your Password"
+                                            name="password" id="password">
+                                        @error('password')
+                                        <span class="text-danger" role="alert">
+                                            <strong>{{ $message }}</strong></span>
+                                        @enderror
+                                    </div>
+                                </div>
+                                <div class="col-md-6">
+                                    {{-- Confirm Pass --}}
+                                    <div class="form-group">
+                                        <label>Confirm Password {!! $mend_sign !!}</label>
+                                        <input type="password" class="my-form-control" placeholder="Enter Your Password"
+                                            name="password_confirmation" id="password_confirmation">
+                                        @error('password_confirmation')
                                         <span class="text-danger" role="alert">
                                             <strong>{{ $message }}</strong></span>
                                         @enderror
@@ -380,13 +347,13 @@
                     minlength: 3,
                 },
                 short_description: {
-                    required: true,
-                    not_empty: true,
+                    required: false,
+                    not_empty: false,
                     minlength: 3,
                 },
                 pronouns:{
-                    required: true,
-                    not_empty: true,
+                    required: false,
+                    not_empty: false,
                     minlength: 3,
                 },
                 user_age: {
@@ -395,7 +362,7 @@
                     digits: true,
                 },
                 body_type: {
-                    required: true,
+                    required: false,
                 },
                 height:{
                     required: true,
@@ -403,7 +370,7 @@
                     digits: true,
                 },
                 ethnicity:{
-                    required: true,
+                    required: false,
                 },
             },
             messages: {

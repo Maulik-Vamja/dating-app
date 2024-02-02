@@ -64,6 +64,22 @@
                                     </select>
                                 </div>
                             </div>
+                            <div class="col-md-3 col-12">
+                                <label>City</label>
+                                <div class="banner__inputlist">
+                                    <select id="city" name="city">
+                                        @if (request()->city == '' && request()->state == '')
+                                        <option value="">Select State First</option>
+                                        @else
+                                        <option value="">Select City</option>
+                                        @foreach (\App\Models\City::where('state_id',request()->state)->get() as $city)
+                                        <option value="{{ $city->id }}" {{ request()->city == $city->id ?
+                                            'selected' : ''}}>{{$city->name }}</option>
+                                        @endforeach
+                                        @endif
+                                    </select>
+                                </div>
+                            </div>
                             <div class="col-12">
                                 <div class="d-flex justify-content-center">
                                     <button type="submit" class="default-btn reverse d-block"><span>Find Your
@@ -282,6 +298,28 @@
                         });
                     }else{
                         $("#state").append(`<option value="">No State Available</option>`)
+                    }
+                },
+                error:function(data){
+                    console.log(data);
+                }
+            });
+        });
+        $('#state').on('change',function(){
+            var state_id = $(this).val();
+            $.ajax({
+                url:"{{route('get.cities')}}?state_id="+state_id,
+                type:"GET",
+                dataType:"json",
+                success:function(data){
+                    $("#city").empty();
+                    $("#city").append(`<option value="">Select City</option>`)
+                    if(data.length > 0){
+                        $.each(data,function(key,value){
+                            $("#city").append(`<option value="${value.id}">${value.name}</option>`);
+                        });
+                    }else{
+                        $("#city").append(`<option value="">No Cities Available Please Select another State.</option>`)
                     }
                 },
                 error:function(data){

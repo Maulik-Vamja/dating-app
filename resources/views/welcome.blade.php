@@ -11,19 +11,20 @@
                     <div class="banner__content wow fadeInLeft" data-wow-duration="1.5s">
                         <div class="banner__title">
                             <h2>Meet & Date, Pleasant.</h2>
-                            <p>The 1st Platform in the world which lists adult entertainers across the world with services like BDSM, kink, Anal, BBW,
-                            FMTY, Sensual Massage and much more.</p>
+                            <p>The 1st Platform in the world which lists adult entertainers across the world with
+                                services like BDSM, kink, Anal, BBW,
+                                FMTY, Sensual Massage and much more.</p>
 
-                           @guest
-                           <a href="{{ route('register') }}" class="default-btn style-2">
-                            <span>Create Free Profile</span>
-                        </a>
-                           @endguest
+                            @guest
+                            <a href="{{ route('register') }}" class="default-btn style-2">
+                                <span>Create Free Profile</span>
+                            </a>
+                            @endguest
 
                         </div>
                     </div>
                 </div>
-                <div class="col-lg-8 col-12" >
+                <div class="col-lg-8 col-12">
                     <div class="banner__thumb wow fadeInUp" data-wow-duration="1.5s">
                         <img src="{{asset('frontend/assets/images/banner/02.png')}}" alt="banner">
                         <div class="banner__thumb--shape">
@@ -51,7 +52,7 @@
 
 
 <!-- ================> About section start here <================== -->
-<div class="about about--style2 padding-top pt-xl-0" >
+<div class="about about--style2 padding-top pt-xl-0">
     <div class="container">
         <div class="section__wrapper wow fadeInUp" data-wow-duration="1.5s">
             <div class="row g-0 justify-content-center row-cols-lg-2 row-cols-1">
@@ -60,13 +61,14 @@
                         <div class="about__top">
                             <div class="about__content">
                                 <h3>Welcome To iFindYou</h3>
-                                <p>You find us, finally, and you are already in love. More than 4.000.000 female & Male Escorts around the world have already joined our
-                                platform ! Don't be late, Still it's free to join.</p>
+                                <p>You find us, finally, and you are already in love. More than 4.000.000 female & Male
+                                    Escorts around the world have already joined our
+                                    platform ! Don't be late, Still it's free to join.</p>
                                 @auth
-                            <a href="{{ route('profile.edit',auth()->user()->user_name) }}" class="default-btn style-2">
-                                <span>Update Profile</span>
-                            </a>
-                           @endauth
+                                <a href="{{ route('profile.edit') }}" class="default-btn style-2">
+                                    <span>Update Profile</span>
+                                </a>
+                                @endauth
                             </div>
                         </div>
                         <div class="about__bottom">
@@ -170,7 +172,17 @@
                                         <label>State</label>
                                         <div class="banner__inputlist">
                                             <select id="state" name="state">
-                                                <option value="">Select State</option>
+                                                <option value="">Select Country First</option>
+                                            </select>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="row">
+                                    <div class="col-12">
+                                        <label>City</label>
+                                        <div class="banner__inputlist">
+                                            <select id="city" name="city">
+                                                <option value="">Select State First</option>
                                             </select>
                                         </div>
                                     </div>
@@ -248,7 +260,8 @@
     <div class="container">
         <div class="section__header style-2 text-center wow fadeInUp" data-wow-duration="1.5s">
             <h2>It all begins with a Knock</h2>
-            <p>There are many members in different activities. You can browse the listing and checkout them Like Megapersonals & Eros</p>
+            <p>There are many members in different activities. You can browse the listing and checkout them Like
+                Megapersonals & Eros</p>
         </div>
         <div class="section__wrapper">
             <div class="row g-4 justify-content-center row-cols-xl-4 row-cols-lg-3 row-cols-sm-2 row-cols-1">
@@ -372,7 +385,8 @@
     <div class="container">
         <div class="section__header style-2 text-center wow fadeInUp" data-wow-duration="1.5s">
             <h2>Why Choose iFindYou ?</h2>
-            <p>Free Register today and effortlessly update your profile, ensuring visibility to a broad audience within our platform.</p>
+            <p>Free Register today and effortlessly update your profile, ensuring visibility to a broad audience within
+                our platform.</p>
         </div>
         <div class="section__wrapper">
             <div class="row g-4 justify-content-center row-cols-xl-4 row-cols-lg-3 row-cols-sm-2 row-cols-1">
@@ -384,7 +398,7 @@
                             </div>
                             <div class="about__content">
                                 <h4>Free Adult Directory</h4>
-                               <p>Now We are Offering Free SingUp ! </p>
+                                <p>Now We are Offering Free SingUp ! </p>
                             </div>
                         </div>
                     </div>
@@ -444,7 +458,8 @@
                     <div class="left">
                         <div class="section__header style-2 mb-lg-0 wow fadeInUp" data-wow-duration="1.5s">
                             <h2>Lets create a vibrant adult community</h2>
-                            <p>If you want to meet local escorts for dating, Adult Job, Video Call ,Companionship, Friendship or even more,
+                            <p>If you want to meet local escorts for dating, Adult Job, Video Call ,Companionship,
+                                Friendship or even more,
                                 you have come to the right place.</p>
                             <ul>
                                 <li>
@@ -680,6 +695,29 @@
                 }
             });
         });
+        $('#state').on('change',function(){
+            var state_id = $(this).val();
+            $.ajax({
+                url:"{{route('get.cities')}}?state_id="+state_id,
+                type:"GET",
+                dataType:"json",
+                success:function(data){
+                    $("#city").empty();
+                    $("#city").append(`<option value="">Select City</option>`)
+                    if(data.length > 0){
+                        $.each(data,function(key,value){
+                            $("#city").append(`<option value="${value.id}">${value.name}</option>`);
+                        });
+                    }else{
+                        $("#city").append(`<option value="">No Cities Available Please Select another State.</option>`)
+                    }
+                },
+                error:function(data){
+                    console.log(data);
+                }
+            });
+        });
+
     });
 
 </script>

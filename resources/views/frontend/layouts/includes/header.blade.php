@@ -12,9 +12,12 @@
                 </div>
                 <div class="header__top--right">
                     <ul>
-                        <li><a rel="nofollow" href="https://www.facebook.com/ifindyou.global"><i class="fa-brands fa-twitter"></i></a></li>
-                        <li><a rel="nofollow" href="https://twitter.com/iFindYouGlobal"><i class="fa-brands fa-facebook"></i></a></li>
-                        <li><a rel="nofollow" href="https://t.me/ifindyouco"><i class="fa-brands fa-telegram"></i></a></li>
+                        <li><a rel="nofollow" href="https://www.facebook.com/ifindyou.global"><i
+                                    class="fa-brands fa-twitter"></i></a></li>
+                        <li><a rel="nofollow" href="https://twitter.com/iFindYouGlobal"><i
+                                    class="fa-brands fa-facebook"></i></a></li>
+                        <li><a rel="nofollow" href="https://t.me/ifindyouco"><i class="fa-brands fa-telegram"></i></a>
+                        </li>
                     </ul>
                 </div>
             </div>
@@ -57,8 +60,7 @@
                             <li><a class="dropdown-item"
                                     href="{{ route('profile.get',auth()->user()->user_name) }}">View Profile</a></li>
                             <li>
-                            <li><a class="dropdown-item"
-                                    href="{{ route('profile.edit',auth()->user()->user_name) }}">Update Profile</a>
+                            <li><a class="dropdown-item" href="{{ route('profile.edit') }}">Update Profile</a>
                             </li>
                             <li>
                                 <a class="dropdown-item" href="{{ route('logout') }}" onclick="event.preventDefault();

@@ -61,16 +61,34 @@ $random_image = $user->gallery_images()->inRandomOrder()->first();
                 </div>
 
                 <div class="col-xl-4">
-                    <ul class="nav nav-tabs justify-content-end" id="myTab" role="tablist">
-                        <li><a class="nav-link" rel="nofollow"  href="https://www.facebook.com/sharer/sharer.php?u={{ route('get.escort',$user->user_name)  }}" target="_blank" rel="noopener noreferrer"><i class="fa-brands fa-facebook"></i></a></li>
-                        <li><a class="nav-link" rel="nofollow" href="https://twitter.com/intent/tweet?url={{ route('get.escort',$user->user_name) }}" target="_blank" rel="noopener noreferrer"><i class="fa-brands fa-twitter"></i></a></li>
-                        <li>   <a class="nav-link" rel="nofollow" href="whatsapp://send?text=Check%20out%20my%20profile%20on%20ifindyou:%20{{ route('get.escort',$user->user_name) }}" target="_blank" rel="noopener noreferrer">
-                            <i class="fa-brands fa-whatsapp"></i>
-                        </a> </li>
-
-                        <li>    <a class="nav-link" rel="nofollow" href="https://www.reddit.com/submit?url={{ route('get.escort',$user->user_name)  }}" target="_blank" rel="noopener noreferrer">
-                            <i class="fa-brands fa-reddit"></i>
-                        </a> </li>
+                    <ul class="nav nav-tabs justify-content-end align-items-center" id="myTab" role="tablist">
+                        <li class="">
+                            <div>Share on Social Media : </div>
+                        </li>
+                        <li class="">
+                            <a class="nav-link p-1 " rel="nofollow"
+                                href="https://www.facebook.com/sharer/sharer.php?u={{ route('get.escort',$user->user_name)  }}"
+                                target="_blank" rel="noopener noreferrer"><i class="fa-brands fa-facebook"></i></a>
+                        </li>
+                        <li class="">
+                            <a class="nav-link p-1 " rel="nofollow"
+                                href="https://twitter.com/intent/tweet?url={{ route('get.escort',$user->user_name) }}"
+                                target="_blank" rel="noopener noreferrer"><i class="fa-brands fa-twitter"></i></a>
+                        </li>
+                        <li class="">
+                            <a class="nav-link p-1 " rel="nofollow"
+                                href="whatsapp://send?text=Check%20out%20my%20profile%20on%20ifindyou:%20{{ route('get.escort',$user->user_name) }}"
+                                target="_blank" rel="noopener noreferrer">
+                                <i class="fa-brands fa-whatsapp"></i>
+                            </a>
+                        </li>
+                        <li class="">
+                            <a class="nav-link p-1 " rel="nofollow"
+                                href="https://www.reddit.com/submit?url={{ route('get.escort',$user->user_name)  }}"
+                                target="_blank" rel="noopener noreferrer">
+                                <i class="fa-brands fa-reddit"></i>
+                            </a>
+                        </li>
 
                     </ul>
                 </div>

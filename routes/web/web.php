@@ -28,7 +28,11 @@ use Illuminate\Support\Facades\{Route, Auth};
  */
 
 // Guest Routes
-Route::get('/', [PagesController::class, 'home'])->middleware('user_validate')->name('welcome');
+if (auth()->check()) {
+    Route::get('/', [PagesController::class, 'home'])->middleware(['user_validate', 'verified'])->name('welcome');
+} else {
+    Route::get('/', [PagesController::class, 'home'])->middleware('user_validate')->name('welcome');
+}
 // Update Auth routes as per your requirement
 Auth::routes([
     'confirm' => false, 'verify' => true, 'register' => true, 'login' => true,
@@ -37,8 +41,10 @@ Auth::routes([
 // Auth Routes
 Route::middleware(['auth', 'verified', 'user_validate'])->group(function () {
     Route::view('home', 'frontend.home');
+    Route::get('profile/update', [UserController::class, 'updateProfile'])->name('profile.edit');
+
     Route::get('profile/{user:user_name}', [UserController::class, 'getProfile'])->name('profile.get');
-    Route::get('profile/{user:user_name}/update', [UserController::class, 'updateProfile'])->name('profile.edit');
+
     Route::post('profile/{user:user_name}/update', [UserController::class, 'update'])->name('profile.update');
 
     Route::post('store-image', [UserController::class, 'storeImage'])->name('store.image');

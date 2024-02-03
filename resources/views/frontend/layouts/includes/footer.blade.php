@@ -53,7 +53,7 @@
                                         FMTY, Sensual Massage and much more</p>
                                     </div>
                                     <div class="footer__content--info">
-                                        <p>Now we 4,000 memebers Family</p>
+                                        <p>Now we 300 memebers Family</p>
                                     </div>
                                 </div>
                             </div>

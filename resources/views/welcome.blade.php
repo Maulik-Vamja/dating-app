@@ -61,7 +61,7 @@
                         <div class="about__top">
                             <div class="about__content">
                                 <h3>Welcome To iFindYou</h3>
-                                <p>You find us, finally, and you are already in love. More than 4.000.000 female & Male
+                                <p>You find us, finally, and you are already in love. More than 300 female & Male
                                     Escorts around the world have already joined our
                                     platform ! Don't be late, Still it's free to join.</p>
                                 @auth

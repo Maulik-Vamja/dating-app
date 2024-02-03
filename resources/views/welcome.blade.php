@@ -116,7 +116,7 @@
                             <div class="banner__list">
                                 <div class="row">
                                     <div class="col-6 ">
-                                        <label>I am a</label>
+                                        <label>I am a </label>
                                         <div class="banner__inputlist">
                                             <select>
                                                 <option>Select Gender</option>
@@ -131,8 +131,8 @@
                                         <div class="banner__inputlist">
                                             <select name="gender" id="gender">
                                                 <option>Select Gender</option>
-                                                <option value="male" selected>Male</option>
-                                                <option value="female">Female</option>
+                                                <option value="male" >Male</option>
+                                                <option selected value="female">Female</option>
                                                 <option value="non-binary">Non Binary</option>
                                             </select>
                                         </div>
@@ -167,8 +167,9 @@
                                         {{-- <span class="text-danger">sbfksf</span> --}}
                                     </div>
                                 </div>
+                                <div class="col-12" style="margin-top: 10px;">
                                 <div class="row">
-                                    <div class="col-12">
+                                    <div class="col-6">
                                         <label>State</label>
                                         <div class="banner__inputlist">
                                             <select id="state" name="state">
@@ -176,9 +177,8 @@
                                             </select>
                                         </div>
                                     </div>
-                                </div>
-                                <div class="row">
-                                    <div class="col-12">
+
+                                    <div class="col-6">
                                         <label>City</label>
                                         <div class="banner__inputlist">
                                             <select id="city" name="city">
@@ -188,6 +188,8 @@
                                     </div>
                                 </div>
                             </div>
+                        </div>
+
                             <button type="submit" class="default-btn reverse d-block"><span>Find Your
                                     Partner</span></button>
                         </form>

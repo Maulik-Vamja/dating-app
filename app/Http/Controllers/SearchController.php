@@ -34,7 +34,7 @@ class SearchController extends Controller
                 });
             })
             ->orderBy('created_at', 'desc')
-            ->paginate(12);
+            ->paginate(36);
         $countries = Country::all();
         return view('frontend.escorts.escorts-list', [
             'escorts' => $escorts,

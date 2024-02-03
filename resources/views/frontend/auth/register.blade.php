@@ -251,7 +251,7 @@
                                     <div class="form-group">
                                         <label>Height {!! $mend_sign !!}</label>
                                         <input type="text" name="height" id="height" class="my-form-control"
-                                            placeholder="Enter Your Height in Inches" value="{{ old('height') }}">
+                                            placeholder="Height in CM" value="{{ old('height') }}">
                                         @error('height')
                                         <span class="text-danger" role="alert">
                                             <strong>{{ $message }}</strong></span>

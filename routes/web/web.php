@@ -7,6 +7,7 @@ use App\Http\Controllers\SearchController;
 use App\Http\Controllers\UserController;
 use App\Http\Controllers\UtilityController;
 use Illuminate\Support\Facades\{Route, Auth};
+use Spatie\Sitemap\SitemapGenerator;
 
 /*
 |--------------------------------------------------------------------------
@@ -69,3 +70,14 @@ Route::controller(BlogsController::class)->group(function () {
 Route::post('/check/username', [UtilityController::class, 'checkUsername'])->name('check.username');
 Route::post('/check/email', [UtilityController::class, 'checkEmail'])->name('check.email');
 Route::post('/check/contact-no', [UtilityController::class, 'checkContact'])->name('check.contact-no');
+
+
+
+
+// Generate SiteMap for all the Page
+Route::get('/generate-sitemap-daynamically', function () {
+    SitemapGenerator::create(config('app.url'))
+        ->writeToFile(public_path('sitemap.xml'));
+    return response()->json(['message' => 'Sitemap generated successfully']);
+
+});

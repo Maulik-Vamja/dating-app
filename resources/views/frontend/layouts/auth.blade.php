@@ -98,7 +98,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1">
 
     <!-- site favicon -->
-    <link rel="icon" type="image/png" href="{{asset('frontend/assets/images/favicon.png')}}">
+    <link rel="icon" type="image/png" href="{{asset('frontend/assets/images/fav-icon.png')}}">
     <!-- Place favicon.ico in the root directory -->
     @include('frontend.layouts.includes.css')
 </head>

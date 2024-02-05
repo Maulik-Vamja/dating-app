@@ -32,10 +32,10 @@
                 <div class="about__content">
                     <h2>iFindYou.co</h2>
                     <h5>Trusted & Most Secure Adult Entertainer Platform</h5>
-                    <p>Welcome to your new Home/iFindyou.co, where we prioritize the well-being and success of escorts, BDSM practitioners,
+                    <p>Welcome to your new Home/iFindyou.co, where we prioritize the well-being and success of Adult Entertrainer, BDSM practitioners,
                     massage providers, and adult entertainers. Free for all Gender and demographics</p>
                     <p>With a commitment to fair pricing and ongoing improvement, we've become the go-to Tryst Alternative, Backpage
-                    alternative, Mega Personal Alternative, that sex workers worldwide have been seeking.</p>
+                    alternative, Megapersonals Alternative, that Adult Entertrainers worldwide have been seeking.</p>
 
                     <p>Join us for a reliable and enhanced experience. Currently we are offering a free profile & tailored to meet the unique
                     needs of the adult entertainment industry.</p>

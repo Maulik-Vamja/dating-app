@@ -49,8 +49,8 @@
                                         <h4>About iFindYou.co</h4>
                                     </div>
                                     <div class="footer__content--desc">
-                                        <p>The 1st Platform in the world which lists adult entertainers across the world with services like BDSM, kink, Anal, BBW,
-                                        FMTY, Sensual Massage and much more</p>
+                                        <p>Best platform to find Adult entertainers around the world. Just specify what you are looking for in the search and you can meet the one you desire.
+                                        </p>
                                     </div>
                                     <div class="footer__content--info">
                                         <p>Now we 300 memebers Family</p>

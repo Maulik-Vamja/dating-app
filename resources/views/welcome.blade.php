@@ -2,44 +2,154 @@
 
 @section('content')
 <!-- ================> Banner section start here <================== -->
-<div class="banner banner--style2 padding-top bg_img"
+<div class="banner banner--style2  bg_img"
     style="background-image: url({{asset('frontend/assets/images/banner/bg-2.jpg')}});">
-    <div class="container">
-        <div class="banner__wrapper">
-            <div class="row g-0 justify-content-center">
-                <div class="col-lg-4 col-12">
-                    <div class="banner__content wow fadeInLeft" data-wow-duration="1.5s">
-                        <div class="banner__title">
-                            <h2>Meet & Date, Pleasant.</h2>
-                            <p>The 1st Platform in the world which lists adult entertainers across the world with
-                                services like BDSM, kink, Anal, BBW,
-                                FMTY, Sensual Massage and much more.</p>
+    <div class="video-container">
+        <video
+            src="https://storage.coverr.co/videos/GK300Fvvg4T1LYiC9SJpUAK36CDldcR7A?token=eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJhcHBJZCI6Ijg3NjdFMzIzRjlGQzEzN0E4QTAyIiwiaWF0IjoxNjE0NzE0NjcxfQ.EnOnRFM1w-1SJY_AfEhhjR6S_dPgXx0lj1kKMvZheTk"
+            autoplay loop muted></video>
+    </div>
+    <div class="about about--style2" style="max-width: 992px;margin:0 auto;">
+        <div class="container">
+            <div class="section__wrapper wow fadeInUp" data-wow-duration="1.5s">
+                <div class="row g-0 justify-content-center row-cols-lg-2 row-cols-1">
+                    <div class="col">
+                        <div class="about__left h-100">
+                            <div class="about__top">
+                                <div class="about__content">
+                                    <h3>Welcome To iFindYou</h3>
+                                    <p>You find us, finally, and you are already in love. More than 300 female & Male
+                                        Escorts around the world have already joined our
+                                        platform ! Don't be late, Still it's free to join.</p>
+                                    @auth
+                                    <a href="{{ route('profile.edit') }}" class="default-btn style-2">
+                                        <span>Update Profile</span>
+                                    </a>
+                                    @endauth
+                                </div>
+                            </div>
+                            <div class="about__bottom">
+                                <div class="about__bottom--head">
+                                    <h5>Latest Registered Members</h5>
+                                    <div class="about__bottom--navi">
+                                        <div class="ragi-prev"><i class="fa-solid fa-chevron-left"></i></div>
+                                        <div class="ragi-next active"><i class="fa-solid fa-chevron-right"></i></div>
+                                    </div>
+                                </div>
+                                <div class="about__bottom--body">
+                                    <div class="ragi__slider overflow-hidden">
+                                        <div class="swiper-wrapper">
 
-                            @guest
-                            <a href="{{ route('register') }}" class="default-btn style-2">
-                                <span>Create Free Profile</span>
-                            </a>
-                            @endguest
+                                            @foreach ($escorts as $escort)
+                                            @php
+                                            $random_image = $escort->gallery_images()->inRandomOrder()->first();
+                                            @endphp
+                                            <div class="swiper-slide">
+                                                <div class="ragi__thumb">
+                                                    <a href="{{ route('get.escort',$escort->user_name) }}">
+                                                        <img class="rounded-circle"
+                                                            style="width: 100px; height: 100px; object-fit: cover;"
+                                                            src="{{$random_image ? (filter_var($random_image->image,FILTER_VALIDATE_URL) == false ? Storage::url($random_image->image) : $random_image->image) : asset('frontend/assets/images/allmedia/01.jpg')}}"
+                                                            alt="dating thumb">
 
+                                                    </a>
+                                                </div>
+                                            </div>
+
+                                            @endforeach
+
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
                         </div>
                     </div>
-                </div>
-                <div class="col-lg-8 col-12">
-                    <div class="banner__thumb wow fadeInUp" data-wow-duration="1.5s">
-                        <img src="{{asset('frontend/assets/images/banner/02.png')}}" alt="banner">
-                        <div class="banner__thumb--shape">
-                            <div class="shapeimg shapeimg__one">
-                                <img src="{{asset('frontend/assets/images/banner/shape/home2/01.png')}}"
-                                    alt="dating thumb">
+                    <div class="col">
+                        <div class="about__right ">
+                            <div class="about__title">
+                                <h3>Find Your best Match</h3>
                             </div>
-                            <div class="shapeimg shapeimg__two">
-                                <img src="{{asset('frontend/assets/images/banner/shape/home2/02.png')}}"
-                                    alt="dating thumb">
-                            </div>
-                            <div class="shapeimg shapeimg__three">
-                                <img src="{{asset('frontend/assets/images/banner/shape/home2/03.png')}}"
-                                    alt="dating thumb">
-                            </div>
+                            <form action="{{ route('get.escorts') }}" method="GET">
+                                <div class="banner__list">
+                                    <div class="row">
+                                        <div class="col-6 ">
+                                            <label>I am a </label>
+                                            <div class="banner__inputlist">
+                                                <select>
+                                                    <option>Select Gender</option>
+                                                    <option value="male" selected>Male</option>
+                                                    <option value="female">Female</option>
+                                                    <option value="non-binary">Non Binary</option>
+                                                </select>
+                                            </div>
+                                        </div>
+                                        <div class="col-6">
+                                            <label>Looking for</label>
+                                            <div class="banner__inputlist">
+                                                <select name="gender" id="gender">
+                                                    <option>Select Gender</option>
+                                                    <option value="male">Male</option>
+                                                    <option selected value="female">Female</option>
+                                                    <option value="non-binary">Non Binary</option>
+                                                </select>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <input type="hidden" name="min_age" id="min_age" value="18">
+                                <input type="hidden" name="max_age" id="max_age" value="40">
+                                <div class="banner__list">
+                                    <div class="row">
+                                        <div class="col-lg-6 col-12">
+                                            <label class="m-0">Age</label>
+                                            <div class="range-slider">
+                                                <span class="rangeValues"></span>
+                                                <input value="18" min="18" max="60" step="1" type="range">
+                                                <input value="40" min="18" max="60" step="1" type="range">
+                                            </div>
+                                        </div>
+                                        @php
+                                        $countries = DB::table('countries')->get();
+                                        @endphp
+                                        <div class="col-lg-6 col-12">
+                                            <label>Country</label>
+                                            <div class="banner__inputlist mb-0">
+                                                <select id="country" name="country">
+                                                    <option value="">Select Country</option>
+                                                    @foreach ($countries as $country)
+                                                    <option value="{{$country->id}}">{{$country->name}}</option>
+                                                    @endforeach
+                                                </select>
+                                            </div>
+                                            {{-- <span class="text-danger">sbfksf</span> --}}
+                                        </div>
+                                    </div>
+                                    <div class="col-12" style="margin-top: 10px;">
+                                        <div class="row">
+                                            <div class="col-6">
+                                                <label>State</label>
+                                                <div class="banner__inputlist">
+                                                    <select id="state" name="state">
+                                                        <option value="">Select Country First</option>
+                                                    </select>
+                                                </div>
+                                            </div>
+
+                                            <div class="col-6">
+                                                <label>City</label>
+                                                <div class="banner__inputlist">
+                                                    <select id="city" name="city">
+                                                        <option value="">Select State First</option>
+                                                    </select>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <button type="submit" class="default-btn reverse d-block"><span>Find Your
+                                        Partner</span></button>
+                            </form>
                         </div>
                     </div>
                 </div>
@@ -49,157 +159,6 @@
 </div>
 
 <!-- ================> Banner section end here <================== -->
-
-
-<!-- ================> About section start here <================== -->
-<div class="about about--style2 padding-top pt-xl-0">
-    <div class="container">
-        <div class="section__wrapper wow fadeInUp" data-wow-duration="1.5s">
-            <div class="row g-0 justify-content-center row-cols-lg-2 row-cols-1">
-                <div class="col">
-                    <div class="about__left h-100">
-                        <div class="about__top">
-                            <div class="about__content">
-                                <h3>Welcome To iFindYou</h3>
-                                <p>You find us, finally, and you are already in love. More than 300 female & Male
-                                    Escorts around the world have already joined our
-                                    platform ! Don't be late, Still it's free to join.</p>
-                                @auth
-                                <a href="{{ route('profile.edit') }}" class="default-btn style-2">
-                                    <span>Update Profile</span>
-                                </a>
-                                @endauth
-                            </div>
-                        </div>
-                        <div class="about__bottom">
-                            <div class="about__bottom--head">
-                                <h5>Latest Registered Members</h5>
-                                <div class="about__bottom--navi">
-                                    <div class="ragi-prev"><i class="fa-solid fa-chevron-left"></i></div>
-                                    <div class="ragi-next active"><i class="fa-solid fa-chevron-right"></i></div>
-                                </div>
-                            </div>
-                            <div class="about__bottom--body">
-                                <div class="ragi__slider overflow-hidden">
-                                    <div class="swiper-wrapper">
-
-                                        @foreach ($escorts as $escort)
-                                        @php
-                                        $random_image = $escort->gallery_images()->inRandomOrder()->first();
-                                        @endphp
-                                        <div class="swiper-slide">
-                                            <div class="ragi__thumb">
-                                                <a href="{{ route('get.escort',$escort->user_name) }}">
-                                                    <img class="rounded-circle"
-                                                        style="width: 100px; height: 100px; object-fit: cover;"
-                                                        src="{{$random_image ? (filter_var($random_image->image,FILTER_VALIDATE_URL) == false ? Storage::url($random_image->image) : $random_image->image) : asset('frontend/assets/images/allmedia/01.jpg')}}"
-                                                        alt="dating thumb">
-
-                                                </a>
-                                            </div>
-                                        </div>
-
-                                        @endforeach
-
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-                <div class="col">
-                    <div class="about__right ">
-                        <div class="about__title">
-                            <h3>Find Your best Match</h3>
-                        </div>
-                        <form action="{{ route('get.escorts') }}" method="GET">
-                            <div class="banner__list">
-                                <div class="row">
-                                    <div class="col-6 ">
-                                        <label>I am a </label>
-                                        <div class="banner__inputlist">
-                                            <select>
-                                                <option>Select Gender</option>
-                                                <option value="male" selected>Male</option>
-                                                <option value="female">Female</option>
-                                                <option value="non-binary">Non Binary</option>
-                                            </select>
-                                        </div>
-                                    </div>
-                                    <div class="col-6">
-                                        <label>Looking for</label>
-                                        <div class="banner__inputlist">
-                                            <select name="gender" id="gender">
-                                                <option>Select Gender</option>
-                                                <option value="male" >Male</option>
-                                                <option selected value="female">Female</option>
-                                                <option value="non-binary">Non Binary</option>
-                                            </select>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                            <input type="hidden" name="min_age" id="min_age" value="18">
-                            <input type="hidden" name="max_age" id="max_age" value="40">
-                            <div class="banner__list">
-                                <div class="row">
-                                    <div class="col-lg-6 col-12">
-                                        <label class="m-0">Age</label>
-                                        <div class="range-slider">
-                                            <span class="rangeValues"></span>
-                                            <input value="18" min="18" max="60" step="1" type="range">
-                                            <input value="40" min="18" max="60" step="1" type="range">
-                                        </div>
-                                    </div>
-                                    @php
-                                    $countries = DB::table('countries')->get();
-                                    @endphp
-                                    <div class="col-lg-6 col-12">
-                                        <label>Country</label>
-                                        <div class="banner__inputlist mb-0">
-                                            <select id="country" name="country">
-                                                <option value="">Select Country</option>
-                                                @foreach ($countries as $country)
-                                                <option value="{{$country->id}}">{{$country->name}}</option>
-                                                @endforeach
-                                            </select>
-                                        </div>
-                                        {{-- <span class="text-danger">sbfksf</span> --}}
-                                    </div>
-                                </div>
-                                <div class="col-12" style="margin-top: 10px;">
-                                <div class="row">
-                                    <div class="col-6">
-                                        <label>State</label>
-                                        <div class="banner__inputlist">
-                                            <select id="state" name="state">
-                                                <option value="">Select Country First</option>
-                                            </select>
-                                        </div>
-                                    </div>
-
-                                    <div class="col-6">
-                                        <label>City</label>
-                                        <div class="banner__inputlist">
-                                            <select id="city" name="city">
-                                                <option value="">Select State First</option>
-                                            </select>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-
-                            <button type="submit" class="default-btn reverse d-block"><span>Find Your
-                                    Partner</span></button>
-                        </form>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </div>
-</div>
-
 <!-- ================> Member section start here <================== -->
 <div class="member member--style2 padding-top">
     <div class="container">

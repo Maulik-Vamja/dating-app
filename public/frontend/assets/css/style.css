@@ -2396,8 +2396,6 @@ iframe {
   width: 60px;
 }
 .footer--feature .footer__content--desc ul li .thumb img {
-    width: 60px;
-    height: 60px;
   -webkit-border-radius: 100%;
   -moz-border-radius: 100%;
   -ms-border-radius: 100%;
@@ -2540,11 +2538,10 @@ iframe {
 }
 @media (min-width: 992px) {
   .about--style2 {
-    margin-top: -120px;
+    margin-top: -60px;
     position: relative;
     z-index: 999;
   }
-
 }
 .about--style2 .about__title h3 {
   font-size: calc(1.35rem + 1.2vw);

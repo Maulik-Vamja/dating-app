@@ -5,7 +5,7 @@
     style="background-image: url({{asset('frontend/assets/images/banner/bg-2.jpg')}});">
     <div class="video-container">
         <video
-            src="https://secureimage.securedataimages.com/images/ffadult/cover/AFFCoverVideo_FINAL_2021/1.mp4"
+            src="{{asset('i-find-you-video.mp4')}}"
             autoplay loop muted></video>
     </div>
     <div class="about about--style2" style="max-width: 992px;margin:0 auto;">

@@ -1,12 +1,11 @@
 @extends('frontend.layouts.app')
-
 @section('content')
 <!-- ================> Banner section start here <================== -->
 <div class="banner banner--style2  bg_img"
     style="background-image: url({{asset('frontend/assets/images/banner/bg-2.jpg')}});">
     <div class="video-container">
         <video
-            src="https://storage.coverr.co/videos/GK300Fvvg4T1LYiC9SJpUAK36CDldcR7A?token=eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJhcHBJZCI6Ijg3NjdFMzIzRjlGQzEzN0E4QTAyIiwiaWF0IjoxNjE0NzE0NjcxfQ.EnOnRFM1w-1SJY_AfEhhjR6S_dPgXx0lj1kKMvZheTk"
+            src="https://secureimage.securedataimages.com/images/ffadult/cover/AFFCoverVideo_FINAL_2021/1.mp4"
             autoplay loop muted></video>
     </div>
     <div class="about about--style2" style="max-width: 992px;margin:0 auto;">
@@ -19,8 +18,7 @@
                                 <div class="about__content">
                                     <h3>Welcome To iFindYou</h3>
                                     <p>You find us, finally, and you are already in love. More than 300 female & Male
-                                        Escorts around the world have already joined our
-                                        platform ! Don't be late, Still it's free to join.</p>
+                                        Adult Entertrainer around the world.</p>
                                     @auth
                                     <a href="{{ route('profile.edit') }}" class="default-btn style-2">
                                         <span>Update Profile</span>
@@ -419,7 +417,7 @@
                     <div class="left">
                         <div class="section__header style-2 mb-lg-0 wow fadeInUp" data-wow-duration="1.5s">
                             <h2>Lets create a vibrant adult community</h2>
-                            <p>If you want to meet local escorts for dating, Adult Job, Video Call ,Companionship,
+                            <p>If you want to meet local adult Entertrainer for dating, Adult Job, Video Call ,Companionship,
                                 Friendship or even more,
                                 you have come to the right place.</p>
                             <ul>
@@ -556,7 +554,7 @@
                             </div>
                             <div class="work__content">
                                 <h3>Simple Membership</h3>
-                                <p>Dont be late, Currently we are offering free Escorts Registration. </p>
+                                <p>Dont be late, Currently we are offering free Registration. </p>
                                 <a href="membership.html" class="default-btn reverse"><span>Create
                                         Profile</span></a>
                             </div>
@@ -580,7 +578,7 @@
                         <div class="app__content text-center">
                             <h4>Coming Soon</h4>
                             <h2>Easy Connect To Everyone</h2>
-                            <p>You find us, finally and you are already in love. More than 4.000.000 around the
+                            <p>You find us, finally and you are already in love. More than 300 around the
                                 world already shared the same experience with Joining us today!</p>
                             <ul class="justify-content-center">
                                 <li><a href="#"><img src="{{asset('frontend/assets/images/app/01.jpg')}}"

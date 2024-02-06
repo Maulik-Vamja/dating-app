@@ -194,7 +194,7 @@
                             </div>
                             <div class="work__content">
                                 <h3>Simple Membership</h3>
-                                <p>Dont be late, Currently we are offering free Escorts Registration. </p>
+                                <p>Dont be late, Currently we are offering free  Registration. </p>
                                 <a href="membership.html" class="default-btn reverse"><span>Create
                                         Profile</span></a>
                             </div>

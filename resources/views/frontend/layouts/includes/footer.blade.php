@@ -24,12 +24,11 @@
                             </div>
                             <div class="footer__newsletter--social">
                                 <ul>
-                                    <li><a rel="nofollow" href="https://www.facebook.com/ifindyou.global"><i class="fa-brands fa-twitter"></i></a></li>
-                                    <li><a rel="nofollow" href="https://twitter.com/iFindYouGlobal"><i class="fa-brands fa-facebook"></i></a></li>
-                                    <li><a rel="nofollow" href="https://t.me/ifindyouco"><i class="fa-brands fa-telegram"></i></a></li>
-                                    <li><a href="#"><i class="fa-brands fa-tumblr"></i></a></li>
-                                    <li><a href="#"><i class="fa-brands fa-reddit"></i></a></li>
-                                    <li><a href="#"><i class="fa-brands fa-instagram"></i></a></li>
+                                    <li><a target="_blank" rel="nofollow" href="https://www.facebook.com/ifindyou.global"><i class="fa-brands fa-facebook"></i></a></li>
+                                    <li><a target="_blank" rel="nofollow" href="https://twitter.com/iFindYouGlobal"><i class="fa-brands fa-twitter"></i></a></li>
+                                    <li><a target="_blank" rel="nofollow" href="https://t.me/ifindyouco"><i class="fa-brands fa-telegram"></i></a></li>
+                                    <li><a target="_blank" rel="nofollow" href="https://www.tumblr.com/ifindyouglobal"><i class="fa-brands fa-tumblr"></i></a></li>
+                                    <li><a target="_blank" rel="nofollow" href="https://mewe.com/ifindyou.47"><i class="fa-brands fa-meetup"></i></a></li>
 
                                 </ul>
                             </div>

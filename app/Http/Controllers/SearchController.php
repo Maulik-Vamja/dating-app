@@ -10,7 +10,6 @@ class SearchController extends Controller
 {
     public function __invoke(Request $request)
     {
-        // dd($request->all());
         $escorts = User::verified()->active()->with('availability', 'addresses', 'based_in_addresses', 'gallery_images')
             ->when($request->has('gender'), function ($query) use ($request) {
                 $query->where('gender', $request->gender);
@@ -34,7 +33,7 @@ class SearchController extends Controller
                 });
             })
             ->orderBy('created_at', 'desc')
-            ->paginate(36);
+            ->paginate(3);
         $countries = Country::all();
         return view('frontend.escorts.escorts-list', [
             'escorts' => $escorts,

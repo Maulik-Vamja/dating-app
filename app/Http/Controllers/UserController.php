@@ -62,7 +62,8 @@ class UserController extends Controller
                     // dd($user);
                     break;
                 case 'update_rates':
-                    UserRate::where('user_id', $user->id)->delete();
+                    // UserRate::where('user_id', $user->id)->delete();
+                    auth()->user()->rates()->delete();
                     foreach (array_reduce($request->input('rates'), 'array_merge', array()) as $rate) {
                         $user->rates()->create([
                             'custom_id' => get_unique_string(),

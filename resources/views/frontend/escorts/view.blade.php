@@ -258,6 +258,7 @@ $random_image = $escort->gallery_images()->inRandomOrder()->first();
                                 </div>
                             </div>
                             <div class="tab-pane fade" id="gt3" role="tabpanel" aria-labelledby="gt3-tab">
+
                                 <div class="container">
                                     <div class="site">
                                         <div class="col-12">

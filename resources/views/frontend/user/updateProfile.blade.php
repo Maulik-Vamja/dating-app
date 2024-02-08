@@ -138,7 +138,7 @@
                                                         <input type="text" class="form-control" id="short_description"
                                                             name="short_description"
                                                             placeholder="Enter Your Short Description"
-                                                            value="{{ $user->short_description }}" required>
+                                                            value="{{ $user->short_description }}">
                                                     </div>
                                                 </div>
                                                 {{-- Gender --}}
@@ -180,7 +180,7 @@
                                                         <label for="pronouns">Pronouns:</label>
                                                         <input type="text" class="form-control" id="pronouns"
                                                             name="pronouns" placeholder="Enter Your Pronouns"
-                                                            value="{{ $user->pronouns }}" required>
+                                                            value="{{ $user->pronouns }}">
                                                     </div>
                                                 </div>
                                                 {{-- Description --}}
@@ -191,7 +191,7 @@
                                                         id="description" name="description"
                                                         placeholder="Enter description" autocomplete="description"
                                                         spellcheck="true"
-                                                        required>{{ old('description') != null ? old('description') : $user->description }}</textarea>
+                                                        >{{ old('description') != null ? old('description') : $user->description }}</textarea>
                                                     @if ($errors->has('description'))
                                                     <span class="text-danger">
                                                         <strong class="form-text">{{ $errors->first('description')
@@ -295,10 +295,10 @@
                                                             <select name="caters_to[]" id="caters_to"
                                                                 class="form-control @error('caters_to') is-invalid @enderror w-100"
                                                                 data-error-container="#caters_to_error_container"
-                                                                multiple>
-                                                                <option value="">Select Your Preference</option>
+                                                                multiple required>
+                                                                <option  value="">Select Your Preference</option>
                                                                 @foreach (config('utility.caters_to') as $item)
-                                                                <option value="{{$item}}" {{
+                                                                <option  value="{{$item}}" {{
                                                                     in_array($item,$user_cater_to) ? 'selected' : '' }}>
                                                                     {{ $item }}
                                                                 </option>

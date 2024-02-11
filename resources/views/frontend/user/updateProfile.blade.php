@@ -60,7 +60,6 @@
                                 class="nav-link {{ session()->has('form_action') ? (session()->get('form_action') == 'update_rates' ? 'active' : '' ) : '' }}"
                                 id="gt3-tab" data-bs-toggle="tab" data-bs-target="#gt3" type="button" role="tab"
                                 aria-controls="gt3" aria-selected="false"><i class="fa-solid fa-video"></i> Rates
-                                <!-- <span>06</span> -->
                             </button>
                         </li>
                         <li class="nav-item" role="presentation">
@@ -68,7 +67,6 @@
                                 class="nav-link {{ session()->has('form_action') ? (session()->get('form_action') == 'update_policies' ? 'active' : '' ) : '' }}"
                                 id="gt4-tab" data-bs-toggle="tab" data-bs-target="#gt4" type="button" role="tab"
                                 aria-controls="gt4" aria-selected="false"><i class="fa-solid fa-users"></i> Policies
-                                <!-- <span>16</span> -->
                             </button>
                         </li>
                         <li class="nav-item" role="presentation">
@@ -77,7 +75,6 @@
                                 id="gt6-tab" data-bs-toggle="tab" data-bs-target="#gt6" type="button" role="tab"
                                 aria-controls="gt6" aria-selected="false"><i class="fa-solid fa-photo-film"></i>
                                 Contacts
-                                <!-- <span>06</span> -->
                             </button>
                         </li>
                         <li class="nav-item " role="presentation">
@@ -85,7 +82,12 @@
                                 class="nav-link {{ session()->has('form_action') ? (session()->get('form_action') == 'update_addresses' ? 'active' : '' ) : '' }}"
                                 id="gt8-tab" data-bs-toggle="tab" data-bs-target="#gt8" type="button" role="tab"
                                 aria-controls="gt8" aria-selected="false"><i class="fa-solid fa-map"></i> Addresses
-                                <!-- <span>06</span> -->
+                            </button>
+                        </li>
+                        <li class="nav-item " role="presentation">
+                            <button class="nav-link" id="gt8-tab" data-bs-toggle="tab" data-bs-target="#gt8"
+                                type="button" role="tab" aria-controls="gt8" aria-selected="false"><i
+                                    class="fa-solid fa-file-check"></i> Document Verification
                             </button>
                         </li>
                     </ul>

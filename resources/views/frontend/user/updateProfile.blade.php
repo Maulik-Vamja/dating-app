@@ -85,9 +85,8 @@
                             </button>
                         </li>
                         <li class="nav-item " role="presentation">
-                            <button class="nav-link" id="gt8-tab" data-bs-toggle="tab" data-bs-target="#gt8"
-                                type="button" role="tab" aria-controls="gt8" aria-selected="false"><i
-                                    class="fa-solid fa-file-check"></i> Document Verification
+                            <button class="nav-link" id="gt9-tab" data-bs-toggle="tab" data-bs-target="#gt9"
+                                type="button" role="tab" aria-controls="gt9" aria-selected="false"><i class="fa-solid fa-circle-check"></i> Document Verification
                             </button>
                         </li>
                     </ul>
@@ -875,6 +874,56 @@
                                                             </div>
                                                         </div>
                                                         @endforeach
+                                                    </div>
+                                                </div>
+                                            </form>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="tab-pane fade"
+                                id="gt9" role="tabpanel" aria-labelledby="gt9-tab">
+                                <div class="container">
+                                    <div class="site">
+                                        <div class="col-12">
+                                            <form action="{{ route('profile.update',$user->user_name) }}" method="POST"
+                                                enctype="multipart/form-data">
+                                                @csrf
+                                                <input type="hidden" name="action" value="update_documents">
+                                                <div class="card">
+                                                    <div class="card-header">
+                                                        <div class="d-flex justify-content-end">
+                                                            <button type="submit" class="btn btn-primary">Submit Documents</button>
+                                                        </div>
+                                                    </div>
+                                                    @php
+                                                    $addressTypes =
+                                                    \App\Models\AddressType::where('is_active','y')->get();
+                                                    @endphp
+                                                    <div class="card-body">
+                                                       <div class="row">
+                                                        <div class="col-md-4">
+                                                            <div class="card">
+                                                                <div class="card-header">
+                                                                    <div class="">Passport/NID (Upper Side)</div>
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                        <div class="col-md-4">
+                                                            <div class="card">
+                                                                <div class="card-header">
+                                                                    <div class="">Passport/NID (Back Side)</div>
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                        <div class="col-md-4">
+                                                            <div class="card">
+                                                                <div class="card-header">
+                                                                    <div class="">Passport/NID (Document with User's Face)</div>
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                       </div>
                                                     </div>
                                                 </div>
                                             </form>

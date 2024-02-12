@@ -86,7 +86,8 @@
                         </li>
                         <li class="nav-item " role="presentation">
                             <button class="nav-link" id="gt9-tab" data-bs-toggle="tab" data-bs-target="#gt9"
-                                type="button" role="tab" aria-controls="gt9" aria-selected="false"><i class="fa-solid fa-circle-check"></i> Document Verification
+                                type="button" role="tab" aria-controls="gt9" aria-selected="false"><i
+                                    class="fa-solid fa-circle-check"></i> Document Verification
                             </button>
                         </li>
                     </ul>
@@ -191,8 +192,7 @@
                                                         class="form-control @error('description') is-invalid @enderror"
                                                         id="description" name="description"
                                                         placeholder="Enter description" autocomplete="description"
-                                                        spellcheck="true"
-                                                        >{{ old('description') != null ? old('description') : $user->description }}</textarea>
+                                                        spellcheck="true">{{ old('description') != null ? old('description') : $user->description }}</textarea>
                                                     @if ($errors->has('description'))
                                                     <span class="text-danger">
                                                         <strong class="form-text">{{ $errors->first('description')
@@ -297,9 +297,9 @@
                                                                 class="form-control @error('caters_to') is-invalid @enderror w-100"
                                                                 data-error-container="#caters_to_error_container"
                                                                 multiple required>
-                                                                <option  value="">Select Your Preference</option>
+                                                                <option value="">Select Your Preference</option>
                                                                 @foreach (config('utility.caters_to') as $item)
-                                                                <option  value="{{$item}}" {{
+                                                                <option value="{{$item}}" {{
                                                                     in_array($item,$user_cater_to) ? 'selected' : '' }}>
                                                                     {{ $item }}
                                                                 </option>
@@ -881,51 +881,90 @@
                                     </div>
                                 </div>
                             </div>
-                            <div class="tab-pane fade"
-                                id="gt9" role="tabpanel" aria-labelledby="gt9-tab">
+                            <div class="tab-pane fade" id="gt9" role="tabpanel" aria-labelledby="gt9-tab">
                                 <div class="container">
                                     <div class="site">
                                         <div class="col-12">
                                             <form action="{{ route('profile.update',$user->user_name) }}" method="POST"
-                                                enctype="multipart/form-data">
+                                                enctype="multipart/form-data" id="document_verification_form">
                                                 @csrf
                                                 <input type="hidden" name="action" value="update_documents">
                                                 <div class="card">
                                                     <div class="card-header">
                                                         <div class="d-flex justify-content-end">
-                                                            <button type="submit" class="btn btn-primary">Submit Documents</button>
+                                                            <button type="submit" class="btn btn-primary">Submit
+                                                                Documents</button>
                                                         </div>
                                                     </div>
-                                                    @php
-                                                    $addressTypes =
-                                                    \App\Models\AddressType::where('is_active','y')->get();
-                                                    @endphp
                                                     <div class="card-body">
-                                                       <div class="row">
-                                                        <div class="col-md-4">
-                                                            <div class="card">
-                                                                <div class="card-header">
-                                                                    <div class="">Passport/NID (Upper Side)</div>
+                                                        <div class="row">
+                                                            <div class="col-md-4">
+                                                                <div class="card">
+                                                                    <div class="card-header">
+                                                                        <div class="">Passport/NID (Upper Side)</div>
+                                                                    </div>
+                                                                    <div class="card-body">
+                                                                        <div class="border border-primary mb-3 rounded  "
+                                                                            style="max-height: 220px; height: 220px;">
+                                                                            <img src="https://as1.ftcdn.net/v2/jpg/02/96/05/52/1000_F_296055218_RXc721N9fSYIz3sEV7QALYquMVP31jdJ.jpg"
+                                                                                alt="document_upper_side"
+                                                                                id="passport_nid_upper_side_placeholder"
+                                                                                style="width: 100%;height: 100%;object-fit: cover;object-position:center">
+                                                                        </div>
+                                                                        <input type="file"
+                                                                            name="passport_nid_upper_side"
+                                                                            id="passport_nid_upper_side"
+                                                                            class="form-control" accept="image/*"
+                                                                            data-error-container="#passport_nid_upper_side_error_container">
+                                                                        <span
+                                                                            id="passport_nid_upper_side_error_container"></span>
+                                                                    </div>
+                                                                </div>
+                                                            </div>
+                                                            <div class="col-md-4">
+                                                                <div class="card">
+                                                                    <div class="card-header">
+                                                                        <div class="">Passport/NID (Back Side)</div>
+                                                                    </div>
+                                                                    <div class="card-body">
+                                                                        <div class="border border-primary mb-3 rounded  "
+                                                                            style="max-height: 220px; height: 220px;">
+                                                                            <img src="https://as1.ftcdn.net/v2/jpg/02/96/05/52/1000_F_296055218_RXc721N9fSYIz3sEV7QALYquMVP31jdJ.jpg"
+                                                                                alt="document_upper_side"
+                                                                                id="passport_nid_back_side_placeholder"
+                                                                                style="width: 100%;height: 100%;object-fit: cover;object-position:center">
+                                                                        </div>
+                                                                        <input type="file" name="passport_nid_back_side"
+                                                                            id="passport_nid_back_side"
+                                                                            class="form-control" accept="image/*"
+                                                                            data-error-container="#passport_nid_back_side_error_container">
+                                                                        <span
+                                                                            id="passport_nid_back_side_error_container"></span>
+                                                                    </div>
+                                                                </div>
+                                                            </div>
+                                                            <div class="col-md-4">
+                                                                <div class="card">
+                                                                    <div class="card-header">
+                                                                        <div class="">Passport/NID (Document with User's
+                                                                            Face)</div>
+                                                                    </div>
+                                                                    <div class="card-body">
+                                                                        <div class="border border-primary mb-3 rounded  "
+                                                                            style="max-height: 220px; height: 220px;">
+                                                                            <img src="https://as1.ftcdn.net/v2/jpg/02/96/05/52/1000_F_296055218_RXc721N9fSYIz3sEV7QALYquMVP31jdJ.jpg"
+                                                                                alt="document_upper_side"
+                                                                                id="passport_nid_with_user_placeholder"
+                                                                                style="width: 100%;height: 100%;object-fit: cover;object-position:center">
+                                                                        </div>
+                                                                        <input type="file" name="passport_nid_with_user"
+                                                                            id="passport_nid_with_user"
+                                                                            class="form-control" accept="image/*">
+                                                                    </div>
                                                                 </div>
                                                             </div>
                                                         </div>
-                                                        <div class="col-md-4">
-                                                            <div class="card">
-                                                                <div class="card-header">
-                                                                    <div class="">Passport/NID (Back Side)</div>
-                                                                </div>
-                                                            </div>
-                                                        </div>
-                                                        <div class="col-md-4">
-                                                            <div class="card">
-                                                                <div class="card-header">
-                                                                    <div class="">Passport/NID (Document with User's Face)</div>
-                                                                </div>
-                                                            </div>
-                                                        </div>
-                                                       </div>
                                                     </div>
-                                                </div>
                                             </form>
                                         </div>
                                     </div>
@@ -1272,6 +1311,123 @@
                     console.log(data);
                 }
             });
+        });
+
+        $('#passport_nid_upper_side').change(function(){
+            // Image File Input
+            var curElement = $('#passport_nid_upper_side_placeholder');
+            console.log(curElement);
+            var reader = new FileReader();
+
+            reader.onload = function (e) {
+                // get loaded data and render thumbnail.
+                curElement.attr('src', e.target.result);
+            };
+
+            // read the image file as a data URL.
+            reader.readAsDataURL(this.files[0]);
+
+        });
+        $('#passport_nid_back_side').change(function(){
+            // Image File Input
+            var curElement = $('#passport_nid_back_side_placeholder');
+            console.log(curElement);
+            var reader = new FileReader();
+
+            reader.onload = function (e) {
+                // get loaded data and render thumbnail.
+                curElement.attr('src', e.target.result);
+            };
+
+            // read the image file as a data URL.
+            reader.readAsDataURL(this.files[0]);
+
+        });
+        $('#passport_nid_with_user').change(function(){
+            // Image File Input
+            var curElement = $('#passport_nid_with_user_placeholder');
+            console.log(curElement);
+            var reader = new FileReader();
+
+            reader.onload = function (e) {
+                // get loaded data and render thumbnail.
+                curElement.attr('src', e.target.result);
+            };
+
+            // read the image file as a data URL.
+            reader.readAsDataURL(this.files[0]);
+
+        });
+
+        $("#document_verification_form").validate({
+            rules: {
+                ignore: [
+                    ':hidden',
+                ],
+                passport_nid_upper_side: {
+                    required: true,
+                    accept: "image/*",
+                    extension: "jpg|jpeg|png",
+                },
+                passport_nid_back_side: {
+                    required: true,
+                    accept: "image/*",
+                    extension: "jpg|jpeg|png",
+                },
+                passport_nid_with_user: {
+                    required: true,
+                    accept: "image/*",
+                    extension: "jpg|jpeg|png",
+                },
+            },
+            messages: {
+                passport_nid_upper_side: {
+                    required: "@lang('validation.required', ['attribute' => 'Passport/NID(Upper Side)'])",
+                    accept: "@lang('validation.mimetypes', ['attribute' => 'Passport/NID', 'values' => '.jpg,.jpeg,.png,'])",
+                    accept: "@lang('validation.mimetypes', ['attribute' => 'Passport/NID', 'values' => '.jpg,.jpeg,.png,'])",
+                },
+                passport_nid_back_side: {
+                    required: "@lang('validation.required', ['attribute' => 'Passport/NID(Back Side)'])",
+                    accept: "@lang('validation.mimetypes', ['attribute' => 'Passport/NID', 'values' => '.jpg,.jpeg,.png,'])",
+                    accept: "@lang('validation.mimetypes', ['attribute' => 'Passport/NID', 'values' => '.jpg,.jpeg,.png,'])",
+                },
+                passport_nid_with_user: {
+                    required: "@lang('validation.required', ['attribute' => 'Passport/NID(with Face)'])",
+                    accept: "@lang('validation.mimetypes', ['attribute' => 'Passport/NID', 'values' => '.jpg,.jpeg,.png,'])",
+                    accept: "@lang('validation.mimetypes', ['attribute' => 'Passport/NID', 'values' => '.jpg,.jpeg,.png,'])",
+                },
+            },
+            errorClass: 'invalid-feedback',
+            errorElement: 'span',
+            highlight: function(element) {
+                $(element).addClass('is-invalid');
+                $(element).siblings('label').addClass('text-danger');
+            },
+            unhighlight: function(element) {
+                $(element).removeClass('is-invalid');
+                $(element).siblings('label').removeClass('text-danger');
+            },
+            errorPlacement: function(error, element) {
+                if (element.attr("type") == "radio") {
+                    error.appendTo('.a');
+                } else {
+                    if (element.attr("data-error-container")) {
+                        error.appendTo(element.attr("data-error-container"));
+                    } else {
+                        error.insertAfter(element);
+                    }
+                }
+            }
+        });
+        $(document).on('submit', '#document_verification_form', function() {
+            if ($("#frmAddRoles").valid()) {
+                addOverlay();
+                $("input[type=submit], input[type=button], button[type=submit]").prop("disabled",
+                    "disabled");
+                return true;
+            } else {
+                return false;
+            }
         });
     });
 </script>

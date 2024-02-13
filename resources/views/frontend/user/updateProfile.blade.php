@@ -905,14 +905,29 @@
                                                                         <div class="">Passport/NID (Upper Side)</div>
                                                                         <a href="#" style="color:#213366;">#Example</a>
                                                                     </div>
+                                                                    @php
+                                                                    $user_uppar_side_document =
+                                                                    $user->documents->where('type','upper')->first();
+                                                                    @endphp
                                                                     <div class="card-body">
                                                                         <div class="border border-primary mb-3 rounded  "
                                                                             style="max-height: 220px; height: 220px;">
-                                                                            <img src="https://as1.ftcdn.net/v2/jpg/02/96/05/52/1000_F_296055218_RXc721N9fSYIz3sEV7QALYquMVP31jdJ.jpg"
-                                                                                alt="document_upper_side"
-                                                                                id="passport_nid_upper_side_placeholder"
-                                                                                style="width: 100%;height: 100%;object-fit: cover;object-position:center">
+                                                                            <img src={{ $user_uppar_side_document->file
+                                                                            ??
+                                                                            'https://as1.ftcdn.net/v2/jpg/02/96/05/52/1000_F_296055218_RXc721N9fSYIz3sEV7QALYquMVP31jdJ.jpg'
+                                                                            }}
+                                                                            alt="document_upper_side"
+                                                                            id="passport_nid_upper_side_placeholder"
+                                                                            style="width: 100%;height: 100%;object-fit:
+                                                                            cover;object-position:center">
                                                                         </div>
+                                                                        @if ($user_uppar_side_document)
+                                                                        <div
+                                                                            class="badge bg-{{$user_uppar_side_document->status == 'approved' ? 'success' : ($user_uppar_side_document->status == 'pending' ? 'info' :danger )}} w-100 py-2 h4 mt-3">
+                                                                            {{
+                                                                            strtoupper($user_with_selfie_document->status)
+                                                                            }}</div>
+                                                                        @else
                                                                         <input type="file"
                                                                             name="passport_nid_upper_side"
                                                                             id="passport_nid_upper_side"
@@ -920,35 +935,55 @@
                                                                             data-error-container="#passport_nid_upper_side_error_container">
                                                                         <span
                                                                             id="passport_nid_upper_side_error_container"></span>
+
+                                                                        @endif
                                                                     </div>
                                                                 </div>
                                                             </div>
                                                             <div class="col-md-4">
                                                                 <div class="card">
+                                                                    @php
+                                                                    $user_back_side_document =
+                                                                    $user->documents->where('type','back')->first();
+                                                                    @endphp
                                                                     <div
                                                                         class="card-header d-flex justify-content-between">
                                                                         <div class="">Passport/NID (Back Side)</div>
                                                                         <a href="#" style="color:#213366;">#Example</a>
                                                                     </div>
                                                                     <div class="card-body">
-                                                                        <div class="border border-primary mb-3 rounded  "
+                                                                        <div class="border border-primary mb-3 rounded"
                                                                             style="max-height: 220px; height: 220px;">
-                                                                            <img src="https://as1.ftcdn.net/v2/jpg/02/96/05/52/1000_F_296055218_RXc721N9fSYIz3sEV7QALYquMVP31jdJ.jpg"
-                                                                                alt="document_upper_side"
+                                                                            <img src="{{ $user_back_side_document->file
+                                                                                ??
+                                                                                'https://as1.ftcdn.net/v2/jpg/02/96/05/52/1000_F_296055218_RXc721N9fSYIz3sEV7QALYquMVP31jdJ.jpg'
+                                                                                }}" alt="document_upper_side"
                                                                                 id="passport_nid_back_side_placeholder"
                                                                                 style="width: 100%;height: 100%;object-fit: cover;object-position:center">
                                                                         </div>
+                                                                        @if ($user_back_side_document)
+                                                                        <div
+                                                                            class="badge bg-{{$user_back_side_document->status == 'approved' ? 'success' : ($user_back_side_document->status == 'pending' ? 'info' :danger )}} w-100 py-2 h4 mt-3">
+                                                                            {{
+                                                                            strtoupper($user_with_selfie_document->status)
+                                                                            }}</div>
+                                                                        @else
                                                                         <input type="file" name="passport_nid_back_side"
                                                                             id="passport_nid_back_side"
                                                                             class="form-control" accept="image/*"
                                                                             data-error-container="#passport_nid_back_side_error_container">
                                                                         <span
                                                                             id="passport_nid_back_side_error_container"></span>
+                                                                        @endif
                                                                     </div>
                                                                 </div>
                                                             </div>
                                                             <div class="col-md-4">
                                                                 <div class="card">
+                                                                    @php
+                                                                    $user_with_selfie_document =
+                                                                    $user->documents->where('type','with_selfie')->first();
+                                                                    @endphp
                                                                     <div
                                                                         class="card-header d-flex justify-content-between">
                                                                         <div class="">Selfie with Id</div>
@@ -957,14 +992,26 @@
                                                                     <div class="card-body">
                                                                         <div class="border border-primary mb-3 rounded  "
                                                                             style="max-height: 220px; height: 220px;">
-                                                                            <img src="https://as1.ftcdn.net/v2/jpg/02/96/05/52/1000_F_296055218_RXc721N9fSYIz3sEV7QALYquMVP31jdJ.jpg"
-                                                                                alt="document_upper_side"
-                                                                                id="passport_nid_with_user_placeholder"
-                                                                                style="width: 100%;height: 100%;object-fit: cover;object-position:center">
+                                                                            <img src={{ $user_with_selfie_document->file
+                                                                            ??
+                                                                            'https://as1.ftcdn.net/v2/jpg/02/96/05/52/1000_F_296055218_RXc721N9fSYIz3sEV7QALYquMVP31jdJ.jpg'
+                                                                            }}
+                                                                            alt="document_upper_side"
+                                                                            id="passport_nid_with_user_placeholder"
+                                                                            style="width: 100%;height: 100%;object-fit:
+                                                                            cover;object-position:center">
                                                                         </div>
+                                                                        @if ($user_with_selfie_document)
+                                                                        <div
+                                                                            class="badge bg-{{$user_with_selfie_document->status == 'approved' ? 'success' : ($user_with_selfie_document->status == 'pending' ? 'info' :danger )}} w-100 py-2 h4 mt-3">
+                                                                            {{
+                                                                            strtoupper($user_with_selfie_document->status)
+                                                                            }}</div>
+                                                                        @else
                                                                         <input type="file" name="passport_nid_with_user"
                                                                             id="passport_nid_with_user"
                                                                             class="form-control" accept="image/*">
+                                                                        @endif
                                                                     </div>
                                                                 </div>
                                                             </div>
@@ -984,12 +1031,15 @@
 </div>
 @endsection
 
-@push('frontend-extra-js')
-<script src="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/js/select2.min.js"></script>
-{{-- <script src="{{ asset('assets/js/pages/crud/file-upload/dropzonejs.js') }}"></script> --}}
-<script src="https://cdnjs.cloudflare.com/ajax/libs/dropzone/4.0.1/dropzone.js"></script>
+@push(' frontend-extra-js') <script src="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/js/select2.min.js">
+</script>
+{{-- <script src="{{ asset('assets/js/pages/crud/file-upload/dropzonejs.js') }}">
+</script> --}}
+<script src="https://cdnjs.cloudflare.com/ajax/libs/dropzone/4.0.1/dropzone.js">
+</script>
 
-{{-- <script src="{{ asset('admin/plugins/summernote/summernotecustom.js') }}"></script> --}}
+{{-- <script src="{{ asset('admin/plugins/summernote/summernotecustom.js') }}">
+</script> --}}
 <script type="text/javascript">
     var summernoteImageUpload = '{{ route('admin.summernote.imageUpload') }}';
     var summernoteMediaDelete = '{{ route('admin.summernote.mediaDelete') }}';

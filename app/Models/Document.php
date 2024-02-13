@@ -8,4 +8,11 @@ use Illuminate\Database\Eloquent\Model;
 class Document extends Model
 {
     use HasFactory;
+
+    protected $fillable = ['title', 'file', 'user_id', 'status', 'reject_reason', 'type'];
+
+    public function user()
+    {
+        return $this->belongsTo(User::class);
+    }
 }

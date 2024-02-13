@@ -98,6 +98,17 @@ class SectionsTableSeeder extends Seeder
                 "created_at"    => \Carbon\Carbon::now(),
                 "updated_at"    => \Carbon\Carbon::now(),
             ],
+            [
+                "name"          =>  "Verification Request",
+                "grouping_name" =>  "Verification Request",
+                "icon"          =>  "fas fa-cog",
+                "image"         =>  NULL,
+                "icon_type"     =>  "icon",
+                "sequence"      =>  8,
+                "is_active"     => "y",
+                "created_at"    => \Carbon\Carbon::now(),
+                "updated_at"    => \Carbon\Carbon::now(),
+            ],
         ];
 
         Section::insert($sections);

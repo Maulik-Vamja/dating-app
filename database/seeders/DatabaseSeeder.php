@@ -18,9 +18,9 @@ class DatabaseSeeder extends Seeder
             CountriesTableSeeder::class,
             StatesTableSeeder::class,
             // Commented this seeders as taking too much time and not able to execute seeding further
-            CitiesTableSeeder1::class, // Execute it separately: php artisan db:seed --class=CitiesTableSeeder1
-            CitiesTableSeeder2::class, // Execute it separately: php artisan db:seed --class=CitiesTableSeeder2
-            CitiesTableSeeder3::class, // Execute it separately: php artisan db:seed --class=CitiesTableSeeder3
+            // CitiesTableSeeder1::class, // Execute it separately: php artisan db:seed --class=CitiesTableSeeder1
+            // CitiesTableSeeder2::class, // Execute it separately: php artisan db:seed --class=CitiesTableSeeder2
+            // CitiesTableSeeder3::class, // Execute it separately: php artisan db:seed --class=CitiesTableSeeder3
             CurrenciesTableSeeder::class,
             TimezonesTableSeeder::class,
             LanguagesTableSeeder::class,

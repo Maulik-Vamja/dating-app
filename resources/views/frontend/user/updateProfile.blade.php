@@ -900,8 +900,10 @@
                                                         <div class="row">
                                                             <div class="col-md-4">
                                                                 <div class="card">
-                                                                    <div class="card-header">
+                                                                    <div
+                                                                        class="card-header d-flex justify-content-between">
                                                                         <div class="">Passport/NID (Upper Side)</div>
+                                                                        <a href="#" style="color:#213366;">#Example</a>
                                                                     </div>
                                                                     <div class="card-body">
                                                                         <div class="border border-primary mb-3 rounded  "
@@ -923,8 +925,10 @@
                                                             </div>
                                                             <div class="col-md-4">
                                                                 <div class="card">
-                                                                    <div class="card-header">
+                                                                    <div
+                                                                        class="card-header d-flex justify-content-between">
                                                                         <div class="">Passport/NID (Back Side)</div>
+                                                                        <a href="#" style="color:#213366;">#Example</a>
                                                                     </div>
                                                                     <div class="card-body">
                                                                         <div class="border border-primary mb-3 rounded  "
@@ -945,9 +949,10 @@
                                                             </div>
                                                             <div class="col-md-4">
                                                                 <div class="card">
-                                                                    <div class="card-header">
-                                                                        <div class="">Passport/NID (Document with User's
-                                                                            Face)</div>
+                                                                    <div
+                                                                        class="card-header d-flex justify-content-between">
+                                                                        <div class="">Selfie with Id</div>
+                                                                        <a href="#" style="color:#213366;">#Example</a>
                                                                     </div>
                                                                     <div class="card-body">
                                                                         <div class="border border-primary mb-3 rounded  "

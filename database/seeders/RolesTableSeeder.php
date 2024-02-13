@@ -130,7 +130,7 @@ class RolesTableSeeder extends Seeder
                 "icon_type"                 => "icon",
                 "sequence"                  => 1,
                 "is_active"                 => 1,
-                "allowed_permissions"       => "access,add,edit,delete,view",
+                "allowed_permissions"       => "access,edit,delete,view",
                 "created_at"                => \Carbon\Carbon::now(),
                 "updated_at"                => \Carbon\Carbon::now(),
             ],

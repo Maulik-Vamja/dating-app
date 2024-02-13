@@ -22,12 +22,12 @@
 
             <div class="card-toolbar">
                 @if (in_array('delete', $permissions))
-                    <a href="{{ route('admin.faqs.destroy', 0) }}" name="del_select" id="del_select" class="btn btn-sm btn-light-danger font-weight-bolder text-uppercase mr-2 delete_all_link">
+                    <a href="{{ route('admin.verification-requests.destroy', 0) }}" name="del_select" id="del_select" class="btn btn-sm btn-light-danger font-weight-bolder text-uppercase mr-2 delete_all_link">
                         <i class="far fa-trash-alt"></i> Delete Selected
                     </a>
                 @endif
                 @if (in_array('add', $permissions))
-                    <a href="{{ route('admin.faqs.create') }}" class="btn btn-sm btn-primary font-weight-bolder text-uppercase">
+                    <a href="{{ route('admin.verification-requests.create') }}" class="btn btn-sm btn-primary font-weight-bolder text-uppercase">
                         <i class="fas fa-plus"></i>
                         Add {{ $custom_title }}
                     </a>
@@ -61,10 +61,9 @@
                 { "data": "updated_at" ,"title": "Updated At", visible:false},
                 @if (in_array('delete', $permissions)) { "data": "checkbox", "title":"<center><input type='checkbox' class='all_select'></center>", orderable: false }, @endif
                 { "data": "title" ,"title": "Title"},
-                { "data": "description" ,"title": "Description"},
-                @if (in_array('edit', $permissions))
-                    { "data": "active" ,"title": "Active",sortable:false},
-                @endif
+                { "data": "user" ,"title": "User"},
+                { "data": "type" ,"title": "Type"},
+                { "data": "status" ,"title": "Status",sortable:false},
                 @if (in_array('delete', $permissions) || in_array('edit', $permissions))
                     { "data": "action" ,"title": "Action", searchble: false, sortable:false }
                 @endif
@@ -83,7 +82,7 @@
                 "data": {
                     tasklist : "{{ Auth::user()->type }}",
                 },
-                "url": "{{route('admin.faqs.listing')}}", // ajax source
+                "url": "{{route('admin.verification-requests.listing')}}", // ajax source
             },
             drawCallback: function( oSettings ) {
               $('.status-switch').bootstrapSwitch();

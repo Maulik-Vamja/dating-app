@@ -127,6 +127,9 @@ class UserController extends Controller
                         }
                     }
                     break;
+                case "update_documents":
+                    $this->updateDocuments($request);
+                    break;
                 default:
                     return redirect()->back()->with('error', 'Invalid action');
                     break;
@@ -135,6 +138,7 @@ class UserController extends Controller
             DB::commit();
             return redirect()->back()->with(['success' => 'Profile updated successfully', 'form_action' => $request->input('action')]);
         } catch (Exception $th) {
+            dd($th->getMessage());
             DB::rollBack();
             return redirect()->back()->with(['errorMsg' => 'Something went wrong', 'form_action' => $request->input('action')]);
         }
@@ -164,5 +168,9 @@ class UserController extends Controller
         } catch (\Throwable $th) {
             return response()->json(['success'   =>  false, 'message'   =>  $th->getMessage(),], 500);
         }
+    }
+    public function updateDocuments($request)
+    {
+        dd($request->all(), 'here');
     }
 }

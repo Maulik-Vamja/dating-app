@@ -9,13 +9,15 @@ use Illuminate\Database\Eloquent\Relations\BelongsTo;
 class Document extends Model
 {
     use HasFactory;
-    protected $fillable = [
-        "id","title","user_id","file","status","reject_reason"
-    ];
+    public function getRouteKeyName()
+    {
+        return 'custom_id';
+    }
 
-    public function user() : BelongsTo
+    protected $fillable = ['title', 'custom_id','file', 'user_id','status', 'reject_reason', 'type'];
+
+    public function user()
     {
         return $this->belongsTo(User::class);
     }
-
 }

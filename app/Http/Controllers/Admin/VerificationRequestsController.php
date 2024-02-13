@@ -36,7 +36,7 @@ class VerificationRequestsController extends Controller
      */
     public function store(Request $request)
     {
-        $request['custom_id'] = get_unique_string('faqs');
+        $request['custom_id'] = get_unique_string('Verification Request');
         $document = Document::create($request->all());
         if ($document) {
             flash('faq created successfully!')->success();
@@ -52,9 +52,9 @@ class VerificationRequestsController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function show($id)
+    public function show(Document $verification_request)
     {
-        //
+        return view('admin.pages.verification-request.show', ['document' => $verification_request])->with(['custom_title' => 'document']);
     }
 
     /**
@@ -63,9 +63,10 @@ class VerificationRequestsController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function edit(Faq $document)
+    public function edit(Document $document)
     {
-        return view('admin.pages.verification-request.edit', compact('faq'))->with(['custom_title' => 'Faq']);
+
+        return view('admin.pages.verification-request.edit', compact('document'))->with(['custom_title' => 'Faq']);
     }
 
     /**
@@ -75,7 +76,7 @@ class VerificationRequestsController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(Faq $document, Request $request)
+    public function update(Document $document, Request $request)
     {
         if (!empty($request->action) && $request->action == 'change_status') {
             $content = ['status' => 204, 'message' => "something went wrong"];
@@ -151,6 +152,7 @@ class VerificationRequestsController extends Controller
         $documents = $documents->offset($offset)->limit($limit)->orderBy($sort_column, $sort_order);
 
         $documents = $documents->latest()->get();
+
         foreach ($documents as $document) {
             $params = [
                 'checked' => ($document->is_active ? 'checked' : ''),
@@ -162,9 +164,11 @@ class VerificationRequestsController extends Controller
             $records['data'][] = [
                 'id' => $document->id,
                 'title' => $document->title,
-                'description' => $document->description,
+                'type' => $document->type,
+                'status' => $document->status,
+                'user' => $document->user ? $document->user->full_name : '',
                 'active' => view('admin.layouts.includes.switch', compact('params'))->render(),
-                'action' => view('admin.layouts.includes.actions')->with(['custom_title' => 'Faqs', 'id' => $document->custom_id], $document)->render(),
+                'action' => view('admin.layouts.includes.actions')->with(['custom_title' => 'Verification Request', 'id' => $document->custom_id], $document)->render(),
                 'checkbox' => view('admin.layouts.includes.checkbox')->with('id', $document->custom_id)->render(),
                 'updated_at' => $document->updated_at,
             ];

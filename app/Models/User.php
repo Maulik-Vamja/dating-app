@@ -83,6 +83,10 @@ class User extends Authenticatable implements MustVerifyEmail
     {
         return $this->hasMany(GalleryImages::class, "user_id", "id");
     }
+    public function documents()
+    {
+        return $this->hasMany(Document::class, "user_id", "id");
+    }
 
     // Scopes
 

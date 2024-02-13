@@ -13,9 +13,11 @@ return new class extends Migration
     {
         Schema::create('documents', function (Blueprint $table) {
             $table->id();
+            $table->string('custom_id')->unique()->nullable();
             $table->string('title')->nullable();
             $table->string('file')->nullable();
             $table->foreignId('user_id')->constrained()->nullable();
+            $table->enum('type', ['upper', 'back', 'with_selfie'])->nullable();
             $table->enum('status', ['pending', 'approved', 'rejected', 'spam'])->default('pending')->nullable();
             $table->text('reject_reason')->nullable();
             $table->timestamps();

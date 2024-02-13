@@ -1,7 +1,7 @@
 @extends('admin.layouts.app')
 
 @push('breadcrumb')
-    {!! Breadcrumbs::render('faqs_update', $faq->id) !!}
+    {!! Breadcrumbs::render('verification_request_update', $document->id) !!}
 @endpush
 
 @section('content')
@@ -17,7 +17,7 @@
             </div>
 
             <!--begin::Form-->
-            <form id="frmEditFaq" method="POST" action="{{ route('admin.faqs.update', $faq->custom_id) }}"
+            <form id="frmEditFaq" method="POST" action="{{ route('admin.verification-requests.update', $document->custom_id) }}"
                 enctype="multipart/form-data">
                 @csrf
                 @method('put')
@@ -27,7 +27,7 @@
                     <div class="form-group">
                         <label for="title">{!! $mend_sign !!}Title:</label>
                         <input type="text" class="form-control @error('title') is-invalid @enderror" id="title"
-                            name="title" value="{{ old('title') ?? $faq->title }}" placeholder="Enter Title"
+                            name="title" value="{{ old('title') ?? $document->title }}" placeholder="Enter Title"
                             autocomplete="title" spellcheck="false" autocapitalize="sentences" tabindex="0" autofocus />
                         @if ($errors->has('title'))
                             <span class="help-block">
@@ -41,7 +41,7 @@
                         <label for="title">{!! $mend_sign !!}Description:</label>
                         <textarea class="form-control @error('description') is-invalid @enderror" id="description" rows="5"
                             name="description" placeholder="Enter Description" autocomplete="description" spellcheck="false"
-                            autocapitalize="sentences" tabindex="0" autofocus>{{ old('description') ?? $faq->description }}</textarea>
+                            autocapitalize="sentences" tabindex="0" autofocus>{{ old('description') ?? $document->description }}</textarea>
                         @if ($errors->has('description'))
                             <span class="help-block">
                                 <strong class="form-text">{{ $errors->first('description') }}</strong>
@@ -52,7 +52,7 @@
                 </div>
                 <div class="card-footer">
                     <button type="submit" class="btn btn-primary mr-2">Update {{ $custom_title }}</button>
-                    <a href="{{ route('admin.faqs.index') }}" class="btn btn-secondary">Cancel</a>
+                    <a href="{{ route('admin.verification-requests.index') }}" class="btn btn-secondary">Cancel</a>
                 </div>
             </form>
             <!--end::Form-->

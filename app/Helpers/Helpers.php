@@ -19,7 +19,7 @@ if (!function_exists("get_permissions")) {
                 5   =>  ["permissions" => "access"],                          // Site Configurations
                 6   =>  ["permissions" => "access,add,edit,delete"],     // App Update Setting
                 7   =>  ["permissions" => "access,edit"],                     // App Update Setting
-                8   =>  ["permissions" => "access,add,edit,delete"],                     // verification request
+                8   =>  ["permissions" => "access,edit,delete,view"],                     // verification request
             ];
         }
 

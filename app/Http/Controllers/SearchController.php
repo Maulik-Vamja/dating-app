@@ -10,7 +10,7 @@ class SearchController extends Controller
 {
     public function __invoke(Request $request)
     {
-        $escorts = User::verified()->active()->with('availability', 'addresses', 'based_in_addresses', 'gallery_images')
+        $escorts = User::verified()->active()->documentVerified()->with('availability', 'addresses', 'based_in_addresses', 'gallery_images')
             ->when($request->has('gender'), function ($query) use ($request) {
                 $query->where('gender', $request->gender);
             })

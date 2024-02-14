@@ -138,7 +138,7 @@ class UserController extends Controller
             DB::commit();
             return redirect()->back()->with(['success' => 'Profile updated successfully', 'form_action' => $request->input('action')]);
         } catch (Exception $th) {
-            dd($th->getMessage());
+            // dd($th->getMessage());
             DB::rollBack();
             return redirect()->back()->with(['errorMsg' => 'Something went wrong', 'form_action' => $request->input('action')]);
         }

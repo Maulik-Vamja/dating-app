@@ -98,4 +98,8 @@ class User extends Authenticatable implements MustVerifyEmail
     {
         return $query->where('is_active', StatusEnums::ACTIVE->value);
     }
+    public function scopeDocumentVerified($query)
+    {
+        return $query->where('is_document_verified', 'y');
+    }
 }

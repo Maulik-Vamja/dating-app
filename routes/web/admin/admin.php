@@ -97,8 +97,8 @@ Route::group(['middleware' => ['check_permit', 'revalidate']], function () {
 
     /* FAQs Management */
     Route::get('verification-requests/listing', [VerificationRequestsController::class, 'listing'])->name('verification-requests.listing');
+    Route::post('verification-requests/update/status', [VerificationRequestsController::class, 'updateStatus'])->name('verification-requests.updateStatus');
     Route::resource('verification-requests', VerificationRequestsController::class);
-
 });
 
 // User Exception

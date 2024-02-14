@@ -4,7 +4,11 @@ namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
 use App\Models\Document;
+use App\Models\User;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\DB;
+
+use function PHPUnit\Framework\isEmpty;
 
 class VerificationRequestsController extends Controller
 {
@@ -15,7 +19,7 @@ class VerificationRequestsController extends Controller
      */
     public function index()
     {
-        return view('admin.pages.verification-request.index')->with(['custom_title' => 'verification request']);
+        return view('admin.pages.verification-request.index')->with(['custom_title' => 'Verification Requests']);
     }
 
     /**
@@ -52,9 +56,10 @@ class VerificationRequestsController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function show(Document $verification_request)
+    public function show(User $verification_request)
     {
-        return view('admin.pages.verification-request.show', ['document' => $verification_request])->with(['custom_title' => 'document']);
+        $verification_request->load('documents');
+        return view('admin.pages.verification-request.show', ['user' => $verification_request])->with(['custom_title' => 'Verification Request']);
     }
 
     /**
@@ -132,48 +137,73 @@ class VerificationRequestsController extends Controller
     {
         extract($this->DTFilters($request->all()));
         $records = [];
-        $documents = Document::orderBy($sort_column, $sort_order);
+        // $documents = Document::orderBy($sort_column, $sort_order);
+        // $documents = Document::orderBy($sort_column, $sort_order);
+        $escorts = User::whereHas('documents', function ($query) {
+            $query->where('status', 'pending');
+        });
 
         if ($search != '') {
-            $documents->where(function ($query) use ($search) {
-                $query->where('title', 'like', "%{$search}%")
-                ->orWhereHas('user',function($q) use ($search){
-                    $q->where('name', 'like', "%{$search}%");
-                });
+            $escorts->where(function ($query) use ($search) {
+                $query->where('full_name', 'like', "%{$search}%");
             });
         }
 
-        $count = $documents->count();
+        $count = $escorts->count();
 
         $records['recordsTotal'] = $count;
         $records['recordsFiltered'] = $count;
         $records['data'] = [];
 
-        $documents = $documents->offset($offset)->limit($limit)->orderBy($sort_column, $sort_order);
+        $escorts = $escorts->offset($offset)->limit($limit)->orderBy($sort_column, $sort_order);
 
-        $documents = $documents->latest()->get();
+        $escorts = $escorts->latest()->get();
 
-        foreach ($documents as $document) {
+        foreach ($escorts as $escort) {
             $params = [
-                'checked' => ($document->is_active ? 'checked' : ''),
-                'getaction' => $document->is_active,
+                'checked' => ($escort->is_active ? 'checked' : ''),
+                'getaction' => $escort->is_active,
                 'class' => '',
-                'id' => $document->custom_id,
+                'id' => $escort->custom_id,
             ];
 
             $records['data'][] = [
-                'id' => $document->id,
-                'title' => $document->title,
-                'type' => $document->type,
-                'status' => $document->status,
-                'user' => $document->user ? $document->user->full_name : '',
-                'active' => view('admin.layouts.includes.switch', compact('params'))->render(),
-                'action' => view('admin.layouts.includes.actions')->with(['custom_title' => 'Verification Request', 'id' => $document->custom_id], $document)->render(),
-                'checkbox' => view('admin.layouts.includes.checkbox')->with('id', $document->custom_id)->render(),
-                'updated_at' => $document->updated_at,
+                'id' => $escort->id,
+                'full_name' => $escort->full_name,
+                'action' => view('admin.layouts.includes.actions')->with(['custom_title' => 'Verification Request', 'id' => $escort->custom_id], $escort)->render(),
+                'updated_at' => $escort->updated_at,
             ];
         }
         // dd($records);
         return $records;
+    }
+
+    public function updateStatus(Request $request)
+    {
+        $response = [];
+        DB::beginTransaction();
+        try {
+            $document = Document::whereCustomId($request->document_id)->first();
+            $document->update(['status' => $request->status]);
+
+
+            $user_documents_status = Document::where('user_id', $document->user_id)->pluck('status')->toArray();
+            // dd($document, $user_documents_status);
+
+            $response = ['status' => 200, 'message' => 'Document Verification Updated', 'statusText' => ucfirst($request->status)];
+
+            if (count(array_intersect(['pending', 'rejected', 'spam'], $user_documents_status)) == 0) {
+                $user = User::where('id', $document->user_id)->update([
+                    'is_document_verified' => 'y',
+                ]);
+                $response = ['status' => 200, 'message' => 'Document Verification Updated', 'is_user_verified' => true, 'statusText' => ucfirst($request->status)];
+            }
+            DB::commit();
+        } catch (\Throwable $th) {
+            DB::rollBack();
+            // dd($th->getMessage());
+            $response = ['status' => 204, 'message' => "something went wrong, Please try again later."];
+        }
+        return response()->json($response);
     }
 }

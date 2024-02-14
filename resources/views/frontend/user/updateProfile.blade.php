@@ -894,7 +894,12 @@
                                                 <div class="card">
                                                     <div class="card-header">
                                                         <div class="d-flex justify-content-end">
-                                                            <button type="submit" class="btn btn-primary">Submit
+                                                            @php
+
+                                                            @endphp
+                                                            <button type="submit" class="btn btn-primary" {{
+                                                                $user->documents->count() > 0 ? 'disabled' : ''
+                                                                }}>Submit
                                                                 Documents</button>
                                                         </div>
                                                     </div>
@@ -927,7 +932,7 @@
                                                                         @if ($user_uppar_side_document)
                                                                         <label for="">Verification Status:</label>
                                                                         <div
-                                                                            class="badge bg-{{$user_uppar_side_document->status == 'approved' ? 'success' : ($user_uppar_side_document->status == 'pending' ? 'info' :danger )}} w-100 py-2 h4">
+                                                                            class="badge bg-{{$user_uppar_side_document->status == 'approved' ? 'success' : ($user_uppar_side_document->status == 'pending' ? 'info' : 'danger' )}} w-100 py-2 h4">
                                                                             {{
                                                                             strtoupper($user_uppar_side_document->status)
                                                                             }}</div>
@@ -968,7 +973,7 @@
                                                                         @if ($user_back_side_document)
                                                                         <label for="">Verification Status:</label>
                                                                         <div
-                                                                            class="badge bg-{{$user_back_side_document->status == 'approved' ? 'success' : ($user_back_side_document->status == 'pending' ? 'info' :danger )}} w-100 py-2 h4 ">
+                                                                            class="badge bg-{{$user_back_side_document->status == 'approved' ? 'success' : ($user_back_side_document->status == 'pending' ? 'info' : 'danger' )}} w-100 py-2 h4 ">
                                                                             {{
                                                                             strtoupper($user_back_side_document->status)
                                                                             }}</div>
@@ -1010,7 +1015,7 @@
                                                                         @if ($user_with_selfie_document)
                                                                         <label for="">Verification Status:</label>
                                                                         <div
-                                                                            class="badge bg-{{$user_with_selfie_document->status == 'approved' ? 'success' : ($user_with_selfie_document->status == 'pending' ? 'info' :danger )}} w-100 py-2 h4">
+                                                                            class="badge bg-{{$user_with_selfie_document->status == 'approved' ? 'success' : ($user_with_selfie_document->status == 'pending' ? 'info' : 'danger' )}} w-100 py-2 h4">
                                                                             {{
                                                                             strtoupper($user_with_selfie_document->status)
                                                                             }}</div>

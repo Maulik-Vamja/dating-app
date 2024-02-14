@@ -171,6 +171,7 @@ class UserController extends Controller
     }
     public function updateDocuments($request, $user)
     {
+        // dd($request->all(), 'here');
         if ($request->has('passport_nid_upper_side')) {
             $user->documents()->create([
                 'custom_id' => get_unique_string(),
@@ -187,12 +188,12 @@ class UserController extends Controller
                 'file' => $request->file('passport_nid_back_side')->store("escorts/documents/{$user->id}"),
             ]);
         }
-        if ($request->has('passport_nid_with_selfie')) {
+        if ($request->has('passport_nid_with_user')) {
             $user->documents()->create([
                 'custom_id' => get_unique_string(),
                 'user_id' => $user->id,
                 'type' => 'with_selfie',
-                'file' => $request->file('passport_nid_with_selfie')->store("escorts/documents/{$user->id}"),
+                'file' => $request->file('passport_nid_with_user')->store("escorts/documents/{$user->id}"),
             ]);
         }
 

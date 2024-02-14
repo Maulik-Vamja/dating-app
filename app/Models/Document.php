@@ -4,7 +4,7 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
-use Illuminate\Database\Eloquent\Relations\BelongsTo;
+use Illuminate\Support\Facades\Storage;
 
 class Document extends Model
 {
@@ -14,10 +14,15 @@ class Document extends Model
         return 'custom_id';
     }
 
-    protected $fillable = ['title', 'custom_id','file', 'user_id','status', 'reject_reason', 'type'];
+    protected $fillable = ['custom_id', 'title', 'file', 'user_id', 'status', 'reject_reason', 'type'];
 
     public function user()
     {
         return $this->belongsTo(User::class);
+    }
+
+    public function getDocumentFileAttribute()
+    {
+        return $this->file ? Storage::url($this->file) : null;
     }
 }

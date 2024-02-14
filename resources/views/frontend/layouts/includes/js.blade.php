@@ -19,11 +19,9 @@
 
 <script src="{{ asset('assets/admin/plugins/jquery-validation/js/jquery.validate.min.js') }}" type="text/javascript">
 </script>
-<script src="http://jqueryvalidation.org/files/dist/additional-methods.min.js"></script>
 
-{{-- <script src="{{ asset('assets/admin/plugins/jquery-validation/js/additional-methods.js') }}"
-    type="text/javascript">
-</script> --}}
+<script src="{{ asset('assets/admin/plugins/jquery-validation/js/additional-methods.js') }}" type="text/javascript">
+</script>
 <script src="{{ asset('assets/admin/js/custom_validations.js') }}" type="text/javascript"></script>
 
 <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js"

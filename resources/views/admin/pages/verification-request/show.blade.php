@@ -149,35 +149,7 @@
 @push('extra-js')
 <script>
     $(document).ready(function () {
-        $(document).on('click','.btn-status-action',function (e) {
-            e.preventDefault();
-            var element = $(this);
-            var status = $(this).data('status');
-            var document_id = $(this).data('document_id');
-            var url = "{{ route('admin.verification-requests.updateStatus') }}";
-            $.ajax({
-                type: "POST",
-                url: url,
-                data: {
-                    _token: "{{ csrf_token() }}",
-                    status: status,
-                    document_id: document_id
-                },
-                success: function (response) {
-                    toastr.success(response.message);
-                    $(element).siblings().remove();
-                    $(element).text(response.statusText);
-                    $(element).addClass('w-100');
-                    $(element).attr('disabled',true);
-                    if(response.is_user_verified == true){
-                        window.location.href = "{{ route('admin.verification-requests.index') }}";
-                    }
-                },
-                error: function (error) {
-                    toastr.error(error.responseJSON.message);
-                }
-            });
-        });
+        
     });
 </script>
 @endpush

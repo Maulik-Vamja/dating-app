@@ -64,6 +64,9 @@
                 { "data": "updated_at" ,"title": "Updated At", visible:false},
                 @if (in_array('delete', $permissions)) { "data": "checkbox", "title":"<center><input type='checkbox' class='all_select'></center>", orderable: false }, @endif
                 { "data": "full_name" ,"title": "Escort Name"},
+                { "data": "is_document_verified" ,"title": "Document Verification Status", render:function (data, type, full, meta) {
+                    return `<div class="badge bg-primary">${data.toUpperCase()}</div>`;
+                }},
                 @if (in_array('delete', $permissions) || in_array('edit', $permissions) || in_array('view', $permissions))
                     { "data": "action" ,"title": "Action", searchble: false, sortable:false }
                 @endif

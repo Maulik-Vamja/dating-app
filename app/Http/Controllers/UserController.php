@@ -23,7 +23,7 @@ class UserController extends Controller
     public function updateProfile()
     {
         $user = auth()->user();
-        $user->load('availability', 'rates', 'policies', 'contacts', 'addresses', 'home_address', 'gallery_images');
+        $user->load('availability', 'rates', 'policies', 'contacts', 'addresses', 'home_address', 'gallery_images', 'documents');
         return view('frontend.user.updateProfile', [
             'user' => $user,
         ]);
@@ -62,7 +62,8 @@ class UserController extends Controller
                     // dd($user);
                     break;
                 case 'update_rates':
-                    UserRate::where('user_id', $user->id)->delete();
+                    // UserRate::where('user_id', $user->id)->delete();
+                    auth()->user()->rates()->delete();
                     foreach (array_reduce($request->input('rates'), 'array_merge', array()) as $rate) {
                         $user->rates()->create([
                             'custom_id' => get_unique_string(),
@@ -126,6 +127,9 @@ class UserController extends Controller
                         }
                     }
                     break;
+                case "update_documents":
+                    $this->updateDocuments($request, $user);
+                    break;
                 default:
                     return redirect()->back()->with('error', 'Invalid action');
                     break;
@@ -134,6 +138,7 @@ class UserController extends Controller
             DB::commit();
             return redirect()->back()->with(['success' => 'Profile updated successfully', 'form_action' => $request->input('action')]);
         } catch (Exception $th) {
+            // dd($th->getMessage());
             DB::rollBack();
             return redirect()->back()->with(['errorMsg' => 'Something went wrong', 'form_action' => $request->input('action')]);
         }
@@ -163,5 +168,35 @@ class UserController extends Controller
         } catch (\Throwable $th) {
             return response()->json(['success'   =>  false, 'message'   =>  $th->getMessage(),], 500);
         }
+    }
+    public function updateDocuments($request, $user)
+    {
+        // dd($request->all(), 'here');
+        if ($request->has('passport_nid_upper_side')) {
+            $user->documents()->create([
+                'custom_id' => get_unique_string(),
+                'user_id' => $user->id,
+                'type' => 'upper',
+                'file' => $request->file('passport_nid_upper_side')->store("escorts/documents/{$user->id}"),
+            ]);
+        }
+        if ($request->has('passport_nid_back_side')) {
+            $user->documents()->create([
+                'custom_id' => get_unique_string(),
+                'user_id' => $user->id,
+                'type' => 'back',
+                'file' => $request->file('passport_nid_back_side')->store("escorts/documents/{$user->id}"),
+            ]);
+        }
+        if ($request->has('passport_nid_with_user')) {
+            $user->documents()->create([
+                'custom_id' => get_unique_string(),
+                'user_id' => $user->id,
+                'type' => 'with_selfie',
+                'file' => $request->file('passport_nid_with_user')->store("escorts/documents/{$user->id}"),
+            ]);
+        }
+
+        return true;
     }
 }

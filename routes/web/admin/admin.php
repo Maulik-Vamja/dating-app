@@ -15,6 +15,7 @@ use App\Http\Controllers\Admin\UserController;
 use App\Http\Controllers\Admin\CountryController;
 use App\Http\Controllers\Admin\CmsPagesController;
 use App\Http\Controllers\Admin\SummernoteController;
+use App\Http\Controllers\Admin\VerificationRequestsController;
 use App\Http\Controllers\MetaTagController;
 
 /*
@@ -93,6 +94,11 @@ Route::group(['middleware' => ['check_permit', 'revalidate']], function () {
     /* app update settings */
     Route::get('update-settings', [AppUpdateSettingController::class, 'index'])->name('update-settings.index');
     Route::post('app-change-setting', [AppUpdateSettingController::class, 'store'])->name('update-settings.change-setting');
+
+    /* FAQs Management */
+    Route::get('verification-requests/listing', [VerificationRequestsController::class, 'listing'])->name('verification-requests.listing');
+    Route::post('verification-requests/update/status', [VerificationRequestsController::class, 'updateStatus'])->name('verification-requests.updateStatus');
+    Route::resource('verification-requests', VerificationRequestsController::class);
 });
 
 // User Exception

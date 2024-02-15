@@ -131,146 +131,45 @@
             @empty
             <h3 class="text-white">Oops.. No Escort Found...!!</h3>
             @endforelse
-            {{-- <div class="col mb-4">
-                <div class="model-intro">
-                    <div class="model-img"><img src="assets/images/allmedia/01.jpg" alt="img"></div>
-                    <div class="model-info">
-                        <h5>Model Name</h5>
-                        <p class="short-desc">Together we’ll mend your heart</p>
-                        <div class="city-availibity">
-                            <p><i class="fa-solid fa-house"></i>Sarasota, FL, US</p>
-                        </div>
-                        <p class="d-flex align-items-center text-capitalize"><span
-                                class="availibity-members"></span>available</p>
-                        <p class="main-short-info">Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do
-                            eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis
-                            nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute
-                            irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur.
-                            Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit
-                            anim id est laborum.</p>
-                    </div>
-                </div>
+        </div>
+        <div class="member__pagination mt-4">
+            <div class="member__pagination--left">
+                <p>Viewing {{ $escorts->firstItem() }} to {{ $escorts->lastItem() }} of {{ $escorts->total() }} Members
+                </p>
             </div>
-            <div class="col mb-4">
-                <div class="model-intro">
-                    <div class="model-img"><img src="assets/images/allmedia/02.jpg" alt="img"></div>
-                    <div class="model-info">
-                        <h5>Model Name</h5>
-                        <p class="short-desc">Together we’ll mend your heart</p>
-                        <div class="city-availibity">
-                            <p><i class="fa-solid fa-house"></i>Sarasota, FL, US</p>
-                        </div>
-                        <p class="d-flex align-items-center text-capitalize"><span
-                                class="availibity-members"></span>available</p>
-                        <p class="main-short-info">Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do
-                            eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis
-                            nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute
-                            irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur.
-                            Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit
-                            anim id est laborum.</p>
-                    </div>
-                </div>
+            {{-- {!! $escorts->links !!} --}}
+
+            <div class="member__pagination--right">
+                <ul class="default-pagination">
+                    <li>
+                        @if (!$escorts->onFirstPage())
+                        <a
+                            href="{{ $escorts->previousPageUrl() }}?gender={{request()->gender}}&min_age={{request()->min_age}}&max_age={{request()->max_age}}&country={{request()->country}}&state={{request()->state}}&city={{request()->city}}"><i
+                                class="fas fa-chevron-left"></i></a>
+                        @else
+                        <a href="javascript:void(0)" class="disabled"><i class="fas fa-chevron-left"></i></a>
+                        @endif
+                    </li>
+
+                    @for ($page = 1 ;$page <= $escorts->total() / $escorts->perPage(); $page++)
+                        <li>
+                            <a href="{{ $escorts->path() }}?page={{ $page }}&gender={{request()->gender}}&min_age={{request()->min_age}}&max_age={{request()->max_age}}&country={{request()->country}}&state={{request()->state}}&city={{request()->city}}"
+                                class="{{ $escorts->currentPage() == $page ? 'active' : ''}}">{{
+                                $page }}</a>
+                        </li>
+
+                        @endfor
+                        <li>
+                            @if ($escorts->hasMorePages() && !$escorts->onLastPage())
+                            <a
+                                href="{{ $escorts->nextPageUrl() }}&gender={{request()->gender}}&min_age={{request()->min_age}}&max_age={{request()->max_age}}&country={{request()->country}}&state={{request()->state}}&city={{request()->city}}"><i
+                                    class="fas fa-chevron-right"></i></a>
+                            @else
+                            <a href="javascript:void(0)"><i class="fas fa-chevron-right"></i></a>
+                            @endif
+                        </li>
+                </ul>
             </div>
-            <div class="col mb-4">
-                <div class="model-intro">
-                    <div class="model-img"><img src="assets/images/allmedia/03.jpg" alt="img"></div>
-                    <div class="model-info">
-                        <h5>Model Name</h5>
-                        <p class="short-desc">Together we’ll mend your heart</p>
-                        <div class="city-availibity">
-                            <p><i class="fa-solid fa-house"></i>Sarasota, FL, US</p>
-                        </div>
-                        <p class="d-flex align-items-center text-capitalize"><span
-                                class="availibity-members"></span>available</p>
-                        <p class="main-short-info">Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do
-                            eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis
-                            nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute
-                            irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur.
-                            Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit
-                            anim id est laborum.</p>
-                    </div>
-                </div>
-            </div>
-            <div class="col mb-4">
-                <div class="model-intro">
-                    <div class="model-img"><img src="assets/images/allmedia/04.jpg" alt="img"></div>
-                    <div class="model-info">
-                        <h5>Model Name</h5>
-                        <p class="short-desc">Together we’ll mend your heart</p>
-                        <div class="city-availibity">
-                            <p><i class="fa-solid fa-house"></i>Sarasota, FL, US</p>
-                        </div>
-                        <p class="d-flex align-items-center text-capitalize"><span
-                                class="availibity-members"></span>available</p>
-                        <p class="main-short-info">Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do
-                            eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis
-                            nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute
-                            irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur.
-                            Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit
-                            anim id est laborum.</p>
-                    </div>
-                </div>
-            </div>
-            <div class="col mb-4">
-                <div class="model-intro">
-                    <div class="model-img"><img src="assets/images/allmedia/05.jpg" alt="img"></div>
-                    <div class="model-info">
-                        <h5>Model Name</h5>
-                        <p class="short-desc">Together we’ll mend your heart</p>
-                        <div class="city-availibity">
-                            <p><i class="fa-solid fa-house"></i>Sarasota, FL, US</p>
-                        </div>
-                        <p class="d-flex align-items-center text-capitalize"><span
-                                class="availibity-members"></span>available</p>
-                        <p class="main-short-info">Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do
-                            eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis
-                            nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute
-                            irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur.
-                            Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit
-                            anim id est laborum.</p>
-                    </div>
-                </div>
-            </div>
-            <div class="col mb-4">
-                <div class="model-intro">
-                    <div class="model-img"><img src="assets/images/allmedia/06.jpg" alt="img"></div>
-                    <div class="model-info">
-                        <h5>Model Name</h5>
-                        <p class="short-desc">Together we’ll mend your heart</p>
-                        <div class="city-availibity">
-                            <p><i class="fa-solid fa-house"></i>Sarasota, FL, US</p>
-                        </div>
-                        <p class="d-flex align-items-center text-capitalize"><span
-                                class="availibity-members"></span>available</p>
-                        <p class="main-short-info">Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do
-                            eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis
-                            nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute
-                            irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur.
-                            Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit
-                            anim id est laborum.</p>
-                    </div>
-                </div>
-            </div>
-            <div class="col mb-4">
-                <div class="model-intro">
-                    <div class="model-img"><img src="assets/images/allmedia/07.jpg" alt="img"></div>
-                    <div class="model-info">
-                        <h5>Model Name</h5>
-                        <p class="short-desc">Together we’ll mend your heart</p>
-                        <div class="city-availibity">
-                            <p><i class="fa-solid fa-house"></i>Sarasota, FL, US</p>
-                        </div>
-                        <p class="d-flex align-items-center text-capitalize"><span
-                                class="availibity-members"></span>available</p>
-                        <p class="main-short-info">Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do
-                            eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis
-                            nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute
-                            irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur.
-                            Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit
-                            anim id est laborum.</p>
-                    </div>
-                </div>
-            </div> --}}
         </div>
     </div>
 </div>

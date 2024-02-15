@@ -60,7 +60,6 @@
                                 class="nav-link {{ session()->has('form_action') ? (session()->get('form_action') == 'update_rates' ? 'active' : '' ) : '' }}"
                                 id="gt3-tab" data-bs-toggle="tab" data-bs-target="#gt3" type="button" role="tab"
                                 aria-controls="gt3" aria-selected="false"><i class="fa-solid fa-video"></i> Rates
-                                <!-- <span>06</span> -->
                             </button>
                         </li>
                         <li class="nav-item" role="presentation">
@@ -68,7 +67,6 @@
                                 class="nav-link {{ session()->has('form_action') ? (session()->get('form_action') == 'update_policies' ? 'active' : '' ) : '' }}"
                                 id="gt4-tab" data-bs-toggle="tab" data-bs-target="#gt4" type="button" role="tab"
                                 aria-controls="gt4" aria-selected="false"><i class="fa-solid fa-users"></i> Policies
-                                <!-- <span>16</span> -->
                             </button>
                         </li>
                         <li class="nav-item" role="presentation">
@@ -77,7 +75,6 @@
                                 id="gt6-tab" data-bs-toggle="tab" data-bs-target="#gt6" type="button" role="tab"
                                 aria-controls="gt6" aria-selected="false"><i class="fa-solid fa-photo-film"></i>
                                 Contacts
-                                <!-- <span>06</span> -->
                             </button>
                         </li>
                         <li class="nav-item " role="presentation">
@@ -85,7 +82,13 @@
                                 class="nav-link {{ session()->has('form_action') ? (session()->get('form_action') == 'update_addresses' ? 'active' : '' ) : '' }}"
                                 id="gt8-tab" data-bs-toggle="tab" data-bs-target="#gt8" type="button" role="tab"
                                 aria-controls="gt8" aria-selected="false"><i class="fa-solid fa-map"></i> Addresses
-                                <!-- <span>06</span> -->
+                            </button>
+                        </li>
+                        <li class="nav-item {{ session()->has('form_action') ? (session()->get('form_action') == 'update_documents' ? 'active' : '' ) : '' }}"
+                            role="presentation">
+                            <button class="nav-link" id="gt9-tab" data-bs-toggle="tab" data-bs-target="#gt9"
+                                type="button" role="tab" aria-controls="gt9" aria-selected="false"><i
+                                    class="fa-solid fa-circle-check"></i> Document Verification
                             </button>
                         </li>
                     </ul>
@@ -188,10 +191,9 @@
                                                     <label for="description">Description</label>
                                                     <textarea
                                                         class="form-control @error('description') is-invalid @enderror"
-                                                        id="description" name="description"
+                                                        id="description-old" name="description"
                                                         placeholder="Enter description" autocomplete="description"
-                                                        spellcheck="true"
-                                                        >{{ old('description') != null ? old('description') : $user->description }}</textarea>
+                                                        spellcheck="true">{{ old('description') != null ? old('description') : $user->description }}</textarea>
                                                     @if ($errors->has('description'))
                                                     <span class="text-danger">
                                                         <strong class="form-text">{{ $errors->first('description')
@@ -296,9 +298,9 @@
                                                                 class="form-control @error('caters_to') is-invalid @enderror w-100"
                                                                 data-error-container="#caters_to_error_container"
                                                                 multiple required>
-                                                                <option  value="">Select Your Preference</option>
+                                                                <option value="">Select Your Preference</option>
                                                                 @foreach (config('utility.caters_to') as $item)
-                                                                <option  value="{{$item}}" {{
+                                                                <option value="{{$item}}" {{
                                                                     in_array($item,$user_cater_to) ? 'selected' : '' }}>
                                                                     {{ $item }}
                                                                 </option>
@@ -880,6 +882,158 @@
                                     </div>
                                 </div>
                             </div>
+                            <div class="tab-pane fade {{ session()->has('form_action') ? (session()->get('form_action') == 'update_documents' ? 'show active' : '' ) : '' }}"
+                                id="gt9" role="tabpanel" aria-labelledby="gt9-tab">
+                                <div class="container">
+                                    <div class="site">
+                                        <div class="col-12">
+                                            <form action="{{ route('profile.update',$user->user_name) }}" method="POST"
+                                                enctype="multipart/form-data" id="document_verification_form">
+                                                @csrf
+                                                <input type="hidden" name="action" value="update_documents">
+                                                <div class="card">
+                                                    <div class="card-header">
+                                                        <div class="d-flex justify-content-end">
+                                                            @php
+
+                                                            @endphp
+                                                            <button type="submit" class="btn btn-primary" {{
+                                                                $user->documents->count() > 0 ? 'disabled' : ''
+                                                                }}>Submit
+                                                                Documents</button>
+                                                        </div>
+                                                    </div>
+                                                    <div class="card-body">
+                                                        <div class="row">
+                                                            <div class="col-md-4">
+                                                                <div class="card">
+                                                                    <div
+                                                                        class="card-header d-flex justify-content-between">
+                                                                        <div class="">Passport/NID (Upper Side)</div>
+                                                                        <a href="#" style="color:#213366;">#Example</a>
+                                                                    </div>
+                                                                    @php
+                                                                    $user_uppar_side_document =
+                                                                    $user->documents->where('type','upper')->first();
+                                                                    @endphp
+                                                                    <div class="card-body">
+                                                                        <div class="border border-primary mb-3 rounded  "
+                                                                            style="max-height: 220px; height: 220px;">
+                                                                            <img src={{
+                                                                                $user_uppar_side_document->document_file
+                                                                            ??
+                                                                            'https://as1.ftcdn.net/v2/jpg/02/96/05/52/1000_F_296055218_RXc721N9fSYIz3sEV7QALYquMVP31jdJ.jpg'
+                                                                            }}
+                                                                            alt="document_upper_side"
+                                                                            id="passport_nid_upper_side_placeholder"
+                                                                            style="width: 100%;height: 100%;object-fit:
+                                                                            cover;object-position:center">
+                                                                        </div>
+                                                                        @if ($user_uppar_side_document)
+                                                                        <label for="">Verification Status:</label>
+                                                                        <div
+                                                                            class="badge bg-{{$user_uppar_side_document->status == 'approved' ? 'success' : ($user_uppar_side_document->status == 'pending' ? 'info' : 'danger' )}} w-100 py-2 h4">
+                                                                            {{
+                                                                            strtoupper($user_uppar_side_document->status)
+                                                                            }}</div>
+                                                                        @else
+                                                                        <input type="file"
+                                                                            name="passport_nid_upper_side"
+                                                                            id="passport_nid_upper_side"
+                                                                            class="form-control" accept="image/*"
+                                                                            data-error-container="#passport_nid_upper_side_error_container">
+                                                                        <span
+                                                                            id="passport_nid_upper_side_error_container"></span>
+
+                                                                        @endif
+                                                                    </div>
+                                                                </div>
+                                                            </div>
+                                                            <div class="col-md-4">
+                                                                <div class="card">
+                                                                    @php
+                                                                    $user_back_side_document =
+                                                                    $user->documents->where('type','back')->first();
+                                                                    @endphp
+                                                                    <div
+                                                                        class="card-header d-flex justify-content-between">
+                                                                        <div class="">Passport/NID (Back Side)</div>
+                                                                        <a href="#" style="color:#213366;">#Example</a>
+                                                                    </div>
+                                                                    <div class="card-body">
+                                                                        <div class="border border-primary mb-3 rounded"
+                                                                            style="max-height: 220px; height: 220px;">
+                                                                            <img src="{{ $user_back_side_document->document_file
+                                                                                ??
+                                                                                'https://as1.ftcdn.net/v2/jpg/02/96/05/52/1000_F_296055218_RXc721N9fSYIz3sEV7QALYquMVP31jdJ.jpg'
+                                                                                }}" alt="document_upper_side"
+                                                                                id="passport_nid_back_side_placeholder"
+                                                                                style="width: 100%;height: 100%;object-fit: cover;object-position:center">
+                                                                        </div>
+                                                                        @if ($user_back_side_document)
+                                                                        <label for="">Verification Status:</label>
+                                                                        <div
+                                                                            class="badge bg-{{$user_back_side_document->status == 'approved' ? 'success' : ($user_back_side_document->status == 'pending' ? 'info' : 'danger' )}} w-100 py-2 h4 ">
+                                                                            {{
+                                                                            strtoupper($user_back_side_document->status)
+                                                                            }}</div>
+                                                                        @else
+                                                                        <input type="file" name="passport_nid_back_side"
+                                                                            id="passport_nid_back_side"
+                                                                            class="form-control" accept="image/*"
+                                                                            data-error-container="#passport_nid_back_side_error_container">
+                                                                        <span
+                                                                            id="passport_nid_back_side_error_container"></span>
+                                                                        @endif
+                                                                    </div>
+                                                                </div>
+                                                            </div>
+                                                            <div class="col-md-4">
+                                                                <div class="card">
+                                                                    @php
+                                                                    $user_with_selfie_document =
+                                                                    $user->documents->where('type','with_selfie')->first();
+                                                                    @endphp
+                                                                    <div
+                                                                        class="card-header d-flex justify-content-between">
+                                                                        <div class="">Selfie with Id</div>
+                                                                        <a href="#" style="color:#213366;">#Example</a>
+                                                                    </div>
+                                                                    <div class="card-body">
+                                                                        <div class="border border-primary mb-3 rounded  "
+                                                                            style="max-height: 220px; height: 220px;">
+                                                                            <img src={{
+                                                                                $user_with_selfie_document->document_file
+                                                                            ??
+                                                                            'https://as1.ftcdn.net/v2/jpg/02/96/05/52/1000_F_296055218_RXc721N9fSYIz3sEV7QALYquMVP31jdJ.jpg'
+                                                                            }}
+                                                                            alt="document_upper_side"
+                                                                            id="passport_nid_with_user_placeholder"
+                                                                            style="width: 100%;height: 100%;object-fit:
+                                                                            cover;object-position:center">
+                                                                        </div>
+                                                                        @if ($user_with_selfie_document)
+                                                                        <label for="">Verification Status:</label>
+                                                                        <div
+                                                                            class="badge bg-{{$user_with_selfie_document->status == 'approved' ? 'success' : ($user_with_selfie_document->status == 'pending' ? 'info' : 'danger' )}} w-100 py-2 h4">
+                                                                            {{
+                                                                            strtoupper($user_with_selfie_document->status)
+                                                                            }}</div>
+                                                                        @else
+                                                                        <input type="file" name="passport_nid_with_user"
+                                                                            id="passport_nid_with_user"
+                                                                            class="form-control" accept="image/*">
+                                                                        @endif
+                                                                    </div>
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                            </form>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
                         </div>
                     </div>
                 </div>
@@ -890,11 +1044,15 @@
 @endsection
 
 @push('frontend-extra-js')
-<script src="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/js/select2.min.js"></script>
-{{-- <script src="{{ asset('assets/js/pages/crud/file-upload/dropzonejs.js') }}"></script> --}}
-<script src="https://cdnjs.cloudflare.com/ajax/libs/dropzone/4.0.1/dropzone.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/js/select2.min.js">
+</script>
+{{-- <script src="{{ asset('assets/js/pages/crud/file-upload/dropzonejs.js') }}">
+</script> --}}
+<script src="https://cdnjs.cloudflare.com/ajax/libs/dropzone/4.0.1/dropzone.js">
+</script>
 
-{{-- <script src="{{ asset('admin/plugins/summernote/summernotecustom.js') }}"></script> --}}
+{{-- <script src="{{ asset('admin/plugins/summernote/summernotecustom.js') }}">
+</script> --}}
 <script type="text/javascript">
     var summernoteImageUpload = '{{ route('admin.summernote.imageUpload') }}';
     var summernoteMediaDelete = '{{ route('admin.summernote.mediaDelete') }}';
@@ -902,6 +1060,11 @@
 <script>
     Dropzone.autoDiscover = false;
     $(document).ready(function () {
+        var summernoteElement = $('#description-old');
+        var imagePath = 'summernote/cms/image';
+        summernoteElement.summernote({
+            height: 300,
+        });
         var images = [];
         var total_uploaded_image = "{{ $user->gallery_images->count() }}";
         var deleted_images = [];
@@ -976,11 +1139,7 @@
             error: function(file, response) {
             },
         });
-        var summernoteElement = $('#description');
-        var imagePath = 'summernote/cms/image';
-        summernoteElement.summernote({
-            height: 300,
-        });
+
         $('#frmEditcms').submit(function (e) {
             if(summernoteElement.summernote('isEmpty')) {
                 $('#description-error').remove();
@@ -1221,6 +1380,123 @@
                     console.log(data);
                 }
             });
+        });
+
+        $('#passport_nid_upper_side').change(function(){
+            // Image File Input
+            var curElement = $('#passport_nid_upper_side_placeholder');
+            console.log(curElement);
+            var reader = new FileReader();
+
+            reader.onload = function (e) {
+                // get loaded data and render thumbnail.
+                curElement.attr('src', e.target.result);
+            };
+
+            // read the image file as a data URL.
+            reader.readAsDataURL(this.files[0]);
+
+        });
+        $('#passport_nid_back_side').change(function(){
+            // Image File Input
+            var curElement = $('#passport_nid_back_side_placeholder');
+            console.log(curElement);
+            var reader = new FileReader();
+
+            reader.onload = function (e) {
+                // get loaded data and render thumbnail.
+                curElement.attr('src', e.target.result);
+            };
+
+            // read the image file as a data URL.
+            reader.readAsDataURL(this.files[0]);
+
+        });
+        $('#passport_nid_with_user').change(function(){
+            // Image File Input
+            var curElement = $('#passport_nid_with_user_placeholder');
+            console.log(curElement);
+            var reader = new FileReader();
+
+            reader.onload = function (e) {
+                // get loaded data and render thumbnail.
+                curElement.attr('src', e.target.result);
+            };
+
+            // read the image file as a data URL.
+            reader.readAsDataURL(this.files[0]);
+
+        });
+
+        $("#document_verification_form").validate({
+            rules: {
+                ignore: [
+                    ':hidden',
+                ],
+                passport_nid_upper_side: {
+                    required: true,
+                    accept: "image/*",
+                    extension: "jpg|jpeg|png",
+                },
+                passport_nid_back_side: {
+                    required: true,
+                    accept: "image/*",
+                    extension: "jpg|jpeg|png",
+                },
+                passport_nid_with_user: {
+                    required: true,
+                    accept: "image/*",
+                    extension: "jpg|jpeg|png",
+                },
+            },
+            messages: {
+                passport_nid_upper_side: {
+                    required: "@lang('validation.required', ['attribute' => 'Passport/NID(Upper Side)'])",
+                    accept: "@lang('validation.mimetypes', ['attribute' => 'Passport/NID', 'values' => '.jpg,.jpeg,.png,'])",
+                    accept: "@lang('validation.mimetypes', ['attribute' => 'Passport/NID', 'values' => '.jpg,.jpeg,.png,'])",
+                },
+                passport_nid_back_side: {
+                    required: "@lang('validation.required', ['attribute' => 'Passport/NID(Back Side)'])",
+                    accept: "@lang('validation.mimetypes', ['attribute' => 'Passport/NID', 'values' => '.jpg,.jpeg,.png,'])",
+                    accept: "@lang('validation.mimetypes', ['attribute' => 'Passport/NID', 'values' => '.jpg,.jpeg,.png,'])",
+                },
+                passport_nid_with_user: {
+                    required: "@lang('validation.required', ['attribute' => 'Passport/NID(with Face)'])",
+                    accept: "@lang('validation.mimetypes', ['attribute' => 'Passport/NID', 'values' => '.jpg,.jpeg,.png,'])",
+                    accept: "@lang('validation.mimetypes', ['attribute' => 'Passport/NID', 'values' => '.jpg,.jpeg,.png,'])",
+                },
+            },
+            errorClass: 'invalid-feedback',
+            errorElement: 'span',
+            highlight: function(element) {
+                $(element).addClass('is-invalid');
+                $(element).siblings('label').addClass('text-danger');
+            },
+            unhighlight: function(element) {
+                $(element).removeClass('is-invalid');
+                $(element).siblings('label').removeClass('text-danger');
+            },
+            errorPlacement: function(error, element) {
+                if (element.attr("type") == "radio") {
+                    error.appendTo('.a');
+                } else {
+                    if (element.attr("data-error-container")) {
+                        error.appendTo(element.attr("data-error-container"));
+                    } else {
+                        error.insertAfter(element);
+                    }
+                }
+            }
+        });
+        $(document).on('submit', '#document_verification_form', function() {
+            if ($("#frmAddRoles").valid()) {
+                addOverlay();
+                $("input[type=submit], input[type=button], button[type=submit]").prop("disabled",
+                    "disabled");
+                return true;
+            } else {
+                return false;
+            }
         });
     });
 </script>

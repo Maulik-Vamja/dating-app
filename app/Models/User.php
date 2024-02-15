@@ -23,7 +23,7 @@ class User extends Authenticatable implements MustVerifyEmail
     }
 
     protected $fillable = [
-        'custom_id', 'full_name', 'user_name', 'email', 'password', 'short_description', 'description', 'pronouns', 'gender', 'caters_to', 'body_type', 'height', 'ethnicity', 'cup_size', 'hair_colour', 'shoe_size', 'eye_colour', 'last_logged_in', 'profile_photo', 'thumbnail_image', 'membership', 'contact_disclaimer', 'age', 'availibility', 'availibility_description', 'is_active', 'is_trans'
+        'custom_id', 'full_name', 'user_name', 'email', 'password', 'short_description', 'description', 'pronouns', 'gender', 'caters_to', 'body_type', 'height', 'ethnicity', 'cup_size', 'hair_colour', 'shoe_size', 'eye_colour', 'last_logged_in', 'profile_photo', 'thumbnail_image', 'membership', 'contact_disclaimer', 'age', 'availibility', 'availibility_description', 'is_active', 'is_trans', 'is_document_verified'
     ];
 
     protected $hidden = [
@@ -83,6 +83,10 @@ class User extends Authenticatable implements MustVerifyEmail
     {
         return $this->hasMany(GalleryImages::class, "user_id", "id");
     }
+    public function documents()
+    {
+        return $this->hasMany(Document::class, "user_id", "id");
+    }
 
     // Scopes
 
@@ -93,5 +97,9 @@ class User extends Authenticatable implements MustVerifyEmail
     public function scopeActive($query)
     {
         return $query->where('is_active', StatusEnums::ACTIVE->value);
+    }
+    public function scopeDocumentVerified($query)
+    {
+        return $query->where('is_document_verified', 'y');
     }
 }

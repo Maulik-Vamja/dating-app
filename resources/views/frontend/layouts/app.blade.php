@@ -10,6 +10,16 @@
     <meta name="viewport" content="width=device-width, initial-scale=1">
     {!! $sitesetting['meta_tags'] !!}
     @yield('og-meta')
+    <!-- Google tag (gtag.js) -->
+<!-- Google tag (gtag.js) -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-95HYWLWJQF"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+
+  gtag('config', 'G-95HYWLWJQF');
+</script>
     <!-- site favicon -->
     <link rel="icon" type="image/png" href="{{asset('frontend/assets/images/fav-icon.png')}}">
     <!-- Place favicon.ico in the root directory -->

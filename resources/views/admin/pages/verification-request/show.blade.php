@@ -20,6 +20,34 @@
             </div>
         </div>
         <div class="card-body">
+            <div class="d-flex justify-content-end">
+                <div class="">
+                    <button data-target-href="{{ route('admin.verification-requests.updateStatus') }}"
+                        class="btn {{$user->is_document_verified == 'approved' ? 'btn-success' : 'btn-light'}} btn-hover-success btn-verification-status"
+                        title="Approve" data-status="approved" data-escort_id={{$user->custom_id}}
+                        @disabled($user->is_document_verified=='approved' ) data-page-source="view">
+                        <i class="fas fa-check-circle"></i> {{$user->is_document_verified=='approved' ? 'Approved' :
+                        'Approve'}}
+                    </button>
+                    <button data-target-href="{{ route('admin.verification-requests.updateStatus') }}"
+                        data-status="rejected"
+                        class="btn {{$user->is_document_verified=='rejected' ? 'btn-warning' : 'btn-light'}}  btn-hover-warning btn-verification-status"
+                        title="Reject" data-escort_id={{$user->custom_id}}
+                        @disabled($user->is_document_verified=='rejected' ) data-page-source="view">
+                        <i class="far fa-times-circle"></i> {{$user->is_document_verified=='rejected' ? 'Rejected' :
+                        'Reject'}}
+                    </button>
+                    <button data-target-href="{{ route('admin.verification-requests.updateStatus') }}"
+                        data-status="spam" data-escort_id={{$user->custom_id}}
+                        class="btn {{$user->is_document_verified == 'spam' ? 'btn-danger' : 'btn-light'}}
+                        btn-hover-danger
+                        btn-verification-status" title="Spam"
+                        @disabled($user->is_document_verified=='spam') data-page-source="view">
+                        <i class="fas fa-info-circle"></i> {{$user->is_document_verified=='rejected' ? 'Spammed' :
+                        'Spam'}}
+                    </button>
+                </div>
+            </div>
             <div class="row">
                 <div class="col-md-4">
                     <div class="card">
@@ -41,22 +69,6 @@
                                 style="width: 100%;height: 100%;object-fit:
                                 cover;object-position:center">
                             </div>
-                            <div class="d-flex justify-content-between statusActionButtonContainer  ">
-                                @if ($user_uppar_side_document->status == 'approved')
-                                <button class="btn btn-success btn-status-action w-100" disabled>Approved</button>
-                                @elseif ($user_uppar_side_document->status == 'rejected')
-                                <button class="btn btn-danger btn-status-action w-100" disabled>Rejected</button>
-                                @elseif ($user_uppar_side_document->status == 'spam')
-                                <button class="btn btn-danger btn-status-action w-100" disabled>Spammed/Fraud</button>
-                                @else
-                                <button class="btn btn-success btn-status-action" data-status="approved"
-                                    data-document_id={{$user_uppar_side_document->custom_id}}>Approve</button>
-                                <button class="btn btn-danger btn-status-action " data-status="rejected"
-                                    data-document_id={{$user_uppar_side_document->custom_id}}>Reject</button>
-                                <button class="btn btn-danger btn-status-action" data-status="spam"
-                                    data-document_id={{$user_uppar_side_document->custom_id}}>Spam</button>
-                                @endif
-                            </div>
                         </div>
                     </div>
                 </div>
@@ -77,22 +89,7 @@
                                     }}" alt="document_upper_side" id="passport_nid_back_side_placeholder"
                                     style="width: 100%;height: 100%;object-fit: cover;object-position:center">
                             </div>
-                            <div class="d-flex justify-content-between statusActionButtonContainer">
-                                @if ($user_back_side_document->status == 'approved')
-                                <button class="btn btn-success btn-status-action w-100" disabled>Approved</button>
-                                @elseif ($user_back_side_document->status == 'rejected')
-                                <button class="btn btn-danger btn-status-action w-100" disabled>Rejected</button>
-                                @elseif ($user_back_side_document->status == 'spam')
-                                <button class="btn btn-danger btn-status-action w-100" disabled>Spammed/Fraud</button>
-                                @else
-                                <button class="btn btn-success btn-status-action" data-status="approved"
-                                    data-document_id={{$user_back_side_document->custom_id}}>Approve</button>
-                                <button class="btn btn-danger btn-status-action " data-status="rejected"
-                                    data-document_id={{$user_back_side_document->custom_id}}>Reject</button>
-                                <button class="btn btn-danger btn-status-action" data-status="spam"
-                                    data-document_id={{$user_back_side_document->custom_id}}>Spam</button>
-                                @endif
-                            </div>
+
                         </div>
                     </div>
                 </div>
@@ -117,22 +114,6 @@
                                 style="width: 100%;height: 100%;object-fit:
                                 cover;object-position:center">
                             </div>
-                            <div class="d-flex justify-content-between statusActionButtonContainer">
-                                @if ($user_with_selfie_document->status == 'approved')
-                                <button class="btn btn-success btn-status-action w-100" disabled>Approved</button>
-                                @elseif ($user_with_selfie_document->status == 'rejected')
-                                <button class="btn btn-danger btn-status-action w-100" disabled>Rejected</button>
-                                @elseif ($user_with_selfie_document->status == 'spam')
-                                <button class="btn btn-danger btn-status-action w-100" disabled>Spammed/Fraud</button>
-                                @else
-                                <button class="btn btn-success btn-status-action" data-status="approved"
-                                    data-document_id={{$user_with_selfie_document->custom_id}}>Approve</button>
-                                <button class="btn btn-danger btn-status-action " data-status="rejected"
-                                    data-document_id={{$user_with_selfie_document->custom_id}}>Reject</button>
-                                <button class="btn btn-danger btn-status-action" data-status="spam"
-                                    data-document_id={{$user_with_selfie_document->custom_id}}>Spam</button>
-                                @endif
-                            </div>
                         </div>
                     </div>
                 </div>
@@ -149,7 +130,7 @@
 @push('extra-js')
 <script>
     $(document).ready(function () {
-        
+
     });
 </script>
 @endpush

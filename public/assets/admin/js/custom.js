@@ -217,6 +217,7 @@ $(function () {
     $(document).on("click", ".btn-verification-status", function (e) {
         e.preventDefault();
         var element = $(this);
+        var page_source = element.data("page-source");
         var status = $(this).data("status");
         var escort_id = $(this).data("escort_id");
         var url = $(this).data("target-href");
@@ -229,16 +230,12 @@ $(function () {
                 escort_id: escort_id,
             },
             success: function (response) {
-                // toastr.success(response.message);
-                // $(element).siblings().remove();
-                // $(element).text(response.statusText);
-                // $(element).addClass("w-100");
-                // $(element).attr("disabled", true);
-                // if (response.is_user_verified == true) {
-                //     window.location.href =
-                //         "{{ route('admin.verification-requests.index') }}";
-                // }
-                oTable.DataTable().ajax.reload();
+                toastr.success(response.message);
+                if (page_source == "view") {
+                    window.location.reload();
+                } else {
+                    oTable.DataTable().ajax.reload();
+                }
             },
             error: function (error) {
                 toastr.error(error.responseJSON.message);

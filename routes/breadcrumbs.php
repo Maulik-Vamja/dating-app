@@ -131,21 +131,21 @@ Breadcrumbs::register('faqs_update', function ($breadcrumbs, $id) {
 // FAQs ---------------------------------------------------------------------------------------------------------------------------------------------------
 Breadcrumbs::register('verification_request_list', function ($breadcrumbs) {
     $breadcrumbs->parent('dashboard');
-    $breadcrumbs->push(__('Verification Request'), route('admin.verification-requests.index'));
+    $breadcrumbs->push(__('Verification Requests'), route('admin.verification-requests.index'));
 });
-Breadcrumbs::register('verification_request_create', function ($breadcrumbs) {
-    $breadcrumbs->parent('verification_request_list');
-    $breadcrumbs->push('Add New Verification Request', route('admin.verification-requests.create'));
-});
-Breadcrumbs::register('verification_request_update', function ($breadcrumbs, $id) {
-    $breadcrumbs->parent('verification_request_list');
-    $breadcrumbs->push(__('Edit Verification Request'), route('admin.verification-requests.edit', $id));
-});
-//generate for users_show breadcumb copilot
-Breadcrumbs::register('verification_request_show', function ($breadcrumbs, $id) {
-    $breadcrumbs->parent('verification_request_list');
-    $breadcrumbs->push('View Verification Request', route('admin.verification-requests.show', $id));
-});
+// Breadcrumbs::register('verification_request_create', function ($breadcrumbs) {
+//     $breadcrumbs->parent('verification_request_list');
+//     $breadcrumbs->push('Add New Verification Request', route('admin.verification-requests.create'));
+// });
+// Breadcrumbs::register('verification_request_update', function ($breadcrumbs, $id) {
+//     $breadcrumbs->parent('verification_request_list');
+//     $breadcrumbs->push(__('Edit Verification Request'), route('admin.verification-requests.edit', $id));
+// });
+// //generate for users_show breadcumb copilot
+// Breadcrumbs::register('verification_request_show', function ($breadcrumbs, $id) {
+//     $breadcrumbs->parent('verification_request_list');
+//     $breadcrumbs->push('View Verification Request', route('admin.verification-requests.show', $id));
+// });
 
 
 // Blogs ---------------------------------------------------------------------------------------------------------------------------------------------------

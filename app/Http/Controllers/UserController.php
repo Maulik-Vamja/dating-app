@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Models\TempImage;
 use App\Models\UserPolicy;
 use App\Models\UserRate;
+use Carbon\Carbon;
 use Exception;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
@@ -129,6 +130,10 @@ class UserController extends Controller
                     break;
                 case "update_documents":
                     $this->updateDocuments($request, $user);
+                    $user->update([
+                        'is_document_verified' => 'pending',
+                        'verification_requested_at' => Carbon::now(),
+                    ]);
                     break;
                 default:
                     return redirect()->back()->with('error', 'Invalid action');
@@ -138,7 +143,7 @@ class UserController extends Controller
             DB::commit();
             return redirect()->back()->with(['success' => 'Profile updated successfully', 'form_action' => $request->input('action')]);
         } catch (Exception $th) {
-            // dd($th->getMessage());
+            dd($th->getMessage());
             DB::rollBack();
             return redirect()->back()->with(['errorMsg' => 'Something went wrong', 'form_action' => $request->input('action')]);
         }
@@ -171,30 +176,55 @@ class UserController extends Controller
     }
     public function updateDocuments($request, $user)
     {
-        // dd($request->all(), 'here');
         if ($request->has('passport_nid_upper_side')) {
-            $user->documents()->create([
-                'custom_id' => get_unique_string(),
-                'user_id' => $user->id,
-                'type' => 'upper',
-                'file' => $request->file('passport_nid_upper_side')->store("escorts/documents/{$user->id}"),
-            ]);
+            $user_upper_side_document = $user->documents->where('type', 'upper')->first();
+            if ($user_upper_side_document && Storage::exists($user_upper_side_document->file)) {
+                Storage::delete($user_upper_side_document->file);
+
+                $user_upper_side_document->update([
+                    'file' => $request->file('passport_nid_upper_side')->store("escorts/documents/{$user->id}")
+                ]);
+            } else {
+                $user->documents()->create([
+                    'custom_id' => get_unique_string(),
+                    'user_id' => $user->id,
+                    'type' => 'upper',
+                    'file' => $request->file('passport_nid_upper_side')->store("escorts/documents/{$user->id}"),
+                ]);
+            }
         }
         if ($request->has('passport_nid_back_side')) {
-            $user->documents()->create([
-                'custom_id' => get_unique_string(),
-                'user_id' => $user->id,
-                'type' => 'back',
-                'file' => $request->file('passport_nid_back_side')->store("escorts/documents/{$user->id}"),
-            ]);
+            $user_back_side_document = $user->documents->where('type', 'back')->first();
+            if ($user_back_side_document && Storage::exists($user_back_side_document->file)) {
+                Storage::delete($user_back_side_document->file);
+                $user_back_side_document->update([
+                    'file' => $request->file('passport_nid_back_side')->store("escorts/documents/{$user->id}"),
+                ]);
+            } else {
+                $user->documents()->create([
+                    'custom_id' => get_unique_string(),
+                    'user_id' => $user->id,
+                    'type' => 'back',
+                    'file' => $request->file('passport_nid_back_side')->store("escorts/documents/{$user->id}"),
+                ]);
+            }
         }
         if ($request->has('passport_nid_with_user')) {
-            $user->documents()->create([
-                'custom_id' => get_unique_string(),
-                'user_id' => $user->id,
-                'type' => 'with_selfie',
-                'file' => $request->file('passport_nid_with_user')->store("escorts/documents/{$user->id}"),
-            ]);
+            $user_with_selfie_document = $user->documents->where('type', 'with_selfie')->first();
+            if ($user_with_selfie_document && Storage::exists($user_with_selfie_document->file)) {
+                Storage::delete($user_with_selfie_document->file);
+
+                $user_with_selfie_document->update([
+                    'file' => $request->file('passport_nid_with_user')->store("escorts/documents/{$user->id}"),
+                ]);
+            } else {
+                $user->documents()->create([
+                    'custom_id' => get_unique_string(),
+                    'user_id' => $user->id,
+                    'type' => 'with_selfie',
+                    'file' => $request->file('passport_nid_with_user')->store("escorts/documents/{$user->id}"),
+                ]);
+            }
         }
 
         return true;

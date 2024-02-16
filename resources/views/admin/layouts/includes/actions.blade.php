@@ -65,18 +65,19 @@
 @endif
 @if (Route::is('admin.verification-requests.listing'))
 <button data-target-href="{{ route('admin.verification-requests.updateStatus') }}"
-    class="btn btn-icon btn-light btn-hover-success btn-sm btn-verification-status" title="Approve"
-    data-status="approved" data-escort_id={{$id}} @disabled($status=='approved' )>
+    class="btn {{ $status=='approved' ? 'btn-success': 'btn-light' }} btn-icon  btn-hover-success btn-sm btn-verification-status"
+    title="Approve" data-status="approved" data-escort_id={{$id}} @disabled($status=='approved' )>
     <i class="fas fa-check-circle"></i>
 </button>
 <button data-target-href="{{ route('admin.verification-requests.updateStatus') }}" data-status="rejected"
-    class="btn btn-icon btn-light btn-hover-warning btn-sm btn-verification-status" title="Reject"
-    data-escort_id={{$id}} @disabled($status=='rejected' )>
+    class="btn btn-icon {{ $status == 'rejected' ? 'btn-warning': 'btn-light' }} btn-hover-warning btn-sm btn-verification-status"
+    title="Reject" data-escort_id={{$id}} @disabled($status=='rejected' )>
     <i class="far fa-times-circle"></i>
 </button>
 <button data-target-href="{{ route('admin.verification-requests.updateStatus') }}" data-status="spam"
-    data-escort_id={{$id}} class="btn btn-icon btn-light btn-hover-danger btn-sm btn-verification-status" title="Spam"
-    @disabled($status=='spam' )>
+    data-escort_id={{$id}}
+    class="btn btn-icon {{ $status == 'spam' ? 'btn-danger': 'btn-light' }} btn-hover-danger btn-sm btn-verification-status"
+    title="Spam" @disabled($status=='spam' )>
     <i class="fas fa-info-circle"></i>
 </button>
 @endif

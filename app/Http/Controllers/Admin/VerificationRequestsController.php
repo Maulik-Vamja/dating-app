@@ -137,9 +137,8 @@ class VerificationRequestsController extends Controller
     {
         extract($this->DTFilters($request->all()));
         $records = [];
-        // $documents = Document::orderBy($sort_column, $sort_order);
-        // $documents = Document::orderBy($sort_column, $sort_order);
-        $escorts = User::query();
+
+        $escorts = User::where('is_document_verified', "<>", null);
 
         if ($search != '') {
             $escorts->where(function ($query) use ($search) {
@@ -170,7 +169,7 @@ class VerificationRequestsController extends Controller
                 'full_name' => $escort->full_name,
                 'is_document_verified' => $escort->is_document_verified,
                 'action' => view('admin.layouts.includes.actions')->with(['custom_title' => 'Verification Request', 'id' => $escort->custom_id, 'status' => $escort->is_document_verified], $escort)->render(),
-                'updated_at' => $escort->updated_at,
+                'verification_requested_at' => $escort->verification_requested_at,
             ];
         }
         // dd($records);
@@ -182,11 +181,13 @@ class VerificationRequestsController extends Controller
         $response = [];
         DB::beginTransaction();
         try {
-            $user = User::whereCustomId('id', $request->escort_id)->update(['is_document_verified' => $request->status,]);
+            $user = User::whereCustomId($request->escort_id)->first();
+            // dd($user);
+            $user->update(['is_document_verified' => $request->status]);
             DB::commit();
+            $response = ['status' => 200, 'message' => "Verification Request " . ucfirst($request->status) . " Successfully"];
         } catch (\Throwable $th) {
             DB::rollBack();
-            // dd($th->getMessage());
             $response = ['status' => 204, 'message' => "something went wrong, Please try again later."];
         }
         return response()->json($response);

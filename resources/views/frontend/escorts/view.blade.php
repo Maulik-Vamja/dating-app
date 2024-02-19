@@ -4,19 +4,26 @@ $random_image = $escort->gallery_images()->inRandomOrder()->first();
 @endphp
 
 @section('og-meta')
-    <meta property="og:type" content="website">
-    <!-- Dynamic OG meta tags -->
-    <meta property="og:title" content="{{ $escort->full_name ? $escort->full_name . ' | ' : '' }}{{ $escort->home_addresses->isNotEmpty() ? $escort->home_addresses->first()->city->name . ', ' . $escort->home_addresses->first()->state->name . ', ' . $escort->home_addresses->first()->country->iso2 : 'iFindYou' }} / &#x2713;">
-    <meta property="og:description" content=" {{$escort->short_description ?? 'The Largest Adult Friend Finder Platform'}} | {{ str_limit($escort->description ?? 'The Largest Adult Friend Finder Platform', 100) }}">
-    <meta property="og:image" content="{{ $random_image ? (filter_var($random_image->image,FILTER_VALIDATE_URL) == false ? Storage::url($random_image->image) : $random_image->image) : asset('frontend/assets/images/allmedia/01.jpg')}}">
-    <meta property="og:url" content="{{ url()->current() }}">
+<meta property="og:type" content="website">
+<!-- Dynamic OG meta tags -->
+<meta property="og:title"
+    content="{{ $escort->full_name ? $escort->full_name . ' | ' : '' }}{{ $escort->home_addresses->isNotEmpty() ? $escort->home_addresses->first()?->city?->name . ', ' . $escort->home_addresses->first()?->state?->name . ', ' . $escort->home_addresses->first()?->country?->iso2 : 'iFindYou' }} / &#x2713;">
+<meta property="og:description"
+    content=" {{$escort->short_description ?? 'The Largest Adult Friend Finder Platform'}} | {{ str_limit($escort->description ?? 'The Largest Adult Friend Finder Platform', 100) }}">
+<meta property="og:image"
+    content="{{ $random_image ? (filter_var($random_image->image,FILTER_VALIDATE_URL) == false ? Storage::url($random_image->image) : $random_image->image) : asset('frontend/assets/images/allmedia/01.jpg')}}">
+<meta property="og:url" content="{{ url()->current() }}">
 
-    <!-- Twitter -->
-    <meta name="twitter:card" content="{{ $random_image ? (filter_var($random_image->image, FILTER_VALIDATE_URL) == false ? Storage::url($random_image->image) : $random_image->image) : asset('frontend/assets/images/allmedia/01.jpg')}}">
-    <meta name="twitter:title" content="{{ $escort->full_name ? $escort->full_name . ' | ' : '' }}{{ $escort->home_addresses->isNotEmpty() ? $escort->home_addresses->first()->city->name . ', ' . $escort->home_addresses->first()->state->name . ', ' . $escort->home_addresses->first()->country->iso2 : 'iFindYou' }} &#x2713;">
-    <meta name="twitter:description" content="{{$escort->short_description ?? 'The Largest Adult Friend Finder Platform'}} | {{ str_limit($escort->description ?? 'The Largest Adult Friend Finder Platform', 100) }}">
-    <meta name="twitter:image" content="{{ $random_image ? (filter_var($random_image->image, FILTER_VALIDATE_URL) == false ? Storage::url($random_image->image) : $random_image->image) : asset('frontend/assets/images/allmedia/01.jpg')}}">
-    <meta name="twitter:url" content="{{ url()->current() }}">
+<!-- Twitter -->
+<meta name="twitter:card"
+    content="{{ $random_image ? (filter_var($random_image->image, FILTER_VALIDATE_URL) == false ? Storage::url($random_image->image) : $random_image->image) : asset('frontend/assets/images/allmedia/01.jpg')}}">
+<meta name="twitter:title"
+    content="{{ $escort->full_name ? $escort->full_name . ' | ' : '' }}{{ $escort->home_addresses->isNotEmpty() ? $escort->home_addresses->first()?->city?->name . ', ' . $escort->home_addresses->first()?->state?->name . ', ' . $escort->home_addresses->first()?->country?->iso2 : 'iFindYou' }} &#x2713;">
+<meta name="twitter:description"
+    content="{{$escort->short_description ?? 'The Largest Adult Friend Finder Platform'}} | {{ str_limit($escort->description ?? 'The Largest Adult Friend Finder Platform', 100) }}">
+<meta name="twitter:image"
+    content="{{ $random_image ? (filter_var($random_image->image, FILTER_VALIDATE_URL) == false ? Storage::url($random_image->image) : $random_image->image) : asset('frontend/assets/images/allmedia/01.jpg')}}">
+<meta name="twitter:url" content="{{ url()->current() }}">
 @endsection
 
 
@@ -111,9 +118,9 @@ $random_image = $escort->gallery_images()->inRandomOrder()->first();
                                                 @if ($escort->home_addresses)
                                                 @foreach ($escort->home_addresses as $address)
                                                 <button class="ic-location"><i class="fa-solid fa-house"></i> {{
-                                                    $address?->city->name
-                                                    }}, {{ $address?->state->name }},
-                                                    {{ $address?->country->iso2 }}</button>
+                                                    $address?->city?->name
+                                                    }}, {{ $address?->state?->name }},
+                                                    {{ $address?->country?->iso2 }}</button>
                                                 @endforeach
                                                 @endif
                                                 <button class="ic-gender"><i class="fa-solid fa-venus"></i>
@@ -158,9 +165,9 @@ $random_image = $escort->gallery_images()->inRandomOrder()->first();
                                                         <p class="info-name">Based In Address</p>
                                                         <div class="info-details">
                                                             @foreach ($escort->based_in_addresses as $address)
-                                                            <p>{{ $address?->city->name
-                                                                }}, {{ $address?->state->name }},
-                                                                {{ $address?->country->iso2 }}.</p>
+                                                            <p>{{ $address?->city?->name
+                                                                }}, {{ $address?->state?->name }},
+                                                                {{ $address?->country?->iso2 }}.</p>
                                                             @endforeach
                                                         </div>
                                                         @endif

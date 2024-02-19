@@ -137,11 +137,8 @@ class VerificationRequestsController extends Controller
     {
         extract($this->DTFilters($request->all()));
         $records = [];
-        // $documents = Document::orderBy($sort_column, $sort_order);
-        // $documents = Document::orderBy($sort_column, $sort_order);
-        $escorts = User::whereHas('documents', function ($query) {
-            $query->where('status', 'pending');
-        });
+
+        $escorts = User::where('is_document_verified', "<>", null);
 
         if ($search != '') {
             $escorts->where(function ($query) use ($search) {
@@ -170,8 +167,9 @@ class VerificationRequestsController extends Controller
             $records['data'][] = [
                 'id' => $escort->id,
                 'full_name' => $escort->full_name,
-                'action' => view('admin.layouts.includes.actions')->with(['custom_title' => 'Verification Request', 'id' => $escort->custom_id], $escort)->render(),
-                'updated_at' => $escort->updated_at,
+                'is_document_verified' => $escort->is_document_verified,
+                'action' => view('admin.layouts.includes.actions')->with(['custom_title' => 'Verification Request', 'id' => $escort->custom_id, 'status' => $escort->is_document_verified], $escort)->render(),
+                'verification_requested_at' => $escort->verification_requested_at,
             ];
         }
         // dd($records);
@@ -183,25 +181,13 @@ class VerificationRequestsController extends Controller
         $response = [];
         DB::beginTransaction();
         try {
-            $document = Document::whereCustomId($request->document_id)->first();
-            $document->update(['status' => $request->status]);
-
-
-            $user_documents_status = Document::where('user_id', $document->user_id)->pluck('status')->toArray();
-            // dd($document, $user_documents_status);
-
-            $response = ['status' => 200, 'message' => 'Document Verification Updated', 'statusText' => ucfirst($request->status)];
-
-            if (count(array_intersect(['pending', 'rejected', 'spam'], $user_documents_status)) == 0) {
-                $user = User::where('id', $document->user_id)->update([
-                    'is_document_verified' => 'y',
-                ]);
-                $response = ['status' => 200, 'message' => 'Document Verification Updated', 'is_user_verified' => true, 'statusText' => ucfirst($request->status)];
-            }
+            $user = User::whereCustomId($request->escort_id)->first();
+            // dd($user);
+            $user->update(['is_document_verified' => $request->status]);
             DB::commit();
+            $response = ['status' => 200, 'message' => "Verification Request " . ucfirst($request->status) . " Successfully"];
         } catch (\Throwable $th) {
             DB::rollBack();
-            // dd($th->getMessage());
             $response = ['status' => 204, 'message' => "something went wrong, Please try again later."];
         }
         return response()->json($response);

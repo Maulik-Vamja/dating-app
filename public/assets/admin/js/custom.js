@@ -64,8 +64,11 @@ $(function () {
                     type: "DELETE",
                     dataType: "json",
                     success: function (success) {
-                        if (typeof oTable.draw !== "undefined") { oTable.draw(); }
-                        else if (typeof oTable.fnDraw !== "undefined") { oTable.fnDraw(); }
+                        if (typeof oTable.draw !== "undefined") {
+                            oTable.draw();
+                        } else if (typeof oTable.fnDraw !== "undefined") {
+                            oTable.fnDraw();
+                        }
                     },
                 });
                 Swal.fire({
@@ -131,8 +134,9 @@ $(function () {
             var numberOfChecked = $(
                 '.dataTable tbody input[class="small-chk"]:checked'
             ).length;
-            var totalCheckboxes = $('.dataTable tbody input[class="small-chk"]')
-                .length;
+            var totalCheckboxes = $(
+                '.dataTable tbody input[class="small-chk"]'
+            ).length;
 
             if (numberOfChecked > 0) {
                 if (numberOfChecked == totalCheckboxes) {
@@ -209,9 +213,38 @@ $(function () {
             $(".delete_all_link").removeAttr("disabled");
         }
     });
+
+    $(document).on("click", ".btn-verification-status", function (e) {
+        e.preventDefault();
+        var element = $(this);
+        var page_source = element.data("page-source");
+        var status = $(this).data("status");
+        var escort_id = $(this).data("escort_id");
+        var url = $(this).data("target-href");
+        $.ajax({
+            type: "POST",
+            url: url,
+            data: {
+                _token: $('meta[name="csrf_token"]').attr("content"),
+                status: status,
+                escort_id: escort_id,
+            },
+            success: function (response) {
+                toastr.success(response.message);
+                if (page_source == "view") {
+                    window.location.reload();
+                } else {
+                    oTable.DataTable().ajax.reload();
+                }
+            },
+            error: function (error) {
+                toastr.error(error.responseJSON.message);
+            },
+        });
+    });
 });
 $(document).on("click", ".paginate_button", function () {
-    if ($('.all_select').hasClass("allChecked")) {
+    if ($(".all_select").hasClass("allChecked")) {
         $('.dataTable tbody input[class="small-chk"]').prop("checked", false);
 
         $(".all_select").prop("indeterminate", false);
@@ -297,8 +330,12 @@ jQuery.validator.addMethod(
 );
 
 function addOverlay() {
-    $('<div class="page-loader page-loader-base" id="overlayDocument"><div class="page-loader page-loader-non-block" ><div class="blockui"><span>Please   wait...</span><span><div class="spinner spinner-primary"></div></span></div></div></div>').prependTo(document.body);
+    $(
+        '<div class="page-loader page-loader-base" id="overlayDocument"><div class="page-loader page-loader-non-block" ><div class="blockui"><span>Please   wait...</span><span><div class="spinner spinner-primary"></div></span></div></div></div>'
+    ).prependTo(document.body);
     $("#overlayDocument").show().children().show();
 }
 
-function removeOverlay() { $('#overlayDocument').remove(); }
+function removeOverlay() {
+    $("#overlayDocument").remove();
+}

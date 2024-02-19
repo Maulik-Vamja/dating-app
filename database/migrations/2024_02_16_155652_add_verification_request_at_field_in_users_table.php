@@ -1,6 +1,5 @@
 <?php
 
-use App\Enums\DocumentVerificationStatusEnums;
 use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
@@ -13,7 +12,7 @@ return new class extends Migration
     public function up(): void
     {
         Schema::table('users', function (Blueprint $table) {
-            $table->enum('is_document_verified', DocumentVerificationStatusEnums::options())->after('is_active')->nullable();
+            $table->dateTime('verification_requested_at')->nullable();
         });
     }
 
@@ -23,7 +22,7 @@ return new class extends Migration
     public function down(): void
     {
         Schema::table('users', function (Blueprint $table) {
-            $table->dropColumn('is_document_verified');
+            $table->dropColumn('verification_requested_at');
         });
     }
 };

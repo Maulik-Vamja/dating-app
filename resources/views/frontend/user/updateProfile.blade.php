@@ -893,12 +893,19 @@
                                                 <input type="hidden" name="action" value="update_documents">
                                                 <div class="card">
                                                     <div class="card-header">
-                                                        <div class="d-flex justify-content-end">
-                                                            @php
-
-                                                            @endphp
+                                                        <div class="d-flex justify-content-between">
+                                                            <div class="">
+                                                                @if ($user->is_document_verified !== null)
+                                                                <div
+                                                                    class="btn btn-large bg-{{ $user->is_document_verified == 'approved' ? 'success' : ($user->is_document_verified == 'rejected' ? 'warning' : ($user->is_document_verified == 'spam' ? 'danger' : 'info' )) }} text-white">
+                                                                    {{ucfirst($user->is_document_verified)}}
+                                                                </div>
+                                                                @endif
+                                                            </div>
                                                             <button type="submit" class="btn btn-primary" {{
-                                                                $user->documents->count() > 0 ? 'disabled' : ''
+                                                                $user->is_document_verified !== null &&
+                                                                $user->is_document_verified !== 'rejected' ? 'disabled'
+                                                                : ''
                                                                 }}>Submit
                                                                 Documents</button>
                                                         </div>
@@ -929,14 +936,8 @@
                                                                             style="width: 100%;height: 100%;object-fit:
                                                                             cover;object-position:center">
                                                                         </div>
-                                                                        @if ($user_uppar_side_document)
-                                                                        <label for="">Verification Status:</label>
-                                                                        <div
-                                                                            class="badge bg-{{$user_uppar_side_document->status == 'approved' ? 'success' : ($user_uppar_side_document->status == 'pending' ? 'info' : 'danger' )}} w-100 py-2 h4">
-                                                                            {{
-                                                                            strtoupper($user_uppar_side_document->status)
-                                                                            }}</div>
-                                                                        @else
+                                                                        @if ($user->is_document_verified == null ||
+                                                                        $user->is_document_verified == 'rejected')
                                                                         <input type="file"
                                                                             name="passport_nid_upper_side"
                                                                             id="passport_nid_upper_side"
@@ -970,14 +971,8 @@
                                                                                 id="passport_nid_back_side_placeholder"
                                                                                 style="width: 100%;height: 100%;object-fit: cover;object-position:center">
                                                                         </div>
-                                                                        @if ($user_back_side_document)
-                                                                        <label for="">Verification Status:</label>
-                                                                        <div
-                                                                            class="badge bg-{{$user_back_side_document->status == 'approved' ? 'success' : ($user_back_side_document->status == 'pending' ? 'info' : 'danger' )}} w-100 py-2 h4 ">
-                                                                            {{
-                                                                            strtoupper($user_back_side_document->status)
-                                                                            }}</div>
-                                                                        @else
+                                                                        @if ($user->is_document_verified == null ||
+                                                                        $user->is_document_verified == 'rejected')
                                                                         <input type="file" name="passport_nid_back_side"
                                                                             id="passport_nid_back_side"
                                                                             class="form-control" accept="image/*"
@@ -1012,14 +1007,8 @@
                                                                             style="width: 100%;height: 100%;object-fit:
                                                                             cover;object-position:center">
                                                                         </div>
-                                                                        @if ($user_with_selfie_document)
-                                                                        <label for="">Verification Status:</label>
-                                                                        <div
-                                                                            class="badge bg-{{$user_with_selfie_document->status == 'approved' ? 'success' : ($user_with_selfie_document->status == 'pending' ? 'info' : 'danger' )}} w-100 py-2 h4">
-                                                                            {{
-                                                                            strtoupper($user_with_selfie_document->status)
-                                                                            }}</div>
-                                                                        @else
+                                                                        @if ($user->is_document_verified == null ||
+                                                                        $user->is_document_verified == 'rejected')
                                                                         <input type="file" name="passport_nid_with_user"
                                                                             id="passport_nid_with_user"
                                                                             class="form-control" accept="image/*">
@@ -1192,8 +1181,7 @@
                                 name="rates[${rate_type_id}][${rate_row_count}][description]"
                                 id="rates[${rate_type_id}][${rate_row_count}][description]"
                                 placeholder="Enter Description"
-                                class="form-control"
-                                required>
+                                class="form-control">
                         </div>
                     </div>
                     <div class="col-md-3">
@@ -1238,7 +1226,7 @@
                             $("#state").append(`<option value="${value.id}">${value.name}</option>`);
                         });
                     }else{
-                        $("#state").append(`<option value="">No State Available</option>`)
+                        $("#state").append(`<option value="" disabled>No State Available</option>`)
                     }
                 },
                 error:function(data){
@@ -1260,7 +1248,7 @@
                             $("#city").append(`<option value="${value.id}">${value.name}</option>`);
                         });
                     }else{
-                        $("#city").append(`<option value="">No city Available</option>`)
+                        $("#city").append(`<option value="" disabled>No city Available</option>`)
                     }
                 },
                 error:function(data){
@@ -1337,6 +1325,7 @@
         $(document).on('change','#addresses_country',function(){
             var country_id = $(this).val();
             var nearest_state_element = $(this).parent().closest('div#addressRow').find('select#addresses_state');
+            var nearest_city_element = $(this).parent().closest('div#addressRow').find('select#addresses_city');
             console.log(nearest_state_element,'nearest_state_element');
             $.ajax({
                 url:"{{route('get.states')}}?country_id="+country_id,
@@ -1344,13 +1333,15 @@
                 dataType:"json",
                 success:function(data){
                     $(nearest_state_element).empty();
+                    $(nearest_city_element).empty();
                     $(nearest_state_element).append(`<option value="">Select State</option>`)
+                    $(nearest_city_element).append(`<option value="">Select City</option>`)
                     if(data.length > 0){
                         $.each(data,function(key,value){
                             $(nearest_state_element).append(`<option value="${value.id}">${value.name}</option>`);
                         });
                     }else{
-                        $(nearest_state_element).append(`<option value="">No State Available</option>`)
+                        $(nearest_state_element).append(`<option value="" disabled>No State Available</option>`)
                     }
                 },
                 error:function(data){
@@ -1373,7 +1364,7 @@
                             $(nearest_city_element).append(`<option value="${value.id}">${value.name}</option>`);
                         });
                     }else{
-                        $(nearest_city_element).append(`<option value="">No City Available, Select another State</option>`)
+                        $(nearest_city_element).append(`<option value="" disabled>No City Available, Select another State</option>`)
                     }
                 },
                 error:function(data){

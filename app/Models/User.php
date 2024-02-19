@@ -2,6 +2,7 @@
 
 namespace App\Models;
 
+use App\Enums\DocumentVerificationStatusEnums;
 use App\Enums\StatusEnums;
 use Illuminate\Contracts\Auth\MustVerifyEmail;
 use Illuminate\Database\Eloquent\SoftDeletes;
@@ -23,7 +24,7 @@ class User extends Authenticatable implements MustVerifyEmail
     }
 
     protected $fillable = [
-        'custom_id', 'full_name', 'user_name', 'email', 'password', 'short_description', 'description', 'pronouns', 'gender', 'caters_to', 'body_type', 'height', 'ethnicity', 'cup_size', 'hair_colour', 'shoe_size', 'eye_colour', 'last_logged_in', 'profile_photo', 'thumbnail_image', 'membership', 'contact_disclaimer', 'age', 'availibility', 'availibility_description', 'is_active', 'is_trans', 'is_document_verified'
+        'custom_id', 'full_name', 'user_name', 'email', 'password', 'short_description', 'description', 'pronouns', 'gender', 'caters_to', 'body_type', 'height', 'ethnicity', 'cup_size', 'hair_colour', 'shoe_size', 'eye_colour', 'last_logged_in', 'profile_photo', 'thumbnail_image', 'membership', 'contact_disclaimer', 'age', 'availibility', 'availibility_description', 'is_active', 'is_trans', 'is_document_verified', 'verification_requested_at'
     ];
 
     protected $hidden = [
@@ -100,6 +101,6 @@ class User extends Authenticatable implements MustVerifyEmail
     }
     public function scopeDocumentVerified($query)
     {
-        return $query->where('is_document_verified', 'y');
+        return $query->where('is_document_verified', DocumentVerificationStatusEnums::APPROVED->value);
     }
 }

@@ -141,11 +141,11 @@ Breadcrumbs::register('verification_request_list', function ($breadcrumbs) {
 //     $breadcrumbs->parent('verification_request_list');
 //     $breadcrumbs->push(__('Edit Verification Request'), route('admin.verification-requests.edit', $id));
 // });
-// //generate for users_show breadcumb copilot
-// Breadcrumbs::register('verification_request_show', function ($breadcrumbs, $id) {
-//     $breadcrumbs->parent('verification_request_list');
-//     $breadcrumbs->push('View Verification Request', route('admin.verification-requests.show', $id));
-// });
+//generate for users_show breadcumb copilot
+Breadcrumbs::register('verification_request_show', function ($breadcrumbs, $id) {
+    $breadcrumbs->parent('verification_request_list');
+    $breadcrumbs->push('View Verification Request', route('admin.verification-requests.show', $id));
+});
 
 
 // Blogs ---------------------------------------------------------------------------------------------------------------------------------------------------

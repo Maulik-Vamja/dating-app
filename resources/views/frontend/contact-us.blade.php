@@ -120,7 +120,7 @@
             </div>
         </div>
     </div>
-    <div class="contact-bottom">
+    {{-- <div class="contact-bottom">
         <div class="contac-bottom">
             <div class="row justify-content-center g-0">
                 <div class="col-12">
@@ -134,7 +134,7 @@
                 </div>
             </div>
         </div>
-    </div>
+    </div> --}}
 </div>
 <!-- ================> contact section end here <================== -->
 @endsection

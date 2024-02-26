@@ -6,8 +6,6 @@
     <meta property="og:description" content="Best platform to find Adult entertainers around the world. Just specify what you are looking for in the search and you can meet the one you desire.">
     <meta property="og:image" content="{{asset('frontend/og_images/home.jpg')}}">
     <meta property="og:url" content="{{ url()->current() }}">
-
-
 @endsection
 @section('content')
 <!-- ================> Banner section start here <================== -->

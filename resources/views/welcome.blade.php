@@ -73,7 +73,7 @@
                     <div class="col">
                         <div class="about__right ">
                             <div class="about__title">
-                                <h3>Find Your best Match</h3>
+                                <h2 style="font-size: 25px;">Find Your best Match</h2>
                             </div>
                             <form action="{{ route('get.escorts') }}" method="GET">
                                 <div class="banner__list">

@@ -1,9 +1,16 @@
 @extends('frontend.layouts.app')
+
+@section('seo-meta')
+    <title>Contact with Largest Adult Network Platform | IFindYou </title>
+    <meta name="description" content="Trusted and secure adult entertainers platform featuring at IFindYou, massage providers, and adult entertainers. Enjoy adult quality services. Sign up today!">
+    <link rel="canonical" href="{{ url()->current() }}" />
+@endsection
+
 @section('og-meta')
     <meta property="og:type" content="website">
     <!-- Dynamic OG meta tags -->
     <meta property="og:title" content="Contact with Largest Adult Network Platform | IFindYou ">
-    <meta property="og:description" content=" Trusted and secure adult entertainers platform featuring at IFindYou, massage providers, and adult entertainers. Enjoy adult quality services. Sign up today!">
+    <meta property="og:description" content="Trusted and secure adult entertainers platform featuring at IFindYou, massage providers, and adult entertainers. Enjoy adult quality services. Sign up today!">
     <meta property="og:image" content="{{asset('frontend/og_images/home.jpg')}}">
     <meta property="og:url" content="{{ url()->current() }}">
 @endsection

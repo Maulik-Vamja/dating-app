@@ -1,4 +1,11 @@
 @extends('frontend.layouts.app')
+@section('seo-meta')
+    <title>Know More About Secure Adult Entertainers Platform | IFindYou </title>
+    <meta name="description" content="Trusted and secure adult entertainers platform featuring at IFindYou, massage providers, and adult entertainers. Enjoy adult quality services. Sign up today!">
+    <link rel="canonical" href="{{ url()->current() }}" />
+@endsection
+
+
 @section('og-meta')
     <meta property="og:type" content="website">
     <!-- Dynamic OG meta tags -->

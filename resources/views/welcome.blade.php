@@ -1,4 +1,12 @@
 @extends('frontend.layouts.app')
+
+@section('seo-meta')
+    <title>Find Your Perfect Adult friend at IFindYou | Incall Adult Service</title>
+    <meta name="description" content="Best platform to find Adult entertainers around the world. Just specify what you are looking for in the search and you can meet the one you desire.">
+    <link rel="canonical" href="{{ url()->current() }}" />
+@endsection
+
+
 @section('og-meta')
     <meta property="og:type" content="website">
     <!-- Dynamic OG meta tags -->

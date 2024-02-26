@@ -24,7 +24,7 @@
                         <div class="about__left h-100">
                             <div class="about__top">
                                 <div class="about__content">
-                                    <h3>Welcome To iFindYou</h3>
+                                    <h1 class="font-weight-bold" style="font-size: 25px;">Find Your Adult Entertainer</h1>
                                     <p>You find us, finally, and you are already in love. More than 300 female & Male
                                         Adult Entertrainer around the world.</p>
                                     @auth

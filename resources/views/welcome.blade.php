@@ -2,7 +2,7 @@
 @section('og-meta')
     <meta property="og:type" content="website">
     <!-- Dynamic OG meta tags -->
-    <meta property="og:title" content="iFindYou | The Largest Adult Friend Finder Platorm ">
+    <meta property="og:title" content="Find Your Perfect Adult friend at IFindYou | Incall Adult Service">
     <meta property="og:description" content="Best platform to find Adult entertainers around the world. Just specify what you are looking for in the search and you can meet the one you desire.">
     <meta property="og:image" content="{{asset('frontend/og_images/home.jpg')}}">
     <meta property="og:url" content="{{ url()->current() }}">
@@ -56,7 +56,7 @@
                                                         <img class="rounded-circle"
                                                             style="width: 100px; height: 100px; object-fit: cover;"
                                                             src="{{$random_image ? (filter_var($random_image->image,FILTER_VALIDATE_URL) == false ? Storage::url($random_image->image) : $random_image->image) : asset('frontend/assets/images/allmedia/01.jpg')}}"
-                                                            alt="dating thumb">
+                                                            alt="{{$escort->full_name}}">
 
                                                     </a>
                                                 </div>
@@ -185,7 +185,7 @@
                                 <a class="member-link-page" href="{{ route('get.escort',$escort->user_name) }}">
                                     <figure><img
                                             src="{{$random_image ? (filter_var($random_image->image,FILTER_VALIDATE_URL) == false ? Storage::url($random_image->image) : $random_image->image) : asset('frontend/assets/images/allmedia/01.jpg')}}"
-                                            alt="member-img">
+                                            alt="{{ $escort->full_name }}">
                                     </figure>
                                 </a>
                             </div>
@@ -236,7 +236,7 @@
                     <div class="about__item text-center">
                         <div class="about__inner">
                             <div class="about__thumb">
-                                <img src="{{asset('frontend/assets/images/about/icon/01.png')}}" alt="dating thumb">
+                                <img src="{{asset('frontend/assets/images/about/icon/01.png')}}" alt="Total Members">
                             </div>
                             <div class="about__content">
                                 <h3><span class="counter" data-to="{{ $counts['total_escorts'] }}"
@@ -250,7 +250,7 @@
                     <div class="about__item text-center">
                         <div class="about__inner">
                             <div class="about__thumb">
-                                <img src="{{asset('frontend/assets/images/about/icon/02.png')}}" alt="dating thumb">
+                                <img src="{{asset('frontend/assets/images/about/icon/02.png')}}" alt="Available memebers">
                             </div>
                             <div class="about__content">
                                 <h3><span class="counter" data-to="{{ $counts['total_online_escorts'] }}"
@@ -264,7 +264,7 @@
                     <div class="about__item text-center">
                         <div class="about__inner">
                             <div class="about__thumb">
-                                <img src="{{asset('frontend/assets/images/about/icon/03.png')}}" alt="dating thumb">
+                                <img src="{{asset('frontend/assets/images/about/icon/03.png')}}" alt="Women Online">
                             </div>
                             <div class="about__content">
                                 <h3><span class="counter" data-to="{{ $counts['total_female_escorts'] }}"
@@ -278,7 +278,7 @@
                     <div class="about__item text-center">
                         <div class="about__inner">
                             <div class="about__thumb">
-                                <img src="{{asset('frontend/assets/images/about/icon/04.png')}}" alt="dating thumb">
+                                <img src="{{asset('frontend/assets/images/about/icon/04.png')}}" alt="Men Online">
                             </div>
                             <div class="about__content">
                                 <h3><span class="counter" data-to="{{ $counts['total_male_escorts'] }}"
@@ -314,7 +314,7 @@
 
                                 <a href="{{ route('blogs.show',$blog->slug) }}">
                                     <img src="{{ filter_var($blog->image, FILTER_VALIDATE_URL) == false ? \Storage::url($blog->image) : $blog->image }}"
-                                        alt="dating thumb"
+                                        alt="{{$blog->title  }}"
                                         style="max-height: 250px !important; height: auto; object-fit: cover;">
                                 </a>
                                 <span class="member__activity member__activity--ofline">{{
@@ -361,7 +361,7 @@
                     <div class="about__item text-center">
                         <div class="about__inner">
                             <div class="about__thumb">
-                                <img src="{{asset('frontend/assets/images/about/01.jpg')}}" alt="dating thumb">
+                                <img src="{{asset('frontend/assets/images/about/01.jpg')}}" alt="Free Adult Directory">
                             </div>
                             <div class="about__content">
                                 <h4>Free Adult Directory</h4>
@@ -374,7 +374,7 @@
                     <div class="about__item text-center">
                         <div class="about__inner">
                             <div class="about__thumb">
-                                <img src="{{asset('frontend/assets/images/about/02.jpg')}}" alt="dating thumb">
+                                <img src="{{asset('frontend/assets/images/about/02.jpg')}}" alt="Smart Matching">
                             </div>
                             <div class="about__content">
                                 <h4>Smart Matching</h4>
@@ -387,7 +387,7 @@
                     <div class="about__item text-center">
                         <div class="about__inner">
                             <div class="about__thumb">
-                                <img src="{{asset('frontend/assets/images/about/03.jpg')}}" alt="dating thumb">
+                                <img src="{{asset('frontend/assets/images/about/03.jpg')}}" alt="happy Community">
                             </div>
                             <div class="about__content">
                                 <h4>Happy Community</h4>
@@ -400,7 +400,7 @@
                     <div class="about__item text-center">
                         <div class="about__inner">
                             <div class="about__thumb">
-                                <img src="{{asset('frontend/assets/images/about/04.jpg')}}" alt="dating thumb">
+                                <img src="{{asset('frontend/assets/images/about/04.jpg')}}" alt="Smart Matching">
                             </div>
                             <div class="about__content">
                                 <h4>Smart Matching</h4>
@@ -430,48 +430,39 @@
                                 you have come to the right place.</p>
                             <ul>
                                 <li>
-                                    <div class="thumb"> <img src="{{asset('frontend/assets/images/transport/01.jpg')}}"
-                                            alt="lab-trensport"></div>
-                                    <div class="content"><a href="#">United kingdom</a></div>
+                                    <div class="thumb"> <img alt="United Kingdom Flag" src="{{asset('frontend/assets/images/transport/01.jpg')}}"></div>
+                                    <div class="content"><a href="#">United Kingdom</a></div>
                                 </li>
                                 <li>
-                                    <div class="thumb"> <img src="{{asset('frontend/assets/images/transport/02.jpg')}}"
-                                            alt="lab-trensport"></div>
+                                    <div class="thumb"> <img alt="Germany Flag" src="{{asset('frontend/assets/images/transport/02.jpg')}}"></div>
                                     <div class="content"><a href="#">Germany</a></div>
                                 </li>
                                 <li>
-                                    <div class="thumb"> <img src="{{asset('frontend/assets/images/transport/03.jpg')}}"
-                                            alt="lab-trensport"></div>
-                                    <div class="content"><a href="#">United states</a></div>
+                                    <div class="thumb"> <img alt="United States Flag" src="{{asset('frontend/assets/images/transport/03.jpg')}}"></div>
+                                    <div class="content"><a href="#">United States</a></div>
                                 </li>
                                 <li>
-                                    <div class="thumb"> <img src="{{asset('frontend/assets/images/transport/04.jpg')}}"
-                                            alt="lab-trensport"></div>
+                                    <div class="thumb"> <img alt="Brazil Flag" src="{{asset('frontend/assets/images/transport/04.jpg')}}"></div>
                                     <div class="content"><a href="#">Brazil</a></div>
                                 </li>
                                 <li>
-                                    <div class="thumb"> <img src="{{asset('frontend/assets/images/transport/05.jpg')}}"
-                                            alt="lab-trensport"></div>
-                                    <div class="content"><a href="#">Falkland islands</a></div>
+                                    <div class="thumb"> <img alt="Falkland Islands Flag" src="{{asset('frontend/assets/images/transport/05.jpg')}}"></div>
+                                    <div class="content"><a href="#">Falkland Islands</a></div>
                                 </li>
                                 <li>
-                                    <div class="thumb"> <img src="{{asset('frontend/assets/images/transport/06.jpg')}}"
-                                            alt="lab-trensport"></div>
+                                    <div class="thumb"> <img alt="Portugal Flag" src="{{asset('frontend/assets/images/transport/06.jpg')}}"></div>
                                     <div class="content"><a href="#">Portugal</a></div>
                                 </li>
                                 <li>
-                                    <div class="thumb"> <img src="{{asset('frontend/assets/images/transport/07.jpg')}}"
-                                            alt="lab-trensport"></div>
+                                    <div class="thumb"> <img alt="Australia Flag" src="{{asset('frontend/assets/images/transport/07.jpg')}}"></div>
                                     <div class="content"><a href="#">Australia</a></div>
                                 </li>
                                 <li>
-                                    <div class="thumb"> <img src="{{asset('frontend/assets/images/transport/08.jpg')}}"
-                                            alt="lab-trensport"></div>
+                                    <div class="thumb"> <img alt="India Flag" src="{{asset('frontend/assets/images/transport/08.jpg')}}"></div>
                                     <div class="content"><a href="#">India</a></div>
                                 </li>
                                 <li>
-                                    <div class="thumb"> <img src="{{asset('frontend/assets/images/transport/09.jpg')}}"
-                                            alt="lab-trensport"></div>
+                                    <div class="thumb"> <img alt="South Africa Flag" src="{{asset('frontend/assets/images/transport/09.jpg')}}"></div>
                                     <div class="content"><a href="#">South Africa</a></div>
                                 </li>
                                 {{-- <li>
@@ -544,7 +535,7 @@
                     <div class="work__item">
                         <div class="work__inner">
                             <div class="work__thumb">
-                                <img src="{{asset('frontend/assets/images/work/09.png')}}" alt="dating thumb">
+                                <img src="{{asset('frontend/assets/images/work/09.png')}}" alt="Google Play">
                             </div>
                             <div class="work__content">
                                 <h3>Trust And Safety</h3>
@@ -558,12 +549,12 @@
                     <div class="work__item">
                         <div class="work__inner">
                             <div class="work__thumb">
-                                <img src="{{asset('frontend/assets/images/work/10.png')}}" alt="dating thumb">
+                                <img src="{{asset('frontend/assets/images/work/10.png')}}" alt="Apple Store">
                             </div>
                             <div class="work__content">
                                 <h3>Simple Membership</h3>
                                 <p>Dont be late, Currently we are offering free Registration. </p>
-                                <a href="membership.html" class="default-btn reverse"><span>Create
+                                <a href="/register" class="default-btn reverse"><span>Create
                                         Profile</span></a>
                             </div>
                         </div>
@@ -590,9 +581,9 @@
                                 world already shared the same experience with Joining us today!</p>
                             <ul class="justify-content-center">
                                 <li><a href="#"><img src="{{asset('frontend/assets/images/app/01.jpg')}}"
-                                            alt="dating thumb"></a></li>
+                                            alt="Google Play"></a></li>
                                 <li><a href="#"><img src="{{asset('frontend/assets/images/app/02.jpg')}}"
-                                            alt="dating thumb"></a></li>
+                                            alt="Apple Play"></a></li>
                             </ul>
                         </div>
                     </div>

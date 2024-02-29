@@ -73,7 +73,9 @@
                                             @endphp
                                             <li>
                                                 <div class="thumb position-relative">
-                                                    <img src="{{ $random_image ? (filter_var($random_image->image, FILTER_VALIDATE_URL) == false ? Storage::url($random_image->image) : $random_image->image) : asset('frontend/assets/images/allmedia/01.jpg') }}" alt="member-img" style="object-fit: cover; width:50px; height:50px;" />
+                                                    <img
+                                                    alt="{{ $escort->full_name }}"
+                                                    src="{{ $random_image ? (filter_var($random_image->image, FILTER_VALIDATE_URL) == false ? Storage::url($random_image->image) : $random_image->image) : asset('frontend/assets/images/allmedia/01.jpg') }}" alt="member-img" style="object-fit: cover; width:50px; height:50px;" />
                                                     @php
                                                     $today = \Carbon\Carbon::now()->format('l');
                                                     $availableOrNot = json_decode($escort->availibility,true);

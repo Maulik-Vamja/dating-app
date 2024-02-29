@@ -6,9 +6,9 @@
 
 <head>
     <meta charset="utf-8">
-    <title>iFindYou | The Largest Adult Friend Finder Platorm </title>
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    {!! $sitesetting['meta_tags'] !!}
+    {{-- {!! $sitesetting['meta_tags'] !!} --}}
+    @yield('seo-meta')
     @yield('og-meta')
     <!-- Google tag (gtag.js) -->
 <!-- Google tag (gtag.js) -->

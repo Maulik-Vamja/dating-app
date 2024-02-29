@@ -55,8 +55,8 @@ Route::middleware(['auth', 'verified', 'user_validate'])->group(function () {
 Route::get('/states', [UtilityController::class, 'getStatesFromCountry'])->name('get.states');
 Route::get('/cities', [UtilityController::class, 'getCitiesFromState'])->name('get.cities');
 
-Route::get('/adult-entertainer/{user:user_name}', [EscortController::class, 'getEscort'])->name('get.escort');
-Route::get('/search/adult-entertainer', SearchController::class)->name('get.escorts');
+Route::get('/escort/{user:user_name}', [EscortController::class, 'getEscort'])->name('get.escort');
+Route::get('/search/escorts', SearchController::class)->name('get.escorts');
 Route::get('/contact-us', [PagesController::class, 'contactUs'])->name('contact-us');
 Route::get('/about-us', [PagesController::class, 'aboutUs'])->name('about-us');
 

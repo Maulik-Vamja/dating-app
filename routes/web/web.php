@@ -97,6 +97,12 @@ Route::get('/adult-entertainer/{userName}', function ($userName) {
     return Redirect::to($newUrl, 301);
 });
 
+Route::get('/escorts/{userName}', function ($userName) {
+    $newUrl = route('get.escort', ['user' => $userName]);
+    return Redirect::to($newUrl, 301);
+});
+
+
 
 
 // Generate SiteMap for all the Page

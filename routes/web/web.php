@@ -55,8 +55,17 @@ Route::middleware(['auth', 'verified', 'user_validate'])->group(function () {
 Route::get('/states', [UtilityController::class, 'getStatesFromCountry'])->name('get.states');
 Route::get('/cities', [UtilityController::class, 'getCitiesFromState'])->name('get.cities');
 
+
+
+
+
+
 Route::get('/escort/{user:user_name}', [EscortController::class, 'getEscort'])->name('get.escort');
 Route::get('/search/escorts', SearchController::class)->name('get.escorts');
+
+
+
+
 Route::get('/contact-us', [PagesController::class, 'contactUs'])->name('contact-us');
 Route::get('/about-us', [PagesController::class, 'aboutUs'])->name('about-us');
 
@@ -71,6 +80,22 @@ Route::post('/check/username', [UtilityController::class, 'checkUsername'])->nam
 Route::post('/check/email', [UtilityController::class, 'checkEmail'])->name('check.email');
 Route::post('/check/contact-no', [UtilityController::class, 'checkContact'])->name('check.contact-no');
 
+
+
+
+
+
+
+
+
+// Fix SEO Problem
+
+
+// Redirect to the new URL with a 301 status code
+Route::get('/adult-entertainer/{userName}', function ($userName) {
+    $newUrl = route('get.escort', ['user' => $userName]);
+    return Redirect::to($newUrl, 301);
+});
 
 
 

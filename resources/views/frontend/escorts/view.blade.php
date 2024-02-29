@@ -480,9 +480,8 @@ $random_image = $escort->gallery_images()->inRandomOrder()->first();
                                                                             $media->name
                                                                             }}
                                                                         </p>
-                                                                        <p><a href="{{ $escort_contact_media->value }}"
-                                                                                target="_blank" class="link-data">{{
-                                                                                $escort_contact_media->value }}</a>
+                                                                        <p>{{
+                                                                                $escort_contact_media->value }}
                                                                         </p>
                                                                     </div>
                                                                 </li>

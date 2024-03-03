@@ -34,26 +34,20 @@
                                 <div class="banner__inputlist">
                                     <select name="gender" id="gender">
                                         <option value="">Select Gender</option>
-                                        <option value="male" {{ request()->gender == 'male' ? 'selected' : '' }}>Male
-                                        </option>
-                                        <option value="female" {{ request()->gender == 'female' ? 'selected' : ''
-                                            }}>Female</option>
-                                        <option value="non-binary" {{ request()->gender == 'non-binary' ? 'selected' :
-                                            ''
-                                            }}>Non Binary</option>
+                                        <option value="male">Male</option>
+                                        <option value="female">Female</option>
+                                        <option value="non-binary">Non Binary</option>
                                     </select>
                                 </div>
                             </div>
-                            <input type="hidden" name="min_age" id="min_age" value="{{ request()->min_age ?? 18 }}">
-                            <input type="hidden" name="max_age" id="max_age" value="{{ request()->max_age ?? 40 }}">
+                            <input type="hidden" name="min_age" id="min_age" value="18">
+                            <input type="hidden" name="max_age" id="max_age" value="40">
                             <div class="col-md-3 col-12">
                                 <label class="m-0">Age</label>
                                 <div class="range-slider">
                                     <span class="rangeValues"></span>
-                                    <input value="{{ request()->min_age ?? 18 }}" min="18" max="60" step="1"
-                                        type="range">
-                                    <input value="{{ request()->max_age ?? 18 }}" min="18" max="60" step="1"
-                                        type="range">
+                                    <input value="18" min="18" max="60" step="1" type="range">
+                                    <input value="40" min="18" max="60" step="1" type="range">
                                 </div>
                             </div>
                             <div class="col-md-3 col-12">
@@ -61,25 +55,18 @@
                                 <div class="banner__inputlist">
                                     <select id="country" name="country">
                                         <option value="">Select Country</option>
-                                        @foreach ($countries as $country)
-                                        <option value="{{ $country->id }}" {{ request()->country == $country->id ?
-                                            'selected' : ''}}>{{$country->name }}</option>
+                                        @foreach ($countries->toArray() as $country)
+                                        <option value="{{ $country['id'] }}">{{$country['name'] }}</option>
                                         @endforeach
                                     </select>
                                 </div>
                             </div>
-                            @php
-                            $states = \App\Models\State::where('country_id',request()->country)->get();
-                            @endphp
+
                             <div class="col-md-3 col-12">
                                 <label>State</label>
                                 <div class="banner__inputlist">
                                     <select id="state" name="state">
-                                        <option value="">Select State</option>
-                                        @foreach ($states as $state)
-                                        <option value="{{ $state->id }}" {{ request()->state == $state->id ?
-                                            'selected' : ''}}>{{$state->name }}</option>
-                                        @endforeach
+                                        <option value="">Select Country First</option>
                                     </select>
                                 </div>
                             </div>
@@ -87,15 +74,7 @@
                                 <label>City</label>
                                 <div class="banner__inputlist">
                                     <select id="city" name="city">
-                                        @if (request()->city == '' && request()->state == '')
                                         <option value="">Select State First</option>
-                                        @else
-                                        <option value="">Select City</option>
-                                        @foreach (\App\Models\City::where('state_id',request()->state)->get() as $city)
-                                        <option value="{{ $city->id }}" {{ request()->city == $city->id ?
-                                            'selected' : ''}}>{{$city->name }}</option>
-                                        @endforeach
-                                        @endif
                                     </select>
                                 </div>
                             </div>
@@ -116,6 +95,9 @@
 <!-- ================> Avilable section start here <================== -->
 <div class="avilable-search-area">
     <div class="container">
+        <div class="">
+            <p class="h2">{{ $location_name }} Escorts</p>
+        </div>
         <div class="row row-cols-1 row-cols-md-2 row-cols-xl-3">
             @forelse ($escorts as $escort)
             <div class="col mb-4">
@@ -164,9 +146,7 @@
                 <ul class="default-pagination">
                     <li>
                         @if (!$escorts->onFirstPage())
-                        <a
-                            href="{{ $escorts->previousPageUrl() }}?gender={{request()->gender}}&min_age={{request()->min_age}}&max_age={{request()->max_age}}&country={{request()->country}}&state={{request()->state}}&city={{request()->city}}"><i
-                                class="fas fa-chevron-left"></i></a>
+                        <a href="{{ $escorts->previousPageUrl() }}"><i class="fas fa-chevron-left"></i></a>
                         @else
                         <a href="javascript:void(0)" class="disabled"><i class="fas fa-chevron-left"></i></a>
                         @endif
@@ -174,17 +154,14 @@
 
                     @for ($page = 1 ;$page <= $escorts->total() / $escorts->perPage(); $page++)
                         <li>
-                            <a href="{{ $escorts->path() }}?page={{ $page }}&gender={{request()->gender}}&min_age={{request()->min_age}}&max_age={{request()->max_age}}&country={{request()->country}}&state={{request()->state}}&city={{request()->city}}"
-                                class="{{ $escorts->currentPage() == $page ? 'active' : ''}}">{{
-                                $page }}</a>
+                            <a href="{{ $escorts->path() }}?page={{ $page }}"
+                                class="{{ $escorts->currentPage() == $page ? 'active' : ''}}">{{ $page }}</a>
                         </li>
 
                         @endfor
                         <li>
                             @if ($escorts->hasMorePages() && !$escorts->onLastPage())
-                            <a
-                                href="{{ $escorts->nextPageUrl() }}&gender={{request()->gender}}&min_age={{request()->min_age}}&max_age={{request()->max_age}}&country={{request()->country}}&state={{request()->state}}&city={{request()->city}}"><i
-                                    class="fas fa-chevron-right"></i></a>
+                            <a href="{{ $escorts->nextPageUrl() }}"><i class="fas fa-chevron-right"></i></a>
                             @else
                             <a href="javascript:void(0)"><i class="fas fa-chevron-right"></i></a>
                             @endif

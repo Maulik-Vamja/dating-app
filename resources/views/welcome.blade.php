@@ -1,28 +1,28 @@
 @extends('frontend.layouts.app')
 
 @section('seo-meta')
-    <title>Find Your Perfect Adult friend at IFindYou | Incall Adult Service</title>
-    <meta name="description" content="Best platform to find Adult entertainers around the world. Just specify what you are looking for in the search and you can meet the one you desire.">
-    <link rel="canonical" href="{{ url()->current() }}" />
+<title>Find Your Perfect Adult friend at IFindYou | Incall Adult Service</title>
+<meta name="description"
+    content="Best platform to find Adult entertainers around the world. Just specify what you are looking for in the search and you can meet the one you desire.">
+<link rel="canonical" href="{{ url()->current() }}" />
 @endsection
 
 
 @section('og-meta')
-    <meta property="og:type" content="website">
-    <!-- Dynamic OG meta tags -->
-    <meta property="og:title" content="Find Your Perfect Adult friend at IFindYou | Incall Adult Service">
-    <meta property="og:description" content="Best platform to find Adult entertainers around the world. Just specify what you are looking for in the search and you can meet the one you desire.">
-    <meta property="og:image" content="{{asset('frontend/og_images/home.jpg')}}">
-    <meta property="og:url" content="{{ url()->current() }}">
+<meta property="og:type" content="website">
+<!-- Dynamic OG meta tags -->
+<meta property="og:title" content="Find Your Perfect Adult friend at IFindYou | Incall Adult Service">
+<meta property="og:description"
+    content="Best platform to find Adult entertainers around the world. Just specify what you are looking for in the search and you can meet the one you desire.">
+<meta property="og:image" content="{{asset('frontend/og_images/home.jpg')}}">
+<meta property="og:url" content="{{ url()->current() }}">
 @endsection
 @section('content')
 <!-- ================> Banner section start here <================== -->
 <div class="banner banner--style2  bg_img"
     style="background-image: url({{asset('frontend/assets/images/banner/bg-2.jpg')}});">
     <div class="video-container">
-        <video
-            src="{{asset('i-find-you-video.mp4')}}"
-            autoplay loop muted></video>
+        <video src="{{asset('i-find-you-video.mp4')}}" autoplay loop muted></video>
     </div>
     <div class="about about--style2" style="max-width: 992px;margin:0 auto;">
         <div class="container">
@@ -32,7 +32,8 @@
                         <div class="about__left h-100">
                             <div class="about__top">
                                 <div class="about__content">
-                                    <h1 class="font-weight-bold" style="font-size: 25px;">Find Your Adult Entertainer</h1>
+                                    <h1 class="font-weight-bold" style="font-size: 25px;">Find Your Adult Entertainer
+                                    </h1>
                                     <p>You find us, finally, and you are already in love. More than 300 female & Male
                                         Adult Entertrainer around the world.</p>
                                     @auth
@@ -258,7 +259,8 @@
                     <div class="about__item text-center">
                         <div class="about__inner">
                             <div class="about__thumb">
-                                <img src="{{asset('frontend/assets/images/about/icon/02.png')}}" alt="Available memebers">
+                                <img src="{{asset('frontend/assets/images/about/icon/02.png')}}"
+                                    alt="Available memebers">
                             </div>
                             <div class="about__content">
                                 <h3><span class="counter" data-to="{{ $counts['total_online_escorts'] }}"
@@ -433,44 +435,54 @@
                     <div class="left">
                         <div class="section__header style-2 mb-lg-0 wow fadeInUp" data-wow-duration="1.5s">
                             <h2>Lets create a vibrant adult community</h2>
-                            <p>If you want to meet local adult Entertrainer for dating, Adult Job, Video Call ,Companionship,
+                            <p>If you want to meet local adult Entertrainer for dating, Adult Job, Video Call
+                                ,Companionship,
                                 Friendship or even more,
                                 you have come to the right place.</p>
                             <ul>
                                 <li>
-                                    <div class="thumb"> <img alt="United Kingdom Flag" src="{{asset('frontend/assets/images/transport/01.jpg')}}"></div>
+                                    <div class="thumb"> <img alt="United Kingdom Flag"
+                                            src="{{asset('frontend/assets/images/transport/01.jpg')}}"></div>
                                     <div class="content"><a href="#">United Kingdom</a></div>
                                 </li>
                                 <li>
-                                    <div class="thumb"> <img alt="Germany Flag" src="{{asset('frontend/assets/images/transport/02.jpg')}}"></div>
+                                    <div class="thumb"> <img alt="Germany Flag"
+                                            src="{{asset('frontend/assets/images/transport/02.jpg')}}"></div>
                                     <div class="content"><a href="#">Germany</a></div>
                                 </li>
                                 <li>
-                                    <div class="thumb"> <img alt="United States Flag" src="{{asset('frontend/assets/images/transport/03.jpg')}}"></div>
+                                    <div class="thumb"> <img alt="United States Flag"
+                                            src="{{asset('frontend/assets/images/transport/03.jpg')}}"></div>
                                     <div class="content"><a href="#">United States</a></div>
                                 </li>
                                 <li>
-                                    <div class="thumb"> <img alt="Brazil Flag" src="{{asset('frontend/assets/images/transport/04.jpg')}}"></div>
+                                    <div class="thumb"> <img alt="Brazil Flag"
+                                            src="{{asset('frontend/assets/images/transport/04.jpg')}}"></div>
                                     <div class="content"><a href="#">Brazil</a></div>
                                 </li>
                                 <li>
-                                    <div class="thumb"> <img alt="Falkland Islands Flag" src="{{asset('frontend/assets/images/transport/05.jpg')}}"></div>
+                                    <div class="thumb"> <img alt="Falkland Islands Flag"
+                                            src="{{asset('frontend/assets/images/transport/05.jpg')}}"></div>
                                     <div class="content"><a href="#">Falkland Islands</a></div>
                                 </li>
                                 <li>
-                                    <div class="thumb"> <img alt="Portugal Flag" src="{{asset('frontend/assets/images/transport/06.jpg')}}"></div>
+                                    <div class="thumb"> <img alt="Portugal Flag"
+                                            src="{{asset('frontend/assets/images/transport/06.jpg')}}"></div>
                                     <div class="content"><a href="#">Portugal</a></div>
                                 </li>
                                 <li>
-                                    <div class="thumb"> <img alt="Australia Flag" src="{{asset('frontend/assets/images/transport/07.jpg')}}"></div>
+                                    <div class="thumb"> <img alt="Australia Flag"
+                                            src="{{asset('frontend/assets/images/transport/07.jpg')}}"></div>
                                     <div class="content"><a href="#">Australia</a></div>
                                 </li>
                                 <li>
-                                    <div class="thumb"> <img alt="India Flag" src="{{asset('frontend/assets/images/transport/08.jpg')}}"></div>
+                                    <div class="thumb"> <img alt="India Flag"
+                                            src="{{asset('frontend/assets/images/transport/08.jpg')}}"></div>
                                     <div class="content"><a href="#">India</a></div>
                                 </li>
                                 <li>
-                                    <div class="thumb"> <img alt="South Africa Flag" src="{{asset('frontend/assets/images/transport/09.jpg')}}"></div>
+                                    <div class="thumb"> <img alt="South Africa Flag"
+                                            src="{{asset('frontend/assets/images/transport/09.jpg')}}"></div>
                                     <div class="content"><a href="#">South Africa</a></div>
                                 </li>
                                 {{-- <li>
@@ -601,44 +613,68 @@
     </div>
 </div>
 <!-- ================> App section end here <================== -->
+<!-- ================> Modal Start here <================== -->
+<!-- Button trigger modal -->
+{{-- <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#staticBackdrop">
+    Launch static backdrop modal
+</button> --}}
+
+<!-- Modal -->
+<div class="modal fade" id="staticBackdrop" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1"
+    aria-labelledby="staticBackdropLabel" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered" style="max-width: 385px;">
+        <div class="modal-content">
+            <div class="modal-body">
+                <div class="text-center" id="modelLogo">
+                    <img style="max-height: 40px;" src="{{asset('frontend/assets/images/logo/logo.png')}}" alt="logo">
+                    <div class="h5 text-dark mt-2">
+                        This website contains adult content
+                    </div>
+                </div>
+                <div class="">
+                    By continuing to use Tryst, you agree you're <span class="fw-bold text-dark"> over the age
+                        of
+                        18
+                    </span>
+                    and have <span class="fw-bold text-dark">
+                        read and agreed </span> to our
+                    <a href="#" class="link-underline-primary">terms.</a>
+                </div>
+                <div class="mt-2">
+                    <span class="fw-bold text-dark">Parents/guardians,</span> you can learn more about online
+                    safety
+                    in the <a href="#" class="link-underline-primary"> Assembly Four
+                        parents guide </a> to
+                    adult content.
+                </div>
+
+            </div>
+            <div class="modal-footer justify-content-center border-0 pt-0 mt-0">
+                <button type="button" class="default-btn style-2 text-white" id="agreeTermsButton">Agree and
+                    Close</button>
+                <button type="button" class="default-btn" data-bs-dismiss="modal">Decline</button>
+            </div>
+        </div>
+    </div>
+</div>
+<!-- ================> Model end here <================== -->
+
 @endsection
 
 @push('frontend-extra-js')
 <script>
-    // function getVals() {
-    //     // Get slider values
-    //     let parent = this.parentNode;
-    //     let slides = parent.getElementsByTagName("input");
-    //     let slide1 = parseFloat(slides[0].value);
-    //     let slide2 = parseFloat(slides[1].value);
-    //     // Neither slider will clip the other, so make sure we determine which is larger
-    //     if (slide1 > slide2) {
-    //         let tmp = slide2;
-    //         slide2 = slide1;
-    //         slide1 = tmp;
-    //     }
-
-    //     let displayElement = parent.getElementsByClassName("rangeValues")[0];
-    //     displayElement.innerHTML = "" + slide1 + " - " + slide2;
-    //     // document.getElementById('min').value = slide1;
-    //     // document.getElementById('max').value = slide2;
-    // }
-
-    // window.onload = function () {
-    //     // Initialize Sliders
-    //     let sliderSections = document.getElementsByClassName("range-slider");
-    //     for (let x = 0; x < sliderSections.length; x++) {
-    //         let sliders = sliderSections[x].getElementsByTagName("input");
-    //         for (let y = 0; y < sliders.length; y++) {
-    //             if (sliders[y].type === "range") {
-    //                 sliders[y].oninput = getVals;
-    //                 // Manually trigger event first time to display values
-    //                 sliders[y].oninput();
-    //             }
-    //         }
-    //     }
-    // };
     $(document).ready(function(){
+        // var agreed_to_terms_cookies = document.cookie.split(';');
+        var agreed_to_terms_cookies = document.cookie.split(';').filter((item) => item.includes('agreed_to_terms'));
+        if (agreed_to_terms_cookies.length > 0){
+            $('#staticBackdrop').modal('hide');
+        }else{
+            $('#staticBackdrop').modal('show');
+        }
+        $('#agreeTermsButton').on('click',function(){
+            document.cookie = " agreed_to_terms=true; expires=Fri, 31 Dec 9999 23:59:59 GMT; path=/";
+            $('#staticBackdrop').modal('hide');
+        });
         $('#country').on('change',function(){
             var country_id = $(this).val();
             $.ajax({

@@ -32,5 +32,39 @@
         </div>
     </div>
 </div>
+<div class="country-state-content mt-5 mb-5">
+    <div class="container">
+        @foreach ($countries as $country)
+        <div class="col-md-12">
+            <div class="d-flex justify-content-between nation-title pb-2 mb-3">
+                <h4 class="mb-0">{{ $country->name }}</h4>
+                <p class="view-all-link mb-0"><a
+                        href="{{ route('get.escorts.by.location',['country' => strtolower(str_replace(' ','_',$country->iso2))]) }}">View
+                        all in {{ $country->name }}</a></p>
+            </div>
+        </div>
+        <div class="col col-12 columns mb-5">
+            @foreach ($country->states as $state)
+            <div class="saparet-col">
+                <div class="d-flex justify-content-between align-items-center mb-2">
+                    <h4 class="mb-0">{{ $state->name }}</h4>
+                    <a href="{{ route('get.escorts.by.location',['country' => strtolower(str_replace(' ','_',$country->iso2)),'state' => strtolower(str_replace(' ','_',$state->name))]) }}"
+                        class="font-weight-bold whitespace-nowrap">View all</a>
+                </div>
+                <ul class="list-unstyled list-inline mb-4">
+                    @foreach ($state->cities as $city)
+                    <li class="list-inline-item">
+                        <a class="decorated" style="text-decoration: underline;"
+                            href="{{ route('get.escorts.by.location',['country'=>strtolower(str_replace(' ','_',$country->iso2)),'state'=>strtolower(str_replace(' ','_',$state->name)),'city'=>strtolower(str_replace(' ','_',$city->name))]) }}">
+                            {{$city->name }}</a>
+                    </li>
+                    @endforeach
+                </ul>
+            </div>
+            @endforeach
+        </div>
+        @endforeach
+    </div>
+</div>
 <!-- ================> Page Header section end here <================== -->
 @endsection

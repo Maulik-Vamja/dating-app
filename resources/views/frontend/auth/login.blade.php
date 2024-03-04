@@ -1,4 +1,21 @@
 @extends('frontend.layouts.auth')
+
+@section('seo-meta')
+    <title>Find Female Escort Services, Massage Providers & BDSM Practitioners Nearby | iFindYou</title>
+    <meta name="description" content="Discover nearby escort services, massage providers, and BDSM practitioners easily with iFindYou.">
+    <link rel="canonical" href="{{ url()->current() }}" />
+@endsection
+
+
+@section('og-meta')
+    <meta property="og:type" content="website">
+    <meta property="og:title" content="Find Female Escort Services, Massage Providers & BDSM Practitioners Nearby | iFindYou">
+    <meta property="og:description" content="Discover nearby escort services, massage providers, and BDSM practitioners easily with iFindYou.">
+    <meta property="og:image" content="{{asset('frontend/og_images/home.jpg')}}">
+    <meta property="og:url" content="{{ url()->current() }}">
+@endsection
+
+
 @section('content')
 <section class="log-reg">
     <div class="top-menu-area">

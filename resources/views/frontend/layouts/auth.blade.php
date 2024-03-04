@@ -94,11 +94,13 @@
 
 <head>
     <meta charset="utf-8">
-    <title>iFindYou.co Login</title>
     <meta name="viewport" content="width=device-width, initial-scale=1">
 
     <!-- site favicon -->
     <link rel="icon" type="image/png" href="{{asset('frontend/assets/images/fav-icon.png')}}">
+
+    @yield('seo-meta')
+    @yield('og-meta')
     <!-- Place favicon.ico in the root directory -->
     @include('frontend.layouts.includes.css')
 </head>

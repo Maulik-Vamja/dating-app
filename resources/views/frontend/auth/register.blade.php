@@ -1,5 +1,22 @@
 @extends('frontend.layouts.auth')
 
+
+@section('seo-meta')
+    <title>Register to  get Escort Services, Massage Providers & BDSM Practitioners Nearby | iFindYou</title>
+    <meta name="description" content="Register go get escort services, massage providers, and BDSM practitioners easily with iFindYou.">
+    <link rel="canonical" href="{{ url()->current() }}" />
+@endsection
+
+
+@section('og-meta')
+    <meta property="og:type" content="website">
+    <meta property="og:title" content="Register to  get Escort Services, Massage Providers & BDSM Practitioners Nearby | iFindYou">
+    <meta property="og:description" content="Register to get escort services, massage providers, and BDSM practitioners easily with iFindYou">
+    <meta property="og:image" content="{{asset('frontend/og_images/home.jpg')}}">
+    <meta property="og:url" content="{{ url()->current() }}">
+@endsection
+
+
 @section('content')
 {{-- <div class="container">
     <div class="row justify-content-center">

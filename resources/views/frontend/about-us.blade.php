@@ -1,7 +1,7 @@
 @extends('frontend.layouts.app')
 @section('seo-meta')
-    <title>Know More About Secure Adult Entertainers Platform | IFindYou </title>
-    <meta name="description" content="Trusted and secure adult entertainers platform featuring at IFindYou, massage providers, and adult entertainers. Enjoy adult quality services. Sign up today!">
+    <title>Find Adult Entertainers & Escort Services Near You | iFindYou</title>
+    <meta name="description" content="Discover the best adult escort services and massage escorts near you with iFindYou.">
     <link rel="canonical" href="{{ url()->current() }}" />
 @endsection
 
@@ -9,8 +9,8 @@
 @section('og-meta')
     <meta property="og:type" content="website">
     <!-- Dynamic OG meta tags -->
-    <meta property="og:title" content="Know More About Secure Adult Entertainers Platform | IFindYou ">
-    <meta property="og:description" content=" Trusted and secure adult entertainers platform featuring at IFindYou, massage providers, and adult entertainers. Enjoy adult quality services. Sign up today!">
+    <meta property="og:title" content="Find Adult Entertainers & Escort Services Near You | iFindYou">
+    <meta property="og:description" content="Discover the best adult escort services and massage escorts near you with iFindYou.">
     <meta property="og:image" content="{{asset('frontend/og_images/home.jpg')}}">
     <meta property="og:url" content="{{ url()->current() }}">
 @endsection

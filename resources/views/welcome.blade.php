@@ -1,9 +1,9 @@
 @extends('frontend.layouts.app')
 
 @section('seo-meta')
-<title>Find Your Perfect Adult friend at IFindYou | Incall Adult Service</title>
+<title>Find Adult Entertainment & Services | Ifindyou</title>
 <meta name="description"
-    content="Best platform to find Adult entertainers around the world. Just specify what you are looking for in the search and you can meet the one you desire.">
+    content="Explore a diverse range of adult services, from mature escorts to adult party entertainment, on iFindYou - the ultimate Backpage alternative.">
 <link rel="canonical" href="{{ url()->current() }}" />
 @endsection
 
@@ -11,9 +11,9 @@
 @section('og-meta')
 <meta property="og:type" content="website">
 <!-- Dynamic OG meta tags -->
-<meta property="og:title" content="Find Your Perfect Adult friend at IFindYou | Incall Adult Service">
+<meta property="og:title" content="Find Adult Entertainment & Services | Ifindyou">
 <meta property="og:description"
-    content="Best platform to find Adult entertainers around the world. Just specify what you are looking for in the search and you can meet the one you desire.">
+    content="Explore a diverse range of adult services, from mature escorts to adult party entertainment, on iFindYou - the ultimate Backpage alternative.">
 <meta property="og:image" content="{{asset('frontend/og_images/home.jpg')}}">
 <meta property="og:url" content="{{ url()->current() }}">
 @endsection

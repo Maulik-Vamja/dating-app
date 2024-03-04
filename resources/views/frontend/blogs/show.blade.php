@@ -1,5 +1,23 @@
 @extends('frontend.layouts.app')
 
+@section('seo-meta')
+<title>{{ $blog->title }}</title>
+<meta name="description"
+    content="{{ str_limit(strip_tags($blog->description), 100) }}">
+<link rel="canonical" href="{{ url()->current() }}" />
+@endsection
+
+
+@section('og-meta')
+<meta property="og:type" content="website">
+<!-- Dynamic OG meta tags -->
+<meta property="og:title" content="{{ $blog->title }}">
+<meta property="og:description"
+    content="{{ str_limit(strip_tags($blog->description), 100) }}">
+<meta property="og:image" content="{{\Storage::url($blog->image)}}">
+<meta property="og:url" content="{{ url()->current() }}">
+@endsection
+
 @section('content')
 <!-- ================> Page Header section start here <================== -->
 {{-- <div class="pageheader bg_img" style="background-image: url(assets/images/bg-img/pageheader.jpg);">

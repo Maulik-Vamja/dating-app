@@ -60,7 +60,7 @@ Route::get('/escort/{user:user_name}', [EscortController::class, 'getEscort'])->
 Route::get('/search/escorts', SearchController::class)->name('get.escorts');
 
 Route::get('/locations', [LocationController::class, 'index'])->name('get.locations');
-Route::get('{country:iso2}/escorts/{state:name?}/{city:name?}', [LocationController::class, 'getEscortsByLocation'])->name('get.escorts.by.location');
+Route::get('location/{country:iso2}/escorts/{state:name?}/{city:name?}', [LocationController::class, 'getEscortsByLocation'])->name('get.escorts.by.location');
 
 Route::get('/contact-us', [PagesController::class, 'contactUs'])->name('contact-us');
 Route::get('/about-us', [PagesController::class, 'aboutUs'])->name('about-us');

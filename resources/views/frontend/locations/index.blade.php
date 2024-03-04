@@ -32,18 +32,19 @@
         </div>
     </div>
 </div>
-<div class="country-state-content mt-5 mb-5">
-    <div class="container">
-        @foreach ($countries as $country)
+
+@foreach ($countries as $country)
+<div class="country-state-content" style="background-color: {{ $loop->odd ? '#ffffff' : 'transparent' }}">
+    <div class="container py-5">
         <div class="col-md-12">
             <div class="d-flex justify-content-between nation-title pb-2 mb-3">
-                <h4 class="mb-0">{{ $country->name }}</h4>
+                <h3 class="mb-0">{{ $country->name }}</h3>
                 <p class="view-all-link mb-0"><a
                         href="{{ route('get.escorts.by.location',['country' => strtolower(str_replace(' ','-',$country->iso2))]) }}">View
                         all in {{ $country->name }}</a></p>
             </div>
         </div>
-        <div class="col col-12 columns mb-5">
+        <div class="col col-12 columns">
             @foreach ($country->states as $state)
             <div class="saparet-col">
                 <div class="d-flex justify-content-between align-items-center mb-2">
@@ -63,8 +64,9 @@
             </div>
             @endforeach
         </div>
-        @endforeach
     </div>
 </div>
+@endforeach
+
 <!-- ================> Page Header section end here <================== -->
 @endsection

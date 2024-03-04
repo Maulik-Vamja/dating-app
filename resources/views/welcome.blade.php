@@ -651,7 +651,7 @@
             <div class="modal-footer justify-content-center border-0 pt-0 mt-0">
                 <button type="button" class="default-btn style-2 text-white" id="agreeTermsButton">Agree and
                     Close</button>
-                <button type="button" class="default-btn" data-bs-dismiss="modal">Decline</button>
+                    <a rel="nofollow" href="https://google.ecom" type="button" class="default-btn" data-bs-dismiss="modal">Decline</a>
             </div>
         </div>
     </div>

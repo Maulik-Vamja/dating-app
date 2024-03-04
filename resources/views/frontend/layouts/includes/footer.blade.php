@@ -96,8 +96,8 @@
                                             <div><a href="{{ route('register') }}">Sign Up</a></div>
                                             <div><a href="{{ route('login') }}">Login</a></div>
                                             <div class=""><a href="">Backpage Alternatives</a></div>
-                                          <div class=""><a href="">Megapersonal Alternatives</a></div>
-                                         <div class=""><a href="">Private Delights Alternative</a></div>
+                                            <div class=""><a href="">Megapersonal Alternatives</a></div>
+                                            <div class=""><a href="">Private Delights Alternative</a></div>
                                             {{--
                                         </ul> --}}
                                     </div>
@@ -235,7 +235,7 @@
                     @foreach ($top12CitiesOfUserRegistered as $city)
                     <div class="col-12 col-lg-3">
                         <a
-                            href="{{ route('get.escorts.by.location',['country'=>strtolower(str_replace(' ','_',$city->country->iso2)),'state'=>strtolower(str_replace(' ','_',$city->state->name)),'city'=>strtolower(str_replace(' ','_',$city->name))]) }}">
+                            href="{{ route('get.escorts.by.location',['country'=>strtolower(str_replace(' ','-',$city->country->iso2)),'state'=>strtolower(str_replace(' ','-',$city->state->name)),'city'=>strtolower(str_replace(' ','-',$city->name))]) }}">
                             {{ $city->name }} escorts
                         </a>
                     </div>

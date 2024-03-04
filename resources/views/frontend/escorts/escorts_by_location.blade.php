@@ -1,7 +1,7 @@
 @extends('frontend.layouts.app')
 
 @section('seo-meta')
-<title>Adult Entertrainer at {{ "United States" }}</title>
+<title>Adult Entertrainer at {{ $location_name }}</title>
 <meta name="description"
     content="Trusted and secure adult entertainers platform featuring at IFindYou, massage providers, and adult entertainers. Enjoy adult quality services. Sign up today!">
 <meta name="description"
@@ -170,8 +170,26 @@
             </div>
         </div>
     </div>
+    <br>
+    <div class="container">
+        <div class="row justify-content-center">
+            <div class="col-8">
+                <!-- Your blog content goes here -->
+                <div class="blog" style="color: white;">
+                    <h2 style="color: white; font-size: 2rem;">Discover the True Essence of Sensuality with Our Esteemed Companions in {{ $location_name }}.     </h2>
+                <p>Embrace your deepest desires and explore new dimensions of intimacy with our exclusive network of adult entertainers in {{ $location_name }}. At iFindYou, we prioritize the well-being and success of individuals involved in adult entertainment, BDSM practices, massage therapy, and more, regardless of gender or demographics.</p>
+                <p>{{ $location_name }} Adult Entertainment is a multifaceted aspect of human experience, often overlooked in its complexity. Our platform offers a safe space for individuals to delve into their fantasies and fetishes with confidence. Whether you seek companionship, sensual exploration, or uninhibited pleasure, our curated selection of professionals is here to fulfill your desires.</p>
+
+                </div>
+            </div>
+        </div>
+    </div>
+
 </div>
 <!-- ================> Avilable section End here <================== -->
+
+
+
 @endsection
 
 @push('frontend-extra-js')

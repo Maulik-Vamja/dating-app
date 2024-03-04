@@ -196,7 +196,7 @@
                             <div class="footer__inner">
                                 <div class="footer__content">
                                     <div class="footer__content--title">
-                                        <h4>PLATEFORM</h4>
+                                        <h4>Platform</h4>
                                     </div>
                                     <div class="">
                                         {{-- <ul>

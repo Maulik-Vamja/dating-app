@@ -26,7 +26,11 @@ class FrontendComposer
 
         $this->latest_escorts = User::latest()->with(['availability', 'addresses'])->limit(4)->get();
         $this->settings = Setting::pluck('value', 'constant');
-        $this->top12CitiesOfUserRegistered = City::withCount('users')->with('state', 'country')->orderByDesc('users_count')->limit(12)->get();
+        $this->top12CitiesOfUserRegistered = City::whereHas('users', function ($query) {
+            return $query->where('address_type_id', 1);
+        })->withCount(['users' => function ($query) {
+            return $query->where('address_type_id', 1);
+        }])->with('state', 'country')->orderByDesc('users_count')->limit(12)->get();
     }
 
     public function compose(View $view)

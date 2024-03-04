@@ -138,7 +138,6 @@
                             </div>
                             @php
                             $today = Carbon\Carbon::now()->format('l');
-
                             $availableOrNot = json_decode($escort->availibility,true);
                             @endphp
                             <p class="d-flex align-items-center text-capitalize"><span

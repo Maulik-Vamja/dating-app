@@ -19,10 +19,10 @@ class LocationController extends Controller
     public function getEscortsByLocation($country, $state = null, $city = null)
     {
         $country = Country::where('iso2', str_replace('-', ' ', $country))->first();
-        if ($state !== null) $state = State::where('name', str_replace('-', ' ', $state))->first();
-        if ($city !== null) $city = City::where('name', str_replace('-', ' ', $city))->first();
+        if ($state !== null) $state = State::where('name', str_replace('-', ' ', $state))->where('country_id', $country->id)->first();
+        if ($city !== null) $city = City::where('name', str_replace('-', ' ', $city))->where('state_id', $state->id)->first();
 
-        $escorts = User::with('availability', 'addresses', 'based_in_addresses', 'gallery_images')->whereHas('based_in_addresses', function ($query) use ($country, $state, $city) {
+        $escorts = User::with('availability', 'addresses', 'based_in_addresses', 'gallery_images')->whereHas('home_address', function ($query) use ($country, $state, $city) {
             $query->when($country->id !== null, function ($query) use ($country) {
                 $query->where('country_id', $country->id);
             })

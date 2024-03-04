@@ -11,7 +11,9 @@ class LocationController extends Controller
 {
     public function index()
     {
-        $countries = Country::with(['states', 'states.cities'])->limit(20)->get();
+        $countries = Country::with(['states', 'states.cities' => function ($query) {
+            return $query->has('users');
+        }])->limit(20)->get();
         return view('frontend.locations.index', ['countries' => $countries]);
     }
     public function getEscortsByLocation($country, $state = null, $city = null)

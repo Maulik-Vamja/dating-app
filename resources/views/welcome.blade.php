@@ -632,7 +632,7 @@
                     </div>
                 </div>
                 <div class="">
-                    By continuing to use Tryst, you agree you're <span class="fw-bold text-dark"> over the age
+                    By continuing to use iFindYou, you agree you're <span class="fw-bold text-dark"> over the age
                         of
                         18
                     </span>
@@ -643,8 +643,7 @@
                 <div class="mt-2">
                     <span class="fw-bold text-dark">Parents/guardians,</span> you can learn more about online
                     safety
-                    in the <a href="#" class="link-underline-primary"> Assembly Four
-                        parents guide </a> to
+               for
                     adult content.
                 </div>
 

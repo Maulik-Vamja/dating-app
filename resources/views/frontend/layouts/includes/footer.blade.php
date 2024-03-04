@@ -95,6 +95,9 @@
                                             <div><a href="{{ route('welcome') }}">Home</a></div>
                                             <div><a href="{{ route('register') }}">Sign Up</a></div>
                                             <div><a href="{{ route('login') }}">Login</a></div>
+                                            <div class=""><a href="">Backpage Alternatives</a></div>
+                                          <div class=""><a href="">Megapersonal Alternatives</a></div>
+                                         <div class=""><a href="">Private Delights Alternative</a></div>
                                             {{--
                                         </ul> --}}
                                     </div>
@@ -143,7 +146,9 @@
                                         </ul> --}}
                                         <div class=""><a href="{{ route('get.locations') }}">Locations</a></div>
                                         <div class=""><a href="">All Escorts</a></div>
-                                        <div class=""><a href="">Backpage Alternatives</a></div>
+                                        <div class=""><a href="">Ashley Madison vs iFindyou</a></div>
+                                        <div class=""><a href="">Top 5 Adult Entertainer Platform</a></div>
+
                                     </div>
                                 </div>
                             </div>
@@ -177,12 +182,10 @@
                                             @endforeach
                                         </ul> --}}
                                         <div><a href="{{ route('blogs.index')}}">Blog</a></div>
-                                        <div><a href="#">TLC Donation Matching</a></div>
-                                        <div><a href="#">Resources</a></div>
-                                        <div><a href="#">#AcceptanceMatters</a></div>
                                         <div><a href="#">Escort Terms</a></div>
                                         <div><a href="#">IFindYou.co FAQ</a></div>
                                         <div><a href="#">Sex Work FAQ</a></div>
+                                        <div class=""><a href="">Tinder vs iFindYou</a></div>
                                     </div>
                                 </div>
                             </div>

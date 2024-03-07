@@ -95,9 +95,7 @@
 <!-- ================> Avilable section start here <================== -->
 <div class="avilable-search-area">
     <div class="container">
-        <div class="">
-            <p class="h2">{{ $location_name }} Escorts</p>
-        </div>
+
         <div class="row row-cols-1 row-cols-md-2 row-cols-xl-3">
             @forelse ($escorts as $escort)
             <div class="col mb-4">
@@ -175,17 +173,20 @@
             <div class="col-8">
                 <!-- Your blog content goes here -->
                 <div class="blog" style="color: white;">
-                    <h2 style="color: white; font-size: 2rem;">Discover the True Essence of Sensuality with Our Esteemed
-                        Companions in {{ $location_name }}. </h2>
-                    <p>Embrace your deepest desires and explore new dimensions of intimacy with our exclusive network of
-                        adult entertainers in {{ $location_name }}. At iFindYou, we prioritize the well-being and
-                        success of individuals involved in adult entertainment, BDSM practices, massage therapy, and
-                        more, regardless of gender or demographics.</p>
-                    <p>{{ $location_name }} Adult Entertainment is a multifaceted aspect of human experience, often
-                        overlooked in its complexity. Our platform offers a safe space for individuals to delve into
-                        their fantasies and fetishes with confidence. Whether you seek companionship, sensual
-                        exploration, or uninhibited pleasure, our curated selection of professionals is here to fulfill
-                        your desires.</p>
+
+            <h1 style="color: white;font-size: 2rem; margin-bottom: 10px;" class="h2">Your nearby Escorts Services in  {{ $location_name }}</h1>
+
+<p>Are you searching for adult services in  {{ $location_name }}? Look no further! At iFindYou, we've categorized all services into two convenient sections: Adult and Dating. Our goal is to simplify your search so you can easily find the perfect service tailored to your needs.
+Adult Jobs in  {{ $location_name }}</p>
+
+<p>If you're seeking adult employment opportunities or looking to hire someone for adult work, our Adult Jobs section is here to assist you. Browse through our extensive job listings to find the perfect fit for you. With countless companies posting job opportunities, you'll have no trouble finding the job of your dreams. You can even post your own job listing if you're looking to hire.
+Body Rubs: Discover personals and parlors in  {{ $location_name }} offering body rub services. Our platform makes it easy to find and book the service of your choice.
+Remember to exercise caution and use your common sense to avoid scams.</p>
+
+<p>Local Escorts in  {{ $location_name }}: Feeling lonely or in need of temporary companionship? Our Local Escorts section is your solution. Find verified escorts near you who are ready to provide companionship and entertainment. Take your time to research and choose the perfect companion for your needs.
+TS Escorts: Explore the growing trend of TS escorts in  {{ $location_name }}. With numerous TS escorts available, you can select the right one to fulfill your desires. Our platform ensures that you find reputable and trustworthy TS escorts for your peace of mind.
+In addition to these services, iFindYou.co also features a female escort directory, and a dating section for personal relationships. We prioritize your choices and ensure a seamless browsing experience without the distraction of flashy ads.</p>
+
 
                 </div>
             </div>

@@ -1,5 +1,9 @@
 <IfModule mod_rewrite.c>
     RewriteEngine On
+    
+    # Redirect www to non-www
+    RewriteCond %{HTTP_HOST} ^www\.(.*)$ [NC]
+    RewriteRule ^(.*)$ http://%1/$1 [R=301,L]
 
     # Redirect requests to /public to the root URL
     RewriteRule ^public(/.*)?$ / [R=301,L]

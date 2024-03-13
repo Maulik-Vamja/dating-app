@@ -61,6 +61,9 @@ Route::get('/search/escorts', SearchController::class)->name('get.escorts');
 
 Route::get('/locations', [LocationController::class, 'index'])->name('get.locations');
 Route::get('location/{country:iso2}/escorts/{state:name?}/{city:name?}', [LocationController::class, 'getEscortsByLocation'])->name('get.escorts.by.location');
+// Route::get('location/{country:iso2}/escorts/', [LocationController::class, 'getEscortsByCountry'])->name('get.escorts.by.country');
+// Route::get('location/{country:iso2}/escorts/{state:name?}', [LocationController::class, 'getEscortsByState'])->name('get.escorts.by.state');
+// Route::get('location/{country:iso2}/escorts/{state:name?}/{city:name?}', [LocationController::class, 'getEscortsByCity'])->name('get.escorts.by.city');
 
 Route::get('/contact-us', [PagesController::class, 'contactUs'])->name('contact-us');
 Route::get('/about-us', [PagesController::class, 'aboutUs'])->name('about-us');

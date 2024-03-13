@@ -3,6 +3,21 @@
 $random_image = $escort->gallery_images()->inRandomOrder()->first();
 @endphp
 
+
+@section('seo-meta')
+<title>{{ $escort->full_name ? $escort->full_name . ' | ' : '' }}
+     Adult Entertrainer &  Escorts in {{ $escort->home_addresses->isNotEmpty() ?
+     $escort->home_addresses->first()?->city?->name . ', ' . $escort->home_addresses->first()?->state?->name .
+     ', ' . $escort->home_addresses->first()?->country?->iso2 : 'iFindYou' }}</title>
+<meta name="description"
+    content="{{ $escort->full_name ? $escort->full_name . ' | ' : '' }}
+   is a backpage, megapersonal, private delights escorts and best in {{ $escort->home_addresses->isNotEmpty() ?
+    $escort->home_addresses->first()?->city?->name . ', ' . $escort->home_addresses->first()?->state?->name .
+    ', ' . $escort->home_addresses->first()?->country?->iso2 : 'iFindYou' }}">
+<link rel="canonical" href="{{ url()->current() }}" />
+@endsection
+
+
 @section('og-meta')
 <meta property="og:type" content="website">
 <!-- Dynamic OG meta tags -->

@@ -18,6 +18,11 @@ class LocationController extends Controller
     }
     public function getEscortsByLocation($country, $state = null, $city = null)
     {
+
+        $country_name=$country;
+        $state_name=$state;
+        $city_name=$city;
+
         $country = Country::where('iso2', str_replace('-', ' ', $country))->first();
         if ($state !== null) $state = State::where('name', str_replace('-', ' ', $state))->where('country_id', $country->id)->first();
         if ($city !== null) $city = City::where('name', str_replace('-', ' ', $city))->where('state_id', $state->id)->first();
@@ -35,7 +40,12 @@ class LocationController extends Controller
         })->orderBy('created_at', 'desc')
             ->paginate(36);
         $countries = Country::all();
+
+
+
+
+
         $location_name = $city->name ?? ($state->name ?? $country->name);
-        return view('frontend.escorts.escorts_by_location', compact('escorts', 'countries', 'location_name'));
+        return view('frontend.escorts.escorts_by_location', compact('escorts', 'countries', 'location_name','country_name','state_name','city_name'));
     }
 }

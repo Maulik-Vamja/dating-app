@@ -1,9 +1,6 @@
 @extends('frontend.layouts.app')
 
 @section('seo-meta')
-
-
-@section('seo-meta')
     @if ($country_name && !$state_name && !$city_name)
         <title> {{ $country_name }} backpage alternative | Ifindyou</title>
         <meta name="description" content="Trusted and secure adult entertainers platform featuring in {{ $country_name }}. Enjoy adult quality services. Sign up today!">
@@ -13,7 +10,7 @@
         <meta name="description" content="Trusted and secure adult entertainers platform featuring in {{ $state_name }}, {{ $country_name }}. Enjoy adult quality services. Sign up today!">
         <meta name="description" content="For {{ $state_name }}, {{ $country_name }} Adult Entertainers iFindYou is the best alternative to tryst and most popular platform site for {{ $state_name }} Escorts. Like megapersonal it is free directory site for {{ $state_name }} Escorts or Escorts in {{ $state_name }}." />
     @elseif ($country_name && $state_name && $city_name)
-        <title>{{ $city_name }} Female & Male escorts - {{ $state_name }} - {{ $country_name }} | Adult Entertainment {{ $city_name }} - {{ $state_name }} - {{ $country_name }} | Ifindyou</title>
+        <title>{{ $city_name }} - {{ $state_name }} - {{ $country_name }} Female & Male escorts | Adult Entertainment {{ $city_name }} - {{ $state_name }} - {{ $country_name }} | Ifindyou</title>
         <meta name="description" content="Trusted and secure adult entertainers platform featuring in {{ $city_name }}, {{ $state_name }}, {{ $country_name }}. Enjoy adult quality services. Sign up today!">
         <meta name="description" content="For {{ $city_name }}, {{ $state_name }}, {{ $country_name }} Adult Entertainers iFindYou is the best alternative to tryst and most popular platform site for {{ $city_name }} Escorts. Like megapersonal it is free directory site for {{ $city_name }} Escorts or Escorts in {{ $city_name }}." />
     @else
@@ -22,7 +19,6 @@
     @endif
     <link rel="canonical" href="{{ url()->current() }}" />
 @endsection
-
 
 @section('og-meta')
 <meta property="og:type" content="website">

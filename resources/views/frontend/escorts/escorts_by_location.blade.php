@@ -5,18 +5,15 @@
 
 @section('seo-meta')
     @if ($country_name && !$state_name && !$city_name)
-        <title> {{ $country_name }} backpage alternative | Ifindyou</title>
-        <meta name="description" content="Trusted and secure adult entertainers platform featuring in {{ $country_name }}. Enjoy adult quality services. Sign up today!">
-        <meta name="description" content="For {{ $country_name }} Adult Entertainers iFindYou is the best alternative to tryst and most popular platform site for {{ $country_name }} Escorts. Like megapersonal it is free directory site for {{ $country_name }} Escorts or Escorts in {{ $country_name }}." />
+        <title>{{ strtoupper($country_name) }} backpage alternative | Ifindyou</title>
+        <meta name="description" content="Find {{ strtoupper($country_name) }} escorts, call girls, escort services, independent escorts, and adult entertainers available 24/7 in Nevada with updated 2024 profiles." />
     @elseif ($country_name && $state_name && !$city_name)
-        <title>Male & Female escorts in {{ $state_name }} - {{ $country_name }} | Adult Entertainment  {{ $state_name }} | Ifindyou</title>
-        <meta name="description" content="Trusted and secure adult entertainers platform featuring in {{ $state_name }}, {{ $country_name }}. Enjoy adult quality services. Sign up today!">
-        <meta name="description" content="For {{ $state_name }}, {{ $country_name }} Adult Entertainers iFindYou is the best alternative to tryst and most popular platform site for {{ $state_name }} Escorts. Like megapersonal it is free directory site for {{ $state_name }} Escorts or Escorts in {{ $state_name }}." />
-    @elseif ($country_name && $state_name && $city_name)
-        <title>{{ $city_name }} Female & Male escorts - {{ $state_name }} - {{ $country_name }} | Adult Entertainment {{ $city_name }} - {{ $state_name }} - {{ $country_name }} | Ifindyou</title>
-        <meta name="description" content="Trusted and secure adult entertainers platform featuring in {{ $city_name }}, {{ $state_name }}, {{ $country_name }}. Enjoy adult quality services. Sign up today!">
-        <meta name="description" content="For {{ $city_name }}, {{ $state_name }}, {{ $country_name }} Adult Entertainers iFindYou is the best alternative to tryst and most popular platform site for {{ $city_name }} Escorts. Like megapersonal it is free directory site for {{ $city_name }} Escorts or Escorts in {{ $city_name }}." />
-    @else
+        <title>Male & Female escorts in {{ ucfirst($state_name) }} -{{ strtoupper($country_name) }} | Adult Entertainment  {{ ucfirst($state_name) }}| Ifindyou</title>
+        <meta name="description" content="Find {{ $state_name }} escorts, call girls, escort services, independent escorts, and adult entertainers available 24/7 in Nevada with updated 2024 profiles.">
+     @elseif ($country_name && $state_name && $city_name)
+        <title>{{ucfirst($city_name) }} Female & Male escorts - {{ ucfirst($state_name) }} - {{ strtoupper($country_name) }} | Adult Entertainment {{ $city_name }} - {{ $state_name }} - {{ strtoupper($country_name) }} | Ifindyou</title>
+        <meta name="description" content="Find Escorts and adult providers and entertainers in  {{ ucfirst($city_name) }} - {{ ucfirst($state_name) }} -{{ strtoupper($country_name) }}. Search for {{ ucfirst($city_name) }} escorts on ifindyou, find the best incall and outcall escorts with photos, videos in  {{ ucfirst($city_name) }} today!">
+       @else
         <title>Adult Entertainers at iFindYou</title>
         <meta name="description" content="Trusted and secure adult entertainers platform. Enjoy adult quality services. Sign up today!">
     @endif

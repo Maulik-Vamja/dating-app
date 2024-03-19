@@ -144,8 +144,9 @@ $random_image = $escort->gallery_images()->inRandomOrder()->first();
                                         </div>
                                         <div class="cmn-txt-area pt-4 pb-3">
                                             <div class="title-main-txt text-center">
+                                                <h1 class="mt-2 bold h4 text-capitalize" style="font-weight: bold; color: #f24570;">{{ $escort->short_description }}</h1>
+
                                                 <h2 class="title-txt">{{ $escort->full_name }}</h2>
-                                                <h4 class="mt-2 text-capitalize">{{ $escort->short_description }}</h4>
                                                 <p>{{ $escort->pronouns }} </p>
                                             </div>
                                             <div class="cmn-txt-block">
